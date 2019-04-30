@@ -1,0 +1,18 @@
+use fulfillmentsystem;
+CREATE TABLE IF NOT EXISTS user (
+	area_code VARCHAR(10),
+	id VARCHAR(10) NOT NULL,
+	name VARCHAR(10) NOT NULL,
+	password VARCHAR(10) NOT NULL,
+	hashed VARCHAR(256),
+	PRIMARY KEY (id)
+)CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS product (
+	pCode VARCHAR(10) NOT NULL,
+	pName VARCHAR(10) NOT NULL,
+	pPrice VARCHAR(10) NOT NULL,
+	pQuantity VARCHAR(10),
+	pImgSource VARCHAR(80) NOT NULL,
+	PRIMARY KEY (pCode)
+)CHARSET=utf8;
