@@ -26,7 +26,7 @@
 	<a href="UserProc?action=logout">로그아웃</a> <br><br>
 	<table border="1" style="border-collapse:collapse;">
 	<thead>
-	<tr><th style="width:200px">제품명</th><th style="width:100px">가격</th><th style="width:100px">재고량</th></tr>
+	<tr><th style="width:200px">제품명</th><th style="width:100px">가격</th><th style="width:100px">재고량</th><th style="width:100px">사진</th></tr>
 	</thead>
 	
 	<c:set var="productList" value="${requestScope.productList}"/>
@@ -35,8 +35,8 @@
 	<td> ${product.pName} </td>
 	<td> ${product.pPrice} </td>
 	<td> ${product.pQuantity} </td>
-	<td><button onclick="location.href='MemberProcServlet?action=update&id=${member.id}'">수정</button></td>
-	<td><button onclick="location.href='MemberProcServlet?action=delete&id=${member.id}'">삭제</button></td></tr>
+	<td><img alt="${product.pName}" src="${product.pImgSource}"></td>
+	
 	
 	</c:forEach>
 	</table>

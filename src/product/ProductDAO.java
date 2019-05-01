@@ -61,7 +61,7 @@ public class ProductDAO {
 	//------------------------ 전체 리스트 가져오기 ------------------------
 	
 	public List<ProductDTO> selectAll(){
-		String sql = "select pName, pPrice, pQuantity from product;";
+		String sql = "select pName, pPrice, pQuantity,pImgSource from product;";
 		List<ProductDTO> productList = selectAllCondition(sql);
 		return productList;
 	}
@@ -78,6 +78,7 @@ public class ProductDAO {
 				product.setpName(rs.getString("pName"));
 				product.setpPrice(rs.getInt("pPrice"));
 				product.setpQuantity(rs.getInt("pQuantity"));
+				product.setpImgSource(rs.getString("pImgSource"));
 				productList.add(product);
 			}
 		} catch (Exception e) {

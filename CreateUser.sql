@@ -1,7 +1,7 @@
 use fulfillmentsystem;
 CREATE TABLE IF NOT EXISTS user (
-	area_code VARCHAR(10),
 	id VARCHAR(10) NOT NULL,
+	user_type INT(4),
 	name VARCHAR(10) NOT NULL,
 	password VARCHAR(10) NOT NULL,
 	hashed VARCHAR(256),
@@ -16,3 +16,27 @@ CREATE TABLE IF NOT EXISTS product (
 	pImgSource VARCHAR(80) NOT NULL,
 	PRIMARY KEY (pCode)
 )CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS customer (
+	cCode VARCHAR(10) NOT NULL,
+	cName VARCHAR(10) NOT NULL,
+	cTel VARCHAR(10) NOT NULL,
+	cAddress VARCHAR(50) NOT NULL,
+	cAreaCode VARCHAR(10) NOT NULL,
+	cDate DATE NOT NULL,
+	PRIMARY KEY(cCode)
+	)CHARSET=utf8;
+	
+CREATE TABLE IF NOT EXISTS invoiceproduct (
+	no int(8) NOT NULL auto_increment,
+	iCustomerCode VARCHAR(10) NOT NULL, 
+	iProductCode VARCHAR(10) NOT NULL,
+	iQuantity int(4) NOT NULL,
+	
+	PRIMARY KEY (no),
+	FOREIGN KEY (iCustomerCode)
+   REFERENCES customer(cCode) ON UPDATE CASCADE,
+   FOREIGN KEY (iProductCode)
+   REFERENCES product(pCode) ON UPDATE CASCADE
+   
+)auto_increment=10001,CHARSET=utf8;

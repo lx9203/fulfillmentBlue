@@ -17,10 +17,10 @@
 	<hr>
 	<form name ="loginForm" action="UserProc?action=login" method=post>
 		<label><span>사용자 유형 : </span>
-			<input type ="radio" name ="id_no" value=1 size="10" >운송 업체 
-			<input type ="radio" name ="id_no" value=2 size="10" >쇼핑몰 운영자
-			<input type ="radio" name ="id_no" value=3 size="10" >구매처 운영자</label> <br><br>
-		<label><span>ID : </span>
+			<input type ="radio" name ="userType" value=1 size="10" >운송 업체 
+			<input type ="radio" name ="userType" value=2 size="10" >쇼핑몰 운영자
+			<input type ="radio" name ="userType" value=3 size="10" >구매처 운영자</label> <br><br>
+		<label><span> ID : </span>
 			<input type ="text" name ="id" size="10"></label> <br><br>
 		<label><span>Password : </span>
 			<input type ="password" name ="password" size="10"></label> <br><br>

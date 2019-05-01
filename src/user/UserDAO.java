@@ -67,12 +67,12 @@ public class UserDAO {
 	
 	//운송회사의 경우, 지역 추가
 	public void insertUser(UserDTO user) {
-		String query = "insert into user (area_code,id,name,password,hashed) values(?,?,?,?,?);";
+		String query = "insert into user (id,user_type,name,password,hashed) values(?,?,?,?,?);";
 		try {
 			String hp = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 			pStmt = conn.prepareStatement(query);
-			pStmt.setString(1, user.getArea());
-			pStmt.setString(2, user.getId());
+			pStmt.setString(1, user.getId());
+			pStmt.setInt(2, user.getuserType());
 			pStmt.setString(3, user.getName());
 			pStmt.setString(4, "****");
 			pStmt.setString(5, hp);
@@ -92,6 +92,12 @@ public class UserDAO {
 	
 	
 	//---------------------- selectOne 관련 메소드 ----------------------------------
+	public UserDTO lastId(int userType) { //쇼핑몰의 마지막 번호
+    	String sql = "select * from user where user_type="+userType+" order by id desc limit 1;";
+    	UserDTO uDto = selectOne(sql);
+    	return uDto;
+    }
+	
 	
 	public UserDTO searchById(String id) {
     	String sql = "select * from user where id like '" + id + "';";
@@ -108,6 +114,7 @@ public class UserDAO {
 			
 			while (rs.next()) {
 				user.setId(rs.getString("id"));
+				user.setuserType(rs.getInt("user_type"));
 				user.setName(rs.getString("name"));
 			}
 		} catch (Exception e) {
