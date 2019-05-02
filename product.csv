@@ -1,56 +1,56 @@
-﻿,제품명,가격,수량,
-A1001,삼겹살 500g,3000,100,../img/samgyopsal.jpg
-A1002,삼겹살 1kg,5000,100,../img/samgyopsal.jpg
-A1003,목살 500g,4000,100,../img/moksal.jpg
-A1004,목살 1kg,7000,100,../img/moksal.jpg
-A1005,새우 10마리,12000,100,../img/shrimp.jpg
-A1006,새우 20마리,20000,100,../img/shrimp.jpg
-A1007,새송이버섯,1000,100,../img/sesong.jpg
-A1008,팽이버섯,1000,100,../img/pengE.jpg
-A1009,양송이버섯,2000,100,../img/yangSong.jpg
-A1010,상추,1500,100,../img/lettuce.jpg
-A1011,깻잎,1000,100,../img/perillaLeaf.jpg
-A1012,대파 1단,3000,100,../img/springOnion.jpg
-A1013,파절이용 대파 1단,5000,100,../img/springOnion.jpg
-A1014,마늘 300g,1000,100,../img/garlic.jpg
-A1015,쌈장 150g,2000,100,../img/ssamJang.jpg
-A1016,간장 300g,2000,100,../img/soySauce.jpg
-A1017,소금,1000,100,../img/salt.jpg
-A1018,설탕,1000,100,../img/suger.jpg
-A1019,후추,1000,100,../img/pepper.jpg
-A1020,양념장세트,5000,100,../img/sauceSet.jpg
-B1001,젓가락 50개,1500,100,../img/chopsticks.jpg
-B1002,젓가락 100개,2500,100,../img/chopsticks.jpg
-B1003,젓가락 200개,5000,100,../img/chopsticks.jpg
-B1004,종이컵 50개,1000,100,../img/paperCup.jpg
-B1005,종이컵 100개,2000,100,../img/paperCup.jpg
-B1006,종이컵 200개,3500,100,../img/paperCup.jpg
-B1007,일회용 수저 50개,2000,100,../img/spoon.jpg
-B1008,일회용 수저 100개,3000,100,../img/spoon.jpg
-B1009,일회용 수저 200개,6000,100,../img/spoon.jpg
-B1010,일회용 용기 50개,2500,100,../img/paperBowl.jpg
-B1011,일회용 용기 100개,4000,100,../img/paperBowl.jpg
-B1012,일회용 용기 200개,8000,100,../img/paperBowl.jpg
-B1013,일회용 접시 50개,2500,100,../img/paperPlate.jpg
-B1014,일회용 접시 100개,4000,100,../img/paperPlate.jpg
-B1015,일회용 접시 200개,8000,100,../img/paperPlate.jpg
-B1016,구이용 목장갑,500,100,../img/bbqglove.jpg
-B1017,부탄가스 4개,4000,100,../img/butane.jpg
-B1018,숯 1kg,4000,100,../img/charcoal.jpg
-B1019,일회용 불판,1000,100,../img/grill.jpg
-B1020,집게,4000,100,../img/tongs.jpg
-B1021,가위,4000,100,../img/scissors.jpg
-B1022,알루미늄 호일,1000,100,../img/aluminumFoil.jpg
-C1001,삼냥이라면,3500,100,../img/samYang.jpg
-C1002,쉰라면,3500,100,../img/sin.jpg
-C1003,지인라면,3500,100,../img/jin.jpg
-C1004,소라과자,1000,100,../img/sora.jpg
-C1005,땅콩과자,1000,100,../img/peanut.jpg
-C1006,계란과자,1000,100,../img/egg.jpg
-C1007,맥주 카스 2L,5000,100,../img/cass.jpg
-C1008,맥주 하이트 2L,5000,100,../img/hite.jpg
-C1009,소주 이제우린,1500,100,../img/rin.jpg
-C1010,소주 참이슬,1500,100,../img/dew.jpg
-C1011,콜라 1.5L,2500,100,../img/cola.jpg
-C1012,사이다 1.5L,2500,100,../img/cider.jpg
-C1013,환타 1.5L,2500,100,../img/fanta.jpg
+﻿제품코드,제품명,가격,수량,,
+A1001,삼겹살 500g,3000,100,../img/samgyopsal.jpg,
+A1002,삼겹살 1kg,5000,100,../img/samgyopsal.jpg,
+A1003,목살 500g,4000,100,../img/moksal.jpg,
+A1004,목살 1kg,7000,100,../img/moksal.jpg,
+A1005,새우 10마리,12000,100,../img/shrimp.jpg,
+A1006,새우 20마리,20000,100,../img/shrimp.jpg,
+A1007,새송이버섯,1000,100,../img/sesong.jpg,
+A1008,팽이버섯,1000,100,../img/pengE.jpg,
+A1009,양송이버섯,2000,100,../img/yangSong.jpg,
+A1010,상추,1500,100,../img/lettuce.jpg,
+A1011,깻잎,1000,100,../img/perillaLeaf.jpg,
+A1012,대파 1단,3000,100,../img/springOnion.jpg,
+A1013,파절이용 대파 1단,5000,100,../img/springOnion.jpg,
+A1014,마늘 300g,1000,100,../img/garlic.jpg,
+B1001,쌈장 150g,2000,100,../img/ssamJang.jpg,
+B1002,간장 300g,2000,100,../img/soySauce.jpg,
+B1003,소금,1000,100,../img/salt.jpg,
+B1004,설탕,1000,100,../img/suger.jpg,
+B1005,후추,1000,100,../img/pepper.jpg,
+B1006,양념장세트,5000,100,../img/sauceSet.jpg,
+C1001,삼냥이라면,3500,100,../img/samYang.jpg,
+C1002,쉰라면,3500,100,../img/sin.jpg,
+C1003,지인라면,3500,100,../img/jin.jpg,
+C1004,소라과자,1000,100,../img/sora.jpg,
+C1005,땅콩과자,1000,100,../img/peanut.jpg,
+C1006,계란과자,1000,100,../img/egg.jpg,
+C1007,맥주 카스 2L,5000,100,../img/cass.jpg,
+C1008,맥주 하이트 2L,5000,100,../img/hite.jpg,
+C1009,소주 이제우린,1500,100,../img/rin.jpg,
+C1010,소주 참이슬,1500,100,../img/dew.jpg,
+C1011,콜라 1.5L,2500,100,../img/cola.jpg,
+C1012,사이다 1.5L,2500,100,../img/cider.jpg,
+C1013,환타 1.5L,2500,100,../img/fanta.jpg,
+D1001,젓가락 50개,1500,100,../img/chopsticks.jpg,
+D1002,젓가락 100개,2500,100,../img/chopsticks.jpg,
+D1003,젓가락 200개,5000,100,../img/chopsticks.jpg,
+D1004,종이컵 50개,1000,100,../img/paperCup.jpg,
+D1005,종이컵 100개,2000,100,../img/paperCup.jpg,
+D1006,종이컵 200개,3500,100,../img/paperCup.jpg,
+D1007,일회용 수저 50개,2000,100,../img/spoon.jpg,
+D1008,일회용 수저 100개,3000,100,../img/spoon.jpg,
+D1009,일회용 수저 200개,6000,100,../img/spoon.jpg,
+D1010,일회용 용기 50개,2500,100,../img/paperBowl.jpg,
+D1011,일회용 용기 100개,4000,100,../img/paperBowl.jpg,
+D1012,일회용 용기 200개,8000,100,../img/paperBowl.jpg,
+D1013,일회용 접시 50개,2500,100,../img/paperPlate.jpg,
+D1014,일회용 접시 100개,4000,100,../img/paperPlate.jpg,
+D1015,일회용 접시 200개,8000,100,../img/paperPlate.jpg,
+E1001,구이용 목장갑,500,100,../img/bbqglove.jpg,
+E1002,부탄가스 4개,4000,100,../img/butane.jpg,
+E1003,숯 1kg,4000,100,../img/charcoal.jpg,
+E1004,일회용 불판,1000,100,../img/grill.jpg,
+E1005,집게,4000,100,../img/tongs.jpg,
+E1006,가위,4000,100,../img/scissors.jpg,
+E1007,알루미늄 호일,1000,100,../img/aluminumFoil.jpg,

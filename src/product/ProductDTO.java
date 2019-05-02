@@ -1,7 +1,7 @@
 package product;
 
 public class ProductDTO {
-	private String pCode;
+	private String pCode; //제품 코드
 	private String pName;
 	private int pPrice;
 	private int pQuantity;
