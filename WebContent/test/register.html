@@ -2,12 +2,12 @@
 <html>
 <head>
 	<script>
-	function div_OnOff(v,id){
+	function div_OnOff(v,id1,id2){
 	 // 라디오 버튼 value 값 조건 비교
 	 if(v == "1"){
-	  document.getElementById(id).style.display = ""; // 보여줌
+	  document.getElementById(id1).style.display = ""; // 보여줌
 	 }else{
-	  document.getElementById(id).style.display = "none"; // 숨김
+	  document.getElementById(id1).style.display = "none"; // 숨김
 	 }
 	}
 	</script>
@@ -19,21 +19,19 @@
 	<h3> 회원가입</h3>
 	<hr>
 	<form name="registerForm" action="UserProc?action=register" method=post>
-		<label><span>ID : </span>
-			<input type ="text" name ="id" size="10"></label> <br><br>
 		<label><span>이름 : </span>
 			<input type ="text" name ="name" size="10"></label> <br><br>
 		<label><span>Password : </span>
 			<input type ="password" name ="password" size="10"></label> <br><br>
 		<label><span>사용자 유형 : </span>
-			<input type ="radio" name ="id_no" value=1 size="10" onclick="div_OnOff(this.value,'con')">운송 업체 
-			<input type ="radio" name ="id_no" value=2 size="10" onclick="div_OnOff(this.value,'con')">쇼핑몰 운영자
-			<input type ="radio" name ="id_no" value=3 size="10" onclick="div_OnOff(this.value,'con')">구매처 운영자</label> <br><br>
-		<label id="con" style="display:none"><span>지역 : </span>
-			<input type ="radio" name ="area" value="경기물류"  size="10">경기 지역
-			<input type ="radio" name ="area" value="중부물류"  size="10">중부 지역
-			<input type ="radio" name ="area" value="영남물류"  size="10">영남 지역
-			<input type ="radio" name ="area" value="서부물류"  size="10">서부 지역</label><br><br>
+			<input type ="radio" name ="userType" value=1 size="10" onclick="div_OnOff(this.value,'con1','con2')">운송 업체 
+			<input type ="radio" name ="userType" value=2 size="10" onclick="div_OnOff(this.value,'con1','con2')">쇼핑몰 운영자
+			<input type ="radio" name ="userType" value=3 size="10" onclick="div_OnOff(this.value,'con1','con2')">구매처 운영자</label> <br><br>
+		<label id="con1" style="display:none"><span>지역 : </span>
+			<input type ="radio" name ="areaId" value=1  size="10">경기 지역
+			<input type ="radio" name ="areaId" value=2  size="10">중부 지역
+			<input type ="radio" name ="areaId" value=3  size="10">영남 지역
+			<input type ="radio" name ="areaId" value=4  size="10">서부 지역</label><br><br>
 		<label><span></span><input type ="submit" value ="회원가입" name="B1"> &nbsp;&nbsp;
 			<input type="reset" value ="재작성" name = "B2"> </label>
 	</form>

@@ -1,7 +1,7 @@
 use fulfillmentsystem;
 CREATE TABLE IF NOT EXISTS user (
-	area_code VARCHAR(10),
 	id VARCHAR(10) NOT NULL,
+	user_type INT(4),
 	name VARCHAR(10) NOT NULL,
 	password VARCHAR(10) NOT NULL,
 	hashed VARCHAR(256),
@@ -15,4 +15,12 @@ CREATE TABLE IF NOT EXISTS product (
 	pQuantity VARCHAR(10),
 	pImgSource VARCHAR(80) NOT NULL,
 	PRIMARY KEY (pCode)
+)CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS customer (
+	cCode VARCHAR(10) NOT NULL,
+	cName VARCHAR(10) NOT NULL,
+	cTel VARCHAR(20) NOT NULL,
+	cAddress VARCHAR(50) NOT NULL,
+	PRIMARY KEY (cCode)
 )CHARSET=utf8;
