@@ -26,14 +26,14 @@ public class InvoiceDAO {
 		}
 	}
 	
-	//------------------------ ì „ì²´ ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸° ------------------------
+	//------------------------ ? „ì²? ë¦¬ìŠ¤?Š¸ ê°?? ¸?˜¤ê¸? ------------------------
 	
 	public List<InvoiceDTO> selectAll(){
 		String sql = "select iCode, iCustomerCode, iProductCode, iQuantity, iAreaCode, iDate from invoice;";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
-	//------------------------ ì†¡ì¥ ë²ˆí˜¸ì— ë§ëŠ” ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸° ---------------------
+	//------------------------ ?†¡?¥ ë²ˆí˜¸?— ë§ëŠ” ë¦¬ìŠ¤?Š¸ ê°?? ¸?˜¤ê¸? ---------------------
 	
 	public List<InvoiceDTO> selectAllInvoice(char AreaCode){
 		String sql = "select iCode, iCustomerCode, iProductCode, iQuantity, iAreaCode, iDate from invoice;";
@@ -41,7 +41,7 @@ public class InvoiceDAO {
 		return invoiceList;
 	}
 	
-	//------------------------ ë‹¨ì¼ ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸° ------------------------
+	//------------------------ ?‹¨?¼ ë¦¬ìŠ¤?Š¸ ê°?? ¸?˜¤ê¸? ------------------------
 	
 	public List<InvoiceDTO> selectOne(){
 		String sql = "select iCode, iCustomerCode, iProductCode, iQuantity, iAreaCode, iDate from invoice where iCode=?";

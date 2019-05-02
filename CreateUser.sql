@@ -13,7 +13,7 @@ insert into user values('admin',0,'관리자','****','$2a$10$IzyTY.1tk053V3dDJJP
 
 CREATE TABLE IF NOT EXISTS product (
 	pCode VARCHAR(10) NOT NULL,
-	pName VARCHAR(10) NOT NULL,
+	pName VARCHAR(20) NOT NULL,
 	pPrice VARCHAR(10) NOT NULL,
 	pQuantity VARCHAR(10),
 	pImgSource VARCHAR(80) NOT NULL,

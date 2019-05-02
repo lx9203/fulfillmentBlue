@@ -37,7 +37,7 @@ public class InvoiceProc extends HttpServlet {
 		doAction(request,response);
 	}
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//ê³µí†µ ì„¤ì •
+		//ê³µí†µ ?„¤? •
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher rd;
 		HttpSession session = request.getSession();
@@ -51,15 +51,15 @@ public class InvoiceProc extends HttpServlet {
 		
 		switch(action) {
 		case "readCSV":
-			JFileChooser chooser = new JFileChooser(); //ê°ì²´ ìƒì„±
-			int ret = chooser.showOpenDialog(null);  //ì—´ê¸°ì°½ ì •ì˜
+			JFileChooser chooser = new JFileChooser(); //ê°ì²´ ?ƒ?„±
+			int ret = chooser.showOpenDialog(null);  //?—´ê¸°ì°½ ? •?˜
 
 			if (ret != JFileChooser.APPROVE_OPTION) {
-				JOptionPane.showMessageDialog(null, "ê²½ë¡œë¥¼ ì„ íƒí•˜ì§€ì•Šì•˜ìŠµë‹ˆë‹¤.", "ê²½ê³ ", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "ê²½ë¡œë¥? ?„ ?ƒ?•˜ì§??•Š?•˜?Šµ?‹ˆ?‹¤.", "ê²½ê³ ", JOptionPane.WARNING_MESSAGE);
 				return;
 			}
 		 
-			String filePath = chooser.getSelectedFile().getPath();  //íŒŒì¼ê²½ë¡œë¥¼ ê°€ì ¸ì˜´
+			String filePath = chooser.getSelectedFile().getPath();  //?ŒŒ?¼ê²½ë¡œë¥? ê°?? ¸?˜´
 			System.out.println(filePath);  //ì¶œë ¥
 			
 			try {
@@ -84,7 +84,7 @@ public class InvoiceProc extends HttpServlet {
 				
 			break;
 		
-		case "test": 
+	/*	case "test": 
 			int sum=0;
 			List<InvoiceProductDTO> productList = iDao.selectAll();
 			for(InvoiceProductDTO product : productList) {
@@ -95,8 +95,8 @@ public class InvoiceProc extends HttpServlet {
 			iDao.close();
 			rd = request.getRequestDispatcher("shopMain.jsp");
 			rd.forward(request, response);
-			LOG.trace("ì „ì†¡ ì™„ë£Œ");
-			break;
+			LOG.trace("? „?†¡ ?™„ë£?");
+			break;*/
 			
 		
 			

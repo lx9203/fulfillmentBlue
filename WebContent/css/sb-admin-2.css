@@ -2149,6 +2149,8 @@ textarea.form-control {
   height: auto;
 }
 
+
+
 .form-group {
   margin-bottom: 1rem;
 }
@@ -3944,6 +3946,7 @@ input[type="button"].btn-block {
 }
 
 .custom-radio .custom-control-label::before {
+  display: inline-block;
   border-radius: 50%;
 }
 

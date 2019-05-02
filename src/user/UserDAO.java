@@ -19,8 +19,8 @@ public class UserDAO {
 	public static final int PASSWORD_IS_WRONG = 3;
 	public static final int DATABASE_ERROR = -1;
 	private Connection conn;
-	private static final String USERNAME = "javauser";
-	private static final String PASSWORD = "javapass";
+	private static final String USERNAME = "Gamja_SQL";
+	private static final String PASSWORD = "Bluemoon1836#%";
 	private static final String URL = "jdbc:mysql://localhost:3306/fulfillmentsystem?verifyServerCertificate=false&useSSL=false";
 	
 	PreparedStatement pStmt = null;
@@ -37,7 +37,6 @@ public class UserDAO {
 	
 	//로그인 확인 메소드
 		public int verifyIdPassword(String id, String password) {
-			System.out.println("verifyidPassword(): " + id + ", " + password);
 			String query = "select hashed from user where id=?;";
 			String hashedPassword = "";
 			try {
