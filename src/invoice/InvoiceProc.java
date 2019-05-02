@@ -86,7 +86,7 @@ public class InvoiceProc extends HttpServlet {
 		
 		case "test": 
 			int sum=0;
-			List<InvoiceProductDTO> productList = iDao.selectAllProduct(userId.charAt(0));
+			List<InvoiceProductDTO> productList = iDao.selectAll();
 			for(InvoiceProductDTO product : productList) {
 				sum += product.getiProductTotal();
 			}

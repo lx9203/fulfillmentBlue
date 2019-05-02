@@ -1,4 +1,4 @@
-package Invoice;
+package invoice;
 
 public class InvoiceDTO {
 	private String iCode;
