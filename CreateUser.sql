@@ -20,23 +20,7 @@ CREATE TABLE IF NOT EXISTS product (
 CREATE TABLE IF NOT EXISTS customer (
 	cCode VARCHAR(10) NOT NULL,
 	cName VARCHAR(10) NOT NULL,
-	cTel VARCHAR(10) NOT NULL,
+	cTel VARCHAR(20) NOT NULL,
 	cAddress VARCHAR(50) NOT NULL,
-	cAreaCode VARCHAR(10) NOT NULL,
-	cDate DATE NOT NULL,
-	PRIMARY KEY(cCode)
-	)CHARSET=utf8;
-	
-CREATE TABLE IF NOT EXISTS invoiceproduct (
-	no int(8) NOT NULL auto_increment,
-	iCustomerCode VARCHAR(10) NOT NULL, 
-	iProductCode VARCHAR(10) NOT NULL,
-	iQuantity int(4) NOT NULL,
-	
-	PRIMARY KEY (no),
-	FOREIGN KEY (iCustomerCode)
-   REFERENCES customer(cCode) ON UPDATE CASCADE,
-   FOREIGN KEY (iProductCode)
-   REFERENCES product(pCode) ON UPDATE CASCADE
-   
-)auto_increment=10001,CHARSET=utf8;
+	PRIMARY KEY (cCode)
+)CHARSET=utf8;
