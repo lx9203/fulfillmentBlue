@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 import product.ProductDAO;
 import product.ProductDTO;
 
-@WebServlet("/test/UserProc")
+@WebServlet("/view/UserProc")
 public class UserProc extends HttpServlet {
 	private static final Logger LOG = LoggerFactory.getLogger(UserProc.class);
 	private static final long serialVersionUID = 1L;
@@ -75,7 +75,10 @@ public class UserProc extends HttpServlet {
 				break;
 			case 2:
 				response.sendRedirect("InvoiceProc?action=test"); 
-				
+				break;
+			case 0:
+				response.sendRedirect("../user/blueCompany.jsp"); 
+				break;
 				
 			}
 			break;
@@ -89,6 +92,7 @@ public class UserProc extends HttpServlet {
 			password = request.getParameter("password");
 			LOG.trace("사용자 유형 : " + userType + ", 아이디 : " + id +", 비밀번호 : " + password);
 			int result = uDao.verifyIdPassword(id, password);
+			LOG.trace(result+"");
 			String errorMessage = null;
 			
 			switch(result){

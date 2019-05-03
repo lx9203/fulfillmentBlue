@@ -1,4 +1,4 @@
-package Customer;
+package invoice;
 
 public class CustomerDTO {
 	private String cCode;

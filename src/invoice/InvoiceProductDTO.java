@@ -1,7 +1,7 @@
 package invoice;
 
 public class InvoiceProductDTO {
-	private String iProductCode; //ì œí’ˆ ì½”ë“œ
+	private String iProductCode; //? œ?’ˆ ì½”ë“œ
 	private String iProductName;
 	private int iProductPrice;
 	private	int iProductTotal;

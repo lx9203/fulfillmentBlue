@@ -12,7 +12,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>송장목록</title>
+  <title>상세페이지</title>
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -153,7 +153,7 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-	          <h1 class="h3 mb-2 text-gray-800">송장목록</h1>
+	          <h1 class="h3 mb-2 text-gray-800">상세페이지</h1>
 	          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
 	          	<i class="fas fa-download fa-sm text-white-50"></i> Generate Report
 	          </a>
@@ -161,113 +161,80 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+              <h6 class="m-0 font-weight-bold text-primary">송장번호: a1001</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>송장번호</th>
-                      <th>이름</th>
-                      <th>날짜</th>
+                      <th>주문번호</th>
+                      <th>상품명</th>
+                      <th>개수</th>
+                      <th>단가</th>
                       <th>합계</th>
                     </tr>
                   </thead>
                   <tfoot>
+                      <tr>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th>총액</th>
+                      <th>34500</th>
+                    </tr>
                   </tfoot>
                   <tbody>
                     <tr>
-                      <td><a href="tables2.jsp" >a1001</a></td>
-                      <td>Tiger Nixon</td>
-                      <td>2011/04/25</td>
-                      <td>$320,800</td>
+                      <td>a100022019050101</td>
+                      <td>삼겹살 1kg</td>
+                      <td>2</td>
+                      <td>5000</td>
+                      <td>10000</td>
                     </tr>
                     <tr>
-                      <td>a1002</td>
-                      <td>Garrett Winters</td>
-                      <td>2011/07/25</td>
-                      <td>$170,750</td>
+                      <td>a100022019050102</td>
+                      <td>목살 1kg</td>
+                      <td>1</td>
+                      <td>7000</td>
+                      <td>7000</td>
                     </tr>
                     <tr>
-                      <td>a1003</td>
-                      <td>Ashton Cox</td>
-                      <td>2009/01/12</td>
-                      <td>$86,000</td>
+                     <td>a100022019050103</td>
+                      <td>대파 1단</td>
+                      <td>1</td>
+                      <td>3000</td>
+                      <td>3000</td>
                     </tr>
                     <tr>
-                      <td>a1004</td>
-                      <td>Cedric Kelly</td>
-                      <td>2012/03/29</td>
-                      <td>$433,060</td>
+                     <td>a100022019050104</td>
+                      <td>쌈장 150g</td>
+                      <td>2</td>
+                      <td>4000</td>
+                      <td>8000</td>
                     </tr>
                     <tr>
-                      <td>a1005</td>
-                      <td>Airi Satou</td>
-                      <td>2008/11/28</td>
-                      <td>$162,700</td>
+                      <td>a100022019050105</td>
+                      <td>젓가락 50개</td>
+                      <td>1</td>
+                      <td>1500</td>
+                      <td>1500</td>
                     </tr>
                     <tr>
-                      <td>a1006</td>
-                      <td>Brielle Williamson</td>
-                      <td>2012/12/02</td>
-                      <td>$372,000</td>
+                      <td>a100022019050106</td>
+                      <td>일회용용기 50개</td>
+                      <td>1</td>
+                      <td>2500</td>
+                      <td>2500</td>
                     </tr>
                     <tr>
-                      <td>a1007</td>
-                      <td>Herrod Chandler</td>
-                      <td>2012/08/06</td>
-                      <td>$137,500</td>
+                     <td>a100022019050107</td>
+                      <td>콜라 1.5L</td>
+                      <td>1</td>
+                      <td>2500</td>
+                      <td>2500</td>
                     </tr>
-                    <tr>
-                      <td>a1008</td>
-                      <td>Rhona Davidson</td>
-                      <td>2010/10/14</td>
-                      <td>$327,900</td>
-                    </tr>
-                    <tr>
-                      <td>a1009</td>
-                      <td>Colleen Hurst</td>
-                      <td>2009/09/15</td>
-                      <td>$205,500</td>
-                    </tr>
-                    <tr>
-                      <td>a1010</td>
-                      <td>Sonya Frost</td>
-                      <td>2008/12/13</td>
-                      <td>$103,600</td>
-                    </tr>
-                    <tr>
-                      <td>a1011</td>
-                      <td>Jena Gaines</td>
-                      <td>2008/12/19</td>
-                      <td>$90,560</td>
-                    </tr>
-                    <tr>
-                      <td>a1012</td>
-                      <td>Quinn Flynn</td>
-                      <td>2013/03/03</td>
-                      <td>$342,000</td>
-                    </tr>
-                    <tr>
-                      <td>a1013</td>
-                      <td>Charde Marshall</td>
-                      <td>2008/10/16</td>
-                      <td>$470,600</td>
-                    </tr>
-                    <tr>
-                      <td>a1014</td>
-                      <td>Haley Kennedy</td>
-                      <td>2012/12/18</td>
-                      <td>$313,500</td>
-                    </tr>
-                    <tr>
-                      <td>a1015</td>
-                      <td>Tatyana Fitzpatrick</td>
-                      <td>2010/03/17</td>
-                      <td>$385,750</td>
-                    </tr>
-                   
+                    
                   </tbody>
                 </table>
               </div>
