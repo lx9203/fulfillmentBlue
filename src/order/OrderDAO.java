@@ -12,12 +12,9 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import invoice.InvoiceDAO;
-import invoice.InvoiceDTO;
-import user.UserDTO;
 
 public class OrderDAO {
-	private static final Logger LOG = LoggerFactory.getLogger(InvoiceDAO.class);
+	private static final Logger LOG = LoggerFactory.getLogger(OrderDAO.class);
 	private Connection conn;
 	private static final String USERNAME = "javauser";
 	private static final String PASSWORD = "javapass";
