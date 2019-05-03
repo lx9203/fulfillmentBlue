@@ -37,7 +37,6 @@ public class UserDAO {
 	
 	//로그인 확인 메소드
 		public int verifyIdPassword(String id, String password) {
-			System.out.println("verifyidPassword(): " + id + ", " + password);
 			String query = "select hashed from user where id=?;";
 			String hashedPassword = "";
 			try {
