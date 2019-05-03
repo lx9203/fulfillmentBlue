@@ -1,4 +1,4 @@
-package invoice;
+package Invoice;
 
 import java.sql.*;
 import java.util.*;
@@ -29,13 +29,6 @@ public class InvoiceDAO {
 	//------------------------ 전체 리스트 가져오기 ------------------------
 	
 	public List<InvoiceDTO> selectAll(){
-		String sql = "select iCode, iCustomerCode, iProductCode, iQuantity, iAreaCode, iDate from invoice;";
-		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
-		return invoiceList;
-	}
-	//------------------------ 송장 번호에 맞는 리스트 가져오기 ---------------------
-	
-	public List<InvoiceDTO> selectAllInvoice(char AreaCode){
 		String sql = "select iCode, iCustomerCode, iProductCode, iQuantity, iAreaCode, iDate from invoice;";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
