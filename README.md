@@ -6,3 +6,4 @@
 
 ---
 ### 19.04.30 : User, Product(재고량) DB 구축 및 로그인 기능 추가
+### 19.05.03 : git Organization 생성 및 설정, DB 재 구축
