@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<html>
 
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,9 +20,10 @@
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
     <style>
-    .bg-login-image {
-      background: green;
-     }
+    .blue-login {
+    	background-image: url('http://www.klnews.co.kr/news/photo/201901/118631_26829_537.jpg');
+    	background-size: cover;
+	}
 
     </style>
   </head>
@@ -40,7 +41,7 @@
             <div class="card-body p-0">
               <!-- Nested Row within Card Body -->
               <div class="row">
-                <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                <div class="col-lg-6 d-none d-lg-block blue-login"></div>
                 <div class="col-lg-6">
                   <div class="p-5">
                     <div class="text-center">
@@ -63,7 +64,7 @@
                           </div>
                         <div class="custom-control custom-radio small d-inline-block">
                           <input type="radio" class="custom-control-input" name="userType" id="seller" value=3>
-                          <label class="custom-control-label" for="seller">입고처&nbsp;</label>
+                          <label class="custom-control-label" for="seller">공급처&nbsp;</label>
                       </div>
                      </div>
 
