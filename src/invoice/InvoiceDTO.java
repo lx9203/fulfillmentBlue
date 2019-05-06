@@ -1,67 +1,68 @@
 package invoice;
 
+import java.time.LocalDate;
+
 public class InvoiceDTO {
 	private String iCode;
-	private String iCustomerCode;
-	private String iProductCode;
-	private int iQuantity;
+	private String iName;
+	private String iTel;
+	private String iAddress;
 	private String iAreaCode;
 	private String iDate;
 	
-	public InvoiceDTO(String iCode, String iCustomerCode, String iProductCode, int iQuantity, String iAreaCode,
-			String iDate) {
-		this.iCode = iCode;
-		this.iCustomerCode = iCustomerCode;
-		this.iProductCode = iProductCode;
-		this.iQuantity = iQuantity;
-		this.iAreaCode = iAreaCode;
-		this.iDate = iDate;
+	public InvoiceDTO(String[] customer) {
+		this.iCode = customer[0];
+		this.iName = customer[1];
+		this.iTel = customer[2];
+		this.iAddress = customer[3];
+		this.iAreaCode = customer[4];
+		this.iDate = LocalDate.now()+"";
 	}
-	
+
 	public InvoiceDTO() {}
 
 	public String getiCode() {
 		return iCode;
 	}
 
-	public String getiCustomerCode() {
-		return iCustomerCode;
+	public void setiCode(String iCode) {
+		this.iCode = iCode;
 	}
 
-	public String getiProductCode() {
-		return iProductCode;
+	public String getiName() {
+		return iName;
 	}
 
-	public int getiQuantity() {
-		return iQuantity;
+	public void setiName(String iName) {
+		this.iName = iName;
+	}
+
+	public String getiTel() {
+		return iTel;
+	}
+
+	public void setiTel(String iTel) {
+		this.iTel = iTel;
+	}
+
+	public String getiAddress() {
+		return iAddress;
+	}
+
+	public void setiAddress(String iAddress) {
+		this.iAddress = iAddress;
 	}
 
 	public String getiAreaCode() {
 		return iAreaCode;
 	}
 
-	public String getiDate() {
-		return iDate;
-	}
-
-	public void setiCode(String iCode) {
-		this.iCode = iCode;
-	}
-
-	public void setiCustomerCode(String iCustomerCode) {
-		this.iCustomerCode = iCustomerCode;
-	}
-
-	public void setiProductCode(String iProductCode) {
-		this.iProductCode = iProductCode;
-	}
-
-	public void setiQuantity(int iQuantity) {
-		this.iQuantity = iQuantity;
-	}
-
 	public void setiAreaCode(String iAreaCode) {
 		this.iAreaCode = iAreaCode;
+	}
+
+	public String getiDate() {
+		return iDate;
 	}
 
 	public void setiDate(String iDate) {
@@ -70,8 +71,9 @@ public class InvoiceDTO {
 
 	@Override
 	public String toString() {
-		return "InvoiceDTO [iCode=" + iCode + ", iCustomerCode=" + iCustomerCode + ", iProductCode=" + iProductCode
-				+ ", iQuantity=" + iQuantity + ", iAreaCode=" + iAreaCode + ", iDate=" + iDate + "]";
+		return "InvoiceDTO [iCode=" + iCode + ", iName=" + iName + ", iTel=" + iTel + ", iAddress=" + iAddress
+				+ ", iAreaCode=" + iAreaCode + ", iDate=" + iDate + "]";
 	}
+
 	
 }

@@ -59,7 +59,7 @@ public class UserProc extends HttpServlet {
 		UserDTO uDto = new UserDTO();
 		
 		switch(action){
-		case "intoMain":
+		case "intoMain": //로그인 유형에 따른 메인페이지 이동
 			userType  = (Integer)session.getAttribute("userType");
 			LOG.trace("사용자 유형 :" + userType);
 			
