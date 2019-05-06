@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -13,17 +13,17 @@
   <title>Register</title>
 
   <!-- Custom fonts for this template-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
-  
+  <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+
   <style>
-  	.blue-register {
-    	background-image: url('http://www.klnews.co.kr/news/photo/201901/118631_26829_537.jpg');
-    	background-size: cover;
-	}
+    .blue-register {
+      background-image: url('http://www.klnews.co.kr/news/photo/201901/118631_26829_537.jpg');
+      background-size: cover;
+    }
   </style>
 
 </head>
@@ -42,8 +42,10 @@
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Create an Account</h1>
               </div>
-              <form class="user">
-				<div class="form-group">
+
+              <!-- form의 class명 'view-radio-group' 변경 시, blue_company.js도 수정필요 : 라디오 버튼 보이기/숨기기 기능이 class명으로 연동되어 있음. -->
+              <form class="user view-radio-group">
+                <div class="form-group">
                   <input type="text" class="form-control form-control-user" id="userId" placeholder="userId">
                 </div>
                 <div class="form-group">
@@ -57,76 +59,79 @@
                     <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
                   </div>
                 </div>
-                <div class="form-group" align = left>
-                	<div class="col-3" style="display : inline-block; max-width:20%; padding-right:0">
-               			<a class="small">회원유형:&nbsp;</a>
-               		</div>
-                  	<div class="col-3" style="display : inline-block; max-width:20%; padding-right:0">
-	            		<input type="radio" class="" name="loginType" value="1">
-	            		<a class="small">쇼핑몰</a>
-                  	</div>
-	                <div class="col-3" style="display : inline-block; max-width:20%; padding-right:0">
-	                    <input type="radio" class="" name="loginType" value="2">
-	                    <a class="small">운송사</a>
-	                </div>
-	                <div class="col-3" style="display : inline-block; max-width:20%; padding-right:0">
-	                    <input type="radio" class="" name="loginType" value="3">
-	                    <a class="small">구매처</a>
-	                </div>
+
+                <div class="form-group row" style="line-height: 2">
+                  <div class="col-sm-3 mb-3 mb-sm-0 small " style="display : inline-block; max-width: max-content">
+                    <span style="padding:0 0 0 17px">회원유형&nbsp;:</span>
+                  </div>
+
+                <!-- id 변경 시, blue_company.js변경 필요 : 숨기기 보이기 기능이 id값으로 연동되어 있음 -->
+                  <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
+                    <input type="radio" class="custom-control-input" name="userType" id="transport" value=1>
+                    <label class="custom-control-label" for="transport">운송업체&nbsp;</label>
+                  </div>
+                  <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
+                    <input type="radio" class="custom-control-input" name="userType" id="shopping" value=2>
+                    <label class="custom-control-label" for="shopping">쇼핑몰&nbsp;</label>
+                  </div>
+                  <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
+                    <input type="radio" class="custom-control-input" name="userType" id="seller" value=3>
+                    <label class="custom-control-label" for="seller">공급처&nbsp;</label>
+                  </div>
                 </div>
-                <div class="form-group" align = left>
-                	<div class="col-3" style="display : inline-block; max-width:20%; padding-right:0">
-                		<a class="small">지역:&nbsp;</a>
-                	</div>
-                  	<div class="col-3" style="display : inline-block; max-width:15%; padding-right:0">
-	            		<input type="radio" class="" name="loginType" value="1">
-	            		<a class="small">경기</a>
-                  	</div>
-	                <div class="col-3" style="display : inline-block; max-width:15%; padding-right:0">
-	                    <input type="radio" class="" name="loginType" value="2">
-	                    <a class="small">중부</a>
-	                </div>
-	                <div class="col-3" style="display : inline-block; max-width:15%; padding-right:0">
-	                    <input type="radio" class="" name="loginType" value="3">
-	                    <a class="small">영남</a>
-	                </div>
-	                <div class="col-3" style="display : inline-block; max-width:15%; padding-right:0">
-	                    <input type="radio" class="" name="loginType" value="3">
-	                    <a class="small">서부</a>
-	                </div>
+
+                <div class="form-group row view-radio-group-object" style="line-height: 2">
+                  <div class="col-sm-3 mb-3 mb-sm-0 small" style="display : inline-block; max-width: max-content">
+                    <span style="padding:0 0 0 17px">지역&nbsp;:</span>
+                  </div>
+                  <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
+                    <input type="radio" class="custom-control-input" name="transportType" id="kyeonggi" value=1>
+                    <label class="custom-control-label" for="kyeonggi">경기&nbsp;</label>
+                  </div>
+                  <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
+                    <input type="radio" class="custom-control-input" name="transportType" id="jungbu" value=2>
+                    <label class="custom-control-label" for="jungbu">중부&nbsp;</label>
+                  </div>
+                  <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
+                    <input type="radio" class="custom-control-input" name="transportType" id="yeongnam" value=3>
+                    <label class="custom-control-label" for="yeongnam">영남&nbsp;</label>
+                  </div>
+                  <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
+                    <input type="radio" class="custom-control-input" name="transportType" id="seobu" value=4>
+                    <label class="custom-control-label" for="seobu">서부&nbsp;</label>
+                  </div>
                 </div>
-                  
-                <a href="index.jsp" class="btn btn-primary btn-user btn-block">
-                  Register Account
-                </a>
+
+                <a href="index.jsp" class="btn btn-primary btn-user btn-block">  Register Account</a>
               </form>
               <hr>
-<!-- 비밀번호 찾기 or 초기화 요청      
+              <!-- 비밀번호 찾기 or 초기화 요청
               <div class="text-center">
-                <a class="small" href="forgot-password.jsp">Forgot Password?</a>
+              <a class="small" href="forgot-password.jsp">Forgot Password?</a>
               </div>
--->
+              -->
               <div class="text-center">
-                <a class="small" href="../index.jsp">Already have an account? Login!</a>
+                <a class="small" href="login.jsp">Already have an account? Login!</a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
+  <script src="../js/sb-admin-2.min.js"></script>
+  
+  <!-- Custom scripts for class=view-radio-group -->
+  <script src="../js/blue_company.js"></script>
 
 </body>
-
 </html>

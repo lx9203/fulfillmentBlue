@@ -37,7 +37,7 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-2 text-gray-800">상세페이지</h1>
             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-              <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
+            <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
             </a>
           </div>
           <!-- DataTales Example -->
@@ -45,11 +45,10 @@
             <div class="card-header py-3">
               <table>
                 <tr>
-                  <td>
-                    <h6 class="m-0 font-weight-bold text-primary">발주코드: DA1001&nbsp;&nbsp;</h6>
-                  </td>
-                  <td>&nbsp;&nbsp;Blue Company&nbsp;&nbsp;</td>
-                  <td>&nbsp;&nbsp;Date:&nbsp;2011/04/25&nbsp;&nbsp;</td>
+                  <td><h6 class="m-0 font-weight-bold text-primary">송장번호: a1001&nbsp;&nbsp;</h6></td>
+                  <td>&nbsp;&nbsp;Tiger Nixon&nbsp;&nbsp;</td>
+                  <td>&nbsp;&nbsp;1&nbsp; Parliament&nbsp; Square,&nbsp; Royal&nbsp; Mile,&nbsp; Edinburgh&nbsp; EH1&nbsp; 1RE,&nbsp; UK&nbsp;&nbsp;</td>
+                  <td>&nbsp;&nbsp;+44&nbsp;131&nbsp;226&nbsp;1414&nbsp;&nbsp;</td>
                 </tr>
               </table>
             </div>
@@ -58,7 +57,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>상품코드</th>
+                      <th>주문번호</th>
                       <th>상품명</th>
                       <th>개수</th>
                       <th>단가</th>
