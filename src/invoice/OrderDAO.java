@@ -1,4 +1,4 @@
-package order;
+package invoice;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,10 +33,10 @@ public class OrderDAO {
 	}
 	
 	public void insertOrder(OrderDTO order) {
-		String query = "insert into order (oCode,oProductCode,oQuantity,oInvoiceCode) values(?,?,?,?);";
+		String query = "insert into order (oNum,oProductCode,oQuantity,oInvoiceCode) values(?,?,?,?);";
 		try {
 			pStmt = conn.prepareStatement(query);
-			pStmt.setString(1, order.getoCode());
+			pStmt.setInt(1, order.getoNum());
 			pStmt.setString(2, order.getoProductCode());
 			pStmt.setInt(3, order.getoQuantity());
 			pStmt.setString(4, order.getoInvoiceCode());
@@ -55,7 +55,7 @@ public class OrderDAO {
 	}
 	
 	public List<OrderDTO> selectAll(String iCode){
-		String sql = "select o.oCode, p.pName, o.oQuantity, p.pPrice from order as o "
+		String sql = "select o.oNum, p.pName, o.oQuantity, p.pPrice from order as o "
 				+ "inner join product as p on p.pCode=o.oProductCode where o.oInvoiceCode like'"+iCode+"';";
 		List<OrderDTO> orderList = selectAllCondition(sql);
 		return orderList;
@@ -70,7 +70,7 @@ public class OrderDAO {
 			
 			while(rs.next()){
 				OrderDTO order = new OrderDTO();
-				order.setoCode(rs.getString("oCode"));
+				order.setoNum(rs.getInt("oNum"));
 				order.setoProductName(rs.getString("pName"));
 				order.setoPrice(rs.getInt("pPrice"));
 				order.setoQuantity(rs.getInt("oQuantity"));
