@@ -27,47 +27,32 @@ public class SupplyDAO {
 	public List<SupplyDTO> searchByDay(String day) {
 		String sql = "select s.sCode, p.pName, p.pPrice, s.sQuantity, s.sDate from supply as s "
 				+ "inner join product as p on p.pCode=s.sProductCode where s.sDate like '%" + day + "일%';";
-		List<SupplyDTO> sDto = selectAll(sql);
+		List<SupplyDTO> sDto = selectCondition(sql);
+		LOG.trace("sDto : " + sDto.toString());
 		return sDto;
 	}
 	
 	public List<SupplyDTO> searchByMonth(String month) {
 		String sql = "select s.sCode, p.pName, p.pPrice, s.sQuantity, s.sDate from supply as s "
 				+ "inner join product as p on p.pCode=s.sProductCode where s.sDate like '%" + month + "월%';";
-		List<SupplyDTO> sDto = selectAll(sql);
+		List<SupplyDTO> sDto = selectCondition(sql);
+		LOG.trace("sDto : " + sDto.toString());
 		return sDto;
 	}
 	
 	public List<SupplyDTO> selectAll(String query){
 		List<SupplyDTO> supplyList = new ArrayList<SupplyDTO>();
 		PreparedStatement pStmt = null;
-		try {
-			pStmt = conn.prepareStatement(query);
-			ResultSet rs = pStmt.executeQuery();
-			while (rs.next()) {	
-				SupplyDTO sDto = new SupplyDTO();
-				sDto.setsCode(rs.getString("sCode"));
-				sDto.setsProductName(rs.getString("pName"));
-				sDto.setsProductPrice(rs.getInt("pPrice"));
-				sDto.setsQuantity(rs.getInt("sQuantity"));
-				sDto.setsDate(rs.getString("sDate"));
-				sDto.setsTotalPrice(sDto.getsProductPrice()*sDto.getsQuantity());
-			}
-			rs.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (pStmt != null && !pStmt.isClosed()) 
-					pStmt.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			}
-		}
 		return supplyList;
 	}
 	
-	public List<SupplyDTO> selectAllCondition(String sql){
+	public List<SupplyDTO> selectMemberAll() { // select All
+		String sql = "select p.pCode,s.sProductCode, s.sCode, p.pName, p.pPrice, s.sQuantity, s.sDate from supply as s inner join product as p on p.pCode = s.sProductCode;";
+		List<SupplyDTO> supplyList = selectCondition(sql);
+		return supplyList;
+	}
+	
+	public List<SupplyDTO> selectCondition(String sql){
 		PreparedStatement pStmt = null;
 		List<SupplyDTO> supplyList = new ArrayList<SupplyDTO>();
 		try {
@@ -91,6 +76,7 @@ public class SupplyDAO {
 					pStmt.close();
 			} catch (SQLException se) {
 				se.printStackTrace();
+				LOG.info("selectAllCondition Error Code : {}", se.getErrorCode());
 			}
 		}
 		return supplyList;

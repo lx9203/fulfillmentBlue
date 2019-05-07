@@ -12,12 +12,24 @@ public class SupplyDTO {
 	private int sState;	// 기록
 	private int sTotalPrice; // 기록
 	
-	public SupplyDTO(String sCode, String sProductCode, String sDate, int sQuantity, int sState) {
+	
+	
+	public SupplyDTO(String sCode, String sProductCode, String sProductName, int sProductPrice, String sDate,
+			int sQuantity, int sState, int sTotalPrice) {
 		this.sCode = sCode;
 		this.sProductCode = sProductCode;
-		this.sDate = LocalDate.now()+"";
+		this.sDate = sDate;
 		this.sQuantity = sQuantity;
 		this.sState = sState;
+		this.sTotalPrice = sTotalPrice;
+	}
+
+	public SupplyDTO(String[] supply) {
+		this.sCode = supply[0];
+		this.sProductCode = supply[1];
+		this.sQuantity = supply[2];
+		this.sState = supply[3];
+		this.sDate = LocalDate.now()+"";
 	}
 	
 	public String getsProductName() {
