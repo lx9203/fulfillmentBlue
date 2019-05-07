@@ -9,8 +9,6 @@ public class OrderDTO {
 	private int oPrice; // 읽어오기
 	private int oTotalPrice; //만들어서 넣기 
 	
-	
-	
 	public OrderDTO(String oProductCode, String oInvoiceCode, int oQuantity) {
 		this.oProductCode = oProductCode;
 		this.oInvoiceCode = oInvoiceCode;
@@ -65,6 +63,14 @@ public class OrderDTO {
 
 	public void setoPrice(int oPrice) {
 		this.oPrice = oPrice;
+	}
+
+	public int getoTotalPrice() {
+		return oTotalPrice;
+	}
+
+	public void setoTotalPrice(int oTotalPrice) {
+		this.oTotalPrice = oTotalPrice;
 	}
 
 	@Override

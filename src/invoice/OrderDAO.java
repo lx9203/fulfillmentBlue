@@ -74,6 +74,7 @@ public class OrderDAO {
 				order.setoProductName(rs.getString("pName"));
 				order.setoPrice(rs.getInt("pPrice"));
 				order.setoQuantity(rs.getInt("oQuantity"));
+				order.setoTotalPrice(order.getoPrice()*order.getoQuantity());
 				orderList.add(order);
 			}
 		} catch (Exception e) {
