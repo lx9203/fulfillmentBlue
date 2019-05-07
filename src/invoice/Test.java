@@ -15,7 +15,7 @@ public class Test {
         
         try {
             // csv 데이터 파일
-            File csv = new File("C:\\Temp/Test1.csv");
+            File csv = new File("C:\\Temp\\test.csv");
             BufferedReader br = new BufferedReader(new FileReader(csv));
             String line = "";
             int row =0 ,i;

@@ -47,7 +47,7 @@
                 <tr>
                   <td><h6 class="m-0 font-weight-bold text-primary">송장번호: a1001&nbsp;&nbsp;</h6></td>
                   <td>&nbsp;&nbsp;Tiger Nixon&nbsp;&nbsp;</td>
-                  <td>&nbsp;&nbsp;1&nbsp; Parliament&nbsp; Square,&nbsp; Royal&nbsp; Mile,&nbsp; Edinburgh&nbsp; EH1&nbsp; 1RE,&nbsp; UK&nbsp;&nbsp;</td>
+                  <td>&nbsp;&nbsp;<span>1 Parliament Square, Royal Mile, Edinburgh EH1 1RE, UK</span>&nbsp;&nbsp;</td>
                   <td>&nbsp;&nbsp;+44&nbsp;131&nbsp;226&nbsp;1414&nbsp;&nbsp;</td>
                 </tr>
               </table>

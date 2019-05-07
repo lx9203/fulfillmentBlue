@@ -72,14 +72,14 @@
               </div>
             </div>
             
-			<div class="col-lg-6 mb-4">
+            <div class="col-lg-6 mb-4">
               <!-- Illustrations -->
               <div class="card shadow mb-4 small">
                 <table>
                   <tr>
                     <td rowspan="2">
-                      <div class="container" style="height:6rem">
-                        <img class="img-fluid"  style="max-height:100%; max-width:unset; padding:1rem 0 1rem 0" src="../../img/undraw_posting_photo.svg" alt="">
+                      <div class="container">
+                        <img class="img-fluid px-3 px-sm-2 mt-3 mb-2" src="../../img/undraw_posting_photo.svg" alt="">
                       </div>
                     </td>
                     <td>
@@ -91,7 +91,7 @@
                   <tr>
                     <td>
                       <div class="card-body" style="padding:5px 20px 5px 20px">
-                        <p style="margin-block-end:0">
+                        <p>
                           Add some quality, svg illustrations to your project courtesy of unDraw,
                           a constantly updated collection of beautiful svg images that you can use
                           completely free and without attribution!
