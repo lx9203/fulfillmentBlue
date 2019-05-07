@@ -12,12 +12,22 @@ public class SupplyDTO {
 	private int sState;	// 기록
 	private int sTotalPrice; // 기록
 	
+	@Override
+	public String toString() {
+		return "SupplyDTO [sCode=" + sCode + ", sProductCode=" + sProductCode + ", sProductName=" + sProductName
+				+ ", sProductPrice=" + sProductPrice + ", sDate=" + sDate + ", sQuantity=" + sQuantity + ", sState="
+				+ sState + ", sTotalPrice=" + sTotalPrice + "]";
+	}
+
 	
-	
+
 	public SupplyDTO(String sCode, String sProductCode, String sProductName, int sProductPrice, String sDate,
 			int sQuantity, int sState, int sTotalPrice) {
+		super();
 		this.sCode = sCode;
 		this.sProductCode = sProductCode;
+		this.sProductName = sProductName;
+		this.sProductPrice = sProductPrice;
 		this.sDate = sDate;
 		this.sQuantity = sQuantity;
 		this.sState = sState;
@@ -26,10 +36,13 @@ public class SupplyDTO {
 
 	public SupplyDTO(String[] supply) {
 		this.sCode = supply[0];
-		this.sProductCode = supply[1];
-		this.sQuantity = supply[2];
-		this.sState = supply[3];
+		this.sProductCode = supply[0];
+		this.sProductName = supply[1];
+		this.sProductPrice = Integer.parseInt(supply[2]);
 		this.sDate = LocalDate.now()+"";
+		this.sQuantity = Integer.parseInt(supply[3]);
+		this.sState = Integer.parseInt(supply[4]);
+		this.sTotalPrice = Integer.parseInt(supply[4])*Integer.parseInt(supply[3]);
 	}
 	
 	public String getsProductName() {

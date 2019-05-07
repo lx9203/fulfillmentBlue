@@ -1,6 +1,8 @@
 package supply;
 
 import java.sql.*;
+import java.time.*;
+import java.time.format.*;
 import java.util.*;
 
 import org.slf4j.*;
@@ -80,6 +82,13 @@ public class SupplyDAO {
 			}
 		}
 		return supplyList;
+	}
+	public String curTime() {
+		LocalDateTime curTime = LocalDateTime.now();
+    	
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
+    	
+    	return curTime.format(dateTimeFormatter);
 	}
 	
 }
