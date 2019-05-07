@@ -55,7 +55,7 @@ public class Test {
     	System.out.println(iDto.toString());*/
         
 
-    	 /*try {
+    	 try {
 	            // csv 데이터 파일
 	            File csv = new File("C:\\Temp/Test.csv");
 	            BufferedReader br = new BufferedReader(new FileReader(csv));
@@ -105,7 +105,7 @@ public class Test {
 	        } 
 	        catch (IOException e) {
 	            e.printStackTrace();
-	        }*/
+	        }
     }   
     public static String iCodeProc(String shopping, String areaCode, int count) {
 		char shoppingCode = shopping.charAt(0);

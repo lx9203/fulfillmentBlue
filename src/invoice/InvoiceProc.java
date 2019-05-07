@@ -81,11 +81,11 @@ public class InvoiceProc extends HttpServlet {
 			rd.forward(request, response);
 			break;
 		case "mallInvoiceListDay":
-			//날짜에서 월에 해당하는 부분을 가져와 해당 일의 리스트를 DTO로 받는다.
-			iDtoLists = iDao.selectAllMonth();
+			//날짜에서 일에 해당하는 부분을 가져와 해당 일의 리스트를 DTO로 받는다.
+			iDtoLists = iDao.selectAllDay();
 			
 			request.setAttribute("invoiceLists", iDtoLists);
-			rd = request.getRequestDispatcher("mall/");
+			rd = request.getRequestDispatcher("mall/sInvoiceList.jsp");
 			rd.forward(request, response);
 			
 			break;

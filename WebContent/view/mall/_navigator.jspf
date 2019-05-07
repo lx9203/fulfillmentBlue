@@ -32,7 +32,7 @@
 
   <!-- Nav Item - 송장목록 -->
   <li class="nav-item">
-    <a class="nav-link" href="sInvoiceList.jsp">
+    <a class="nav-link" href="../InvoiceProc?action=mallInvoiceListDay">
       <i class="fas fa-fw fa-table"></i>
       <span>일별 송장내역</span></a>
   </li>
