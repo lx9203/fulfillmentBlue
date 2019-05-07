@@ -20,6 +20,8 @@
 
   <!-- Custom styles for this page -->
   <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  
+  <link href="../../css/jquery-ui.min.css" rel="stylesheet">
 </head>
 <body id="page-top">
   <!-- Page Wrapper -->
@@ -34,15 +36,23 @@
         <div class="container-fluid">
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-2 text-gray-800">송장목록</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-              <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-            </a>
+            <h1 class="h3 mb-2 text-gray-800">일별 주문내역</h1>
+            <form action="" class="form-horizontal d-sm-inline-block" method="post">
+			  <div class="form-group" style="margin-bottom:0">
+			    <label class="control-label" style="margin-bottom:0">
+			      <input type="text" name="dateCustomer" id="datepicker1" placeholder="날짜">&nbsp;&nbsp;
+			      <input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
+			    </label>
+			  </div>
+	        </form>
           </div>
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">DataTables Example</h6>
+              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
+              </a>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -57,7 +67,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><a href="../InvoiceProc?action=DetailList&iCode=a119050710001" >a1001</a></td>
+                      <td><a href="tDetailList.jsp" >a1001</a></td>
                       <td>Tiger Nixon</td>
                       <td>2011/04/25</td>
                       <td>$320,800</td>
@@ -178,5 +188,10 @@
 
   <!-- Page level custom scripts -->
   <script src="../../js/demo/datatables-demo.js"></script>
+  
+  <!-- 날짜검색기능 -->
+  <script src="../../js/jquery-ui.min.js"></script>
+  <script src="../../js/blue_company.js"></script>
+	
 </body>
 </html>

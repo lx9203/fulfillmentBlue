@@ -41,7 +41,23 @@
           <!-- Content Row 1-->
           <div class="row">
 
-            <div class="col-lg-6 mb-4">
+            <div class="col-lg-4 mb-4">
+              <!-- Illustrations -->
+              <div class="card shadow mb-4">
+                <a class="card-link" href="catalogDetail.jsp">
+	                <div class="card-header py-3">
+	                  <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+	                </div>
+	                <div class="card-body">
+	                  <div class="text-center">
+	                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="height: 8rem;" src="../../img/undraw_posting_photo.svg" alt="">
+	                  </div>
+	                </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-4 mb-4">
               <!-- Illustrations -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -54,8 +70,8 @@
                 </div>
               </div>
             </div>
-
-            <div class="col-lg-6 mb-4">
+            
+            <div class="col-lg-4 mb-4">
               <!-- Illustrations -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -74,7 +90,7 @@
           <!-- Content Row 2-->
           <div class="row">
 
-            <div class="col-lg-12 mb-4">
+            <div class="col-lg-6 mb-4">
               <!-- Illustrations -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -88,26 +104,7 @@
               </div>
             </div>
 
-          </div>
-
-          <!-- Content Row 3-->
-          <div class="row">
-
-            <div class="col-lg-4 mb-4">
-              <!-- Illustrations -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                </div>
-                <div class="card-body">
-                  <div class="text-center">
-                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="height: 8rem;" src="../../img/undraw_posting_photo.svg" alt="">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-8 mb-4">
+            <div class="col-lg-6 mb-4">
               <!-- Illustrations -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">

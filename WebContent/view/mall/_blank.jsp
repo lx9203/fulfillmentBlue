@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>일별 운송내역</title>
+  <title>일별 송장내역</title>
 
   <!-- Custom fonts for this template-->
   <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -22,10 +22,34 @@
   <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   
   <link href="../../css/jquery-ui.min.css" rel="stylesheet">
+  
+  
 </head>
 <body id="page-top">
+
+<div class="modal fade" id="noData">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
   <!-- Page Wrapper -->
   <div id="wrapper">
+  
+
     <%@ include file="_navigator.jspf" %>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -36,7 +60,7 @@
         <div class="container-fluid">
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-2 text-gray-800">일별 운송내역</h1>
+            <h1 class="h3 mb-2 text-gray-800">일별 송장내역</h1>
             <form action="" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
@@ -57,104 +81,104 @@
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <colgroup>
+					<col style="width:10%">
+					<col style="width:15%">
+					<col style="width:40%">
+					<col style="width:15%">
+					<col style="width:10%">
+					<col style="width:10%">
+				  </colgroup>
                   <thead>
                     <tr>
                       <th>송장번호</th>
                       <th>이름</th>
-                      <th>날짜</th>
+                      <th>주소</th>
+                      <th>연락처</th>
                       <th>합계</th>
+                      <th>날짜</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td><a href="tDetailList.jsp" >a1001</a></td>
-                      <td>Tiger Nixon</td>
-                      <td>2011/04/25</td>
-                      <td>$320,800</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                     </tr>
                     <tr>
-                      <td>a1002</td>
-                      <td>Garrett Winters</td>
-                      <td>2011/07/25</td>
-                      <td>$170,750</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                     </tr>
                     <tr>
-                      <td>a1003</td>
-                      <td>Ashton Cox</td>
-                      <td>2009/01/12</td>
-                      <td>$86,000</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                     </tr>
                     <tr>
-                      <td>a1004</td>
-                      <td>Cedric Kelly</td>
-                      <td>2012/03/29</td>
-                      <td>$433,060</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                     </tr>
                     <tr>
-                      <td>a1005</td>
-                      <td>Airi Satou</td>
-                      <td>2008/11/28</td>
-                      <td>$162,700</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                     </tr>
                     <tr>
-                      <td>a1006</td>
-                      <td>Brielle Williamson</td>
-                      <td>2012/12/02</td>
-                      <td>$372,000</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                     </tr>
                     <tr>
-                      <td>a1007</td>
-                      <td>Herrod Chandler</td>
-                      <td>2012/08/06</td>
-                      <td>$137,500</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                     </tr>
                     <tr>
-                      <td>a1008</td>
-                      <td>Rhona Davidson</td>
-                      <td>2010/10/14</td>
-                      <td>$327,900</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                     </tr>
                     <tr>
-                      <td>a1009</td>
-                      <td>Colleen Hurst</td>
-                      <td>2009/09/15</td>
-                      <td>$205,500</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                     </tr>
                     <tr>
-                      <td>a1010</td>
-                      <td>Sonya Frost</td>
-                      <td>2008/12/13</td>
-                      <td>$103,600</td>
-                    </tr>
-                    <tr>
-                      <td>a1011</td>
-                      <td>Jena Gaines</td>
-                      <td>2008/12/19</td>
-                      <td>$90,560</td>
-                    </tr>
-                    <tr>
-                      <td>a1012</td>
-                      <td>Quinn Flynn</td>
-                      <td>2013/03/03</td>
-                      <td>$342,000</td>
-                    </tr>
-                    <tr>
-                      <td>a1013</td>
-                      <td>Charde Marshall</td>
-                      <td>2008/10/16</td>
-                      <td>$470,600</td>
-                    </tr>
-                    <tr>
-                      <td>a1014</td>
-                      <td>Haley Kennedy</td>
-                      <td>2012/12/18</td>
-                      <td>$313,500</td>
-                    </tr>
-                    <tr>
-                      <td>a1015</td>
-                      <td>Tatyana Fitzpatrick</td>
-                      <td>2010/03/17</td>
-                      <td>$385,750</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                     </tr>
                   </tbody>
                 </table>
@@ -193,5 +217,10 @@
   <script src="../../js/jquery-ui.min.js"></script>
   <script src="../../js/blue_company.js"></script>
 	
+<script>
+$(document).ready(function(){
+	$('#noData').modal('show');
+});
+</script>
 </body>
 </html>
