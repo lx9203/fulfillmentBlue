@@ -5,11 +5,38 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Test {
     public static void main(String[] args) {
-    	InvoiceDTO iDto = new InvoiceDTO();
+    	
+    	String shopping = "aMall";
+    	String areaCode = "1area";
+    	
+    	/*int count = 10001;
+    	char shoppingCode = shopping.charAt(0);
+    	System.out.println((char)shoppingCode);
+		char area = areaCode.charAt(0);
+		System.out.println((char)area);
+		Date curDate = new Date();
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+    	
+		
+		System.out.println(Character.toString(shoppingCode)+Character.toString(area)+sdf.format(curDate)+count);
+    	*/
+    	LocalDateTime curTime = LocalDateTime.now();
+    	
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시");
+    	
+    	String nowString = curTime.format(dateTimeFormatter);
+    	
+    	System.out.println(nowString.substring(10,12));
+		
+    	/*InvoiceDTO iDto = new InvoiceDTO();
     	OrderDTO oDto = new OrderDTO();
     	
         
@@ -54,7 +81,7 @@ public class Test {
         } 
         catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }   
     
     public static String iAreaCode(String Address) {
