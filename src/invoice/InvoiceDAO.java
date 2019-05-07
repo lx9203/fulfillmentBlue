@@ -5,9 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -61,15 +63,19 @@ public class InvoiceDAO {
 	
 	
 	//------------------------여러개의 송장번호를 리스트로 가져오기-------------------------------------------
-	public List<InvoiceDTO> selectAllDay(String day){
-		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice where iDate like '%"+day+"일%';";
+	public List<InvoiceDTO> selectAllDay(){
+		Date curDate = new Date();
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice where iCode like '%"+sdf.format(curDate)+"%';";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
 	
-	public List<InvoiceDTO> selectAllMonth(String month){
+	public List<InvoiceDTO> selectAllMonth(){
+		Date curDate = new Date();
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyMM");
 		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice "
-				+ "where iDate like '%"+month+"월%';";
+				+ "where iCode like '%"+sdf.format(curDate)+"%';";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
@@ -151,10 +157,8 @@ public class InvoiceDAO {
 	
 	//현재 시간 구하기 
 	public String curTime() {
-		LocalDateTime curTime = LocalDateTime.now();
-    	
-    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시");
-    	
+		LocalDateTime curTime = LocalDateTime.now();	
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     	return curTime.format(dateTimeFormatter);
 	}
 }
