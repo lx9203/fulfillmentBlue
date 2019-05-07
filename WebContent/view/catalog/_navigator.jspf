@@ -21,7 +21,7 @@
 
   <!-- Nav Item - 송장목록 -->
   <li class="nav-item">
-    <a class="nav-link" href="tables.jsp">
+    <a class="nav-link" href="catalogDetail.jsp">
       <i class="fas fa-fw fa-table"></i>
       <span>상품종류1</span>
     </a>

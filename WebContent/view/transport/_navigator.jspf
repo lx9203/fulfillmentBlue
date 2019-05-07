@@ -34,7 +34,14 @@
   <li class="nav-item">
     <a class="nav-link" href="tInvoiceList.jsp">
       <i class="fas fa-fw fa-table"></i>
-      <span>송장목록</span></a>
+      <span>일별 운송내역</span></a>
+  </li>
+  
+  <!-- Nav Item - 송장목록 -->
+  <li class="nav-item">
+    <a class="nav-link" href="tInvoiceList.jsp">
+      <i class="fas fa-fw fa-table"></i>
+      <span>월별 운송내역</span></a>
   </li>
 
   <!-- Divider -->

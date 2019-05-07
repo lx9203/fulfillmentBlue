@@ -34,7 +34,13 @@
   <li class="nav-item">
     <a class="nav-link" href="sInvoiceList.jsp">
       <i class="fas fa-fw fa-table"></i>
-      <span>송장목록</span></a>
+      <span>일별 송장내역</span></a>
+  </li>
+  
+  <li class="nav-item">
+    <a class="nav-link" href="sInvoiceList.jsp">
+      <i class="fas fa-fw fa-table"></i>
+      <span>월별 송장내역</span></a>
   </li>
 
   <!-- Divider -->
