@@ -57,7 +57,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><a href="../InvoiceProc?action=DetailList&iCode=a12019050710001" >a1001</a></td>
+                      <td><a href="../InvoiceProc?action=DetailList&iCode=a119050710001" >a1001</a></td>
                       <td>Tiger Nixon</td>
                       <td>2011/04/25</td>
                       <td>$320,800</td>

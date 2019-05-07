@@ -33,13 +33,12 @@ public class OrderDAO {
 	}
 	
 	public void insertOrder(OrderDTO order) {
-		String query = "insert into order (oNum,oProductCode,oQuantity,oInvoiceCode) values(?,?,?,?);";
+		String query = "insert into `order` (oProductCode,oQuantity,oInvoiceCode) values(?,?,?);";
 		try {
 			pStmt = conn.prepareStatement(query);
-			pStmt.setInt(1, order.getoNum());
-			pStmt.setString(2, order.getoProductCode());
-			pStmt.setInt(3, order.getoQuantity());
-			pStmt.setString(4, order.getoInvoiceCode());
+			pStmt.setString(1, order.getoProductCode());
+			pStmt.setInt(2, order.getoQuantity());
+			pStmt.setString(3, order.getoInvoiceCode());
 			
 			pStmt.executeUpdate();
 		} catch (Exception e) {
@@ -55,7 +54,7 @@ public class OrderDAO {
 	}
 	
 	public List<OrderDTO> selectAll(String iCode){
-		String sql = "select o.oNum, p.pName, o.oQuantity, p.pPrice from order as o "
+		String sql = "select o.oNum, p.pName, o.oQuantity, p.pPrice from `order` as o "
 				+ "inner join product as p on p.pCode=o.oProductCode where o.oInvoiceCode like'"+iCode+"';";
 		List<OrderDTO> orderList = selectAllCondition(sql);
 		return orderList;

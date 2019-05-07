@@ -71,7 +71,7 @@
 					<c:forEach var="order" items="${orderLists}">
                     <tr>
                       <td>${order.oNum}</td>
-                      <td>${order.oName}</td>
+                      <td>${order.oProductName}</td>
                       <td>${order.oQuantity}</td>
                       <td>${order.oPrice}</td>
                       <td>${order.oTotalPrice}</td>

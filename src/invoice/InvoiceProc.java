@@ -58,27 +58,31 @@ public class InvoiceProc extends HttpServlet {
     	List<OrderDTO> oDtoLists = new ArrayList<OrderDTO>();
     	
     	//session 변수
-    	String userId = (String)session.getAttribute("userId");
+    	/*String userId = (String)session.getAttribute("userId");
     	LOG.trace(userId);
     	String userName = (String)session.getAttribute("userName");
-    	int userType = (Integer)session.getAttribute("userType");
+    	int userType = (Integer)session.getAttribute("userType");*/
 		
     	//일반 변수
     	String now = curTime();
+    	int curTime = 0;
+    	int curDate = 0;
+    	String iCode = new String();
     	
 		
 		switch(action) {
-		case "InvoiceListMonth":
+		//---------------------------------쇼핑몰 관련 Action ----------------------------------------------------------
+		case "mallInvoiceListMonth":
 			//날짜에서 월에 해당하는 부분을 가져와 해당 월의 리스트를 DTO로 받는다.
-			iDtoLists = iDao.selectAllMonth(now.substring(6,8)); 
+			iDtoLists = iDao.selectAllMonth(); 
 			
 			request.setAttribute("invoiceLists", iDtoLists);
 			rd = request.getRequestDispatcher("mall/");
 			rd.forward(request, response);
 			break;
-		case "InvoiceListDay":
+		case "mallInvoiceListDay":
 			//날짜에서 월에 해당하는 부분을 가져와 해당 일의 리스트를 DTO로 받는다.
-			iDtoLists = iDao.selectAllMonth(now.substring(10,12));
+			iDtoLists = iDao.selectAllMonth();
 			
 			request.setAttribute("invoiceLists", iDtoLists);
 			rd = request.getRequestDispatcher("mall/");
@@ -87,7 +91,8 @@ public class InvoiceProc extends HttpServlet {
 			break;
 		case "DetailList": //송장 번호에 해당하는 제품 목록을 가져온다.
 			//하나의 송장 정보와 해당 송장정보의 모든 제품 목록을 가져온다.
-			String iCode = request.getParameter("iCode");
+			iCode = request.getParameter("iCode");
+			LOG.trace(iCode);
 			
 			iDto = iDao.selectOneCode(iCode);
 			oDtoLists = oDao.selectAll(iCode);
@@ -99,7 +104,7 @@ public class InvoiceProc extends HttpServlet {
 			request.setAttribute("invoiceTotalPrice", totalProductPrice);
 			request.setAttribute("invoice", iDto);
 			request.setAttribute("orderLists", oDtoLists);
-			rd = request.getRequestDispatcher("mall/sDetailList.jsp");
+			rd = request.getRequestDispatcher("mall/sDetailTest.jsp");
 			rd.forward(request, response);
 			
 			break;
@@ -111,9 +116,9 @@ public class InvoiceProc extends HttpServlet {
 	            BufferedReader br = new BufferedReader(new FileReader(csv));
 	            String line = "";
 	            String[] customer = new String[5]; //이름,전화번호,주소를 저장할 공간
+	            int count = 10001;//자동증가 숫자 (실제로 DB이 마지막 숫자부터 시작한다.)
 	 
 	            while ((line = br.readLine()) != null) {
-	            	int count = 10001;//자동증가 숫자 (실제로 DB이 마지막 숫자부터 시작한다.)
 	                // -1 옵션은 마지막 "," 이후 빈 공백도 읽기 위한 옵션
 	                String[] token = line.split(",", -1);
 //	                System.out.println(token.length); //길이는 값이 있던 없던 똑같다.
@@ -125,7 +130,7 @@ public class InvoiceProc extends HttpServlet {
 	                	customer[2] = token[1]; //전화번호
 	                	customer[3] = token[2]; //주소
 	                	customer[4] = iAreaCode(token[2]); //지역코드
-	                	customer[0] = iCodeProc(userId,customer[4],count); //송장번호
+	                	//customer[0] = iCodeProc(userId,customer[4],count); //송장번호
 	                	//송장번호 이름 전화번호 주소 지역코드를 DTO에 넣는다. 
 	                	iDto = new InvoiceDTO(customer); 
 	                	LOG.trace(iDto.toString());
@@ -136,7 +141,11 @@ public class InvoiceProc extends HttpServlet {
 	                }   
 	                
 	                //제품번호, 송장번호, 제품수량을 DTO에 넣는다.
-	                oDto = new OrderDTO(token[3],customer[0],Integer.parseInt(token[4]));
+	                try {
+						oDto = new OrderDTO(token[3],customer[0],Integer.parseInt(token[4]));
+					} catch (NumberFormatException e) {
+						e.printStackTrace();
+					}
 	                LOG.trace(oDto.toString());
 	                //제품번호, 송장번호, 제품수량을 DB에 넣는다.
 	                //제품 인덱스는 DB에서 처리한다.
@@ -152,6 +161,41 @@ public class InvoiceProc extends HttpServlet {
 	            e.printStackTrace();
 	        }
 			break;
+			
+	//------------------------------------------운송사 관련 Action------------------------------------
+		case "transInvoiceListMonth":
+			//날짜에서 월에 해당하는 부분을 가져와 해당 월의 리스트를 DTO로 받는다.
+			iDtoLists = iDao.selectAllMonth(); 
+			
+			request.setAttribute("invoiceLists", iDtoLists);
+			rd = request.getRequestDispatcher("mall/");
+			rd.forward(request, response);
+			break;
+		case "transInvoiceListDay":
+			//날짜에서 월에 해당하는 부분을 가져와 해당 일의 리스트를 DTO로 받는다.
+			iDtoLists = iDao.selectAllMonth();
+			
+			request.setAttribute("invoiceLists", iDtoLists);
+			rd = request.getRequestDispatcher("mall/");
+			rd.forward(request, response);
+			
+			break;
+		case "InvoiceProcess":
+			//1.현재 날짜와 시간을 확인 한다.
+			try {
+				curDate = Integer.parseInt(now.substring(11,13));
+				curTime = Integer.parseInt(now.substring(11,13));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			if(curTime<9 && curTime>18) {
+				
+			}
+			
+			break;
+			
 		default:
 			break;
 		}
@@ -195,14 +239,14 @@ public class InvoiceProc extends HttpServlet {
 		char shoppingCode = shopping.charAt(0);
 		char area = areaCode.charAt(0);
 		Date curDate = new Date();
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
 		return Character.toString(shoppingCode)+Character.toString(area)+sdf.format(curDate)+count;
 		
 	}
 	//현재 시간 구하는 함수
-	public static String curTime() {
+	public String curTime() {
 		LocalDateTime curTime = LocalDateTime.now();
-    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시");
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");	
     	return curTime.format(dateTimeFormatter);
 	}
 }
