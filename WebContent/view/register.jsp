@@ -76,7 +76,7 @@
                   </div>
                   <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
                     <input type="radio" class="custom-control-input" name="userType" id="seller" value=3>
-                    <label class="custom-control-label" for="seller">공급처&nbsp;</label>
+                    <label class="custom-control-label" for="seller">공급사&nbsp;</label>
                   </div>
                 </div>
 

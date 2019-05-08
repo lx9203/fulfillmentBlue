@@ -10,55 +10,71 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>납품내역</title>
+  <title>일별 수주내역</title>
 
   <!-- Custom fonts for this template-->
-  <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
   <!-- Custom styles for this page -->
-  <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body id="page-top">
   <!-- Page Wrapper -->
   <div id="wrapper">
-    <%@ include file="_navigator.jspf" %>
+    <%@ include file="s_navigator.jspf" %>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
       <div id="content">
-        <%@ include file="../common/_top.jspf" %>
+        <%@ include file="common/_top.jspf" %>
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-2 text-gray-800">납품내역</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-              <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-            </a>
+            <h1 class="h3 mb-2 text-gray-800">일별 수주내역</h1>
+            <form action="" class="form-horizontal d-sm-inline-block" method="post">
+			  <div class="form-group" style="margin-bottom:0">
+			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
+			      <input type="text" name="dateCustomer" id="datepicker1" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
+			      <input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
+			    </label>
+			  </div>
+	        </form>
+            
           </div>
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">[검색한 날짜]</h6>
+              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
+              </a>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <colgroup>
+					<col style="width:10%">
+					<col style="width:15%">
+					<col style="width:40%">
+					<col style="width:15%">
+					<col style="width:10%">
+				  </colgroup>
                   <thead>
                     <tr>
                       <th>발주코드</th>
+                      <th>회사명</th>
                       <th>날짜</th>
                       <th>금액</th>
-                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td><a href="requestDetail.jsp" >a1001</a></td>
+                      <td><a href="sRequestDetail.jsp" >a1001</a></td>
                       <td>Tiger Nixon</td>
                       <td>2011/04/25</td>
                       <td>$320,800</td>
@@ -157,27 +173,27 @@
         <!-- /.container-fluid -->
       </div>
       <!-- End of Main Content -->
-      <%@ include file="../common/_bottom.jspf" %>
+      <%@ include file="common/_bottom.jspf" %>
     </div>
     <!-- End of Content Wrapper -->
   </div>
   <!-- End of Page Wrapper -->
 
   <!-- Bootstrap core JavaScript-->
-  <script src="../../vendor/jquery/jquery.min.js"></script>
-  <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="../../js/sb-admin-2.min.js"></script>
+  <script src="../js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="../../js/demo/datatables-demo.js"></script>
+  <script src="../js/demo/datatables-demo.js"></script>
 </body>
 </html>

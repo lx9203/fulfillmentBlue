@@ -14,33 +14,52 @@
 
   <!-- Divider -->
   <hr class="sidebar-divider my-0">
-
+  
   <!-- Nav Item - Dashboard -->
-  <li class="nav-item active">
-    <a class="nav-link" href="mallMain.jsp">
+  <li class="nav-item">
+    <a class="nav-link" href="catalogMain.jsp">
       <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>메인페이지</span></a>
+      <span>제품소개 메인페이지</span></a>
   </li>
-
+  
   <!-- Divider -->
   <hr class="sidebar-divider">
 
   <!-- Heading -->
   <div class="sidebar-heading">
-    고객관리
+    카테고리
   </div>
 
-  <!-- Nav Item - 송장목록 -->
+  <!-- Nav Item -->
   <li class="nav-item">
-    <a class="nav-link" href="../InvoiceProc?action=mallInvoiceListDay">
+    <a class="nav-link" href="cCatalogList.jsp">
       <i class="fas fa-fw fa-table"></i>
-      <span>일별 송장내역</span></a>
+      <span>상품종류1</span>
+    </a>
   </li>
-  
   <li class="nav-item">
-    <a class="nav-link" href="sInvoiceList.jsp">
+    <a class="nav-link" href="tables.jsp">
       <i class="fas fa-fw fa-table"></i>
-      <span>월별 송장내역</span></a>
+      <span>상품종류2</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="tables.jsp">
+      <i class="fas fa-fw fa-table"></i>
+      <span>상품종류3</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="tables.jsp">
+      <i class="fas fa-fw fa-table"></i>
+      <span>상품종류4</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="tables.jsp">
+      <i class="fas fa-fw fa-table"></i>
+      <span>상품종류5</span>
+    </a>
   </li>
 
   <!-- Divider -->
