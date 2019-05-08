@@ -36,11 +36,11 @@
         <div class="container-fluid">
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-2 text-gray-800">일별 송장내역</h1>
-            <form action="InvoiceProc?action=searchList" class="form-horizontal d-sm-inline-block" method="post">
+            <h1 class="h3 mb-2 text-gray-800">월별 송장내역</h1>
+            <form action="" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
-			      <input type="text" name="date" id="datepicker1" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
+			      <input type="text" name="monthCustomer" id="monthpicker" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
 			      <input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
 			    </label>
 			  </div>
@@ -120,6 +120,7 @@
   <!-- 날짜검색기능 -->
   <script src="../js/jquery-ui.min.js"></script>
   <script src="../js/blue_company.js"></script>
-	
+  <script src="../js/jquery.mtz.monthpicker.js"></script>
+
 </body>
 </html>
