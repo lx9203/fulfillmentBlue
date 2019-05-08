@@ -1,0 +1,106 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+  <!-- 상단 창고회사 로고 -->
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+    <div class="sidebar-brand-icon rotate-n-15">
+      <i class="fas fa-laugh-wink"></i>
+    </div>
+    <div class="sidebar-brand-text mx-3">BlueCompany</div>
+  </a>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider my-0">
+
+  <!-- Nav Item - Dashboard -->
+  <li class="nav-item">
+    <a class="nav-link" href="adminMain.jsp">
+      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <span>운영현황</span></a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+  
+    <!-- Heading -->
+  <div class="sidebar-heading">
+    재고조사
+  </div>
+
+  <!-- Nav Item -->
+  <li class="nav-item">
+    <a class="nav-link" href="aStockList.jsp">
+      <i class="fas fa-fw fa-table"></i>
+      <span>재고현황</span></a>
+  </li>
+  
+  <!-- Nav Item -->
+  <li class="nav-item">
+    <a class="nav-link" href="tInvoiceList.jsp">
+      <i class="fas fa-fw fa-table"></i>
+      <span>일별 입고내역</span></a>
+  </li>
+  
+  <!-- Nav Item -->
+  <li class="nav-item">
+    <a class="nav-link" href="tInvoiceList.jsp">
+      <i class="fas fa-fw fa-table"></i>
+      <span>일별 출고내역</span></a>
+  </li>
+  
+  <!-- Nav Item -->
+  <li class="nav-item">
+    <a class="nav-link" href="tInvoiceList.jsp">
+      <i class="fas fa-fw fa-table"></i>
+      <span>일별 발주내역</span></a>
+  </li>
+  
+  <!-- Divider -->
+  <hr class="sidebar-divider d-none d-md-block">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    월별 내역조회
+  </div>
+
+  <!-- Nav Item -->
+  <li class="nav-item">
+    <a class="nav-link" href="tInvoiceList.jsp">
+      <i class="fas fa-fw fa-table"></i>
+      <span>판매내역</span></a>
+  </li>
+  
+  <!-- Nav Item -->
+  <li class="nav-item">
+    <a class="nav-link" href="tInvoiceList.jsp">
+      <i class="fas fa-fw fa-table"></i>
+      <span>운송내역</span></a>
+  </li>
+  
+  <!-- Nav Item -->
+  <li class="nav-item">
+    <a class="nav-link" href="tInvoiceList.jsp">
+      <i class="fas fa-fw fa-table"></i>
+      <span>발주내역</span></a>
+  </li>
+  
+  <!-- Nav Item -->
+  <li class="nav-item">
+    <a class="nav-link" href="tInvoiceList.jsp">
+      <i class="fas fa-fw fa-table"></i>
+      <span>매출 총이익</span></a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider d-none d-md-block">
+
+  <!-- Sidebar Toggler (Sidebar) -->
+  <div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+  </div>
+
+</ul>
+<!-- End of Sidebar -->
