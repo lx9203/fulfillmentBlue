@@ -1,40 +1,55 @@
 package supply;
 
-import java.io.*;
 import java.time.*;
+import java.time.format.*;
 import java.util.*;
+
+import javax.servlet.*;
+
+import org.slf4j.*;
 
 import invoice.*;
 
 public class test {
+	private static final Logger LOG = LoggerFactory.getLogger(OrderDAO.class);
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
 		SupplyDTO sDto = new SupplyDTO();
 		SupplyDAO sDao = new SupplyDAO();
+		
+		/*			
+		private String sCode;	// 기록, 읽어오기
+		private String sProductCode;	// 기록
+		private String sProductName;	// 읽어오기
+		private int sProductPrice;	// 읽어오기
+		private String sDate;	// 기록, 읽어오기
+		private int sQuantity;	// 기록, 읽어오기
+		private int sState;	// 기록
+		private int sTotalPrice; // 기록
+		 제품코드 ,번호,   날짜   ,양 ,상태
+		A190505001,A105,2019-05-05,100,0
+		String sCode = "A190505001";
+		String sProductCode = "A105";
+		int sQuantity = 0;
+		int sState = 0;
+		 */          
+		
+//		List<SupplyDTO> request = sDao.selectAll();
+//		for (int i=0; i < request.size(); i++) {
+//			System.out.println(request.get(i));
+//		}
+		
+		String sDate = curTime();
+		List<SupplyDTO> request = sDao.searchByDay(sDate);
+		for (int i=0; i < request.size(); i++) {
+			System.out.println(request.get(i));
+		}
+		
+
+	}
 	
-		try {
-            // csv 데이터 파일
-            File csv = new File("C:\\D:\\seong\\fulfillmentBlue\\supply(test).csv");
-            BufferedReader br = new BufferedReader(new FileReader(csv));
-            String line = "";
-            int row =0 ,i;
-            String[] customer = new String[5];
-            while ((line = br.readLine()) != null) {
-            	int count = 10001;
-            	String[] token = line.split(",", -1);
-            	if(!token[0].equals("")) {
-                	LocalDate currentDate = LocalDate.now();
-                	customer[1] = token[0]; //sCode
-                	customer[2] = token[1]; //sProductCode
-                	customer[3] = token[2]; //sDate
-                	customer[4] = token[3]; //sQuantity
-                	customer[0] = "A"+1+currentDate+count; 
-                	iDto = new InvoiceDTO(customer);
-                	System.out.println(iDto.toString());
-                }   
-            	sDto = new SupplyDTO(sCode, sProductCode, sDate, sQuantity, sState);
-            	System.out.println(sDto.toString());
-            }
-		scanner.close();
+	public static String curTime() {
+		LocalDateTime curTime = LocalDateTime.now();
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyMMdd");	
+    	return curTime.format(dateTimeFormatter);
 	}
 }
