@@ -73,16 +73,19 @@ public class SupplyProc extends HttpServlet {
 	//발주코드 생성 함수
 	public static String sCodeCreate(String pCode, String date, int count) {
 		SupplyDAO sDao = new SupplyDAO();
+//		userType  = (Integer)session.getAttribute("userType");
 		char supplierCode = pCode.charAt(0);
 		Date curDate = new Date();
     	SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
     	date = sdf.format(curDate);
+    	String id = request.getParameter("id");	;
+    	String supplier = id.charAt(0);
     	int YesOrNo = sDao.searchStateByDay(date);	// 날짜로 sState 검색후 state가 0인것이 
     	if(YesOrNo != 0) {	//	없으면
     		count =101;	//101번부터 시작
 		} else {	// state가 0인것이 있으면
-									/*			sCode		   */
-			count = Integer.parseInt(sDao.searchsCodeBySupplier(/*userId*/).substring(7))+1;	// count = 이미 있는 sCode의 마지막번호 +1로 시작
+									/*			sCode	   *//*userId첫글자*/
+			count = Integer.parseInt(sDao.searchsCodeBySupplier(supplier).substring(7))+1;	// count = 이미 있는 sCode의 마지막번호 +1로 시작
 		}
     	
     	String sCode = Character.toString(supplierCode) + date + count;

@@ -131,6 +131,7 @@ public class SupplyDAO {
 	// 미처리 마지막 발주코드
 	public String searchsCodeBySupplier(String supplier) {
 		String sCode="";
+		
 		try {
 			SupplyDTO supply = new SupplyDTO();
 			String sql = "select s.sCode from supply as s inner join product as p on p.pCode=s.sProductCode where sCode like '"+ supplier +"%' and sState = 0 order by sCode desc limit 1;";
