@@ -1,6 +1,6 @@
 package supply;
 
-import java.time.*;
+import java.util.*;
 
 public class SupplyDTO {
 	private String sCode;	// 기록, 읽어오기
@@ -19,8 +19,6 @@ public class SupplyDTO {
 				+ sState + ", sTotalPrice=" + sTotalPrice + "]";
 	}
 
-	
-
 	public SupplyDTO(String sCode, String sProductCode, String sProductName, int sProductPrice, String sDate,
 			int sQuantity, int sState, int sTotalPrice) {
 		super();
@@ -32,17 +30,6 @@ public class SupplyDTO {
 		this.sQuantity = sQuantity;
 		this.sState = sState;
 		this.sTotalPrice = sTotalPrice;
-	}
-
-	public SupplyDTO(String[] supply) {
-		this.sCode = supply[0];
-		this.sProductCode = supply[0];
-		this.sProductName = supply[1];
-		this.sProductPrice = Integer.parseInt(supply[2]);
-		this.sDate = LocalDate.now()+"";
-		this.sQuantity = Integer.parseInt(supply[3]);
-		this.sState = Integer.parseInt(supply[4]);
-		this.sTotalPrice = Integer.parseInt(supply[4])*Integer.parseInt(supply[3]);
 	}
 	
 	public String getsProductName() {
