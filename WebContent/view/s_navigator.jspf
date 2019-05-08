@@ -14,35 +14,37 @@
 
   <!-- Divider -->
   <hr class="sidebar-divider my-0">
-
+  
   <!-- Nav Item - Dashboard -->
-  <li class="nav-item active">
-    <a class="nav-link" href="transMain.jsp">
+  <li class="nav-item">
+    <a class="nav-link" href="supplierMain.jsp">
       <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>메인페이지</span></a>
+      <span>공급사 메인페이지</span>
+    </a>
   </li>
-
+  
   <!-- Divider -->
   <hr class="sidebar-divider">
 
   <!-- Heading -->
   <div class="sidebar-heading">
-    고객관리
+    내역조회
   </div>
 
-  <!-- Nav Item - 송장목록 -->
+  <!-- Nav Item - 수주내역 -->
   <li class="nav-item">
-    <a class="nav-link" href="tInvoiceList.jsp">
+    <a class="nav-link" href="sBeforeSupply.jsp">
       <i class="fas fa-fw fa-table"></i>
-      <span>일별 운송내역</span></a>
+      <span>일별 수주내역</span></a>
   </li>
   
-  <!-- Nav Item - 송장목록 -->
+  <!-- Nav Item - 납품내역 -->
   <li class="nav-item">
-    <a class="nav-link" href="tInvoiceList.jsp">
+    <a class="nav-link" href="sAfterSupply.jsp">
       <i class="fas fa-fw fa-table"></i>
-      <span>월별 운송내역</span></a>
+      <span>월별 납품내역</span></a>
   </li>
+  
 
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">

@@ -16,10 +16,10 @@
   <hr class="sidebar-divider my-0">
 
   <!-- Nav Item - Dashboard -->
-  <li class="nav-item active">
+  <li class="nav-item">
     <a class="nav-link" href="mallMain.jsp">
       <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>메인페이지</span></a>
+      <span>쇼핑몰 메인페이지</span></a>
   </li>
 
   <!-- Divider -->
@@ -27,18 +27,18 @@
 
   <!-- Heading -->
   <div class="sidebar-heading">
-    고객관리
+    내역조회
   </div>
 
   <!-- Nav Item - 송장목록 -->
   <li class="nav-item">
-    <a class="nav-link" href="sInvoiceList.jsp">
+    <a class="nav-link" href="InvoiceProcTest?action=mallInvoiceListDay">
       <i class="fas fa-fw fa-table"></i>
       <span>일별 송장내역</span></a>
   </li>
   
   <li class="nav-item">
-    <a class="nav-link" href="sInvoiceList.jsp">
+    <a class="nav-link" href="mInvoiceList.jsp">
       <i class="fas fa-fw fa-table"></i>
       <span>월별 송장내역</span></a>
   </li>

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
   <!-- 상단 창고회사 로고 -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
     <div class="sidebar-brand-icon rotate-n-15">
@@ -12,43 +13,35 @@
   </a>
 
   <!-- Divider -->
+  <hr class="sidebar-divider my-0">
+
+  <!-- Nav Item - Dashboard -->
+  <li class="nav-item">
+    <a class="nav-link" href="transMain.jsp">
+      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <span>운송업체 메인페이지</span></a>
+  </li>
+
+  <!-- Divider -->
   <hr class="sidebar-divider">
 
   <!-- Heading -->
   <div class="sidebar-heading">
-    상품목록
+    내역조회
   </div>
 
   <!-- Nav Item - 송장목록 -->
   <li class="nav-item">
-    <a class="nav-link" href="catalogDetail.jsp">
+    <a class="nav-link" href="tInvoiceList.jsp">
       <i class="fas fa-fw fa-table"></i>
-      <span>상품종류1</span>
-    </a>
+      <span>일별 운송내역</span></a>
   </li>
+  
+  <!-- Nav Item - 송장목록 -->
   <li class="nav-item">
-    <a class="nav-link" href="tables.jsp">
+    <a class="nav-link" href="tInvoiceList.jsp">
       <i class="fas fa-fw fa-table"></i>
-      <span>상품종류2</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="tables.jsp">
-      <i class="fas fa-fw fa-table"></i>
-      <span>상품종류3</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="tables.jsp">
-      <i class="fas fa-fw fa-table"></i>
-      <span>상품종류4</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="tables.jsp">
-      <i class="fas fa-fw fa-table"></i>
-      <span>상품종류5</span>
-    </a>
+      <span>월별 운송내역</span></a>
   </li>
 
   <!-- Divider -->
