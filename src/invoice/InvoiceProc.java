@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,6 +23,8 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import product.*;
 
 @WebServlet("/view/InvoiceProc")
 public class InvoiceProc extends HttpServlet {
@@ -56,6 +59,8 @@ public class InvoiceProc extends HttpServlet {
 		List<InvoiceDTO> iDtoLists = new ArrayList<InvoiceDTO>();
     	OrderDTO oDto = new OrderDTO();
     	List<OrderDTO> oDtoLists = new ArrayList<OrderDTO>();
+    	ProductDAO pDao = new ProductDAO();
+    	ProductDTO pDto = new ProductDTO();
     	
     	//session 변수
     	/*String userId = (String)session.getAttribute("userId");
@@ -64,10 +69,10 @@ public class InvoiceProc extends HttpServlet {
     	int userType = (Integer)session.getAttribute("userType");*/
 		
     	//일반 변수
-    	String now = curTime();
-    	int curTime = 0;
-    	int curDate = 0;
-    	String iCode = new String();
+    	String now = curTime(); //현재 날짜와 시간을 받는 변수
+    	int curTime = 0; //현재 시간을 정수로 받는 변수
+    	String iCode = new String(); //송장번호를 받는 변수
+    	int count = 0; //카운트가 필요할 때 사용
     	
 		
 		switch(action) {
@@ -80,6 +85,7 @@ public class InvoiceProc extends HttpServlet {
 			rd = request.getRequestDispatcher("mall/");
 			rd.forward(request, response);
 			break;
+			
 		case "mallInvoiceListDay":
 			//날짜에서 월에 해당하는 부분을 가져와 해당 일의 리스트를 DTO로 받는다.
 			iDtoLists = iDao.selectAllMonth();
@@ -89,6 +95,7 @@ public class InvoiceProc extends HttpServlet {
 			rd.forward(request, response);
 			
 			break;
+			
 		case "DetailList": //송장 번호에 해당하는 제품 목록을 가져온다.
 			//하나의 송장 정보와 해당 송장정보의 모든 제품 목록을 가져온다.
 			iCode = request.getParameter("iCode");
@@ -108,15 +115,15 @@ public class InvoiceProc extends HttpServlet {
 			rd.forward(request, response);
 			
 			break;
-		case "readCSV":
 			
+		case "readCSV": //송장CSV파일 받기 case	
 	        try {
 	            // csv 데이터 파일
 	            File csv = new File("C:\\Temp/Test1.csv");
 	            BufferedReader br = new BufferedReader(new FileReader(csv));
 	            String line = "";
 	            String[] customer = new String[5]; //이름,전화번호,주소를 저장할 공간
-	            int count = 10001;//자동증가 숫자 (실제로 DB이 마지막 숫자부터 시작한다.)
+	            count = 10001;//자동증가 숫자 (실제로 DB이 마지막 숫자부터 시작한다.)
 	 
 	            while ((line = br.readLine()) != null) {
 	                // -1 옵션은 마지막 "," 이후 빈 공백도 읽기 위한 옵션
@@ -171,7 +178,7 @@ public class InvoiceProc extends HttpServlet {
 			rd = request.getRequestDispatcher("mall/");
 			rd.forward(request, response);
 			break;
-		case "transInvoiceListDay":
+		case "transInvoiceListDay": 
 			//날짜에서 월에 해당하는 부분을 가져와 해당 일의 리스트를 DTO로 받는다.
 			iDtoLists = iDao.selectAllMonth();
 			
@@ -180,20 +187,52 @@ public class InvoiceProc extends HttpServlet {
 			rd.forward(request, response);
 			
 			break;
-		case "InvoiceProcess":
-			//1.현재 날짜와 시간을 확인 한다.
+		case "forwarding": //물건 출고 case
+			boolean available = true;
+			//1.현재 시간을 확인 한다.
 			try {
-				curDate = Integer.parseInt(now.substring(11,13));
 				curTime = Integer.parseInt(now.substring(11,13));
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-			if(curTime<9 && curTime>18) {
-				
+			//2. 9시 이전, 9시에서 18시 사이, 18시 이후 3가지 경우로 나눈다.
+			if(curTime>=9 && curTime<=18) { //(1) 9시에서 18시 사이에 출고를 할 경우 그 시간때의 송장만 출고를 한다.
+				iDtoLists = iDao.selectAllWorkTime();
+			} else if(curTime<9) { //(2) 9시 이전에 출고를 할 경우 전날 18시부터 당일 9시까지의 송장만 출고를 한다.
+				iDtoLists = iDao.selectAllBeforeWork();
+			} else if(curTime>18) { //(3)18시 이후에 출고를 할 경우 당일 18시부터 당일 24시까지의 송장만 출고를 한다.
+				iDtoLists = iDao.selectAllAfterWork();
 			}
 			
+			//3. 각 시간에 맞는 송장만 가져와 출고 작업을 시작한다. 
+			for(InvoiceDTO invoice : iDtoLists) {
+				oDtoLists = oDao.selectQuantity(invoice.getiCode()); //해당 송장의 제품코드, 출고해야할 수량과 창고의 재고량을 가져온다.
+				for(OrderDTO order : oDtoLists) { // 1. 출고 가능 여부를 먼저 검사한다.
+					//재고의 개수가 적으면 해당 송장의 모든 물건을 출고 하지 않는다. 동시에 공급처로 물품을 요청한다.
+					if(order.getoQuantity() >order.getpQuantity()) { 
+	//물풀 요청이 들어가야하는 자리!!
+						available = false;
+						break;
+					} 
+				}
+				if(available) { //2. 송장에 해당하는 물건 전부가 출고 가능일 때, 출고 
+					for(OrderDTO order : oDtoLists) {
+						int afterRelease = order.getpQuantity()-order.getoQuantity();
+						pDto = new ProductDTO(order.getoProductCode(), afterRelease);
+						pDao.updateQuantity(pDto); //출고
+					}
+					iDao.updateState(invoice.getiCode());//해당 송장을 출고 상태로 변경한다.
+					count ++;
+				}
+			}
+			message = "총 "+count+"건의 출고 처리가 완료되었습니다.";
+			url = "register.html";
+			request.setAttribute("message", message);
+			request.setAttribute("url", url);
+			rd = request.getRequestDispatcher("alertMsg.jsp");
+			rd.forward(request, response);
 			break;
 			
 		default:
@@ -201,6 +240,8 @@ public class InvoiceProc extends HttpServlet {
 		}
 	}
 	
+	
+	//--------------------------------- 사용자 생성 함수 ----------------------------------------------------
 	//지역코드 변환 함수
 	public static String iAreaCode(String Address) {
     	String area = new String();
@@ -235,18 +276,37 @@ public class InvoiceProc extends HttpServlet {
     }
 
 	//송장번호 생성 함수
-	public static String iCodeProc(String shopping, String areaCode, int count) {
+	public static String iCodeProc(String shopping, String areaCode) {
+    	InvoiceDAO iDao = new InvoiceDAO();
 		char shoppingCode = shopping.charAt(0);
 		char area = areaCode.charAt(0);
 		Date curDate = new Date();
     	SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
-		return Character.toString(shoppingCode)+Character.toString(area)+sdf.format(curDate)+count;
-		
+    	int increment =0;
+    	Optional<String> op = Optional.ofNullable(iDao.selectOneDayLast(sdf.format(curDate)).getiCode());
+    	LOG.trace(op.isPresent()+ "");
+		if(!op.isPresent()) {
+			increment =10001; //송장번호를 생성시 당일 첫 송장번호는 10001부터 시작
+			LOG.trace("처음 생성한 송장번호");
+		} else {
+			String iCode = iDao.selectOneDayLast(sdf.format(curDate)).getiCode();
+			increment = Integer.parseInt(iCode.substring(8))+1;
+			System.out.println(increment);
+		}	
+    	
+		return Character.toString(shoppingCode)+Character.toString(area)+sdf.format(curDate)+increment;
 	}
 	//현재 시간 구하는 함수
 	public String curTime() {
 		LocalDateTime curTime = LocalDateTime.now();
     	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");	
+    	return curTime.format(dateTimeFormatter);
+	}
+	
+	//현재 날짜를 구하는 함수
+	public String curDate() {
+		LocalDateTime curTime = LocalDateTime.now();
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");	
     	return curTime.format(dateTimeFormatter);
 	}
 }

@@ -7,8 +7,14 @@ public class ProductDTO {
 	private int pQuantity;
 	private String pImgSource;
 	
-//	public ProductDTO()
 	
+	
+	public ProductDTO(String pCode, int pQuantity) {
+		this.pCode = pCode;
+		this.pQuantity = pQuantity;
+	}
+
+
 	public ProductDTO() {}
 	
 	

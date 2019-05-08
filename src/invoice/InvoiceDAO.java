@@ -61,6 +61,70 @@ public class InvoiceDAO {
 		}
 	}
 	
+	public void updateState(String iCode) { // 출고 처리
+		String query = "update invoice set iState=1 where iCode =?;";
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setString(1,iCode);
+			pStmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+	}
+	
+	//-----------------------출고 처리 하기--------------------------------------------
+	public List<InvoiceDTO> selectAllWorkTime(){ //오늘 날짜의 9시부터 18시까지의 송장을 처리
+		String today = curDate();
+		String sql = "select iCode from invoice WHERE iDate >='"+today+" 09:00:00' AND iDate <= '"+today+" 18:00:00' ;";
+		List<InvoiceDTO> invoiceList = selectiCodeCondition(sql);
+		return invoiceList;
+	}
+	public List<InvoiceDTO> selectAllBeforeWork(){ //어제 날짜 18일 부터 오늘날짜 09시 까지 송장 처리 
+		String today = curDate();
+		String yesterday = yesterDate();
+		String sql = "select iCode from invoice WHERE iDate >='"+yesterday+" 18:00:00' AND iDate < '"+today+" 09:00:00' ;";
+		List<InvoiceDTO> invoiceList = selectiCodeCondition(sql);
+		return invoiceList;
+	}
+	public List<InvoiceDTO> selectAllAfterWork(){
+		String today = curDate(); //오늘 날짜 18시부터 24시까지 송장 처리
+		String sql = "select iCode from invoice WHERE iDate >'"+today+" 18:00:00' AND iDate <= '"+today+" 24:00:00' ;";
+		List<InvoiceDTO> invoiceList = selectiCodeCondition(sql);
+		return invoiceList;
+	}
+	
+	public List<InvoiceDTO> selectiCodeCondition(String sql){
+		PreparedStatement pStmt = null;
+		List<InvoiceDTO> invoiceList = new ArrayList<InvoiceDTO>();
+		try {
+			pStmt = conn.prepareStatement(sql);
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()){
+				InvoiceDTO invoice = new InvoiceDTO();
+				invoice.setiCode(rs.getString("iCode"));
+				invoiceList.add(invoice);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return invoiceList;
+	}
+	
 	
 	//------------------------여러개의 송장번호를 리스트로 가져오기-------------------------------------------
 	public List<InvoiceDTO> selectAllDay(){
@@ -110,6 +174,34 @@ public class InvoiceDAO {
 	}
 	
 	//----------------------------한개의 송장번호 가져오기--------------------------------------------
+	public InvoiceDTO selectOneDayLast(String date){
+		String sql = "select iCode from invoice where iCode like '%"+date+"%' order by iCode desc limit 1;";
+		InvoiceDTO invoice = selectOneIncrement(sql);
+		return invoice;
+	}
+	
+	public InvoiceDTO selectOneIncrement(String sql){
+		PreparedStatement pStmt = null;
+		InvoiceDTO invoice = new InvoiceDTO();
+		try {
+			pStmt = conn.prepareStatement(sql);
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()){
+				invoice.setiCode(rs.getString("iCode"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return invoice;
+	}
 	
 	public InvoiceDTO selectOneCode(String iCode){
 		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice "
@@ -160,5 +252,19 @@ public class InvoiceDAO {
 		LocalDateTime curTime = LocalDateTime.now();	
     	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     	return curTime.format(dateTimeFormatter);
+	}
+	
+	//현재 날짜를 구하는 함수
+	public String curDate() {
+		LocalDateTime curTime = LocalDateTime.now();
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");	
+    	return curTime.format(dateTimeFormatter);
+	}
+	//하루전 날짜 구하는 함수
+	public String yesterDate() {
+		LocalDateTime yesterTime = LocalDateTime.now();
+		yesterTime = yesterTime.minusDays(1);
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");	
+    	return yesterTime.format(dateTimeFormatter);
 	}
 }

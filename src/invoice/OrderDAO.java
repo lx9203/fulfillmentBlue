@@ -53,6 +53,43 @@ public class OrderDAO {
 		}
 	}
 	
+	//-------------------------------송장을 통해 주문 물건의 개수와 해당 물건의 재고량을 가져온다.
+	public List<OrderDTO> selectQuantity(String iCode){
+		String sql = "select p.pCode o.oQuantity, p.pQuantity from `order` as o\r\n" + 
+				"inner join product as p on p.pCode = o.oProductCode where o.oInvoiceCode like '"+iCode+"';";
+		List<OrderDTO> orderList = selectQuantitiyCondition(sql);
+		return orderList;
+	}
+	
+	public List<OrderDTO> selectQuantitiyCondition(String sql){
+		PreparedStatement pStmt = null;
+		List<OrderDTO> orderList = new ArrayList<OrderDTO>();
+		try {
+			pStmt = conn.prepareStatement(sql);
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()){
+				OrderDTO order = new OrderDTO();
+				order.setoProductCode(rs.getString("pCode"));
+				order.setoQuantity(rs.getInt("oQuantity"));
+				order.setpQuantity(rs.getInt("pQuantity"));
+				orderList.add(order);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return orderList;
+	}
+	
+	// ----------------------------송장을 통해 주문 리스트를 가져온다.------------------------------------------
+	
 	public List<OrderDTO> selectAll(String iCode){
 		String sql = "select o.oNum, p.pName, o.oQuantity, p.pPrice from `order` as o "
 				+ "inner join product as p on p.pCode=o.oProductCode where o.oInvoiceCode like'"+iCode+"';";
