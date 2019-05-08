@@ -11,14 +11,8 @@ public class SupplyDTO {
 	private int sQuantity;	// 기록, 읽어오기
 	private int sState;	// 기록
 	private int sTotalPrice; // 기록
-	
-	@Override
-	public String toString() {
-		return "SupplyDTO [sCode=" + sCode + ", sProductCode=" + sProductCode + ", sProductName=" + sProductName
-				+ ", sProductPrice=" + sProductPrice + ", sDate=" + sDate + ", sQuantity=" + sQuantity + ", sState="
-				+ sState + ", sTotalPrice=" + sTotalPrice + "]";
-	}
 
+	// s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState
 	public SupplyDTO(String sCode, String sProductCode, String sProductName, int sProductPrice, String sDate,
 			int sQuantity, int sState, int sTotalPrice) {
 		super();
@@ -29,7 +23,7 @@ public class SupplyDTO {
 		this.sDate = sDate;
 		this.sQuantity = sQuantity;
 		this.sState = sState;
-		this.sTotalPrice = sTotalPrice;
+		this.sTotalPrice = (sQuantity*sProductPrice);
 	}
 	
 	public String getsProductName() {
@@ -101,5 +95,11 @@ public class SupplyDTO {
 	public void setsTotalPrice(int sTotalPrice) {
 		this.sTotalPrice = sTotalPrice;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "SupplyDTO [sCode=" + sCode + ", sProductCode=" + sProductCode + ", sProductName=" + sProductName
+				+ ", sProductPrice=" + sProductPrice + ", sDate=" + sDate + ", sQuantity=" + sQuantity + ", sState="
+				+ sState + ", sTotalPrice=" + sTotalPrice + "]";
+	}
 }
