@@ -15,8 +15,9 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import product.ProductDAO;
-import product.ProductDTO;
+import product.*;
+import invoice.*;
+
 
 @WebServlet("/view/UserProc")
 public class UserProc extends HttpServlet {
@@ -70,11 +71,13 @@ public class UserProc extends HttpServlet {
 				
 				request.setAttribute("productList",productList);
 				LOG.trace(productList.toString());
-				rd = request.getRequestDispatcher("productMain.jsp");
+				rd = request.getRequestDispatcher("transMain.jsp");
 				rd.forward(request, response);
 				break;
 			case 2:
-				response.sendRedirect("InvoiceProc?action=test"); 
+				name = (String)session.getAttribute("userId");
+				rd = request.getRequestDispatcher("mallMain.jsp");
+				rd.forward(request, response);
 				break;
 			case 0:
 				response.sendRedirect("../user/blueCompany.jsp"); 
@@ -83,10 +86,6 @@ public class UserProc extends HttpServlet {
 			}
 			break;
 		case "login" : //로그인을 위한 처리 부분
-			if(!request.getParameter("userType").equals("")) {
-				userType = Integer.parseInt(request.getParameter("userType"));
-			}
-			LOG.trace("userType :" +userType);
 			
 			id = request.getParameter("id");	
 			password = request.getParameter("password");
@@ -112,11 +111,7 @@ public class UserProc extends HttpServlet {
 				session.setAttribute("userName", uDto.getName());
 				session.setAttribute("userType", uDto.getuserType());
 				LOG.trace("userId : " + id + ", userName : " + uDto.getName() + ", userType : " + uDto.getuserType());
-				message = "로그인이 되었습니다. 축하합니다. 로그인 프로그램을 완성 하였습니다.";
-				url = "UserProc?action=intoMain";
-				request.setAttribute("message", message);
-				request.setAttribute("url", url);
-				rd = request.getRequestDispatcher("alertMsg.jsp");
+				rd = request.getRequestDispatcher("UserProc?action=intoMain");
 				rd.forward(request, response);
 			} else{
 				request.setAttribute("message", errorMessage);
@@ -134,6 +129,8 @@ public class UserProc extends HttpServlet {
 			response.sendRedirect("login.jsp");
 			break;
 		case"register":
+			//필요한 변수 목록 : userType, name, 
+			
 			if(!request.getParameter("userType").equals("")) {
 				userType = Integer.parseInt(request.getParameter("userType"));
 			}
@@ -156,8 +153,6 @@ public class UserProc extends HttpServlet {
 							
 				break;
 			case 3:
-				String buyId = request.getParameter("userId");
-				LOG.trace("buyId : " + buyId);
 				//맨 처음 회원가입시 객체를 가져오지 않아 확인을 해주기 위해 Optional클래스 이용
 				Optional<String> op2 = Optional.ofNullable(uDao.lastId(userType).getId());
 				LOG.trace(op2.isPresent()+ "");
@@ -179,8 +174,9 @@ public class UserProc extends HttpServlet {
 			}
 			
 			name = request.getParameter("name");
-			password = request.getParameter("password");
+			password = request.getParameter("InputPassword");
 			uDto = new UserDTO(userType, id, name, password);
+			LOG.trace(uDto.toString());
 			uDao.insertUser(uDto);
 			
 			LOG.trace("회원 가입 완료");

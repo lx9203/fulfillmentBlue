@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>일별 운송내역</title>
+  <title>운송사 월별 운송내역</title>
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -74,96 +74,16 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td><a href="tDetailList.jsp" >a1001</a></td>
-                      <td>Tiger Nixon</td>
-                      <td>2011/04/25</td>
-                      <td>$320,800</td>
-                    </tr>
-                    <tr>
-                      <td>a1002</td>
-                      <td>Garrett Winters</td>
-                      <td>2011/07/25</td>
-                      <td>$170,750</td>
-                    </tr>
-                    <tr>
-                      <td>a1003</td>
-                      <td>Ashton Cox</td>
-                      <td>2009/01/12</td>
-                      <td>$86,000</td>
-                    </tr>
-                    <tr>
-                      <td>a1004</td>
-                      <td>Cedric Kelly</td>
-                      <td>2012/03/29</td>
-                      <td>$433,060</td>
-                    </tr>
-                    <tr>
-                      <td>a1005</td>
-                      <td>Airi Satou</td>
-                      <td>2008/11/28</td>
-                      <td>$162,700</td>
-                    </tr>
-                    <tr>
-                      <td>a1006</td>
-                      <td>Brielle Williamson</td>
-                      <td>2012/12/02</td>
-                      <td>$372,000</td>
-                    </tr>
-                    <tr>
-                      <td>a1007</td>
-                      <td>Herrod Chandler</td>
-                      <td>2012/08/06</td>
-                      <td>$137,500</td>
-                    </tr>
-                    <tr>
-                      <td>a1008</td>
-                      <td>Rhona Davidson</td>
-                      <td>2010/10/14</td>
-                      <td>$327,900</td>
-                    </tr>
-                    <tr>
-                      <td>a1009</td>
-                      <td>Colleen Hurst</td>
-                      <td>2009/09/15</td>
-                      <td>$205,500</td>
-                    </tr>
-                    <tr>
-                      <td>a1010</td>
-                      <td>Sonya Frost</td>
-                      <td>2008/12/13</td>
-                      <td>$103,600</td>
-                    </tr>
-                    <tr>
-                      <td>a1011</td>
-                      <td>Jena Gaines</td>
-                      <td>2008/12/19</td>
-                      <td>$90,560</td>
-                    </tr>
-                    <tr>
-                      <td>a1012</td>
-                      <td>Quinn Flynn</td>
-                      <td>2013/03/03</td>
-                      <td>$342,000</td>
-                    </tr>
-                    <tr>
-                      <td>a1013</td>
-                      <td>Charde Marshall</td>
-                      <td>2008/10/16</td>
-                      <td>$470,600</td>
-                    </tr>
-                    <tr>
-                      <td>a1014</td>
-                      <td>Haley Kennedy</td>
-                      <td>2012/12/18</td>
-                      <td>$313,500</td>
-                    </tr>
-                    <tr>
-                      <td>a1015</td>
-                      <td>Tatyana Fitzpatrick</td>
-                      <td>2010/03/17</td>
-                      <td>$385,750</td>
-                    </tr>
+                    <c:set var="invoiceList" value="${requestScope.invoiceLists}"/>
+					<c:forEach var="invoice" items="${invoiceList}">
+	                 <tr>
+                      <td><a href="InvoiceProc?action=detailList&iCode=${invoice.iCode}">${invoice.iCode}</a></td>
+                      <td>${invoice.iName}</td>
+                      <td>${invoice.iAddress}</td>
+                      <td>${invoice.iTel}</td>
+                      <td>${invoice.iDate}</td>
+                   	</tr>
+                 	</c:forEach>
                   </tbody>
                 </table>
               </div>

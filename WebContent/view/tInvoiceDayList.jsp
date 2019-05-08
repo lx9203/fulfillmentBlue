@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>일별 송장내역</title>
+  <title>운송사 일별 운송내역</title>
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -26,7 +26,7 @@
 <body id="page-top">
   <!-- Page Wrapper -->
   <div id="wrapper">
-    <%@ include file="m_navigator.jspf" %>
+    <%@ include file="t_navigator.jspf" %>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
@@ -36,11 +36,11 @@
         <div class="container-fluid">
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-2 text-gray-800">일별 송장내역</h1>
-            <form action="" class="form-horizontal d-sm-inline-block" method="post">
+            <h1 class="h3 mb-2 text-gray-800">일별 운송내역</h1>
+            <form action="InvoiceProc?action=transSearchList" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
-			      <input type="text" name="dateCustomer" id="datepicker1" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
+			      <input type="text" name="date" id="datepicker1" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
 			      <input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
 			    </label>
 			  </div>
@@ -77,18 +77,18 @@
                     <c:set var="invoiceList" value="${requestScope.invoiceLists}"/>
 					<c:forEach var="invoice" items="${invoiceList}">
 	                 <tr>
-                      <td><a href="InvoiceProc?action=DetailList&iCode=${invoice.iCode}">${invoice.iCode}</a></td>
+                      <td><a href="InvoiceProc?action=detailList&iCode=${invoice.iCode}">${invoice.iCode}</a></td>
                       <td>${invoice.iName}</td>
                       <td>${invoice.iAddress}</td>
                       <td>${invoice.iTel}</td>
                       <td>${invoice.iDate}</td>
                    	</tr>
                  	</c:forEach>
-                 </tbody>
-               </table>
-             </div>
-           </div>
-         </div>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
           <!-- 위까지 그래프  -->
         </div>
         <!-- /.container-fluid -->
