@@ -10,12 +10,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Optional;
 
 public class Test {
     public static void main(String[] args) {
-    	
-    	
-    	
+
     	
     /*	String shopping = "aMall";
     	String areaCode = "1area";
@@ -31,26 +30,38 @@ public class Test {
 		
 		System.out.println(Character.toString(shoppingCode)+Character.toString(area)+sdf.format(curDate)+count);
     	*/
-    	LocalDateTime curTime = LocalDateTime.now();
+  /*  	LocalDateTime curTime = LocalDateTime.now();
     	
-    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    	LocalDateTime yesterDate = curTime.minusDays(1);
+    	System.out.println(yesterDate);
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     	
     	String nowString = curTime.format(dateTimeFormatter);
     	
+    	System.out.println(nowString);*/
     	
-    	System.out.println(nowString.substring(5, 7));
-    	System.out.println(nowString.substring(8, 10));
-    	System.out.println(nowString.substring(11, 13));
     	
+    	
+    	
+    	/*System.out.println(nowString.substring(5, 7)); //월
+    	System.out.println(nowString.substring(8, 10)); //일
+    	System.out.println(nowString.substring(11, 13)); //시간
+*/    	
+    	
+    	/*Date curDate = new Date();
+    	SimpleDateFormat sdf = new SimpleDateFormat("dd일 HH시간");
+    	System.out.println(sdf.format(curDate));*/
     	/*String str = "04";
     	int num = Integer.parseInt(str);
     	System.out.println(num);
 		*/
-    	InvoiceDTO iDto = new InvoiceDTO();
+    	/*InvoiceDTO iDto = new InvoiceDTO();
     	InvoiceDAO iDao = new InvoiceDAO();
     	OrderDTO oDto = new OrderDTO();
-    	OrderDAO oDao = new OrderDAO();
+    	OrderDAO oDao = new OrderDAO();*/
     	
+    	
+    	System.out.println(iCodeProc("amall","1area"));
     	/*iDto = iDao.selectOneCode("a119050710001");
     	System.out.println(iDto.toString());*/
         
@@ -107,13 +118,26 @@ public class Test {
 	            e.printStackTrace();
 	        }*/
     }   
-    public static String iCodeProc(String shopping, String areaCode, int count) {
+    
+    public static String iCodeProc(String shopping, String areaCode) {
+    	InvoiceDAO iDao = new InvoiceDAO();
 		char shoppingCode = shopping.charAt(0);
 		char area = areaCode.charAt(0);
 		Date curDate = new Date();
     	SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
-		return Character.toString(shoppingCode)+Character.toString(area)+sdf.format(curDate)+count;
-		
+    	int increment =0;
+    	Optional<String> op = Optional.ofNullable(iDao.selectOneDayLast(sdf.format(curDate)).getiCode());
+//    	Optional<String> op = Optional.ofNullable(iDao.selectOneDayLast("121325").getiCode());
+    	System.out.println(op);
+		if(!op.isPresent()) {
+			increment =10001;	
+		} else {
+			String iCode = iDao.selectOneDayLast(sdf.format(curDate)).getiCode();
+			increment = Integer.parseInt(iCode.substring(8))+1;
+			System.out.println(increment);
+		}	
+    	
+		return Character.toString(shoppingCode)+Character.toString(area)+sdf.format(curDate)+increment;
 	}
     
     public static String iAreaCode(String Address) {
@@ -148,5 +172,10 @@ public class Test {
     	return area;
     }
     
+    public String curDate() {
+		LocalDateTime curTime = LocalDateTime.now();
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");	
+    	return curTime.format(dateTimeFormatter);
+	}
  
 }
