@@ -42,7 +42,7 @@
                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                   </div>
                   <form action="UserProc?action=login" class="user" method="POST">
-                    <div class="form-group" align=center style="line-height: 2">
+                   <!--  <div class="form-group" align=center style="line-height: 2">
                       <div class="custom-control custom-radio small d-inline-block">
                         <input type="radio" class="custom-control-input" name="userType" id="admin" value=0>
                         <label class="custom-control-label " for="admin">관리자&nbsp;</label>
@@ -59,10 +59,10 @@
                         <input type="radio" class="custom-control-input" name="userType" id="seller" value=3>
                         <label class="custom-control-label" for="seller">공급사&nbsp;</label>
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="id" name="id" aria-describedby="emailHelp" placeholder="아이디를 입력해 주세요">
+                      <input type="text" class="form-control form-control-user" id="id" name="id" placeholder="아이디를 입력해 주세요">
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="비밀번호를 입력해 주세요">
@@ -107,3 +107,22 @@
 
 </body>
 </html>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <a class="btn btn-primary" href="login.jsp">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
