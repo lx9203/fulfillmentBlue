@@ -95,6 +95,7 @@
     </div>
   </div>
 
+
   <!-- Bootstrap core JavaScript-->
   <script src="../vendor/jquery/jquery.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -104,6 +105,21 @@
 
   <!-- Custom scripts for all pages-->
   <script src="../js/sb-admin-2.min.js"></script>
+  
+<!-- 변수 설정 -->
+  <c:set value="user1" var="msg"/>
+  msg : ${msg} <br>
+  
+<!-- 변수 검사 -->  
+  <c:if test="${msg=='user1'}" var="result">
+  	test result : ${result}
+    <script>
+	  $(function(){
+		$('#logoutModal').modal('show');
+	  });
+	</script>
+	
+  </c:if>
 
 </body>
 </html>
@@ -113,7 +129,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?${result}</h5>
         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>

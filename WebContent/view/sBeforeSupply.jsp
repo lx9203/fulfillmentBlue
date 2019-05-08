@@ -21,6 +21,8 @@
 
   <!-- Custom styles for this page -->
   <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  
+  <link href="../css/jquery-ui.min.css" rel="stylesheet">
 </head>
 <body id="page-top">
   <!-- Page Wrapper -->
@@ -44,7 +46,6 @@
 			    </label>
 			  </div>
 	        </form>
-            
           </div>
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -195,5 +196,9 @@
 
   <!-- Page level custom scripts -->
   <script src="../js/demo/datatables-demo.js"></script>
+  
+  <!-- 날짜검색기능 -->
+  <script src="../js/jquery-ui.min.js"></script>
+  <script src="../js/blue_company.js"></script>
 </body>
 </html>

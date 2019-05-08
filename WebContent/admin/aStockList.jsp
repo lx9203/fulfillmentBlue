@@ -143,11 +143,11 @@
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <colgroup>
-					<col style="width:10%">
+					<col style="width:15%">
 					<col style="width:25%">
-					<col style="width:15%">
-					<col style="width:15%">
-					<col style="width:15%">
+					<col style="width:10%">
+					<col style="width:10%">
+					<col style="width:10%">
 					<col style="width:20%">
 				  </colgroup>
                   <thead>
@@ -156,7 +156,7 @@
                       <th>상품이름</th>
                       <th>재고량</th>
                       <th>출고대기</th>
-                      <th>입고대기</th>
+                      <th>입고예정</th>
                       <th>발주코드</th>
                     </tr>
                   </thead>

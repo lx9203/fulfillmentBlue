@@ -22,7 +22,7 @@ $.datepicker.setDefaults({
     dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
     showMonthAfterYear: true,
     changeMonth: true,
-	changeYear: true,
+	  changeYear: true,
 });
 
 

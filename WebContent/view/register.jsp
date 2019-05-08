@@ -116,6 +116,9 @@
       </div>
     </div>
   </div>
+  
+ 
+
 
   <!-- Bootstrap core JavaScript-->
   <script src="../vendor/jquery/jquery.min.js"></script>
@@ -130,5 +133,19 @@
   <!-- Custom scripts for class=view-radio-group -->
   <script src="../js/blue_company.js"></script>
 
+ <!-- 변수 설정 -->
+  <c:set value="user1" var="msg"/>
+  msg : ${msg} <br>
+  
+<!-- 변수 검사 -->  
+  <c:if test="${msg=='user1'}" var="result">
+  	test result : ${result}
+	<script>
+	$(function(){
+		$('#transport').attr('disabled',true);
+	  });
+	</script>
+	
+  </c:if>
 </body>
 </html>
