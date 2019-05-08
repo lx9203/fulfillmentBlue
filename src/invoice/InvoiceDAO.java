@@ -24,6 +24,7 @@ public class InvoiceDAO {
 	
 	PreparedStatement pStmt = null;
 	ResultSet rs = null;
+	String today = curDate();
 	
 	public InvoiceDAO() {
 		try {
@@ -124,22 +125,64 @@ public class InvoiceDAO {
 		}
 		return invoiceList;
 	}
-	
+	//------------------------매출 계산을 위한 송장 리스트-------------------------------------------------
 	
 	//------------------------여러개의 송장번호를 리스트로 가져오기-------------------------------------------
-	public List<InvoiceDTO> selectAllDay(){
+	//------------------- 쇼핑몰에서 사용하는 리스트--------------------------------
+	public List<InvoiceDTO> mallSelectAllDay(char iCode){
 		Date curDate = new Date();
     	SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
-		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice where iCode like '%"+sdf.format(curDate)+"%';";
+		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice "
+				+ "where iCode like '"+Character.toString(iCode)+"%"+sdf.format(curDate)+"%';";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
 	
-	public List<InvoiceDTO> selectAllMonth(){
+	public List<InvoiceDTO> mallSelectAllMonth(char iCode){
 		Date curDate = new Date();
     	SimpleDateFormat sdf = new SimpleDateFormat("yyMM");
 		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice "
-				+ "where iCode like '%"+sdf.format(curDate)+"%';";
+				+ "where iCode like '"+Character.toString(iCode)+"%"+sdf.format(curDate)+"%';";
+		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
+		return invoiceList;
+	}
+	//-------------------------------운송사에서 사용하는 리스트 -------------------------
+	
+	public List<InvoiceDTO> transSelectAllDay(String userId){
+		LOG.trace(today);
+		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice "
+				+ "where iDate like '"+today+"%' and iAreaCode like '"+userId+"';";
+		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
+		return invoiceList;
+	}
+	
+	public List<InvoiceDTO> transSelectAllMonth(String userId){
+		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice "
+				+ "where iDate >'"+today+" ' and iDate < '"+today+" 23:59:59' and iAreaCode like '"+userId+"';";
+		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
+		return invoiceList;
+	}
+	
+	//----------------------------날짜 검색 리스트-------------------------------
+	
+	public List<InvoiceDTO> mallSearchAllDay(char iCode,String Date){
+		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice "
+				+ "where iCode like '"+Character.toString(iCode)+"%' and iDate >'"+Date+"' and iDate < '"+Date+" 23:59:59';";
+		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
+		return invoiceList;
+	}
+	
+	public List<InvoiceDTO> transSearchAllDay(String userId,String Date){
+		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice "
+				+ "where iDate like '"+Date+"%' and iAreaCode like '"+userId+"';";
+		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
+		return invoiceList;
+	}
+	
+	//수정 안함
+	public List<InvoiceDTO> mallSearchAllMonth(char iCode,String date){
+		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice "
+				+ "where iCode like '"+Character.toString(iCode)+"%' and iDate >'"+date+"' and iDate < '"+date+" 23:59:59';";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
@@ -157,7 +200,7 @@ public class InvoiceDAO {
 				invoice.setiName(rs.getString("iName"));
 				invoice.setiTel(rs.getString("iTel"));
 				invoice.setiAddress(rs.getString("iAddress"));
-				invoice.setiDate(rs.getString("iDate"));
+				invoice.setiDate(rs.getString("iDate").substring(0, 10));
 				invoiceList.add(invoice);
 			}
 		} catch (Exception e) {
@@ -258,6 +301,11 @@ public class InvoiceDAO {
 	public String curDate() {
 		LocalDateTime curTime = LocalDateTime.now();
     	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");	
+    	return curTime.format(dateTimeFormatter);
+	}
+	public String curMonth() {
+		LocalDateTime curTime = LocalDateTime.now();
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");	
     	return curTime.format(dateTimeFormatter);
 	}
 	//하루전 날짜 구하는 함수

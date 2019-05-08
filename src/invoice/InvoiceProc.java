@@ -63,40 +63,50 @@ public class InvoiceProc extends HttpServlet {
     	ProductDTO pDto = new ProductDTO();
     	
     	//session 변수
-    	/*String userId = (String)session.getAttribute("userId");
+    	String userId = (String)session.getAttribute("userId");
     	LOG.trace(userId);
     	String userName = (String)session.getAttribute("userName");
-    	int userType = (Integer)session.getAttribute("userType");*/
+    	int userType = (Integer)session.getAttribute("userType");
 		
     	//일반 변수
     	String now = curTime(); //현재 날짜와 시간을 받는 변수
     	int curTime = 0; //현재 시간을 정수로 받는 변수
     	String iCode = new String(); //송장번호를 받는 변수
     	int count = 0; //카운트가 필요할 때 사용
+    	String date = new String();
     	
 		
 		switch(action) {
 		//---------------------------------쇼핑몰 관련 Action ----------------------------------------------------------
 		case "mallInvoiceListMonth":
 			//날짜에서 월에 해당하는 부분을 가져와 해당 월의 리스트를 DTO로 받는다.
-			iDtoLists = iDao.selectAllMonth(); 
+			iDtoLists = iDao.mallSelectAllMonth(userId.charAt(0)); 
 			
 			request.setAttribute("invoiceLists", iDtoLists);
-			rd = request.getRequestDispatcher("mall/");
+			rd = request.getRequestDispatcher("mInvoiceMonthList.jsp");
 			rd.forward(request, response);
 			break;
 			
 		case "mallInvoiceListDay":
 			//날짜에서 일에 해당하는 부분을 가져와 해당 일의 리스트를 DTO로 받는다.
-			iDtoLists = iDao.selectAllDay();
+			iDtoLists = iDao.mallSelectAllDay(userId.charAt(0)); 
 			
 			request.setAttribute("invoiceLists", iDtoLists);
-			rd = request.getRequestDispatcher("mall/sInvoiceList.jsp");
+			rd = request.getRequestDispatcher("mInvoiceDayList.jsp");
 			rd.forward(request, response);
-			
 			break;
 			
-		case "DetailList": //송장 번호에 해당하는 제품 목록을 가져온다.
+		case "mallSearchList":
+			date = request.getParameter("date");
+			LOG.trace(date);
+			iDtoLists = iDao.mallSearchAllDay(userId.charAt(0), date);
+			request.setAttribute("selectDate", date);
+			request.setAttribute("invoiceLists", iDtoLists);
+			rd = request.getRequestDispatcher("mInvoiceDayList.jsp");
+			rd.forward(request, response);
+			break;
+			
+		case "detailList": //송장 번호에 해당하는 제품 목록을 가져온다.
 			//하나의 송장 정보와 해당 송장정보의 모든 제품 목록을 가져온다.
 			iCode = request.getParameter("iCode");
 			LOG.trace(iCode);
@@ -111,7 +121,7 @@ public class InvoiceProc extends HttpServlet {
 			request.setAttribute("invoiceTotalPrice", totalProductPrice);
 			request.setAttribute("invoice", iDto);
 			request.setAttribute("orderLists", oDtoLists);
-			rd = request.getRequestDispatcher("mall/sDetailTest.jsp");
+			rd = request.getRequestDispatcher("mDetailList.jsp");
 			rd.forward(request, response);
 			
 			break;
@@ -172,20 +182,30 @@ public class InvoiceProc extends HttpServlet {
 	//------------------------------------------운송사 관련 Action------------------------------------
 		case "transInvoiceListMonth":
 			//날짜에서 월에 해당하는 부분을 가져와 해당 월의 리스트를 DTO로 받는다.
-			iDtoLists = iDao.selectAllMonth(); 
+			iDtoLists = iDao.transSelectAllMonth(userId); 
 			
 			request.setAttribute("invoiceLists", iDtoLists);
-			rd = request.getRequestDispatcher("mall/");
+			rd = request.getRequestDispatcher("tInvoiceMonthList.jsp");
 			rd.forward(request, response);
 			break;
 		case "transInvoiceListDay": 
-			//날짜에서 월에 해당하는 부분을 가져와 해당 일의 리스트를 DTO로 받는다.
-			iDtoLists = iDao.selectAllMonth();
+			//날짜에서 일에 해당하는 부분을 가져와 해당 일의 리스트를 DTO로 받는다.
+			iDtoLists = iDao.transSelectAllDay(userId);
 			
 			request.setAttribute("invoiceLists", iDtoLists);
-			rd = request.getRequestDispatcher("mall/");
+			rd = request.getRequestDispatcher("tInvoiceDayList.jsp");
 			rd.forward(request, response);
 			
+			break;
+			
+		case "transSearchList":
+			date = request.getParameter("date");
+			LOG.trace(date);
+			iDtoLists = iDao.mallSearchAllDay(userId.charAt(0), date);
+			request.setAttribute("selectDate", date);
+			request.setAttribute("invoiceLists", iDtoLists);
+			rd = request.getRequestDispatcher("mInvoiceDayList.jsp");
+			rd.forward(request, response);
 			break;
 		case "forwarding": //물건 출고 case
 			boolean available = true;

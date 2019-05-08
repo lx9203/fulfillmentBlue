@@ -55,10 +55,10 @@ public class Test {
     	int num = Integer.parseInt(str);
     	System.out.println(num);
 		*/
-    	/*InvoiceDTO iDto = new InvoiceDTO();
+    	InvoiceDTO iDto = new InvoiceDTO();
     	InvoiceDAO iDao = new InvoiceDAO();
     	OrderDTO oDto = new OrderDTO();
-    	OrderDAO oDao = new OrderDAO();*/
+    	OrderDAO oDao = new OrderDAO();
     	
     	
     	System.out.println(iCodeProc("amall","1area"));
@@ -66,7 +66,7 @@ public class Test {
     	System.out.println(iDto.toString());*/
         
 
-    	 try {
+    	 /*try {
 	            // csv 데이터 파일
 	            File csv = new File("C:\\Temp/Test.csv");
 	            BufferedReader br = new BufferedReader(new FileReader(csv));
@@ -117,7 +117,8 @@ public class Test {
 	        catch (IOException e) {
 	            e.printStackTrace();
 	        }
-    }   
+	        */
+    }
     
     public static String iCodeProc(String shopping, String areaCode) {
     	InvoiceDAO iDao = new InvoiceDAO();

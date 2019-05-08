@@ -40,23 +40,21 @@
           <div class="col-lg-6">
             <div class="p-5">
               <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Create an Account</h1>
+                <h2 class="h5 text-gray-900 mb-4">BlueCampany의 고객이 되신것을 환영합니다.</h2>
+                <div class="small">아래의 정보를 채워주세요</div><br>      
               </div>
 
               <!-- form의 class명 'view-radio-group' 변경 시, blue_company.js도 수정필요 : 라디오 버튼 보이기/숨기기 기능이 class명으로 연동되어 있음. -->
-              <form class="user view-radio-group">
+              <form action="UserProc?action=register" class="user view-radio-group" method="POST" id="checkPass">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-user" id="userId" placeholder="userId">
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control form-control-user" id="company" placeholder="company">
+                  <input type="text" class="form-control form-control-user" name="name" placeholder="이름을 입력해주세요.">
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                    <input type="password" class="form-control form-control-user" name="InputPassword" placeholder="비밀번호를 입력해주세요.">
                   </div>
                   <div class="col-sm-6">
-                    <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
+                    <input type="password" class="form-control form-control-user" name="RepeatPassword" placeholder="다시 한 번 입력해 주세요.">
                   </div>
                 </div>
 
@@ -85,24 +83,23 @@
                     <span style="padding:0 0 0 17px">지역&nbsp;:</span>
                   </div>
                   <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
-                    <input type="radio" class="custom-control-input" name="transportType" id="kyeonggi" value=1>
+                    <input type="radio" class="custom-control-input" name="areaId" id="kyeonggi" value=1>
                     <label class="custom-control-label" for="kyeonggi">경기&nbsp;</label>
                   </div>
                   <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
-                    <input type="radio" class="custom-control-input" name="transportType" id="jungbu" value=2>
+                    <input type="radio" class="custom-control-input" name="areaId" id="jungbu" value=2>
                     <label class="custom-control-label" for="jungbu">중부&nbsp;</label>
                   </div>
                   <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
-                    <input type="radio" class="custom-control-input" name="transportType" id="yeongnam" value=3>
+                    <input type="radio" class="custom-control-input" name="areaId" id="yeongnam" value=3>
                     <label class="custom-control-label" for="yeongnam">영남&nbsp;</label>
                   </div>
                   <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
-                    <input type="radio" class="custom-control-input" name="transportType" id="seobu" value=4>
+                    <input type="radio" class="custom-control-input" name="areaId" id="seobu" value=4>
                     <label class="custom-control-label" for="seobu">서부&nbsp;</label>
                   </div>
                 </div>
-
-                <a href="index.jsp" class="btn btn-primary btn-user btn-block">  Register Account</a>
+				<input class="btn btn-primary btn-user btn-block" type="submit" value="회원가입">
               </form>
               <hr>
               <!-- 비밀번호 찾기 or 초기화 요청

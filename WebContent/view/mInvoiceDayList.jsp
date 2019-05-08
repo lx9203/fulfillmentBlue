@@ -37,10 +37,10 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-2 text-gray-800">일별 송장내역</h1>
-            <form action="" class="form-horizontal d-sm-inline-block" method="post">
+            <form action="InvoiceProc?action=mallSearchList" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
-			      <input type="text" name="dateCustomer" id="datepicker1" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
+			      <input type="text" name="date" id="datepicker1" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
 			      <input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
 			    </label>
 			  </div>
@@ -49,7 +49,7 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">[검색한 날짜]</h6>
+              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${selectDate}</h6>
               <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
               </a>
@@ -77,7 +77,7 @@
                     <c:set var="invoiceList" value="${requestScope.invoiceLists}"/>
 					<c:forEach var="invoice" items="${invoiceList}">
 	                 <tr>
-                      <td><a href="InvoiceProc?action=DetailList&iCode=${invoice.iCode}">${invoice.iCode}</a></td>
+                      <td><a href="InvoiceProc?action=detailList&iCode=${invoice.iCode}">${invoice.iCode}</a></td>
                       <td>${invoice.iName}</td>
                       <td>${invoice.iAddress}</td>
                       <td>${invoice.iTel}</td>

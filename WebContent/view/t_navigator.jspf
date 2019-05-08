@@ -32,14 +32,14 @@
 
   <!-- Nav Item - 송장목록 -->
   <li class="nav-item">
-    <a class="nav-link" href="tInvoiceList.jsp">
+    <a class="nav-link" href="InvoiceProc?action=transInvoiceListDay">
       <i class="fas fa-fw fa-table"></i>
       <span>일별 운송내역</span></a>
   </li>
   
   <!-- Nav Item - 송장목록 -->
   <li class="nav-item">
-    <a class="nav-link" href="tInvoiceList.jsp">
+    <a class="nav-link" href="InvoiceProc?action=transInvoiceListMonth">
       <i class="fas fa-fw fa-table"></i>
       <span>월별 운송내역</span></a>
   </li>

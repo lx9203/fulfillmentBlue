@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>일별 운송내역</title>
+  <title>운송사 월별 운송내역</title>
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -45,16 +45,7 @@
 			    </label>
 			  </div>
 	        </form>
-	        <form action="" class="form-horizontal d-sm-inline-block" method="post">
-			  <div class="form-group" style="margin-bottom:0">
-			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
-			      <input type="text" name="monthCustomer" id="monthpicker" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
-			      <input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
-			    </label>
-			  </div>
-	        </form>
           </div>
-          
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
@@ -83,25 +74,21 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td><a href="tDetailList.jsp" >a1001</a></td>
-                      <td>Tiger Nixon</td>
-                      <td>2011/04/25</td>
-                      <td>$320,800</td>
-                      <td>$320,800</td>
-                    </tr>
-                    <tr>
-                      <td>a1002</td>
-                      <td>Garrett Winters</td>
-                      <td>2011/07/25</td>
-                      <td>$170,750</td>
-                      <td>$320,800</td>
-                    </tr>
+                    <c:set var="invoiceList" value="${requestScope.invoiceLists}"/>
+					<c:forEach var="invoice" items="${invoiceList}">
+	                 <tr>
+                      <td><a href="InvoiceProc?action=detailList&iCode=${invoice.iCode}">${invoice.iCode}</a></td>
+                      <td>${invoice.iName}</td>
+                      <td>${invoice.iAddress}</td>
+                      <td>${invoice.iTel}</td>
+                      <td>${invoice.iDate}</td>
+                   	</tr>
+                 	</c:forEach>
                   </tbody>
                 </table>
-             </div>
-           </div>
-         </div>
+              </div>
+            </div>
+          </div>
           <!-- 위까지 그래프  -->
         </div>
         <!-- /.container-fluid -->
@@ -133,8 +120,6 @@
   <!-- 날짜검색기능 -->
   <script src="../js/jquery-ui.min.js"></script>
   <script src="../js/blue_company.js"></script>
-  <script src="../js/jquery.mtz.monthpicker.js"></script>
-  
 	
 </body>
 </html>
