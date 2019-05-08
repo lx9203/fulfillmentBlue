@@ -1,10 +1,9 @@
 package supply;
 
+import java.text.*;
 import java.time.*;
 import java.time.format.*;
 import java.util.*;
-
-import javax.servlet.*;
 
 import org.slf4j.*;
 
@@ -38,18 +37,26 @@ public class test {
 //			System.out.println(request.get(i));
 //		}
 		
-		String sDate = curTime();
-		List<SupplyDTO> request = sDao.searchByDay(sDate);
-		for (int i=0; i < request.size(); i++) {
-			System.out.println(request.get(i));
-		}
+//		String sDay = curTime();
+//		List<SupplyDTO> request = sDao.searchsCodeByDay(sDay);
+//		for (int i=1; i < request.size(); i++) {
+//			System.out.println(request.get(i));
+//		}
+		
+//		Date curDate = new Date();
+//    	SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+//    	String date = sdf.format(curDate);
+//		List<SupplyDTO> YesOrNo = sDao.searchByDay(date);
+//		for (int i=0; i < YesOrNo.size(); i++) {
+//			System.out.println(YesOrNo.get(i));
+//		}
 		
 
 	}
 	
 	public static String curTime() {
 		LocalDateTime curTime = LocalDateTime.now();
-    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyMMdd");	
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yy-MM");	
     	return curTime.format(dateTimeFormatter);
 	}
 }
