@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>일별 송장내역</title>
+  <title>쇼핑몰 일별 송장내역</title>
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -37,7 +37,7 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-2 text-gray-800">일별 송장내역</h1>
-            <form action="InvoiceProc?action=mallSearchList" class="form-horizontal d-sm-inline-block" method="post">
+            <form action="InvoiceProc?action=mallSearchDayList" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
 			      <input type="text" name="date" id="datepicker1" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
@@ -50,12 +50,9 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
               <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${selectDate}</h6>
-              <form action="InvoiceProc?action=readCSV">
-	             <input type="file" name="upFile" id="upFile">
-	             <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit">
-	               <i class="fas fa-download fa-sm text-white-50"></i> 송장 등록
-	             </button>
-              </form>
+              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                <i class="fas fa-download fa-sm text-white-50"></i> 송장 등록
+              </a>
             </div>
             <div class="card-body">
               <div class="table-responsive">

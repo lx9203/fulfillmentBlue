@@ -133,7 +133,7 @@
   <!-- Custom scripts for class=view-radio-group -->
   <script src="../js/blue_company.js"></script>
 
- <!-- 변수 설정 -->
+<%--  <!-- 변수 설정 -->
   <c:set value="user1" var="msg"/>
   msg : ${msg} <br>
   
@@ -145,7 +145,7 @@
 		$('#transport').attr('disabled',true);
 	  });
 	</script>
-  </c:if>
+  </c:if> --%>
   
  <!-- Modal Control -->
   <c:set var="msgState" value="${requestScope.msgState}"/>

@@ -88,8 +88,13 @@ public class UserProc extends HttpServlet {
 				rd = request.getRequestDispatcher("mallMain.jsp");
 				rd.forward(request, response);
 				break;
+			case 3:
+				name = (String)session.getAttribute("userId");
+				rd = request.getRequestDispatcher("supplierMain.jsp");
+				rd.forward(request, response);
+				break;
 			case 0:
-				response.sendRedirect("../user/blueCompany.jsp"); 
+				response.sendRedirect("../admin/adminMain.jsp"); 
 				break;
 				
 			}
