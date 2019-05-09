@@ -1,5 +1,7 @@
 package invoice;
 
+import java.awt.FileDialog;
+import java.awt.Frame;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -64,7 +66,6 @@ public class InvoiceProc extends HttpServlet {
     	
     	//session 변수
     	String userId = (String)session.getAttribute("userId");
-    	LOG.trace(userId);
     	String userName = (String)session.getAttribute("userName");
     	int userType = (Integer)session.getAttribute("userType");
 		
@@ -130,11 +131,11 @@ public class InvoiceProc extends HttpServlet {
 		case "readCSV": //송장CSV파일 받기 case	
 	        try {
 	            // csv 데이터 파일
-	            File csv = new File("C:\\Temp/Test1.csv");
+	        	String csvFile = CSVFileOpen();
+	            File csv = new File(csvFile);
 	            BufferedReader br = new BufferedReader(new FileReader(csv));
 	            String line = "";
 	            String[] customer = new String[5]; //이름,전화번호,주소를 저장할 공간
-	            count = 10001;//자동증가 숫자 (실제로 DB이 마지막 숫자부터 시작한다.)
 	 
 	            while ((line = br.readLine()) != null) {
 	                // -1 옵션은 마지막 "," 이후 빈 공백도 읽기 위한 옵션
@@ -148,7 +149,7 @@ public class InvoiceProc extends HttpServlet {
 	                	customer[2] = token[1]; //전화번호
 	                	customer[3] = token[2]; //주소
 	                	customer[4] = iAreaCode(token[2]); //지역코드
-	                	//customer[0] = iCodeProc(userId,customer[4],count); //송장번호
+	                	customer[0] = iCodeProc(userId,customer[4]); //송장번호
 	                	//송장번호 이름 전화번호 주소 지역코드를 DTO에 넣는다. 
 	                	iDto = new InvoiceDTO(customer); 
 	                	LOG.trace(iDto.toString());
@@ -160,7 +161,7 @@ public class InvoiceProc extends HttpServlet {
 	                
 	                //제품번호, 송장번호, 제품수량을 DTO에 넣는다.
 	                try {
-						oDto = new OrderDTO(token[3],customer[0],Integer.parseInt(token[4]));
+						oDto = new OrderDTO(token[3],customer[0],Integer.parseInt(token[5]));
 					} catch (NumberFormatException e) {
 						e.printStackTrace();
 					}
@@ -181,6 +182,13 @@ public class InvoiceProc extends HttpServlet {
 			break;
 			
 	//------------------------------------------운송사 관련 Action------------------------------------
+		case "transInvoiceListDay": //날짜에서 일에 해당하는 부분을 가져와 해당 일의 리스트를 DTO로 받는다.
+			iDtoLists = iDao.transSelectAllDay(userId);
+			request.setAttribute("invoiceLists", iDtoLists);
+			rd = request.getRequestDispatcher("tInvoiceDayList.jsp");
+			rd.forward(request, response);
+			break;
+		
 		case "transInvoiceListMonth":
 			//날짜에서 월에 해당하는 부분을 가져와 해당 월의 리스트를 DTO로 받는다.
 			iDtoLists = iDao.transSelectAllMonth(userId); 
@@ -189,15 +197,7 @@ public class InvoiceProc extends HttpServlet {
 			rd = request.getRequestDispatcher("tInvoiceMonthList.jsp");
 			rd.forward(request, response);
 			break;
-		case "transInvoiceListDay": 
-			//날짜에서 일에 해당하는 부분을 가져와 해당 일의 리스트를 DTO로 받는다.
-			iDtoLists = iDao.transSelectAllDay(userId);
-			
-			request.setAttribute("invoiceLists", iDtoLists);
-			rd = request.getRequestDispatcher("tInvoiceDayList.jsp");
-			rd.forward(request, response);
-			
-			break;
+		
 			
 		case "transSearchList":
 			date = request.getParameter("date");
@@ -330,4 +330,17 @@ public class InvoiceProc extends HttpServlet {
     	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");	
     	return curTime.format(dateTimeFormatter);
 	}
+	
+	//CSV 파일 열기
+	public static String CSVFileOpen(){
+        Frame f1 = new Frame();
+        //파일 열기(프레임선택, 파일선택창 Title, 파일 선택 유형)
+        FileDialog f = new FileDialog(f1,"송장 파일 선택",FileDialog.LOAD);  
+        f.setSize(300, 300);
+        f.setLocation(0, 100);
+        f.setDirectory("c:\\Temp"); //파일선택창 기본 경로 지정
+        f.setVisible(true); //파일선택창 보이게 설정
+        
+        return f.getDirectory()+f.getFile();
+    }
 }

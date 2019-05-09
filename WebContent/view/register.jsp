@@ -58,7 +58,7 @@
                   </div>
                 </div>
 
-                <div class="form-group row" style="line-height: 2">
+                <div class="form-group row " style="line-height: 2">
                   <div class="col-sm-3 mb-3 mb-sm-0 small " style="display : inline-block; max-width: max-content">
                     <span style="padding:0 0 0 17px">회원유형&nbsp;:</span>
                   </div>
@@ -116,6 +116,9 @@
       </div>
     </div>
   </div>
+  
+ 
+
 
   <!-- Bootstrap core JavaScript-->
   <script src="../vendor/jquery/jquery.min.js"></script>
@@ -130,5 +133,48 @@
   <!-- Custom scripts for class=view-radio-group -->
   <script src="../js/blue_company.js"></script>
 
+ <!-- 변수 설정 -->
+  <c:set value="user1" var="msg"/>
+  msg : ${msg} <br>
+  
+<!-- 운송사 라디오 버튼 활성 --> 
+  <c:if test="${msg=='user1'}" var="result">
+  	test result : ${result}
+	<script>
+	$(function(){
+		$('#transport').attr('disabled',true);
+	  });
+	</script>
+  </c:if>
+  
+ <!-- Modal Control -->
+  <c:set var="msgState" value="${requestScope.msgState}"/>
+	<c:if test="${msgState==true}" var="result">
+		<script>
+			$(function() {
+				$('#resigterError').modal('show');
+			});
+		</script>
+	</c:if>
+  
+  
 </body>
 </html>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="resigterError" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">Register Error!!</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">${requestScope.message}</div>
+      <div class="modal-footer">
+        <a class="btn btn-primary" href="register.jsp">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>

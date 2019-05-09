@@ -22,7 +22,7 @@ $.datepicker.setDefaults({
     dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
     showMonthAfterYear: true,
     changeMonth: true,
-	changeYear: true,
+	  changeYear: true,
 });
 
 
@@ -47,7 +47,36 @@ $(function() {
 		$('#monthpicker').monthpicker(options);
 
 		/* 버튼 클릭시 MonthPicker Show */
-		$('#btn_monthpicker').bind('click', function () {
-			$('#monthpicker').monthpicker('show');
-		});
+//		$('#btn_monthpicker').bind('click', function () {
+//			$('#monthpicker').monthpicker('show');
+//		});
 });
+
+ $('#upFile').change(
+	function getCmaFileView(obj,stype) {
+	    var s = getCmaFileInfo(obj,stype);
+	    
+	}
+);
+ 
+ function getCmaFileInfo(obj,stype) {
+	    var fileObj, pathHeader , pathMiddle, pathEnd, allFilename;
+	    if(obj == "[object HTMLInputElement]") {
+	        fileObj = obj.value
+	    } else {
+	        fileObj = document.getElementById(obj).value;
+	    }
+	    if (fileObj != "") {
+	            pathHeader = fileObj.lastIndexOf("\\");
+	            pathMiddle = fileObj.lastIndexOf(".");
+	            pathEnd = fileObj.length;
+	            allFilename = fileName+"."+extName;
+	 
+	            if(stype == "all") {
+	                    return allFilename; 
+	            } 
+	    } else {
+	            alert("파일을 선택해주세요");
+	            return false;
+	    }
+	 }
