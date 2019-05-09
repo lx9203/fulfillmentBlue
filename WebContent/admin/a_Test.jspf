@@ -1,4 +1,8 @@
-// Set new default font family and font color to mimic Bootstrap's default styling
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript">
+//Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
@@ -28,8 +32,12 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 // Area Chart Example
-var ctx = document.getElementById("myAreaChart");
-var myLineChart = new Chart(ctx, {
+var ctx = document.getElementById("monthTotalPrice");
+var list = new Array(); 
+<c:foreach items="${MonthTotalPriceList}" var="item"> 
+	list.push("${item}"); 
+</c:foreach>
+var myLineChart = new Chart(ctx,{
   type: 'line',
   data: {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
@@ -46,7 +54,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      data: [list[0],list[0],list[0],list[0],list[0],list[0],list[0],list[0],list[0],list[0],list[0],list[0]],
     }],
   },
   options: {
@@ -116,3 +124,6 @@ var myLineChart = new Chart(ctx, {
     }
   }
 });
+
+
+</script>

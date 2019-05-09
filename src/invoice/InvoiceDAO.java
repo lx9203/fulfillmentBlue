@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class InvoiceDAO {
-	private static final Logger LOG = LoggerFactory.getLogger(OrderDAO.class);
+	private static final Logger LOG = LoggerFactory.getLogger(InvoiceDAO.class);
 	private Connection conn;
 /*	private static final String USERNAME = "javauser";
 	private static final String PASSWORD = "javapass";*/
@@ -103,7 +103,7 @@ public class InvoiceDAO {
 		List<InvoiceDTO> invoiceList = selectiCodeCondition(sql);
 		return invoiceList;
 	}
-	
+	// iCode 가져오는 메소드
 	public List<InvoiceDTO> selectiCodeCondition(String sql){
 		PreparedStatement pStmt = null;
 		List<InvoiceDTO> invoiceList = new ArrayList<InvoiceDTO>();
@@ -128,7 +128,6 @@ public class InvoiceDAO {
 		}
 		return invoiceList;
 	}
-	//------------------------매출 계산을 위한 송장 리스트-------------------------------------------------
 	
 	//------------------------여러개의 송장번호를 리스트로 가져오기-------------------------------------------
 	//------------------- 쇼핑몰에서 사용하는 리스트--------------------------------
@@ -307,10 +306,18 @@ public class InvoiceDAO {
     	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");	
     	return curTime.format(dateTimeFormatter);
 	}
+	//이번 달을 구하는 함수
 	public String curMonth() {
 		LocalDateTime curTime = LocalDateTime.now();
     	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");	
     	return curTime.format(dateTimeFormatter);
+	}
+	//다음달 구하는 함수
+	public String nextMonth() {
+		LocalDateTime nextTime = LocalDateTime.now();
+		nextTime = nextTime.plusMonths(1);
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");	
+    	return nextTime.format(dateTimeFormatter);
 	}
 	//하루전 날짜 구하는 함수
 	public String yesterDate() {

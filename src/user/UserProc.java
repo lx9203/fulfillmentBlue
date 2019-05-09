@@ -94,7 +94,8 @@ public class UserProc extends HttpServlet {
 				rd.forward(request, response);
 				break;
 			case 0:
-				response.sendRedirect("../admin/adminMain.jsp"); 
+				rd = request.getRequestDispatcher("../admin/AdminProc?action=intoMain");
+				rd.forward(request, response);
 				break;
 				
 			}

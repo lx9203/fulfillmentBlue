@@ -7,7 +7,7 @@ public class OrderDTO {
 	private String oInvoiceCode; //기록
 	private int oQuantity; //송장에 기록된 주문개수를 의미한다. 기록, 읽어오기
 	private int pQuantity; //창고에 있는 물품의 개수를 의미한다.
-	private int oPrice; // 읽어오기
+	private int pPrice; // 읽어오기
 	private int oTotalPrice; //만들어서 넣기 
 	
 	public OrderDTO(String oProductCode, String oInvoiceCode, int oQuantity) {
@@ -67,12 +67,12 @@ public class OrderDTO {
 		this.pQuantity = pQuantity;
 	}
 
-	public int getoPrice() {
-		return oPrice;
+	public int getpPrice() {
+		return pPrice;
 	}
 
-	public void setoPrice(int oPrice) {
-		this.oPrice = oPrice;
+	public void setpPrice(int pPrice) {
+		this.pPrice = pPrice;
 	}
 
 	public int getoTotalPrice() {
@@ -86,7 +86,7 @@ public class OrderDTO {
 	@Override
 	public String toString() {
 		return "OrderDTO [oNum=" + oNum + ", oProductCode=" + oProductCode + ", oProductName=" + oProductName
-				+ ", oInvoiceCode=" + oInvoiceCode + ", oQuantity=" + oQuantity + ", oPrice=" + oPrice + "]";
+				+ ", oInvoiceCode=" + oInvoiceCode + ", oQuantity=" + oQuantity + ", pPrice=" + pPrice + "]";
 	}
 	
 	
