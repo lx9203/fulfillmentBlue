@@ -133,10 +133,6 @@
                 <!-- Card Body -->
                 <div class="card-body">
                   <div class="chart-area">
-                  	<c:set ver="MonthTotalPriceList" value ="${MonthTotalPriceList}"/>
-                  	<c:forEach var="MonthTotalPrice" items="${MonthTotalPriceList}">
-                  	
-                 	</c:forEach>
                   	<canvas id="monthTotalPrice"></canvas>
                   </div>
                 </div>
