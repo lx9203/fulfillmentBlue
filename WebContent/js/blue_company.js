@@ -47,9 +47,9 @@ $(function() {
 		$('#monthpicker').monthpicker(options);
 
 		/* 버튼 클릭시 MonthPicker Show */
-		$('#btn_monthpicker').bind('click', function () {
-			$('#monthpicker').monthpicker('show');
-		});
+//		$('#btn_monthpicker').bind('click', function () {
+//			$('#monthpicker').monthpicker('show');
+//		});
 });
 
  $('#upFile').change(
