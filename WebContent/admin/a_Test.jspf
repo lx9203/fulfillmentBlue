@@ -33,10 +33,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 // Area Chart Example
 var ctx = document.getElementById("monthTotalPrice");
-var list = new Array(); 
-<c:foreach items="${MonthTotalPriceList}" var="item"> 
-	list.push("${item}"); 
-</c:foreach>
+var list = ${requestScope.MonthTotalPriceList}; 
 var myLineChart = new Chart(ctx,{
   type: 'line',
   data: {
@@ -54,7 +51,7 @@ var myLineChart = new Chart(ctx,{
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [list[0],list[0],list[0],list[0],list[0],list[0],list[0],list[0],list[0],list[0],list[0],list[0]],
+      data: [list[0],list[1],list[2],list[3],list[4],list[5],list[6],list[7],list[8],list[9],list[10],list[11]],
     }],
   },
   options: {

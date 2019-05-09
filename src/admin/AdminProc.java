@@ -47,6 +47,7 @@ public class AdminProc extends HttpServlet {
 		
 		switch(action) {
 		case "intoMain":
+			LOG.trace("intoMain");
 			int thisTotalPrice = 0;
 			int lastTotalPrice = 0;
 			int MonthTotalPrice =0;
@@ -54,7 +55,7 @@ public class AdminProc extends HttpServlet {
 			
 			//1.이번 달 판매수익
 			List<String> thisInvoiceCodes = aDao.selectThisMonth();
-			LOG.trace(thisInvoiceCodes.size()+"");
+			LOG.trace("이번달 송장 수 : "+thisInvoiceCodes.size()+"");
 			for(String invoiceCode : thisInvoiceCodes) {
 				orderList = aDao.selectOrder(invoiceCode);
 				for(AdminDTO order : orderList) {
@@ -64,7 +65,7 @@ public class AdminProc extends HttpServlet {
 			}
 			//2.전월 판매수익
 			List<String> LastInvoiceCodes = aDao.selectLastMonth();
-			LOG.trace(LastInvoiceCodes.size()+"");
+			LOG.trace("지난달 송장 수 : "+LastInvoiceCodes.size()+"");
 			for(String invoiceCode : LastInvoiceCodes) {
 				orderList = aDao.selectOrder(invoiceCode);
 				for(AdminDTO order : orderList) {
@@ -76,7 +77,7 @@ public class AdminProc extends HttpServlet {
 			//3. 그래프 이번년도 월별 매출 총액
 			for(int m=1;m<13;m++) {
 				List<String> MonthInvoiceCodes = aDao.selectThisYear(m);
-				LOG.trace(MonthInvoiceCodes.size()+"");
+				LOG.trace(m+"월 송장 수 : "+MonthInvoiceCodes.size()+"");
 				for(String invoiceCode : MonthInvoiceCodes) {
 					orderList = aDao.selectOrder(invoiceCode);
 					for(AdminDTO order : orderList) {
