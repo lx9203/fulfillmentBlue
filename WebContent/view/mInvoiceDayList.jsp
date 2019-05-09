@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>운송사 월별 운송내역</title>
+  <title>일별 송장내역</title>
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -26,7 +26,7 @@
 <body id="page-top">
   <!-- Page Wrapper -->
   <div id="wrapper">
-    <%@ include file="t_navigator.jspf" %>
+    <%@ include file="m_navigator.jspf" %>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
@@ -36,21 +36,26 @@
         <div class="container-fluid">
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-2 text-gray-800">월별 운송내역</h1>
-            <form action="" class="form-horizontal d-sm-inline-block" method="post">
+            <h1 class="h3 mb-2 text-gray-800">일별 송장내역</h1>
+            <form action="InvoiceProc?action=mallSearchList" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
-			      <input type="text" name="monthCustomer" id="monthpicker" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
+			      <input type="text" name="date" id="datepicker1" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
 			      <input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
 			    </label>
 			  </div>
 	        </form>
-	        
           </div>
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">[검색한 날짜]</h6>
+              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${selectDate}</h6>
+              <form action="InvoiceProc?action=readCSV">
+	             <input type="file" name="upFile" id="upFile">
+	             <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit">
+	               <i class="fas fa-download fa-sm text-white-50"></i> 송장 등록
+	             </button>
+              </form>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -69,6 +74,7 @@
                       <th>주소</th>
                       <th>연락처</th>
                       <th>날짜</th>
+                      <th>상태</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -80,13 +86,14 @@
                       <td>${invoice.iAddress}</td>
                       <td>${invoice.iTel}</td>
                       <td>${invoice.iDate}</td>
+                      <td>${invoice.iState}</td>
                    	</tr>
                  	</c:forEach>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+                 </tbody>
+               </table>
+             </div>
+           </div>
+         </div>
           <!-- 위까지 그래프  -->
         </div>
         <!-- /.container-fluid -->
@@ -117,10 +124,7 @@
   
   <!-- 날짜검색기능 -->
   <script src="../js/jquery-ui.min.js"></script>
-  
-  <!-- 월 검색기능 -->
-  <script src="../js/jquery.mtz.monthpicker.js"></script>
-  <script src="../js/monthpicker.js"></script>
+  <script src="../js/blue_company.js"></script>
 	
 </body>
 </html>

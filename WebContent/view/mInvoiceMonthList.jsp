@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>운송사 월별 운송내역</title>
+  <title>월별 송장내역</title>
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -26,7 +26,7 @@
 <body id="page-top">
   <!-- Page Wrapper -->
   <div id="wrapper">
-    <%@ include file="t_navigator.jspf" %>
+    <%@ include file="m_navigator.jspf" %>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
@@ -36,7 +36,7 @@
         <div class="container-fluid">
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-2 text-gray-800">월별 운송내역</h1>
+            <h1 class="h3 mb-2 text-gray-800">월별 송장내역</h1>
             <form action="" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
@@ -45,12 +45,11 @@
 			    </label>
 			  </div>
 	        </form>
-	        
           </div>
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">[검색한 날짜]</h6>
+              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${selectDate}</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -82,11 +81,11 @@
                       <td>${invoice.iDate}</td>
                    	</tr>
                  	</c:forEach>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+                 </tbody>
+               </table>
+             </div>
+           </div>
+         </div>
           <!-- 위까지 그래프  -->
         </div>
         <!-- /.container-fluid -->
@@ -121,6 +120,6 @@
   <!-- 월 검색기능 -->
   <script src="../js/jquery.mtz.monthpicker.js"></script>
   <script src="../js/monthpicker.js"></script>
-	
+
 </body>
 </html>
