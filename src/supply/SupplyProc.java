@@ -10,6 +10,8 @@ import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
+import invoice.*;
+
 @WebServlet("/view/SupplyProc")
 public class SupplyProc extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -33,13 +35,15 @@ public class SupplyProc extends HttpServlet {
 		// 공통 설정
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
-
+		RequestDispatcher rd;
+		
 		String sCode = new String();
 		String pCode = new String();
 		String sDate = new String();
 
 		SupplyDAO sDao = new SupplyDAO();
 		SupplyDTO sDto = new SupplyDTO();
+		List<SupplyDTO> sDtoLists = new ArrayList<SupplyDTO>();
 
 		switch (action) {
 		// 발주신청(pCode를 받아 발주코드와 현재시간, 처리상태를 붙임)
@@ -66,10 +70,27 @@ public class SupplyProc extends HttpServlet {
 			int pQuantity = sDao.selectQuantity(pCode);
 			sDao.SupplyQuantity(pCode, pQuantity);
 			break;
+			
+		case "detailList":
+			sCode = request.getParameter("sCode");
+			
+			sDtoLists = sDao.selectAll(sCode);
+			
+			int totalProductPrice = 0;
+			
+			for(SupplyDTO supply : sDtoLists) totalProductPrice += supply.getsTotalPrice();
+			
+			request.setAttribute("supplyTotalPrice", totalProductPrice);
+			request.setAttribute("supply", sDto);
+			request.setAttribute("supplyList",sDtoLists);
+			rd = request.getRequestDispatcher("mDetailList.jsp");
+			rd.forward(request, response);
+			break;
 
 		default:
 			break;
 		}
+		
 	}
 
 	// 발주코드 생성 함수 { 공급사구분+날짜+자동(3) }

@@ -29,8 +29,9 @@ public class SupplyDAO {
 	}
 
 	// 전체검색
-	public List<SupplyDTO> selectAll() {
-		String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState from supply as s inner join product as p on p.pCode = s.sProductCode;";
+	public List<SupplyDTO> selectAll(String sCode) {
+		String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState from supply as s "
+				+ "inner join product as p on p.pCode = s.sProductCode where s.sCode like '"+sCode+"';";
 		List<SupplyDTO> supplyList = selectCondition(sql);
 		return supplyList;
 	}
