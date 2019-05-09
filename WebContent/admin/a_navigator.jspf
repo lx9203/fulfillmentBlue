@@ -37,27 +37,6 @@
       <span>재고현황</span></a>
   </li>
   
-  <!-- Nav Item -->
-  <li class="nav-item">
-    <a class="nav-link" href="tInvoiceList.jsp">
-      <i class="fas fa-fw fa-table"></i>
-      <span>일별 입고내역</span></a>
-  </li>
-  
-  <!-- Nav Item -->
-  <li class="nav-item">
-    <a class="nav-link" href="tInvoiceList.jsp">
-      <i class="fas fa-fw fa-table"></i>
-      <span>일별 출고내역</span></a>
-  </li>
-  
-  <!-- Nav Item -->
-  <li class="nav-item">
-    <a class="nav-link" href="tInvoiceList.jsp">
-      <i class="fas fa-fw fa-table"></i>
-      <span>일별 발주내역</span></a>
-  </li>
-  
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">
 
@@ -68,32 +47,25 @@
 
   <!-- Nav Item -->
   <li class="nav-item">
-    <a class="nav-link" href="tInvoiceList.jsp">
+    <a class="nav-link" href="aMonthlySell.jsp">
       <i class="fas fa-fw fa-table"></i>
       <span>판매내역</span></a>
   </li>
   
   <!-- Nav Item -->
   <li class="nav-item">
-    <a class="nav-link" href="tInvoiceList.jsp">
+    <a class="nav-link" href="aMonthlyTrans.jsp">
       <i class="fas fa-fw fa-table"></i>
       <span>운송내역</span></a>
   </li>
   
   <!-- Nav Item -->
   <li class="nav-item">
-    <a class="nav-link" href="tInvoiceList.jsp">
+    <a class="nav-link" href="aMonthlySupply.jsp">
       <i class="fas fa-fw fa-table"></i>
       <span>발주내역</span></a>
   </li>
   
-  <!-- Nav Item -->
-  <li class="nav-item">
-    <a class="nav-link" href="tInvoiceList.jsp">
-      <i class="fas fa-fw fa-table"></i>
-      <span>매출 총이익</span></a>
-  </li>
-
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">
 
