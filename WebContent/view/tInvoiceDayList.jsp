@@ -45,14 +45,6 @@
 			    </label>
 			  </div>
 	        </form>
-	        <form action="" class="form-horizontal d-sm-inline-block" method="post">
-			  <div class="form-group" style="margin-bottom:0">
-			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
-			      <input type="text" name="monthCustomer" id="monthpicker" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
-			      <input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
-			    </label>
-			  </div>
-	        </form>
           </div>
           
           <!-- DataTales Example -->
@@ -83,7 +75,7 @@
                     </tr>
                   </thead>
                   <tbody>
-<<<<<<< HEAD:WebContent/view/tInvoiceList.jsp
+
                     <tr>
                       <td><a href="tDetailList.jsp" >a1001</a></td>
                       <td>Tiger Nixon</td>
@@ -98,7 +90,7 @@
                       <td>$170,750</td>
                       <td>$320,800</td>
                     </tr>
-=======
+
                     <c:set var="invoiceList" value="${requestScope.invoiceLists}"/>
 					<c:forEach var="invoice" items="${invoiceList}">
 	                 <tr>
@@ -109,7 +101,7 @@
                       <td>${invoice.iDate}</td>
                    	</tr>
                  	</c:forEach>
->>>>>>> ac6074792e69152ee8845cdcee25f7a271d5c738:WebContent/view/tInvoiceDayList.jsp
+
                   </tbody>
                 </table>
              </div>
@@ -146,8 +138,6 @@
   <!-- 날짜검색기능 -->
   <script src="../js/jquery-ui.min.js"></script>
   <script src="../js/blue_company.js"></script>
-  <script src="../js/jquery.mtz.monthpicker.js"></script>
-  
 	
 </body>
 </html>
