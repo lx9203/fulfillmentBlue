@@ -27,6 +27,10 @@ public class test {
 		
 		sDao.insertSupply(sDto);
 		
+//		SupplyDAO sDao = new SupplyDAO();
+//		int pQuantity = sDao.selectQuantity(pCode);
+//		sDao.SupplyQuantity(pCode, pQuantity);
+		
 //		List<SupplyDTO> a = sDao.searchByMonth();
 //		System.out.println(a);
 		
