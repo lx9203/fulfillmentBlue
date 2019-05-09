@@ -21,21 +21,10 @@
   <!-- Custom styles for this page -->
   <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   
+  <!-- datepicker, monthpiker style -->
   <link href="../css/jquery-ui.min.css" rel="stylesheet">
   
-  <style>
-  #upFile {/*파일찾기 폼 투명하게*/
-	position:absolute;
-	top:0;
-	right:0;
-	cursor:pointer;
-	opacity:0;
-	filter:alpha(opacity=0);
-	-ms-filter:"alpha(opacity=0)";
-	-moz-opacity:0;
-}
-  
-  </style>
+  <link href="../css/blue_company.css" rel="stylesheet">
 </head>
 <body id="page-top">
   <!-- Page Wrapper -->
@@ -64,20 +53,17 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
               <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${selectDate}</h6>
-              <form action="InvoiceProc?action=readCSV">
-               <div class=row>
-                  <label style="margin-bottom:0" for="upFile">
-				    <input type="file" name="upFile" id="upFile">
-				    <button>
-	                  파일찾기
-	                </button>
-	              </label> 
+              <form name="fileUpload" action=InvoiceProc?action=readCSV method=post>
+                <div class="filebox d-inline-block">
+				  <input type="text" class="displayFileName" name="fileName" disabled>
+				  <label for="ex_file">
+				    <i class="fas fa-folder-open fa-sm text-white-50"></i> 파일찾기
+				  </label>
+				  <input type="file" id="ex_file">
+				</div>
 	            <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit">
-	              <i class="fas fa-download fa-sm text-white-50"></i> 송장 등록
+	              <i class="fas fa-upload fa-sm text-white-50"></i> 송장 등록
 	            </button>
-               
-               </div>
-               
               </form>
            <!-- 
               <a href="InvoiceProc?action=readCSV&fileName" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
@@ -156,6 +142,16 @@
   <!-- 날짜검색기능 -->
   <script src="../js/jquery-ui.min.js"></script>
   <script src="../js/blue_company.js"></script>
+  
+  <script>
+$(document).ready(function(){
+  $('input[type="file"]').change(function(e){
+    var fileName = e.target.files[0].name;
+////	document.write(fileName);
+  $('.displayFileName').attr('value',fileName); // a에서 받아온 속성 값을 src라는 속성에 넣을 경우
+  })
+});
+</script>
 	
 </body>
 </html>
