@@ -10,13 +10,8 @@ import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
-import org.slf4j.*;
-
-import invoice.*;
-
 @WebServlet("/view/SupplyProc")
 public class SupplyProc extends HttpServlet {
-	private static final Logger LOG = LoggerFactory.getLogger(InvoiceProc.class);
 	private static final long serialVersionUID = 1L;
        
     public SupplyProc() {
@@ -34,34 +29,37 @@ public class SupplyProc extends HttpServlet {
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//공통 설정 
 		request.setCharacterEncoding("UTF-8");
-		RequestDispatcher rd;
-		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
-		String message = new String();
-		String url = new String();
 		
+		String sCode = new String();
 		String sProductCode = new String();
+		String sDate = new String();
 		
 		SupplyDAO sDao = new SupplyDAO();
-		List<SupplyDTO> sDtoLists = (List<SupplyDTO>) new SupplyDTO();
-		
+		SupplyDTO sDto = new SupplyDTO();
 		
     	switch(action) {
+    		// 발주신청(pCode를 받아 발주코드와 현재시간, 처리상태를 붙임)
     		case "requestSupply" :
-//    			sProductCode = request.getParameter("pCode");
-//    			List<SupplyDTO> request = sDao.selectAll();
-//    			for (int i=0; i < request.size(); i++) {
-//    				System.out.println(request.get(i));
-//    			}
-//    			String sDate = curTime();
-//    			sDtoLists = sDao.searchByDay(sDate);
-//    			sCodeCreate(sProductCode, sDate, count)
-//    			request.setAttribute("supplyLists", sDtoLists);
-//    			rd = request.getRequestDispatcher("supply/");
-//    			rd.forward(request, response);
-//    			break;
+    			sProductCode = request.getParameter("pCode");	//pCode받기
+    			sCode = sCodeCreate(sProductCode);	// pCode로 발주코드 만들기
+    			sDate = curTime();	// 현재시간만들기
+    			int sQuantity = 100;		// 발주량
+    			int sState = 0;				// 상태를 0으로 부여
     			
+    			sDto.setsCode(sCode);
+    			sDto.setsProductCode(sProductCode);
+    			sDto.setsDate(sDate);
+    			sDto.setsQuantity(sQuantity);
+    			sDto.setsState(sState);
+    			
+    			sDao.insertSupply(sDto);
+    			
+    			break;
+    			
+    		// 오전 10시가 되면 날짜를 검색해 전날신청물품을 골라 갯수를 올리고 상태를 1로 변경
     		case "complete" :
+    			
     			
     			break;
     	
@@ -84,7 +82,7 @@ public class SupplyProc extends HttpServlet {
 		char supplierCode = pCode.charAt(0);
 		supplier = Character.toString(supplierCode);
 		// 자동(3)
-		int OneOrZero = sDao.searchStateByDay(date);	// 날짜로 sState 검색후 state가 0인것이 
+		int OneOrZero = sDao.searchStateByDay();	//	날짜로 sState 검색후 state가 0인것이 
 		if(OneOrZero != 0) {	//	없으면
 			count =101;	//101번부터 시작
 		} else {	// state가 0인것이 있으면
