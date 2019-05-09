@@ -12,10 +12,8 @@ import org.slf4j.*;
 public class SupplyDAO {
 	private static final Logger LOG = LoggerFactory.getLogger(SupplyDAO.class);
 	private Connection conn;
-	/*	private static final String USERNAME = "javauser";
-	private static final String PASSWORD = "javapass";*/
-	private static final String USERNAME = "Gamja_SQL";
-	private static final String PASSWORD = "Bluemoon1836#%";
+	private static final String USERNAME = "javauser";
+	private static final String PASSWORD = "javapass";
 	private static final String URL = "jdbc:mysql://localhost:3306/fulfillmentsystem?verifyServerCertificate=false&useSSL=false";
 
 	PreparedStatement pStmt = null;
