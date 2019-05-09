@@ -1,5 +1,7 @@
 package invoice;
 
+import java.awt.FileDialog;
+import java.awt.Frame;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -66,9 +68,9 @@ public class Test {
     	System.out.println(iDto.toString());*/
         
 
-    	 /*try {
+    	 try {
 	            // csv 데이터 파일
-	            File csv = new File("C:\\Temp/Test.csv");
+	            File csv = new File(FileTest());
 	            BufferedReader br = new BufferedReader(new FileReader(csv));
 	            String line = "";
 	            String[] customer = new String[5]; //이름,전화번호,주소를 저장할 공간
@@ -86,14 +88,14 @@ public class Test {
 	                	customer[2] = token[1]; //전화번호
 	                	customer[3] = token[2]; //주소
 	                	customer[4] = iAreaCode(token[2]); //지역코드
-	                	customer[0] = iCodeProc("amall",customer[4],count); //송장번호
+	                	customer[0] = iCodeProc("amall",customer[4]); //송장번호
 	                	count ++;
 	                	//송장번호 이름 전화번호 주소 지역코드를 DTO에 넣는다. 
 	                	iDto = new InvoiceDTO(customer); 
 	                	System.out.println(iDto.toString());
 	                	//송장번호 이름 전화번호 주소 지역코드를 DB에 넣는다.
 	                	//날짜와 배송 상태는 DAO에서 처리한다.
-	                	iDao.insertInvoice(iDto);
+	                	//iDao.insertInvoice(iDto);
 	                	
 	                }   
 	                
@@ -106,7 +108,7 @@ public class Test {
 	                System.out.println(oDto.toString());
 	                //제품번호, 송장번호, 제품수량을 DB에 넣는다.
 	                //제품 인덱스는 DB에서 처리한다.
-	                oDao.insertOrder(oDto);      
+	                //oDao.insertOrder(oDto);      
 	            }
 	            br.close();
 	 
@@ -117,7 +119,7 @@ public class Test {
 	        catch (IOException e) {
 	            e.printStackTrace();
 	        }
-	        */
+	        
     }
     
     public static String iCodeProc(String shopping, String areaCode) {
@@ -178,5 +180,17 @@ public class Test {
     	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");	
     	return curTime.format(dateTimeFormatter);
 	}
+    
+    public static String FileTest(){
+        Frame f1 = new Frame();
+        //파일 열기(프레임선택, 파일선택창 Title, 파일 선택 유형)
+        FileDialog f = new FileDialog(f1,"송장 파일 선택",FileDialog.LOAD);  
+        f.setSize(300, 300);
+        f.setLocation(0, 100);
+        f.setDirectory("c:\\Temp"); //파일선택창 기본 경로 지정
+        f.setVisible(true); //파일선택창 보이게 설정
+        
+        return f.getDirectory()+f.getFile();
+    }
  
 }

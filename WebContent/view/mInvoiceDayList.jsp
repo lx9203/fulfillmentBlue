@@ -50,8 +50,9 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
               <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${selectDate}</h6>
-              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
+              <a href="InvoiceProc?action=readCSV" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+	            <input type="file" name="upFile" id="upFile">
+                <i class="fas fa-download fa-sm text-white-50"></i> 송장 등록
               </a>
             </div>
             <div class="card-body">
@@ -71,6 +72,7 @@
                       <th>주소</th>
                       <th>연락처</th>
                       <th>날짜</th>
+                      <th>상태</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -82,6 +84,7 @@
                       <td>${invoice.iAddress}</td>
                       <td>${invoice.iTel}</td>
                       <td>${invoice.iDate}</td>
+                      <td>${invoice.iState}</td>
                    	</tr>
                  	</c:forEach>
                  </tbody>

@@ -3,6 +3,7 @@ package user;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,6 +24,11 @@ import invoice.*;
 public class UserProc extends HttpServlet {
 	private static final Logger LOG = LoggerFactory.getLogger(UserProc.class);
 	private static final long serialVersionUID = 1L;
+	
+	public static final int TWO_PASSWORD_MATCH = 1;
+	public static final int PASSWORD_FORMAT_ERROR = 2;
+	public static final int PASSWORD_NOT_MATCH = 3;
+	public static final int DATABASE_ERROR = -1;
 
     public UserProc() {
     
@@ -48,11 +54,14 @@ public class UserProc extends HttpServlet {
 		String id = new String();
 		String name = new String();
 		String password = request.getParameter("password");
+		String password1 = new String();
+		String password2 = new String();
 		
 		//User관련 변수 목록
-		int userType =0;
-		
+		int userType = 0;
+		int result = 0; //match 검사용
 		String area = new String();
+		String errorMessage = null;
 		
 		
 		//user 메소드 관련 변수 설정
@@ -90,9 +99,8 @@ public class UserProc extends HttpServlet {
 			id = request.getParameter("id");	
 			password = request.getParameter("password");
 			LOG.trace("사용자 유형 : " + userType + ", 아이디 : " + id +", 비밀번호 : " + password);
-			int result = uDao.verifyIdPassword(id, password);
+			result = uDao.verifyIdPassword(id, password);
 			LOG.trace(result+"");
-			String errorMessage = null;
 			
 			switch(result){
 			case UserDAO.ID_PASSWORD_MATCH:
@@ -115,8 +123,8 @@ public class UserProc extends HttpServlet {
 				rd.forward(request, response);
 			} else{
 				request.setAttribute("message", errorMessage);
-				request.setAttribute("url", "login.jsp");
-				rd = request.getRequestDispatcher("alertMsg.jsp");
+				request.setAttribute("msgState", true);
+				rd = request.getRequestDispatcher("login.jsp");
 				rd.forward(request, response);
 			}
 			uDao.close();
@@ -135,6 +143,30 @@ public class UserProc extends HttpServlet {
 				userType = Integer.parseInt(request.getParameter("userType"));
 			}
 			LOG.trace("userType : " + userType);
+			
+			name = request.getParameter("name");
+			password1 = request.getParameter("InputPassword");
+			password2 = request.getParameter("RepeatPassword");
+			LOG.trace("비밀번호 1 : " + password1 + " 비밀번호 2 : " + password2);
+			result = isValidForm(password1, password2);
+			LOG.trace("비밀번호 상태 : " +result);
+			switch(result){
+			case TWO_PASSWORD_MATCH:
+				break;
+			case PASSWORD_FORMAT_ERROR:
+				errorMessage = "유효한 패스워드를 입력해 주세요."; break;
+			case PASSWORD_NOT_MATCH:
+				errorMessage = "두개의 패스워드가 다릅니다.<br> 동일한 패스워드를 입력해 주세요."; break;
+			}
+			
+			if(result != TWO_PASSWORD_MATCH) {
+				request.setAttribute("message", errorMessage);
+				request.setAttribute("msgState", true);
+				rd = request.getRequestDispatcher("register.jsp");
+				rd.forward(request, response);
+				break;
+			}
+			
 			switch (userType) {
 			case 1:
 				int areaId = Integer.parseInt(request.getParameter("areaId"));
@@ -145,7 +177,7 @@ public class UserProc extends HttpServlet {
 				Optional<String> op1 = Optional.ofNullable(uDao.lastId(userType).getId());
 				if(!op1.isPresent()) {
 					LOG.trace("처음 만든 아이디");
-					id = "aShopping";	
+					id = "aShop";	
 				} else {
 					LOG.trace(op1.get().charAt(0)+"");
 					id = (char)(op1.get().charAt(0)+1)+"Shopping";	
@@ -157,7 +189,7 @@ public class UserProc extends HttpServlet {
 				Optional<String> op2 = Optional.ofNullable(uDao.lastId(userType).getId());
 				LOG.trace(op2.isPresent()+ "");
 				if(!op2.isPresent()) {
-					id = "ASeller";	
+					id = "ASupply";	
 					LOG.trace("처음 만든 아이디");
 				} else {
 					id = (char)(op2.get().charAt(0)+1)+ "Seller";	
@@ -165,17 +197,14 @@ public class UserProc extends HttpServlet {
 				break;
 			default:
 				message = "사용자 유형 입력을 잘못 받았습니다.\\n";
-				url = "register.html";
 				request.setAttribute("message", message);
-				request.setAttribute("url", url);
-				rd = request.getRequestDispatcher("alertMsg.jsp");
+				request.setAttribute("msgState", true);
+				rd = request.getRequestDispatcher("register.jsp");
 				rd.forward(request, response);
 				break;	
 			}
 			
-			name = request.getParameter("name");
-			password = request.getParameter("InputPassword");
-			uDto = new UserDTO(userType, id, name, password);
+			uDto = new UserDTO(userType, id, name, password1);
 			LOG.trace(uDto.toString());
 			uDao.insertUser(uDto);
 			
@@ -193,6 +222,18 @@ public class UserProc extends HttpServlet {
 			break;
 		default:
 		}
+	}
+	
+	//패스워드 확인 form
+	public static int isValidForm( String pwd1, String pwd2) {
+		String rgx_pwd = "[a-zA-Z0-9!@#$%^*+=-_]{4,20}";
+		if (!Pattern.matches(rgx_pwd, pwd1)) {
+			return PASSWORD_FORMAT_ERROR;
+		}
+		if (!pwd1.equals(pwd2)) {
+			return PASSWORD_NOT_MATCH;
+		}
+		return TWO_PASSWORD_MATCH;
 	}
 
 }

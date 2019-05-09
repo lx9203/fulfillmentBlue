@@ -132,7 +132,7 @@ public class InvoiceDAO {
 	public List<InvoiceDTO> mallSelectAllDay(char iCode){
 		Date curDate = new Date();
     	SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
-		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice "
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
 				+ "where iCode like '"+Character.toString(iCode)+"%"+sdf.format(curDate)+"%';";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
@@ -141,7 +141,7 @@ public class InvoiceDAO {
 	public List<InvoiceDTO> mallSelectAllMonth(char iCode){
 		Date curDate = new Date();
     	SimpleDateFormat sdf = new SimpleDateFormat("yyMM");
-		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice "
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
 				+ "where iCode like '"+Character.toString(iCode)+"%"+sdf.format(curDate)+"%';";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
@@ -150,14 +150,14 @@ public class InvoiceDAO {
 	
 	public List<InvoiceDTO> transSelectAllDay(String userId){
 		LOG.trace(today);
-		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice "
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
 				+ "where iDate like '"+today+"%' and iAreaCode like '"+userId+"';";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
 	
 	public List<InvoiceDTO> transSelectAllMonth(String userId){
-		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice "
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
 				+ "where iDate >'"+today+" ' and iDate < '"+today+" 23:59:59' and iAreaCode like '"+userId+"';";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
@@ -166,14 +166,14 @@ public class InvoiceDAO {
 	//----------------------------날짜 검색 리스트-------------------------------
 	
 	public List<InvoiceDTO> mallSearchAllDay(char iCode,String Date){
-		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice "
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
 				+ "where iCode like '"+Character.toString(iCode)+"%' and iDate >'"+Date+"' and iDate < '"+Date+" 23:59:59';";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
 	
 	public List<InvoiceDTO> transSearchAllDay(String userId,String Date){
-		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice "
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
 				+ "where iDate like '"+Date+"%' and iAreaCode like '"+userId+"';";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
@@ -181,7 +181,7 @@ public class InvoiceDAO {
 	
 	//수정 안함
 	public List<InvoiceDTO> mallSearchAllMonth(char iCode,String date){
-		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice "
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
 				+ "where iCode like '"+Character.toString(iCode)+"%' and iDate >'"+date+"' and iDate < '"+date+" 23:59:59';";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
@@ -201,6 +201,7 @@ public class InvoiceDAO {
 				invoice.setiTel(rs.getString("iTel"));
 				invoice.setiAddress(rs.getString("iAddress"));
 				invoice.setiDate(rs.getString("iDate").substring(0, 10));
+				invoice.setiState(rs.getInt("iState"));
 				invoiceList.add(invoice);
 			}
 		} catch (Exception e) {

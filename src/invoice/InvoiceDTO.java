@@ -9,6 +9,7 @@ public class InvoiceDTO {
 	private String iAddress;
 	private String iAreaCode;
 	private String iDate;
+	private String iState;
 	
 	public InvoiceDTO(String[] customer) {
 		this.iCode = customer[0];
@@ -67,6 +68,18 @@ public class InvoiceDTO {
 
 	public void setiDate(String iDate) {
 		this.iDate = iDate;
+	}
+	
+	public String getiState() {
+		return iState;
+	}
+
+	public void setiState(int iState) {
+		if(iState == 1) {
+			this.iState = "출고 완료";			
+		} else {
+			this.iState = "출고 준비중";
+		}
 	}
 
 	@Override
