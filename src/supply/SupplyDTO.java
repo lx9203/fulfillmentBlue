@@ -1,16 +1,14 @@
 package supply;
 
-import java.util.*;
-
 public class SupplyDTO {
 	private String sCode;	// 기록, 읽어오기
-	private String sProductCode;	// 기록
+	private String sProductCode;	// 기록, 읽어오기
 	private String sProductName;	// 읽어오기
 	private int sProductPrice;	// 읽어오기
 	private String sDate;	// 기록, 읽어오기
 	private int sQuantity;	// 기록, 읽어오기
 	private int sState;	// 기록
-	private int sTotalPrice; // 기록
+	private int sTotalPrice; // 기록, 읽어오기
 
 	// s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState
 	public SupplyDTO(String sCode, String sProductCode, String sProductName, int sProductPrice, String sDate,
