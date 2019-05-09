@@ -29,8 +29,9 @@ public class SupplyDAO {
 	}
 
 	// 전체검색
-	public List<SupplyDTO> selectAll() {
-		String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState from supply as s inner join product as p on p.pCode = s.sProductCode;";
+	public List<SupplyDTO> selectAll(String sCode) {
+		String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState from supply as s "
+				+ "inner join product as p on p.pCode = s.sProductCode where s.sCode like '"+sCode+"';";
 		List<SupplyDTO> supplyList = selectCondition(sql);
 		return supplyList;
 	}
@@ -111,7 +112,7 @@ public class SupplyDAO {
 		List<SupplyDTO> searchList = searchCondition(sql);
 		return searchList;
 	}// 오늘 리스트
-	
+
 	// 일별 리스트
 	public List<SupplyDTO> searchByDay(String sDay) {
 		Date curDate = new Date();
@@ -130,7 +131,8 @@ public class SupplyDAO {
 		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM");
 		String sMonth = sdf.format(curDate);
 		String sql = "select s.sCode, p.pName, p.pPrice, s.sQuantity, s.sDate, s.sState from supply as s "
-				+ "inner join product as p on p.pCode=s.sProductCode where s.sDate >= '" + sMonth + "-01' and s.sDate <= '" + sMonth + "-31 23:59:59'";
+				+ "inner join product as p on p.pCode=s.sProductCode where s.sDate >= '" + sMonth
+				+ "-01' and s.sDate <= '" + sMonth + "-31 23:59:59'";
 		List<SupplyDTO> searchList = searchCondition(sql);
 		return searchList;
 	}// 이번달 리스트
@@ -141,12 +143,13 @@ public class SupplyDAO {
 		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM");
 		sMonth = sdf.format(curDate);
 		String sql = "select s.sCode, p.pName, p.pPrice, s.sQuantity, s.sDate, s.sState from supply as s "
-				+ "inner join product as p on p.pCode=s.sProductCode where s.sDate >= '" + sMonth + "-01' and s.sDate <= '" + sMonth + "-31 23:59:59'";
+				+ "inner join product as p on p.pCode=s.sProductCode where s.sDate >= '" + sMonth
+				+ "-01' and s.sDate <= '" + sMonth + "-31 23:59:59'";
 		List<SupplyDTO> searchList = searchCondition(sql);
 		return searchList;
 	}// 월별 리스트
-	
-	// 미처리 마지막 발주코드 
+
+	// 미처리 마지막 발주코드
 	public String searchsCodeBySupplier(String supplier) {
 		String sCode = new String();
 
@@ -170,7 +173,7 @@ public class SupplyDAO {
 
 	}// 재고확인
 
-	// 날짜로 sState찾기
+	// 날짜로 sState 찾기
 	public int selectOneCondition(String sql) {
 		PreparedStatement pStmt = null;
 		int state = 0;
@@ -190,10 +193,10 @@ public class SupplyDAO {
 	}
 
 	public int searchStateByDay() {
-		String sql = "select sState from supply order by sCode desc limit 1;";
+		String sql = "select sState from supply order by sCode limit 1;";
 		int state = selectOneCondition(sql);
 		return state;
-	}// 날짜로 sState찾기
+	}// 날짜로 sState 찾기
 
 	// sCode 찾기
 	public String selectOnesCode() {
@@ -246,7 +249,7 @@ public class SupplyDAO {
 		}
 	}
 
-	// 출고 처리 ※ product 에서 pQuantity 수량을 검색하고 +100 해야함
+	// 상태를 1로
 	public void updateState(String sCode) {
 		String query = "update supply set sState=1 where sCode =?;";
 		try {
@@ -263,6 +266,70 @@ public class SupplyDAO {
 				se.printStackTrace();
 			}
 		}
+	}
+
+	// product에서 pCode에 해당하는 주문량 확인
+	public int selectQuantity(String pCode) {
+		String query = "select pQuantity from product where pCode = ?;";
+		int pQuantity = 0;
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setString(1, pCode);
+
+			ResultSet rs = pStmt.executeQuery();
+			while (rs.next()) {
+				pQuantity = rs.getInt("pQuantity");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return pQuantity;
+
+	}
+
+	// 공급 완료
+	public void SupplyQuantity(String pCode, int pQuantity) {
+		String today = curDate();
+		String yesterday = yesterDate();
+		String query = "UPDATE product p INNER JOIN supply s ON p.pCode = s.sProductCode "
+				+ "SET pQuantity = ? where pCode = ? and sDate < '"+ today +"' and sDate >= '"+ yesterday +"';";
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setInt(1, pQuantity + 100);
+			pStmt.setString(2, pCode);
+			pStmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+	}
+	
+	// 하루전 날짜
+	public String yesterDate() {
+		LocalDateTime yesterTime = LocalDateTime.now();
+		yesterTime = yesterTime.minusDays(1);
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		return yesterTime.format(dateTimeFormatter);
+	}
+	
+	// 현재 날짜를 구하는 함수
+	public String curDate() {
+		LocalDateTime curTime = LocalDateTime.now();
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		return curTime.format(dateTimeFormatter);
 	}
 
 	// 시간
