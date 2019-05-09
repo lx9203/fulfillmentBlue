@@ -51,3 +51,32 @@ $(function() {
 			$('#monthpicker').monthpicker('show');
 		});
 });
+
+ $('#upFile').change(
+	function getCmaFileView(obj,stype) {
+	    var s = getCmaFileInfo(obj,stype);
+	    
+	}
+);
+ 
+ function getCmaFileInfo(obj,stype) {
+	    var fileObj, pathHeader , pathMiddle, pathEnd, allFilename;
+	    if(obj == "[object HTMLInputElement]") {
+	        fileObj = obj.value
+	    } else {
+	        fileObj = document.getElementById(obj).value;
+	    }
+	    if (fileObj != "") {
+	            pathHeader = fileObj.lastIndexOf("\\");
+	            pathMiddle = fileObj.lastIndexOf(".");
+	            pathEnd = fileObj.length;
+	            allFilename = fileName+"."+extName;
+	 
+	            if(stype == "all") {
+	                    return allFilename; 
+	            } 
+	    } else {
+	            alert("파일을 선택해주세요");
+	            return false;
+	    }
+	 }

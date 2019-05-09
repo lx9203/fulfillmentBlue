@@ -51,8 +51,8 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
               <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">[검색한 날짜]</h6>
-              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
+              <a href="InvoiceProc?action=forwarding" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                <i class="fas fa-download fa-sm text-white-50"></i> 출고
               </a>
             </div>
             <div class="card-body">
@@ -72,25 +72,10 @@
                       <th>주소</th>
                       <th>연락처</th>
                       <th>날짜</th>
+                      <th>상태</th>                      
                     </tr>
                   </thead>
                   <tbody>
-
-                    <tr>
-                      <td><a href="tDetailList.jsp" >a1001</a></td>
-                      <td>Tiger Nixon</td>
-                      <td>2011/04/25</td>
-                      <td>$320,800</td>
-                      <td>$320,800</td>
-                    </tr>
-                    <tr>
-                      <td>a1002</td>
-                      <td>Garrett Winters</td>
-                      <td>2011/07/25</td>
-                      <td>$170,750</td>
-                      <td>$320,800</td>
-                    </tr>
-
                     <c:set var="invoiceList" value="${requestScope.invoiceLists}"/>
 					<c:forEach var="invoice" items="${invoiceList}">
 	                 <tr>
@@ -99,6 +84,7 @@
                       <td>${invoice.iAddress}</td>
                       <td>${invoice.iTel}</td>
                       <td>${invoice.iDate}</td>
+                      <td>${invoice.iState}</td>
                    	</tr>
                  	</c:forEach>
 
