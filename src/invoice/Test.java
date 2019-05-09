@@ -74,7 +74,6 @@ public class Test {
 	            BufferedReader br = new BufferedReader(new FileReader(csv));
 	            String line = "";
 	            String[] customer = new String[5]; //이름,전화번호,주소를 저장할 공간
-	            int count = 10001;//자동증가 숫자 (실제로 DB이 마지막 숫자부터 시작한다.)
 	 
 	            while ((line = br.readLine()) != null) {
 	                // -1 옵션은 마지막 "," 이후 빈 공백도 읽기 위한 옵션
@@ -89,13 +88,12 @@ public class Test {
 	                	customer[3] = token[2]; //주소
 	                	customer[4] = iAreaCode(token[2]); //지역코드
 	                	customer[0] = iCodeProc("amall",customer[4]); //송장번호
-	                	count ++;
 	                	//송장번호 이름 전화번호 주소 지역코드를 DTO에 넣는다. 
 	                	iDto = new InvoiceDTO(customer); 
 	                	System.out.println(iDto.toString());
 	                	//송장번호 이름 전화번호 주소 지역코드를 DB에 넣는다.
 	                	//날짜와 배송 상태는 DAO에서 처리한다.
-	                	//iDao.insertInvoice(iDto);
+	                	iDao.insertInvoice(iDto);
 	                	
 	                }   
 	                
@@ -108,7 +106,7 @@ public class Test {
 	                System.out.println(oDto.toString());
 	                //제품번호, 송장번호, 제품수량을 DB에 넣는다.
 	                //제품 인덱스는 DB에서 처리한다.
-	                //oDao.insertOrder(oDto);      
+	                oDao.insertOrder(oDto);      
 	            }
 	            br.close();
 	 
@@ -130,7 +128,6 @@ public class Test {
     	SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
     	int increment =0;
     	Optional<String> op = Optional.ofNullable(iDao.selectOneDayLast(sdf.format(curDate)).getiCode());
-//    	Optional<String> op = Optional.ofNullable(iDao.selectOneDayLast("121325").getiCode());
     	System.out.println(op);
 		if(!op.isPresent()) {
 			increment =10001;	
@@ -139,7 +136,7 @@ public class Test {
 			increment = Integer.parseInt(iCode.substring(8))+1;
 			System.out.println(increment);
 		}	
-    	
+    	//13자리의 송장번호를 생성
 		return Character.toString(shoppingCode)+Character.toString(area)+sdf.format(curDate)+increment;
 	}
     
@@ -187,7 +184,7 @@ public class Test {
         FileDialog f = new FileDialog(f1,"송장 파일 선택",FileDialog.LOAD);  
         f.setSize(300, 300);
         f.setLocation(0, 100);
-        f.setDirectory("c:\\Temp"); //파일선택창 기본 경로 지정
+        f.setDirectory("D:\\Gamja file\\fulfillmentBlue"); //파일선택창 기본 경로 지정
         f.setVisible(true); //파일선택창 보이게 설정
         
         return f.getDirectory()+f.getFile();

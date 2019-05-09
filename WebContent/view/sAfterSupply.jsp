@@ -55,104 +55,144 @@
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <colgroup>
+					<col style="width:10%">
+					<col style="width:40%">
+					<col style="width:10%">
+					<col style="width:15%">
+					<col style="width:15%">
+					<col style="width:10%">
+				  </colgroup>
                   <thead>
                     <tr>
                       <th>발주코드</th>
-                      <th>회사명</th>
+                      <th>제품명</th>
+                      <th>제품수량</th>
+                      <th>제품가격</th>
+                      <th>총 가격</th>
                       <th>날짜</th>
-                      <th>금액</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td><a href="requestDetail.jsp" >a1001</a></td>
-                      <td>Tiger Nixon</td>
-                      <td>2011/04/25</td>
+                     <tr>
+                      <td><a href="sRequestDetail.jsp" >a1001</a></td>
+                      <td>Tiger Nixon</td>                      
+                      <td>34</td>
+                      <td>$2,800</td>
                       <td>$320,800</td>
+                      <td>2011/04/25</td>
                     </tr>
                     <tr>
                       <td>a1002</td>
                       <td>Garrett Winters</td>
-                      <td>2011/07/25</td>
+                      <td>34</td>
+                      <td>$2,800</td>
                       <td>$170,750</td>
+                      <td>2011/07/25</td>
                     </tr>
                     <tr>
                       <td>a1003</td>
                       <td>Ashton Cox</td>
-                      <td>2009/01/12</td>
+                      <td>34</td>
+                      <td>$2,800</td>
                       <td>$86,000</td>
+                      <td>2009/01/12</td>
                     </tr>
                     <tr>
                       <td>a1004</td>
                       <td>Cedric Kelly</td>
-                      <td>2012/03/29</td>
+                      <td>34</td>
+                      <td>$2,800</td>
                       <td>$433,060</td>
+                      <td>2012/03/29</td>
                     </tr>
                     <tr>
                       <td>a1005</td>
                       <td>Airi Satou</td>
-                      <td>2008/11/28</td>
+                      <td>34</td>
+                      <td>$2,800</td>
                       <td>$162,700</td>
+                      <td>2008/11/28</td>
                     </tr>
                     <tr>
                       <td>a1006</td>
                       <td>Brielle Williamson</td>
-                      <td>2012/12/02</td>
+                      <td>34</td>
+                      <td>$2,800</td>
                       <td>$372,000</td>
+                      <td>2012/12/02</td>
                     </tr>
                     <tr>
                       <td>a1007</td>
                       <td>Herrod Chandler</td>
-                      <td>2012/08/06</td>
+                      <td>34</td>
+                      <td>$2,800</td>
                       <td>$137,500</td>
+                      <td>2012/08/06</td>
                     </tr>
                     <tr>
                       <td>a1008</td>
                       <td>Rhona Davidson</td>
-                      <td>2010/10/14</td>
+                      <td>34</td>
+                      <td>$2,800</td>
                       <td>$327,900</td>
+                      <td>2010/10/14</td>
                     </tr>
                     <tr>
                       <td>a1009</td>
                       <td>Colleen Hurst</td>
-                      <td>2009/09/15</td>
+                      <td>34</td>
+                      <td>$2,800</td>
                       <td>$205,500</td>
+                      <td>2009/09/15</td>
                     </tr>
                     <tr>
                       <td>a1010</td>
                       <td>Sonya Frost</td>
-                      <td>2008/12/13</td>
+                      <td>34</td>
+                      <td>$2,800</td>
                       <td>$103,600</td>
+                      <td>2008/12/13</td>
                     </tr>
                     <tr>
                       <td>a1011</td>
                       <td>Jena Gaines</td>
-                      <td>2008/12/19</td>
+                      <td>34</td>
+                      <td>$2,800</td>
                       <td>$90,560</td>
+                      <td>2008/12/19</td>
                     </tr>
                     <tr>
                       <td>a1012</td>
                       <td>Quinn Flynn</td>
-                      <td>2013/03/03</td>
+                      <td>34</td>
+                      <td>$2,800</td>
                       <td>$342,000</td>
+                      <td>2013/03/03</td>
                     </tr>
                     <tr>
                       <td>a1013</td>
                       <td>Charde Marshall</td>
-                      <td>2008/10/16</td>
+                      <td>34</td>
+                      <td>$2,800</td>
                       <td>$470,600</td>
+                      <td>2008/10/16</td>
                     </tr>
                     <tr>
                       <td>a1014</td>
                       <td>Haley Kennedy</td>
-                      <td>2012/12/18</td>
+                      <td>34</td>
+                      <td>$2,800</td>
                       <td>$313,500</td>
+                      <td>2012/12/18</td>
                     </tr>
                     <tr>
                       <td>a1015</td>
                       <td>Tatyana Fitzpatrick</td>
-                      <td>2010/03/17</td>
+                      <td>34</td>
+                      <td>$2,800</td>
                       <td>$385,750</td>
+                      <td>2010/03/17</td>
                     </tr>
                   </tbody>
                 </table>
