@@ -222,7 +222,7 @@
 
   <!-- Page level plugins -->
   <script src="../vendor/chart.js/Chart.min.js"></script>
-
+  
   <!-- Page level custom scripts -->
   <%@ include file="graphData.jspf" %>
 
