@@ -95,7 +95,7 @@
 												<td>${supply.sCode}</td>
 												<td>${supply.sProductName}</td>
 												<td>${supply.sQuantity}</td>
-                        <td><fmt:formatNumber value="${supply.sProductPrice }" pattern="#,##0"/></td>
+                        						<td><fmt:formatNumber value="${supply.sProductPrice }" pattern="#,##0"/></td>
 												<td><fmt:formatNumber value="${supply.sTotalPrice }" pattern="#,##0"/></td>
 												<td>${supply.sDate}</td>
 											</tr>

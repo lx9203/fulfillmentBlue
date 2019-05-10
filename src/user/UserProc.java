@@ -94,10 +94,9 @@ public class UserProc extends HttpServlet {
 				rd.forward(request, response);
 				break;
 			case 0:
-				rd = request.getRequestDispatcher("../admin/AdminProc?action=intoMain");
+				rd = request.getRequestDispatcher("AdminProc?action=intoMain");
 				rd.forward(request, response);
 				break;
-				
 			}
 			break;
 		case "login" : //로그인을 위한 처리 부분
