@@ -37,6 +37,11 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
+        
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">[카테고리명]</h1>
+          </div>
 
           <!-- row 1번-->
           <div class="row">

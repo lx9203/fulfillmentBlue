@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>쇼핑몰 송장 상세페이지</title>
+  <title>상세페이지</title>
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -25,7 +25,7 @@
 <body id="page-top">
   <!-- Page Wrapper -->
   <div id="wrapper">
-    <%@ include file="m_navigator.jspf" %>
+    <%@ include file="s_navigator.jspf" %>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
@@ -36,18 +36,20 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-2 text-gray-800">상세페이지</h1>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+              <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
+            </a>
           </div>
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <table>
                 <tr>
-                  <c:set var="invoice" value="${requestScope.invoice}"/>
-                  <td><h6 class="m-0 font-weight-bold text-primary">송장번호: ${invoice.iCode} &nbsp;&nbsp;</h6></td>
-                  <td>&nbsp;&nbsp;성명 : ${invoice.iName}&nbsp;&nbsp;</td>
-                  <td>&nbsp;&nbsp;주소 : ${invoice.iAddress}&nbsp;&nbsp;</td>
-                  <td>&nbsp;&nbsp;연락처 : ${invoice.iTel}&nbsp;&nbsp;</td>
-                  <td>&nbsp;&nbsp;날짜 : ${invoice.iDate}&nbsp;&nbsp;</td>
+                  <td>
+                    <h6 class="m-0 font-weight-bold text-primary">발주코드: DA1001&nbsp;&nbsp;</h6>
+                  </td>
+                  <td>&nbsp;&nbsp;Blue Company&nbsp;&nbsp;</td>
+                  <td>&nbsp;&nbsp;Date:&nbsp;2011/04/25&nbsp;&nbsp;</td>
                 </tr>
               </table>
             </div>
@@ -56,34 +58,73 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>주문번호</th>
+                      <th>상품코드</th>
                       <th>상품명</th>
                       <th>개수</th>
                       <th>단가</th>
                       <th>합계</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <c:set var="orderLists" value="${requestScope.orderLists}"/>
-					<c:forEach var="order" items="${orderLists}">
-                    <tr>
-                      <td>${order.oNum}</td>
-                      <td>${order.oProductName}</td>
-                      <td>${order.oQuantity}</td>
-                      <td>${order.oPrice}</td>
-                      <td>${order.oTotalPrice}</td>
-                    </tr>
-                    </c:forEach>
-                  </tbody>
                   <tfoot>
                     <tr>
                       <th></th>
                       <th></th>
                       <th></th>
                       <th>총액</th>
-                      <th>${requestScope.invoiceTotalPrice}</th>
+                      <th>34500</th>
                     </tr>
                   </tfoot>
+                  <tbody>
+                    <tr>
+                      <td>a100022019050101</td>
+                      <td>삼겹살 1kg</td>
+                      <td>2</td>
+                      <td>5000</td>
+                      <td>10000</td>
+                    </tr>
+                    <tr>
+                      <td>a100022019050102</td>
+                      <td>목살 1kg</td>
+                      <td>1</td>
+                      <td>7000</td>
+                      <td>7000</td>
+                    </tr>
+                    <tr>
+                      <td>a100022019050103</td>
+                      <td>대파 1단</td>
+                      <td>1</td>
+                      <td>3000</td>
+                      <td>3000</td>
+                    </tr>
+                    <tr>
+                      <td>a100022019050104</td>
+                      <td>쌈장 150g</td>
+                      <td>2</td>
+                      <td>4000</td>
+                      <td>8000</td>
+                    </tr>
+                    <tr>
+                      <td>a100022019050105</td>
+                      <td>젓가락 50개</td>
+                      <td>1</td>
+                      <td>1500</td>
+                      <td>1500</td>
+                    </tr>
+                    <tr>
+                      <td>a100022019050106</td>
+                      <td>일회용용기 50개</td>
+                      <td>1</td>
+                      <td>2500</td>
+                      <td>2500</td>
+                    </tr>
+                    <tr>
+                      <td>a100022019050107</td>
+                      <td>콜라 1.5L</td>
+                      <td>1</td>
+                      <td>2500</td>
+                      <td>2500</td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
             </div>
