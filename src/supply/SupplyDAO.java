@@ -1,11 +1,9 @@
 package supply;
 
 import java.sql.*;
-import java.text.*;
 import java.time.*;
 import java.time.format.*;
 import java.util.*;
-import java.util.Date;
 
 import org.slf4j.*;
 
@@ -29,9 +27,19 @@ public class SupplyDAO {
 	}
 
 	// 전체검색
-	public List<SupplyDTO> selectAll(String sCode) {
+	// 상태가 0인 전체검색
+	public List<SupplyDTO> selectBeforeAll(String sCode) {
 		String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState from supply as s "
-				+ "inner join product as p on p.pCode = s.sProductCode where s.sCode like '"+sCode+"';";
+				+ "inner join product as p on p.pCode = s.sProductCode where s.sState = 0 and s.sCode like '" + sCode
+				+ "';";
+		List<SupplyDTO> supplyList = selectCondition(sql);
+		return supplyList;
+	}
+
+	// 상태가 1인 전체검색
+	public List<SupplyDTO> selectAfterAll(String sCode) {
+		String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState from supply as s "
+				+ "inner join product as p on p.pCode = s.sProductCode where s.sState = 1 and s.sDate <= ;";
 		List<SupplyDTO> supplyList = selectCondition(sql);
 		return supplyList;
 	}
@@ -49,7 +57,7 @@ public class SupplyDAO {
 				supply.setsProductCode(rs.getString("pCode"));
 				supply.setsProductName(rs.getString("pName"));
 				supply.setsProductPrice(rs.getInt("pPrice"));
-				supply.setsDate(rs.getString("sDate"));
+				supply.setsDate(rs.getString("sDate").substring(0, 10));
 				supply.setsQuantity(rs.getInt("sQuantity"));
 				supply.setsState(rs.getInt("sState"));
 				supply.setsTotalPrice(supply.getsQuantity() * supply.getsProductPrice());
@@ -83,7 +91,7 @@ public class SupplyDAO {
 				supply.setsProductName(rs.getString("pName"));
 				supply.setsProductPrice(rs.getInt("pPrice"));
 				supply.setsQuantity(rs.getInt("sQuantity"));
-				supply.setsDate(rs.getString("sDate"));
+				supply.setsDate(rs.getString("sDate").substring(0, 10));
 				supply.setsState(rs.getInt("sState"));
 				searchList.add(supply);
 			}
@@ -101,54 +109,49 @@ public class SupplyDAO {
 		return searchList;
 	}// 일별, 월별 검색용 컨디션
 
-	// 오늘 리스트
+	// 어제 리스트
 	public List<SupplyDTO> searchByDay() {
-		Date curDate = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
-		String sDay = sdf.format(curDate);
 		String sql = "select s.sCode, p.pName, p.pPrice, s.sQuantity, s.sDate, s.sState from supply as s "
-				+ "inner join product as p on p.pCode=s.sProductCode where s.sDate >= '" + sDay + "' and s.sDate <= '"
-				+ sDay + " 23:59:59';";
+				+ "inner join product as p on p.pCode=s.sProductCode where s.sDate >= '" + yesterDate()
+				+ "' and s.sDate < '" + curDate() + "';";
 		List<SupplyDTO> searchList = searchCondition(sql);
 		return searchList;
-	}// 오늘 리스트
+	}// 어제 리스트
 
-	// 일별 리스트
-	public List<SupplyDTO> searchByDay(String sDay) {
-		Date curDate = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
-		sDay = sdf.format(curDate);
-		String sql = "select s.sCode, p.pName, p.pPrice, s.sQuantity, s.sDate, s.sState from supply as s "
-				+ "inner join product as p on p.pCode=s.sProductCode where s.sDate >= '" + sDay + "' and s.sDate <= '"
-				+ sDay + " 23:59:59';";
-		List<SupplyDTO> searchList = searchCondition(sql);
-		return searchList;
-	}// 일별 리스트
-
-	// 이번달 리스트
-	public List<SupplyDTO> searchByMonth() {
-		Date curDate = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM");
-		String sMonth = sdf.format(curDate);
-		String sql = "select s.sCode, p.pName, p.pPrice, s.sQuantity, s.sDate, s.sState from supply as s "
-				+ "inner join product as p on p.pCode=s.sProductCode where s.sDate >= '" + sMonth
-				+ "-01' and s.sDate <= '" + sMonth + "-31 23:59:59'";
-		List<SupplyDTO> searchList = searchCondition(sql);
-		return searchList;
-	}// 이번달 리스트
+	// // 일별 리스트
+	// public List<SupplyDTO> searchByDay(String sDay) {
+	// Date curDate = new Date();
+	// SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+	// sDay = sdf.format(curDate);
+	// String sql = "select s.sCode, p.pName, p.pPrice, s.sQuantity, s.sDate,
+	// s.sState from supply as s "
+	// + "inner join product as p on p.pCode=s.sProductCode where s.sDate >= '" +
+	// sDay + "' and s.sDate <= '"
+	// + sDay + " 23:59:59';";
+	// List<SupplyDTO> searchList = searchCondition(sql);
+	// return searchList;
+	// }// 일별 리스트
 
 	// 월별 리스트
-	public List<SupplyDTO> searchByMonth(String sMonth) {
-		Date curDate = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM");
-		sMonth = sdf.format(curDate);
+	public List<SupplyDTO> searchByMonth() {
 		String sql = "select s.sCode, p.pName, p.pPrice, s.sQuantity, s.sDate, s.sState from supply as s "
-				+ "inner join product as p on p.pCode=s.sProductCode where s.sDate >= '" + sMonth
-				+ "-01' and s.sDate <= '" + sMonth + "-31 23:59:59'";
+				+ "inner join product as p on p.pCode=s.sProductCode where s.sDate >= '" + curMonth()
+				+ "-01' and s.sDate < '" + nextMonth() + "-01'";
 		List<SupplyDTO> searchList = searchCondition(sql);
 		return searchList;
 	}// 월별 리스트
 
+	// 월별 리스트
+	public List<SupplyDTO> searchByMonth(String Month) {
+		LocalDate LocalAfterMonth = LocalDate.parse(Month+"-01");
+		LocalAfterMonth = LocalAfterMonth.plusMonths(1);
+		String sql = "select s.sCode, p.pName, p.pPrice, s.sQuantity, s.sDate, s.sState from supply as s "
+				+ "inner join product as p on p.pCode=s.sProductCode where s.sDate >= '" + Month
+				+ "-01' and s.sDate < '" + LocalAfterMonth +"';";
+		List<SupplyDTO> searchList = searchCondition(sql);
+		return searchList;
+	}// 월별 리스트
+	
 	// 미처리 마지막 발주코드
 	public String searchsCodeBySupplier(String supplier) {
 		String sCode = new String();
@@ -299,7 +302,7 @@ public class SupplyDAO {
 		String today = curDate();
 		String yesterday = yesterDate();
 		String query = "UPDATE product p INNER JOIN supply s ON p.pCode = s.sProductCode "
-				+ "SET pQuantity = ? where pCode = ? and sDate < '"+ today +"' and sDate >= '"+ yesterday +"';";
+				+ "SET pQuantity = ? where pCode = ? and sDate < '" + today + "' and sDate >= '" + yesterday + "';";
 		try {
 			pStmt = conn.prepareStatement(query);
 			pStmt.setInt(1, pQuantity + 100);
@@ -316,7 +319,7 @@ public class SupplyDAO {
 			}
 		}
 	}
-	
+
 	// 하루전 날짜
 	public String yesterDate() {
 		LocalDateTime yesterTime = LocalDateTime.now();
@@ -324,7 +327,7 @@ public class SupplyDAO {
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		return yesterTime.format(dateTimeFormatter);
 	}
-	
+
 	// 현재 날짜를 구하는 함수
 	public String curDate() {
 		LocalDateTime curTime = LocalDateTime.now();
@@ -332,12 +335,25 @@ public class SupplyDAO {
 		return curTime.format(dateTimeFormatter);
 	}
 
+	// 이번 달을 구하는 함수
+	public String curMonth() {
+		LocalDateTime curTime = LocalDateTime.now();
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
+		return curTime.format(dateTimeFormatter);
+	}
+
+	// 다음달 구하는 함수
+	public String nextMonth() {
+		LocalDateTime nextTime = LocalDateTime.now();
+		nextTime = nextTime.plusMonths(1);
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
+		return nextTime.format(dateTimeFormatter);
+	}
+
 	// 시간
 	public String curTime() {
 		LocalDateTime curTime = LocalDateTime.now();
-
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
-
 		return curTime.format(dateTimeFormatter);
 	}// 시간
 
