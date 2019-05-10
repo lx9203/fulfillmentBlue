@@ -32,7 +32,7 @@
 
   <!-- Nav Item -->
   <li class="nav-item">
-    <a class="nav-link" href="aStockList.jsp">
+    <a class="nav-link" href="../admin/aStockList.jsp">
       <i class="fas fa-fw fa-table"></i>
       <span>재고현황</span></a>
   </li>

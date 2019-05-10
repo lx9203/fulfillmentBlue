@@ -64,6 +64,18 @@ public class AdminDAO {
 		List<String> invoiceCodes = selectiCodeCondition(sql);
 		return invoiceCodes;
 	}
+	//-------------------------전년도 처리한 송장 리스트 -------------------------------------------
+	public List<String> selectLastYear(int month){ // !!! 'and iState = 1'을 조건으로 추가 해야 함 !!!
+		String thisMonth = String.format("%02d", month);
+		String nextMonth = String.format("%02d", month+1);
+		if(month != 12) {
+			sql = "select iCode from invoice WHERE iDate >='"+lastYear()+"-"+thisMonth+"-01' AND iDate <'"+lastYear()+"-"+nextMonth+"-01' ;";
+		}else {
+			sql = "select iCode from invoice WHERE iDate >='"+lastYear()+"-"+thisMonth+"-01' AND iDate <'"+curYear()+"-01-01' ;";	
+		}
+		List<String> invoiceCodes = selectiCodeCondition(sql);
+		return invoiceCodes;
+	}
 	
 	public List<String> selectiCodeCondition(String sql){
 		PreparedStatement pStmt = null;
@@ -92,7 +104,7 @@ public class AdminDAO {
 	//2. 찾은 송장 번호와 맞는 Order제품의 가격과 개수를 가져와 총액을 구한다.
 	
 	public List<AdminDTO> selectOrder(String iCode){
-		sql = "select o.oQuantity, p.pPrice from `order` as o "
+		sql = "select p.pCode o.oQuantity, p.pPrice from `order` as o "
 				+ "inner join product as p on p.pCode = o.oProductCode where o.oInvoiceCode like '"+iCode+"';";
 		List<AdminDTO> orderList = selectPriceCondition(sql);
 		return orderList;
@@ -107,6 +119,7 @@ public class AdminDAO {
 			
 			while(rs.next()){
 				AdminDTO order = new AdminDTO();
+				order.setpCode(rs.getString("pCode"));
 				order.setoQuantity(rs.getInt("oQuantity"));
 				order.setpPrice(rs.getInt("pPrice"));
 				orderList.add(order);
@@ -131,6 +144,17 @@ public class AdminDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	
+	//-------------------------------------일반 함수 목록 -----------------------------------------------------
+	//작년도 구하는 함수
+	public String lastYear() {
+		LocalDateTime lastYear = LocalDateTime.now();
+		lastYear = lastYear.minusYears(1);
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy");	
+    	return lastYear.format(dateTimeFormatter);
 	}
 	//이번 년도 구하는 함수
 	public String curYear() {
