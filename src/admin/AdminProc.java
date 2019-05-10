@@ -76,14 +76,12 @@ public class AdminProc extends HttpServlet {
 			for(String invoiceCode : thisInvoiceCodes) {
 				orderList = aDao.selectOrder(invoiceCode);
 				for(AdminDTO order : orderList) {
-					shopTotalPrice += order.getoQuantity()*order.getpPrice()*1.1; //5. 쇼핑몰 대금 청구
 					supplyTotalPrice += order.getoQuantity()*order.getpPrice(); //6. 공급사 대금 청구
-					thisTotalPrice += shopTotalPrice-supplyTotalPrice; 
-					
-					
 				}
-				transTotalPrice += 10000; //7. 운송사 대금 청구
+				thisTotalPrice += supplyTotalPrice*0.1; 
+				shopTotalPrice += supplyTotalPrice*1.1; //5. 쇼핑몰 대금 청구
 				shopTotalPrice += 10000;
+				transTotalPrice += 10000; //7. 운송사 대금 청구
 			}
 			//2.전년도 판매수익
 			for(int m=1;m<13;m++) {
