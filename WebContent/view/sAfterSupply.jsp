@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,9 +79,11 @@
                      <tr>
                       <td><a href="sRequestDetail.jsp" >a1001</a></td>
                       <td>Tiger Nixon</td>                      
-                      <td>34</td>
-                      <td>$2,800</td>
-                      <td>$320,800</td>
+                      <td>20</td>
+                      <!-- 가격 등 comma표시 fmt:formatNumber사용
+                      <td><fmt:formatNumber value="${count}" pattern="#,##0" /></td> -->
+                      <td><fmt:formatNumber value="15000" pattern="#,##0"/></td>
+                      <td><fmt:formatNumber value="300000" pattern="#,##0"/></td>
                       <td>2011/04/25</td>
                     </tr>
                     <tr>

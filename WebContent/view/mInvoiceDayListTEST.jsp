@@ -23,8 +23,7 @@
   
   <!-- datepicker, monthpiker style -->
   <link href="../css/jquery-ui.min.css" rel="stylesheet">
-  
-  <link href="../css/blue_company.css" rel="stylesheet">
+  <link href="../css/bluecompany.css" rel="stylesheet">
 </head>
 <body id="page-top">
   <!-- Page Wrapper -->

@@ -17,13 +17,9 @@
 
   <!-- Custom styles for this template-->
   <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+  
+  <link href="../css/bluecompany.css" rel="stylesheet">
 
-  <style>
-    .blue-login {
-	    background-image: url('http://www.klnews.co.kr/news/photo/201901/118631_26829_537.jpg');
-	    background-size: cover;
-	}
-  </style>
 </head>
 
 <body class="bg-gradient-primary">
@@ -78,11 +74,6 @@
                  	<a href="catalogMain.jsp" class="btn btn-google btn-user btn-block">창고 둘러보기</a>
                   </form>
                   <hr>
-<!-- 비밀번호 찾기 or 초기화 요청
-                  <div class="text-center">
-                    <a class="small" href="forgot-password.html">Forgot Password?</a>
-                  </div>
--->
                   <div class="text-center">
                     <a class="small" href="register.jsp">Create an Account!</a>
                   </div>
@@ -95,7 +86,6 @@
     </div>
   </div>
 
-
   <!-- Bootstrap core JavaScript-->
   <script src="../vendor/jquery/jquery.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -105,34 +95,8 @@
 
   <!-- Custom scripts for all pages-->
   <script src="../js/sb-admin-2.min.js"></script>
-  
-<!-- 변수 검사 -->
-	<c:set var="msgState" value="${requestScope.msgState}"/>
-	<c:if test="${msgState==true}" var="result">
-		<script>
-			$(function() {
-				$('#loginerror').modal('show');
-			});
-		</script>
-	</c:if>
+ 
+  <%@ include file="common/_messageModal.jspf" %>
 
 </body>
 </html>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="loginerror" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="ModalLabel">Login Error!!</h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">${requestScope.message}</div>
-      <div class="modal-footer">
-        <a class="btn btn-primary" href="login.jsp">Cancel</a>
-      </div>
-    </div>
-  </div>
-</div>
