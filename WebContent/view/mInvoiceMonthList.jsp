@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>월별 송장내역</title>
+  <title>쇼핑몰 월별 송장내역</title>
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -37,7 +37,7 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-2 text-gray-800">월별 송장내역</h1>
-            <form action="" class="form-horizontal d-sm-inline-block" method="post">
+            <form action="InvoiceProc?action=searchList" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
 			      <input type="text" name="monthCustomer" id="monthpicker" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
@@ -68,6 +68,7 @@
                       <th>주소</th>
                       <th>연락처</th>
                       <th>날짜</th>
+                      <th>상태</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -79,6 +80,7 @@
                       <td>${invoice.iAddress}</td>
                       <td>${invoice.iTel}</td>
                       <td>${invoice.iDate}</td>
+                      <td>${invoice.iState}</td>
                    	</tr>
                  	</c:forEach>
                  </tbody>

@@ -108,9 +108,9 @@ public class OrderDAO {
 				OrderDTO order = new OrderDTO();
 				order.setoNum(rs.getInt("oNum"));
 				order.setoProductName(rs.getString("pName"));
-				order.setoPrice(rs.getInt("pPrice"));
+				order.setpPrice(rs.getInt("pPrice"));
 				order.setoQuantity(rs.getInt("oQuantity"));
-				order.setoTotalPrice(order.getoPrice()*order.getoQuantity());
+				order.setoTotalPrice(order.getpPrice()*order.getoQuantity());
 				orderList.add(order);
 			}
 		} catch (Exception e) {
