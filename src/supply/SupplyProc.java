@@ -10,10 +10,11 @@ import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
-import invoice.*;
+import org.slf4j.*;
 
 @WebServlet("/view/SupplyProc")
 public class SupplyProc extends HttpServlet {
+	private static final Logger LOG = LoggerFactory.getLogger(SupplyProc.class);
 	private static final long serialVersionUID = 1L;
 
 	public SupplyProc() {
@@ -33,8 +34,10 @@ public class SupplyProc extends HttpServlet {
 	protected void doAction(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 공통 설정
+		LOG.trace("액션");
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
+		LOG.trace(action);
 		RequestDispatcher rd;
 		
 		String sCode = new String();
@@ -45,14 +48,16 @@ public class SupplyProc extends HttpServlet {
 		SupplyDTO sDto = new SupplyDTO();
 		List<SupplyDTO> sDtoLists = new ArrayList<SupplyDTO>();
 
-		switch (action) {
-		// 발주신청(pCode를 받아 발주코드와 현재시간, 처리상태를 붙임)
+		switch(action){
 		case "requestSupply":
+			// 발주신청(pCode를 받아 발주코드와 현재시간, 처리상태를 붙임)
+			LOG.trace("시작");
 			pCode = request.getParameter("pCode"); // pCode받기
 			sCode = sCodeCreate(pCode); // pCode로 발주코드 만들기
 			sDate = curTime(); // 현재시간만들기
 			int sQuantity = 100; // 발주량
 			int sState = 0; // 상태를 0으로 부여
+			int totalProductPrice = 0;
 
 			sDto.setsCode(sCode);
 			sDto.setsProductCode(pCode);
@@ -64,32 +69,45 @@ public class SupplyProc extends HttpServlet {
 
 			break;
 
-		// complete를 하면 어제에 해당하는 모든 발주를 배송하고(pQuantity+100) 처리완료상태(sState=1)로 만듬
 		case "complete":
+			// complete를 하면 어제에 해당하는 모든 발주를 배송하고(pQuantity+100) 처리완료상태(sState=1)로 만듬
 			pCode = request.getParameter("pCode");
 			int pQuantity = sDao.selectQuantity(pCode);
 			sDao.SupplyQuantity(pCode, pQuantity);
 			break;
 			
-		case "detailList":
-			sCode = request.getParameter("sCode");
-			
-			sDtoLists = sDao.selectAll(sCode);
-			
-			int totalProductPrice = 0;
-			
-			for(SupplyDTO supply : sDtoLists) totalProductPrice += supply.getsTotalPrice();
-			
-			request.setAttribute("supplyTotalPrice", totalProductPrice);
-			request.setAttribute("supply", sDto);
+		case "supplyBeforeList":
+			LOG.trace("supplyBeforeList");
+			// 상태가 0 인 목록
+			sDtoLists = sDao.selectBeforeAll();
 			request.setAttribute("supplyList",sDtoLists);
-			rd = request.getRequestDispatcher("mDetailList.jsp");
+			rd = request.getRequestDispatcher("sBeforeSupply.jsp");
+			rd.forward(request, response);
+			LOG.trace("supplyBeforeList끝");
+			break;
+		
+		case "supplyAfterListSearch":
+			// 상태가 1인 목록
+			String month = request.getParameter("month");
+			sDtoLists = sDao.searchByMonth(month);
+			request.setAttribute("selectMonth", month);
+			request.setAttribute("supplyList",sDtoLists);
+			rd = request.getRequestDispatcher("mall/sAfterSupply.jsp");
+			rd.forward(request, response);
+			break;
+			
+		case "supplyAfterList":
+			LOG.trace("시작");
+			sDtoLists = sDao.searchByMonth();
+			request.setAttribute("supplyList",sDtoLists);
+			rd = request.getRequestDispatcher("sAfterSupply.jsp");
 			rd.forward(request, response);
 			break;
 
 		default:
 			break;
 		}
+		LOG.trace("끝");
 		
 	}
 
