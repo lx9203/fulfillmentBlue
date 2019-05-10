@@ -22,6 +22,8 @@
   <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   
   <link href="../css/jquery-ui.min.css" rel="stylesheet">
+  
+  <link href="../css/blue_company.css" rel="stylesheet">
 </head>
 <body id="page-top">
   <!-- Page Wrapper -->
@@ -50,9 +52,18 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
               <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${selectDate}</h6>
-              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-download fa-sm text-white-50"></i> 송장 등록
-              </a>
+              <form name="fileUpload" action=InvoiceProc?action=readCSV method=post>
+                <div class="filebox d-inline-block">
+				  <input type="text" class="displayFileName" name="fileName" disabled>
+				  <label for="ex_file">
+				    <i class="fas fa-folder-open fa-sm text-white-50"></i> 파일찾기
+				  </label>
+				  <input type="file" id="ex_file">
+				</div>
+	            <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="submit">
+	              <i class="fas fa-upload fa-sm text-white-50"></i> 송장 등록
+	            </button>
+              </form>
             </div>
             <div class="card-body">
               <div class="table-responsive">
