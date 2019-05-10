@@ -17,7 +17,7 @@
 
   <!-- Nav Item - Dashboard -->
   <li class="nav-item">
-    <a class="nav-link" href="adminMain.jsp">
+    <a class="nav-link" href="">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>운영현황</span></a>
   </li>
@@ -32,7 +32,7 @@
 
   <!-- Nav Item -->
   <li class="nav-item">
-    <a class="nav-link" href="../admin/aStockList.jsp">
+    <a class="nav-link" href="admin/aStockList.jsp">
       <i class="fas fa-fw fa-table"></i>
       <span>재고현황</span></a>
   </li>

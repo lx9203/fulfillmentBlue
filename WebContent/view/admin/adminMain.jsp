@@ -26,7 +26,7 @@
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
       <div id="content">
-        <%@ include file="common/_top.jspf" %>
+        <%@ include file="../common/_top.jspf" %>
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
@@ -255,7 +255,7 @@
         <!-- /.container-fluid -->
       </div>
       <!-- End of Main Content -->
-      <%@ include file="common/_bottom.jspf" %>
+      <%@ include file="../common/_bottom.jspf" %>
     </div>
     <!-- End of Content Wrapper -->
   </div>

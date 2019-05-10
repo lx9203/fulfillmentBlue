@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebServlet("/admin/AdminProc")
+@WebServlet("/view/admin/AdminProc")
 public class AdminProc extends HttpServlet {
 	private static final Logger LOG = LoggerFactory.getLogger(AdminProc.class);
 	private static final long serialVersionUID = 1L;
@@ -123,7 +123,7 @@ public class AdminProc extends HttpServlet {
 			
 			
 			request.setAttribute("monthTotalPriceList", monthTotalPriceList); // 그래프 월별 총액 값
-			rd = request.getRequestDispatcher("adminMain.jsp");
+			rd = request.getRequestDispatcher("admin/adminMain.jsp");
 			rd.forward(request, response);
 			break;
 		default:

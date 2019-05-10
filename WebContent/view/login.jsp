@@ -38,25 +38,6 @@
                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                   </div>
                   <form action="UserProc?action=login" class="user" method="POST">
-                   <!--  <div class="form-group" align=center style="line-height: 2">
-                      <div class="custom-control custom-radio small d-inline-block">
-                        <input type="radio" class="custom-control-input" name="userType" id="admin" value=0>
-                        <label class="custom-control-label " for="admin">관리자&nbsp;</label>
-                      </div>
-                      <div class="custom-control custom-radio small d-inline-block">
-                        <input type="radio" class="custom-control-input" name="userType" id="transport" value=1>
-                        <label class="custom-control-label" for="transport">운송업체&nbsp;</label>
-                      </div>
-                      <div class="custom-control custom-radio small d-inline-block">
-                        <input type="radio" class="custom-control-input" name="userType" id="shopping" value=2>
-                        <label class="custom-control-label" for="shopping">쇼핑몰&nbsp;</label>
-                      </div>
-                      <div class="custom-control custom-radio small d-inline-block">
-                        <input type="radio" class="custom-control-input" name="userType" id="seller" value=3>
-                        <label class="custom-control-label" for="seller">공급사&nbsp;</label>
-                      </div>
-                    </div> -->
-
                     <div class="form-group">
                       <input type="text" class="form-control form-control-user" id="id" name="id" placeholder="아이디를 입력해 주세요">
                     </div>
