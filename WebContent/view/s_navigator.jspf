@@ -35,14 +35,14 @@
   <li class="nav-item">
     <a class="nav-link" href="SupplyProc?action=supplyBeforeList">
       <i class="fas fa-fw fa-table"></i>
-      <span>일별 수주내역</span></a>
+      <span>수주내역</span></a>
   </li>
   
   <!-- Nav Item - 납품내역 -->
   <li class="nav-item">
     <a class="nav-link" href="SupplyProc?action=supplyAfterList">
       <i class="fas fa-fw fa-table"></i>
-      <span>월별 납품내역</span></a>
+      <span>납품내역</span></a>
   </li>
   
 

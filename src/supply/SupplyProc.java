@@ -77,25 +77,20 @@ public class SupplyProc extends HttpServlet {
 			break;
 			
 		case "supplyBeforeList":
+			LOG.trace("supplyBeforeList");
 			// 상태가 0 인 목록
-			sCode = request.getParameter("sCode");
-			sDtoLists = sDao.selectBeforeAll(sCode);
-			totalProductPrice = 0;
-			for(SupplyDTO supply : sDtoLists) totalProductPrice += supply.getsTotalPrice();
-			request.setAttribute("supplyTotalPrice", totalProductPrice);
+			sDtoLists = sDao.selectBeforeAll();
 			request.setAttribute("supplyList",sDtoLists);
-			rd = request.getRequestDispatcher("sBeforeSupplyTest.jsp");
+			rd = request.getRequestDispatcher("sBeforeSupply.jsp");
 			rd.forward(request, response);
+			LOG.trace("supplyBeforeList끝");
 			break;
 		
 		case "supplyAfterListSearch":
 			// 상태가 1인 목록
 			String month = request.getParameter("month");
 			sDtoLists = sDao.searchByMonth(month);
-			totalProductPrice = 0;
-			for(SupplyDTO supply : sDtoLists) totalProductPrice += supply.getsTotalPrice();
 			request.setAttribute("selectMonth", month);
-			request.setAttribute("supplyTotalPrice", totalProductPrice);
 			request.setAttribute("supplyList",sDtoLists);
 			rd = request.getRequestDispatcher("mall/sAfterSupply.jsp");
 			rd.forward(request, response);
@@ -104,9 +99,6 @@ public class SupplyProc extends HttpServlet {
 		case "supplyAfterList":
 			LOG.trace("시작");
 			sDtoLists = sDao.searchByMonth();
-			totalProductPrice = 0;
-			for(SupplyDTO supply : sDtoLists) totalProductPrice += supply.getsTotalPrice();
-			request.setAttribute("supplyTotalPrice", totalProductPrice);
 			request.setAttribute("supplyList",sDtoLists);
 			rd = request.getRequestDispatcher("sAfterSupply.jsp");
 			rd.forward(request, response);

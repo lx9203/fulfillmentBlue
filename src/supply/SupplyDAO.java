@@ -28,10 +28,12 @@ public class SupplyDAO {
 
 	// 전체검색
 	// 상태가 0인 전체검색
-	public List<SupplyDTO> selectBeforeAll(String sCode) {
+	public List<SupplyDTO> selectBeforeAll() {
+		String today = curDate();
+		String yesterday = yesterDate();
 		String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState from supply as s "
-				+ "inner join product as p on p.pCode = s.sProductCode where s.sState = 0 and s.sCode like '" + sCode
-				+ "';";
+				+ "inner join product as p on p.pCode = s.sProductCode "
+				+ "where s.sState = 0 AND s.sDate < '" + today + "' and s.sDate >= '" + yesterday + "';";
 		List<SupplyDTO> supplyList = selectCondition(sql);
 		return supplyList;
 	}
@@ -61,6 +63,7 @@ public class SupplyDAO {
 				supply.setsQuantity(rs.getInt("sQuantity"));
 				supply.setsState(rs.getInt("sState"));
 				supply.setsTotalPrice(supply.getsQuantity() * supply.getsProductPrice());
+				LOG.trace(supply.getsTotalPrice()+"");
 				supplyList.add(supply);
 			}
 		} catch (Exception e) {
@@ -132,14 +135,14 @@ public class SupplyDAO {
 	// return searchList;
 	// }// 일별 리스트
 
-	// 월별 리스트
+	// 금월 리스트
 	public List<SupplyDTO> searchByMonth() {
 		String sql = "select s.sCode, p.pName, p.pPrice, s.sQuantity, s.sDate, s.sState from supply as s "
 				+ "inner join product as p on p.pCode=s.sProductCode where s.sDate >= '" + curMonth()
 				+ "-01' and s.sDate < '" + nextMonth() + "-01'";
 		List<SupplyDTO> searchList = searchCondition(sql);
 		return searchList;
-	}// 월별 리스트
+	}// 금월 리스트
 
 	// 월별 리스트
 	public List<SupplyDTO> searchByMonth(String Month) {
@@ -197,6 +200,12 @@ public class SupplyDAO {
 
 	public int searchStateByDay() {
 		String sql = "select sState from supply order by sCode limit 1;";
+		int state = selectOneCondition(sql);
+		return state;
+	}// 날짜로 sState 찾기
+	
+	public int count() {
+		String sql = "select count(*) from supply where sState = 1 and s.sDate >= '" + curMonth() + "-01' and s.sDate < '" + nextMonth() + "-01';";
 		int state = selectOneCondition(sql);
 		return state;
 	}// 날짜로 sState 찾기

@@ -89,7 +89,7 @@
 										<c:set var="supplyList" value="${requestScope.supplyList}" />
 										<c:forEach var="supply" items="${supplyList}">
 											<tr>
-												<td><a href="sRequestDetail.jsp">${supply.sCode}</a></td>
+												<td>${supply.sCode}</td>
 												<td>${supply.sProductName}</td>
 												<td>${supply.sQuantity}</td>
 												<td>${supply.sProductPrice }</td>
