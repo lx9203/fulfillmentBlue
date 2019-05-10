@@ -134,6 +134,15 @@
   <!-- 날짜검색기능 -->
   <script src="../js/jquery-ui.min.js"></script>
   <script src="../js/blue_company.js"></script>
+  
+  <script>
+$(document).ready(function(){
+  $('input[type="file"]').change(function(e){
+    var fileName = e.target.files[0].name;
+  $('.displayFileName').attr('value',fileName); // a에서 받아온 속성 값을 src라는 속성에 넣을 경우
+  })
+});
+</script>
 	
 </body>
 </html>
