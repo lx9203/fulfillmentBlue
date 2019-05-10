@@ -76,6 +76,7 @@ public class AdminProc extends HttpServlet {
 			
 			//3. 그래프 이번년도 월별 매출 총액
 			for(int m=1;m<13;m++) {
+				MonthTotalPrice = 0;
 				List<String> MonthInvoiceCodes = aDao.selectThisYear(m);
 				LOG.trace(m+"월 송장 수 : "+MonthInvoiceCodes.size()+"");
 				for(String invoiceCode : MonthInvoiceCodes) {
