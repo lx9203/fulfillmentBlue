@@ -16,7 +16,7 @@ import java.util.Optional;
 
 public class Test {
     public static void main(String[] args) {
-
+    	
     	
     /*	String shopping = "aMall";
     	String areaCode = "1area";
@@ -57,15 +57,15 @@ public class Test {
     	int num = Integer.parseInt(str);
     	System.out.println(num);
 		*/
-    	InvoiceDTO iDto = new InvoiceDTO();
+    	/*InvoiceDTO iDto = new InvoiceDTO();
     	InvoiceDAO iDao = new InvoiceDAO();
     	OrderDTO oDto = new OrderDTO();
     	OrderDAO oDao = new OrderDAO();
     	
     	
     	System.out.println(iCodeProc("amall","1area"));
-    	/*iDto = iDao.selectOneCode("a119050710001");
-    	System.out.println(iDto.toString());*/
+    	iDto = iDao.selectOneCode("a119050710001");
+    	System.out.println(iDto.toString());
         
 
     	 try {
@@ -116,7 +116,7 @@ public class Test {
 	        } 
 	        catch (IOException e) {
 	            e.printStackTrace();
-	        }
+	        }*/
 	        
     }
     
@@ -189,5 +189,12 @@ public class Test {
         
         return f.getDirectory()+f.getFile();
     }
+    
+    public String toYesterday(String date) {
+		LocalDate lastDay = LocalDate.parse(date);
+		lastDay = lastDay.minusDays(1);
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");	
+    	return lastDay.format(dateTimeFormatter);
+	}
  
 }

@@ -81,20 +81,6 @@ public class InvoiceProc extends HttpServlet {
 		//---------------------------------쇼핑몰 관련 Action ----------------------------------------------------------
 		
 		//[일별 배송목록] 날짜에서 일에 해당하는 부분을 가져와 해당 하루 리스트를 DTO로 받는다.
-		case "mallInvoiceListDay":
-			iDtoLists = iDao.mallSelectAllDay(userId.charAt(0)); //쇼핑몰의 코드를 통해 오늘 날짜의 송장 목록을 가져온다.
-			request.setAttribute("invoiceLists", iDtoLists);
-			rd = request.getRequestDispatcher("mInvoiceDayList.jsp"); //쇼핑몰 일별 리스트 화면으로 송장 리스트를 던져준다.
-			rd.forward(request, response);
-			break;
-		
-		//[월별 배송목록] 날짜에서 월에 해당하는 부분을 가져와 해당 월의 리스트를 DTO로 받는다.
-		case "mallInvoiceListMonth":
-			iDtoLists = iDao.mallSelectAllMonth(userId.charAt(0)); //쇼핑몰의 코드를 통해 이번 월의 송장목록을 가져온다.
-			request.setAttribute("invoiceLists", iDtoLists);
-			rd = request.getRequestDispatcher("mInvoiceMonthList.jsp"); //쇼핑몰 월별 리스트 화면으로 송장 리스트를 던져준다.
-			rd.forward(request, response);
-			break;
 			
 		
 		//[날짜 검색] 날짜를 선택해서 해당항는 부분의 하루 리스트를 DTO로 받는다.

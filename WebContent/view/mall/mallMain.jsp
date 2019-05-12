@@ -22,12 +22,12 @@
 <body id="page-top">
   <!-- Page Wrapper -->
   <div id="wrapper">
-    <%@ include file="m_navigator.jspf" %>
+    <%@ include file="_navigator.jspf" %>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
       <div id="content">
-        <%@ include file="common/_top.jspf" %>
+        <%@ include file="../common/_top.jspf" %>
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
@@ -45,7 +45,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">월간 총 매출액</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.monthTotalSales}원</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -61,8 +61,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">전년도 총 매출액</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.lastYearTotalSales}원</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -78,10 +78,10 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">이번년도 총 매출액</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${requestScope.thisYearTotalSales}원</div>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
@@ -104,8 +104,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">이번달 처리 송장 수</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.monthListCount}건</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -193,7 +193,7 @@
         <!-- /.container-fluid -->
       </div>
       <!-- End of Main Content -->
-      <%@ include file="common/_bottom.jspf" %>
+      <%@ include file="../common/_bottom.jspf" %>
     </div>
     <!-- End of Content Wrapper -->
   </div>
