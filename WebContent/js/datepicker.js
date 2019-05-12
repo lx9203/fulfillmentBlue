@@ -23,7 +23,7 @@ if(transSwitch == 'off') {
 	  $('.displayFileName').attr('value',fileName); // input text에 가져온 파일이름 표시
   });
 //-----------------------------------
-  
+
 $.datepicker.setDefaults({
     dateFormat: 'yy-mm-dd',
     prevText: '이전 달',
@@ -38,7 +38,6 @@ $.datepicker.setDefaults({
 	changeYear: true,
 	yearRange: "-5:+0",
 });
-
 
 $(function() {
     $("#datepicker1").datepicker(
