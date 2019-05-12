@@ -1,0 +1,42 @@
+﻿제품번호,제품명,개별 가격,재고수량,이미지 경로
+A101,삼겹살 500g,7000,100,../img/meatpork_belly.jpg
+A102,돼지갈비 1kg(찜용),13000,100,../img/meatpork_rib.jpg
+A103,돼지갈비 500g(구이용),10000,100,../img/meatpork_rib_steak.jpg
+A104,돼지등심 500g,5000,100,../img/meatpork_loin.jpg
+A105,립아이 300g,10000,100,../img/meatribeye.jpg
+A106,티본스테이크 300g,13000,100,../img/meatT-bone steak.jpg
+A107,토마호크 300g,15000,100,../img/meatTomahawk.jpg
+A108,찹스테이크 300g,13000,100,../img/meatchap_beef.jpg
+A109,스테이크용 부위 300g,10000,100,../img/meatbeef_steak.jpg
+A110,고베 스테이크용 부위 300g,15000,100,../img/meatgobe_beef.jpg
+A111,소고기 스테이크 set,20000,100,../img/meatbeef_set.jpg
+B101,소시지 10개,6000,100,../img/seafoodsausage.jpg
+B102,닭꼬치 10개,6000,100,../img/seafoodskewered_chicken.jpg
+B103,양꼬치 10개,10000,100,../img/seafoodskewered_lamb.jpg
+B104,돼지고기 꼬치 10개,8000,100,../img/seafoodskewered_pork.jpg
+B105,새우꼬치 10개,8000,100,../img/seafoodskewered_shrimp.jpg
+B106,야채꼬치 10개,5000,100,../img/seafoodskewered_vegetable.jpg
+B107,모듬꼬치 각 2개,8000,100,../img/seafoodskewered_set.jpg
+C101,연어 300g(스테이크용),7000,100,../img/BBQsalmon_steak.jpg
+C102,농어 300g(스테이크용),6000,100,../img/BBQbass.jpg
+C103,숭어 1마리(구이용),6000,100,../img/BBQsea_bream.jpg
+C104,굴 1kg(구이용),8000,100,../img/BBQoysters.jpg
+C105,홍합 1kg,5000,100,../img/BBQmussels.jpg
+C106,가리비 1kg,8000,100,../img/BBQscallop.jpg
+C107,새우 10마리,8000,100,../img/BBQshrimp.jpg
+C108,대개 1kg,20000,100,../img/BBQsnow_crab.jpg
+D101,아스파라거스 5개,3000,100,../img/vegetableasparagus.jpg
+D102,방울토마토 500g,5000,100,../img/vegetablecherry_tomato.jpg
+D103,가지 2개,2000,100,../img/vegetableeggplant.jpg
+D104,마늘 300g,3000,100,../img/vegetablegarlic.jpg
+D105,대파 1단,3000,100,../img/vegetablegreen_onion.jpg
+D106,양파 5개,4000,100,../img/vegetableonion.jpg
+D107,레몬 1개,500,100,../img/vegetablelemon.jpg
+D108,파프리카 2개,2000,100,../img/vegetablepaprika.jpg
+D109,양송이버섯 100g,2000,100,../img/vegetablewhite_mushroom.jpg
+E101,고추 100g,3000,100,../img/spicychili.jpg
+E102,시나몬가루 100g,3000,100,../img/spicycinnamon.jpg
+E103,월계수 잎 50g,3000,100,../img/spicylaurel.jpg
+E104,통후추 100g,3000,100,../img/spicypapper.jpg
+E105,로즈마리 50g,3000,100,../img/spicyrosemary.jpg
+E106,향신료 세트,5000,100,../img/spicyspices_set.jpg

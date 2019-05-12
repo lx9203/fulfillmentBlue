@@ -84,8 +84,9 @@ public class UserProc extends HttpServlet {
 				rd.forward(request, response);
 				break;
 			case 2:
+				LOG.trace("쇼핑몰 입장");
 				name = (String)session.getAttribute("userId");
-				rd = request.getRequestDispatcher("mallMain.jsp");
+				rd = request.getRequestDispatcher("MallProc?action=intoMain");
 				rd.forward(request, response);
 				break;
 			case 3:
