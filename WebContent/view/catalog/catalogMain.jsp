@@ -35,7 +35,8 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
 
-    <%@ include file="c_navigator.jspf" %>
+    <c:set value="catalog" var="navRecall"/>
+    <%@ include file="../common/_navigator.jspf" %>
 
       <!-- Content Wrapper -->
       <div id="content-wrapper" class="d-flex flex-column">

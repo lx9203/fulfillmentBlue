@@ -19,7 +19,8 @@
     <li class="nav-item">
       <a class="nav-link" href="">
         <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>운영현황</span></a>
+        <span>운영현황</span>
+      </a>
     </li>
 
     <hr class="sidebar-divider">
@@ -31,7 +32,8 @@
     <li class="nav-item">
       <a class="nav-link" href="admin/aStockList.jsp">
         <i class="fas fa-fw fa-table"></i>
-        <span>재고현황</span></a>
+        <span>재고현황</span>
+      </a>
     </li>
 
     <hr class="sidebar-divider d-none d-md-block">
@@ -43,29 +45,81 @@
     <li class="nav-item">
       <a class="nav-link" href="../admin/aMonthlySell.jsp">
         <i class="fas fa-fw fa-table"></i>
-        <span>판매내역</span></a>
+        <span>판매내역</span>
+      </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" href="aMonthlyTrans.jsp">
         <i class="fas fa-fw fa-table"></i>
-        <span>운송내역</span></a>
+        <span>운송내역</span>
+      </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" href="aMonthlySupply.jsp">
         <i class="fas fa-fw fa-table"></i>
-        <span>발주내역</span></a>
+        <span>발주내역</span>
+      </a>
     </li>
   </c:if>
-    <!--  ./관리자 영역 -->
+  <!--  ./관리자 영역 -->
+  
+  <!--  카탈로그 영역 -->
+  <c:if test="${navRecall == 'catalog'}">
+    <li class="nav-item">
+      <a class="nav-link" href="catalogMain.jsp">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>제품소개 메인페이지</span>
+      </a>
+    </li>
+  
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">
+      카테고리
+    </div>
+
+    <li class="nav-item">
+      <a class="nav-link" href="cCatalogList.jsp">
+        <i class="fas fa-fw fa-table"></i>
+        <span>상품종류1</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="tables.jsp">
+        <i class="fas fa-fw fa-table"></i>
+        <span>상품종류2</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="tables.jsp">
+        <i class="fas fa-fw fa-table"></i>
+        <span>상품종류3</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="tables.jsp">
+        <i class="fas fa-fw fa-table"></i>
+        <span>상품종류4</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="tables.jsp">
+        <i class="fas fa-fw fa-table"></i>
+        <span>상품종류5</span>
+      </a>
+    </li>
+  </c:if>
+  <!--  ./카탈로그 영역 -->
 
   <!-- 쇼핑몰 영역 -->
   <c:if test="${navRecall == 'mall'}">
     <li class="nav-item">
-      <a class="nav-link" href="mallMain.jsp">
+      <a class="nav-link" href="MallProc?action=intoMain">
         <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>쇼핑몰 메인페이지</span></a>
+        <span>쇼핑몰 메인페이지</span>
+      </a>
     </li>
 
     <hr class="sidebar-divider">
@@ -75,43 +129,39 @@
     </div>
 
     <li class="nav-item">
-      <a class="nav-link" href="InvoiceProc?action=mallInvoiceListDay">
+      <a class="nav-link" href="MallProc?action=mallInvoiceListDay">
         <i class="fas fa-fw fa-table"></i>
-        <span>일별 송장내역</span></a>
+        <span>일별 송장내역</span>
+      </a>
     </li>
-
+  
     <li class="nav-item">
-      <a class="nav-link" href="InvoiceProc?action=mallInvoiceListMonth">
+      <a class="nav-link" href="MallProc?action=mallInvoiceListMonth">
         <i class="fas fa-fw fa-table"></i>
-        <span>월별 송장내역</span></a>
+        <span>월별 송장내역</span>
+      </a>
     </li>
   </c:if>
   <!--  ./쇼핑몰 영역 -->
 
   <!--  운송사 영역 -->
   <c:if test="${navRecall == 'trans'}">
-    <li class="nav-item">
-      <a class="nav-link" href="transMain.jsp">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>운송사 메인페이지</span></a>
-    </li>
-
-    <hr class="sidebar-divider">
-
     <div class="sidebar-heading">
       내역조회
     </div>
 
     <li class="nav-item">
-      <a class="nav-link" href="InvoiceProc?action=transInvoiceListDay">
+      <a class="nav-link" href="TransProc?action=transInvoiceListDay">
         <i class="fas fa-fw fa-table"></i>
-        <span>일별 운송내역</span></a>
+        <span>일별 운송내역</span>
+      </a>
     </li>
-
+  
     <li class="nav-item">
-      <a class="nav-link" href="InvoiceProc?action=transInvoiceListMonth">
+      <a class="nav-link" href="TransProc?action=transInvoiceListMonth">
         <i class="fas fa-fw fa-table"></i>
-        <span>월별 운송내역</span></a>
+        <span>월별 운송내역</span>
+      </a>
     </li>
   </c:if>
   <!--  ./운송사 영역 -->
