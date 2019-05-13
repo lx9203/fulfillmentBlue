@@ -37,13 +37,13 @@
 		<div id="content-wrapper" class="d-flex flex-column">
 			<!-- Main Content -->
 			<div id="content">
-				<%@ include file="common/_top.jspf"%>
+				<%@ include file="../common/_top.jspf"%>
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-2 text-gray-800">미처리 수주내역</h1>
+						<h1 class="h3 mb-2 text-gray-800">수주내역</h1>
 						<form action="" class="form-horizontal d-sm-inline-block"
 							method="post">
 							<div class="form-group" style="margin-bottom: 0">
@@ -73,20 +73,22 @@
 									cellspacing="0">
 									<colgroup>
 										<col style="width: 10%">
-										<col style="width: 40%">
+										<col style="width: 35%">
+										<col style="width: 15%">
 										<col style="width: 10%">
 										<col style="width: 10%">
-										<col style="width: 15%">
-										<col style="width: 15%">
+										<col style="width: 10%">
+										<col style="width: 10%">
 									</colgroup>
 									<thead>
 										<tr>
 											<th>발주코드</th>
 											<th>제품명</th>
+											<th>날짜</th>
 											<th>제품수량</th>
 											<th>제품가격</th>
-											<th>총 가격</th>
-											<th>날짜</th>
+											<th>청구금액</th>
+											<th>상태</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -95,13 +97,25 @@
 											<tr>
 												<td>${supply.sCode}</td>
 												<td>${supply.sProductName}</td>
+												<td>${supply.sDate}</td>
 												<td>${supply.sQuantity}</td>
 												<td>${supply.sProductPrice }</td>
 												<td>${supply.sTotalPrice }</td>
-												<td>${supply.sDate}</td>
+												<td>${supply.sState}</td>
 											</tr>
 										</c:forEach>
 									</tbody>
+									<tfoot>
+										<tr>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th>총액</th>
+											<th>${requestScope.supplyTotalPrice}</th>
+											<th></th>
+										</tr>
+									</tfoot>
 								</table>
 							</div>
 						</div>
@@ -111,7 +125,7 @@
 				<!-- /.container-fluid -->
 			</div>
 			<!-- End of Main Content -->
-			<%@ include file="common/_bottom.jspf"%>
+			<%@ include file="../common/_bottom.jspf"%>
 		</div>
 		<!-- End of Content Wrapper -->
 	</div>

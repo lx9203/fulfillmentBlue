@@ -90,8 +90,10 @@ public class UserProc extends HttpServlet {
 				rd.forward(request, response);
 				break;
 			case 3:
+				LOG.trace("공급사 입장");
 				name = (String)session.getAttribute("userId");
-				rd = request.getRequestDispatcher("supplierMain.jsp");
+				LOG.trace(name);
+				rd = request.getRequestDispatcher("SupplyProc?action=intoMain");
 				rd.forward(request, response);
 				break;
 			case 0:

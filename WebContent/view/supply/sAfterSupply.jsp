@@ -40,7 +40,7 @@
 		<div id="content-wrapper" class="d-flex flex-column">
 			<!-- Main Content -->
 			<div id="content">
-				<%@ include file="common/_top.jspf"%>
+				<%@ include file="../common/_top.jspf"%>
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 					<!-- Page Heading -->
@@ -84,7 +84,7 @@
 											<th>제품명</th>
 											<th>제품수량</th>
 											<th>제품가격</th>
-											<th>총 가격</th>
+											<th>청구금액</th>
 											<th>날짜</th>
 										</tr>
 									</thead>
@@ -110,7 +110,7 @@
 				<!-- /.container-fluid -->
 			</div>
 			<!-- End of Main Content -->
-			<%@ include file="common/_bottom.jspf"%>
+			<%@ include file="../common/_bottom.jspf"%>
 		</div>
 		<!-- End of Content Wrapper -->
 	</div>

@@ -1,5 +1,6 @@
 package function;
 
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,11 +12,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import invoice.InvoiceDAO;
+import supply.*;
 
 public class CustomerFunction {
 	private static final Logger LOG = LoggerFactory.getLogger(CustomerFunction.class);
 	
-	//지역코드 변환 함수 - 송장 등록 관련
+	// (invoice) 지역코드 변환 함수 - 송장 등록 관련
 	public static String iAreaCode(String Address) {
     	String area = new String();
     	String strAd = Address.substring(0,2);
@@ -49,7 +51,7 @@ public class CustomerFunction {
     	return area;
     }
 
-	//송장번호 생성 함수 - 송장 등록 관련
+	//(invoice) 송장번호 생성 함수 - 송장 등록 관련
 	public static String iCodeProc(String shopping, String areaCode) {
     	InvoiceDAO iDao = new InvoiceDAO();
 		char shoppingCode = shopping.charAt(0);
@@ -70,10 +72,40 @@ public class CustomerFunction {
     	
 		return Character.toString(shoppingCode)+Character.toString(area)+sdf.format(curDate)+increment;
 	}
+	
+	// (supply) 발주코드(sCode) 생성 함수 { 공급사구분+날짜+자동(3) }
+		public static String sCodeCreate(String pCode) {
+			// 변수
+			SupplyDAO sDao = new SupplyDAO();
+			int count = 0;
+			String supplier = "";
+			// 날짜
+			Date curDate = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+			String date = sdf.format(curDate);
+			
+			// 공급자 구분
+			char supplierCode = pCode.charAt(0);
+			supplier = Character.toString(supplierCode);
+			// 자동(3)
+			int OneOrZero = sDao.searchState(supplier); // sState 검색후 state가 0인것이
+			if (OneOrZero != 0) { // 없으면
+				count = 101; // 101번부터 시작
+			} else { // state가 0인것이 있으면
+				count = Integer.parseInt(sDao.searchsCodeBySupplier(supplier).substring(7)) + 1; // count = 이미 있는 sCode의
+																									// 마지막번호 +1로 시작
+			}
+
+			String sCode = supplier + date + count;
+			return sCode;
+		}
+		
+
+		
 //----------------------------------- 시간 관련 함수 ----------------------------------------------------
 //------------------------------- 01. 현재 시간 관련 함수 ------------------------------------------------
 	
-	//현재 시간 구하는 함수
+	//현재 시간을 구하는 함수
 	public String curTime() {
 		LocalDateTime curTime = LocalDateTime.now();
     	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");	
@@ -86,13 +118,13 @@ public class CustomerFunction {
     	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");	
     	return curTime.format(dateTimeFormatter);
 	}
-	//현재 날짜를 구하는 함수
+	//현재 달을 구하는 함수
 	public String curMonth() {
 		LocalDateTime curTime = LocalDateTime.now();
     	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");	
     	return curTime.format(dateTimeFormatter);
 	}
-	//현재 날짜를 구하는 함수
+	//현재 년도를 구하는 함수
 	public String curYear() {
 		LocalDateTime curTime = LocalDateTime.now();
     	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy");	
