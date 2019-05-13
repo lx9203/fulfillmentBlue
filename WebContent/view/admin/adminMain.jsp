@@ -280,3 +280,4 @@
   <script src="../js/demo/chart-pie-demo.js"></script>
 </body>
 </html>
+<%@ include file="../common/_messageModal.jspf" %>

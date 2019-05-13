@@ -128,9 +128,10 @@
   <!-- Custom scripts for class=view-radio-group -->
   <script src="../js/bluecompany.js"></script>
 
-  
- <!-- Modal Control -->
-  <c:set var="msgState" value="${requestScope.msgState}"/>
+</body>
+</html>
+<c:set var="msgState" value="${requestScope.msgState}"/>
+<c:set var="msgState" value="true"/>
 	<c:if test="${msgState==true}" var="result">
 		<script>
 			$(function() {
@@ -138,11 +139,6 @@
 			});
 		</script>
 	</c:if>
-  
-  
-</body>
-</html>
-
 <!-- Logout Modal-->
 <div class="modal fade" id="resigterError" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

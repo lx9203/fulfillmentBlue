@@ -115,8 +115,9 @@
  
   <!-- 날짜검색기능 -->
   <script src="../js/jquery-ui.min.js"></script>
-  <script src="../js/blue_company.js"></script>
+  <script src="../js/monthpicker.js"></script>
   <script src="../js/jquery.mtz.monthpicker.js"></script>
   
 </body>
 </html>
+<%@ include file="../common/_messageModal.jspf" %>

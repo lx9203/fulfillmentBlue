@@ -49,16 +49,8 @@
 	font-weight: 500;
 	line-height: 1.5;
 }
-
 /*-- end of 'input type=file' custom style-- */
-/*--
-.ui-datepicker-prev {
-	background-image: url(img/arrow-alt-circle-left-solid.svg);
-    background-size: 60%;
-    background-repeat: no-repeat;
-    background-position: center;
-}
--- */
+
 
 .ui-datepicker-prev span {
     background-image: url(img/arrow-alt-circle-left-solid.svg) !important;

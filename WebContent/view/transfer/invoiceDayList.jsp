@@ -22,6 +22,7 @@
   <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   
   <link href="../css/jquery-ui.min.css" rel="stylesheet">
+  <link href="../css/bluecompany.css" rel="stylesheet">
 </head>
 <body id="page-top">
   <!-- Page Wrapper -->
@@ -123,7 +124,9 @@
   
   <!-- 날짜검색기능 -->
   <script src="../js/jquery-ui.min.js"></script>
-  <script src="../js/blue_company.js"></script>
+  <script src="../js/datepicker.js"></script>
 	
 </body>
 </html>
+
+<%@ include file="../common/_messageModal.jspf" %>

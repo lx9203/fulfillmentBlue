@@ -119,3 +119,5 @@
   <script src="../js/demo/datatables-demo.js"></script>
 </body>
 </html>
+
+<%@ include file="../common/_messageModal.jspf" %>
