@@ -17,6 +17,16 @@
 
   <!-- Custom styles for this template-->
   <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+  
+  <style>
+  .hover-fadeout {
+    height: 16rem;
+    background-image: url(../../img/meat/meat_main.jpg);
+    background-position: center center;
+    background-size: cover;
+    border-radius: .35rem
+  }
+  </style>
 
 </head>
 
@@ -126,12 +136,29 @@
                 </div>
               </div>
             </div>
-
           </div>
 
+		  <!-- test Row 1-->
+          <div class="row">
+			<!-- 이미지 위에 글씨 올라갈수 있도록 바꾸기  -->
+            <div class="col-lg-4 mb-4">
+              <!-- Illustrations -->
+              <div class="card shadow mb-4 fade-item center" id="meet" style="height:16rem; position:unset"> <!-- 형상 틀 -->
+                <article style="height:0">
+                  <div class="hover-fadeout" style="position: relative;"></div>
+                  <div class="hover-fadein" style="position: absolute; left:0px; top:0px;">
+                    <h3>Title</h3>
+                    <p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+                    <ul class="">
+                      <li><input type="button">Details</span></li>
+                    </ul>
+			      </div>
+                </article>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- /.container-fluid -->
-
       </div>
       <!-- End of Main Content -->
 
@@ -152,7 +179,20 @@
 
   <!-- Custom scripts for all pages-->
   <script src="../../js/sb-admin-2.min.js"></script>
-
+ 
+  <script>
+  $('.hover-fadein').hide();
+  $('.fade-item').hover(
+	function(){
+		$('.hover-fadeout').stop().fadeOut();
+		$('.hover-fadein').stop().fadeIn();
+	},
+		
+	function(){
+		$('.hover-fadein').stop().fadeOut();
+		$('.hover-fadeout').stop().fadeIn()
+	}
+  );
+  </script>
 </body>
-
 </html>
