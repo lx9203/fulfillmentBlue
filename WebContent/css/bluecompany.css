@@ -1,4 +1,4 @@
-.blue-login {
+.blue-login, .blue-register {
     background-image: url('http://www.klnews.co.kr/news/photo/201901/118631_26829_537.jpg');
     background-size: cover;
 }
@@ -51,12 +51,21 @@
 }
 
 /*-- end of 'input type=file' custom style-- */
-
+/*--
 .ui-datepicker-prev {
-	background-image: url(../css/img/arrow-alt-circle-left-solid.svg);
+	background-image: url(img/arrow-alt-circle-left-solid.svg);
     background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
 }
+-- */
 
+.ui-datepicker-prev span {
+    background-image: url(img/arrow-alt-circle-left-solid.svg) !important;
+        background-position: 0px 0px !important;
+}
 
+.ui-datepicker-next span {
+    background-image: url(img/arrow-alt-circle-right-solid.svg) !important;
+        background-position: 0px 0px !important;
+}
