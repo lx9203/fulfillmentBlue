@@ -81,11 +81,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">이번년도 총 지불액</div>
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><fmt:formatNumber value="${requestScope.thisYearTotalSales}" pattern="#,##0"/>원</div>
-                        </div>
-                      </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${requestScope.thisYearTotalSales}" pattern="#,##0"/>원</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>

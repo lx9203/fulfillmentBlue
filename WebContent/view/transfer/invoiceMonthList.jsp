@@ -26,21 +26,21 @@
 <body id="page-top">
   <!-- Page Wrapper -->
   <div id="wrapper">
-    <%@ include file="t_navigator.jspf" %>
+    <%@ include file="_navigator.jspf" %>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
       <div id="content">
-        <%@ include file="common/_top.jspf" %>
+        <%@ include file="../common/_top.jspf" %>
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-2 text-gray-800">월별 운송내역</h1>
-            <form action="" class="form-horizontal d-sm-inline-block" method="post">
+            <form action="TransProc?action=transSearchMonthList" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
-			      <input type="text" name="monthCustomer" id="monthpicker" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
+			      <input type="text" name="month" id="monthpicker" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
 			      <input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
 			    </label>
 			  </div>
@@ -91,7 +91,7 @@
         <!-- /.container-fluid -->
       </div>
       <!-- End of Main Content -->
-      <%@ include file="common/_bottom.jspf" %>
+      <%@ include file="../common/_bottom.jspf" %>
     </div>
     <!-- End of Content Wrapper -->
   </div>

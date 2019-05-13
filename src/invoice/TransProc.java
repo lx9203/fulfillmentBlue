@@ -19,7 +19,7 @@ import function.CustomerFunction;
 import product.ProductDAO;
 import product.ProductDTO;
 
-@WebServlet("/transProc")
+@WebServlet("/view/TransProc")
 public class TransProc extends HttpServlet {
 	private static final Logger LOG = LoggerFactory.getLogger(TransProc.class);
 	private static final long serialVersionUID = 1L;
