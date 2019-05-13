@@ -125,7 +125,7 @@ public class SupplyProc extends HttpServlet {
 		char supplierCode = pCode.charAt(0);
 		supplier = Character.toString(supplierCode);
 		// 자동(3)
-		int OneOrZero = sDao.searchStateByDay(); // 날짜로 sState 검색후 state가 0인것이
+		int OneOrZero = sDao.searchState(supplier); // sState 검색후 state가 0인것이
 		if (OneOrZero != 0) { // 없으면
 			count = 101; // 101번부터 시작
 		} else { // state가 0인것이 있으면
