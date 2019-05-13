@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<c:if test="${msgState==true}" var="result">
+  <script>
+    $(function() {
+	  $('#alertModal').modal('show');
+    });
+  </script>
+</c:if>    
+    
+<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">Login Error!!</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">${requestScope.message}</div>
+      <div class="modal-footer">
+      
+        <!-- 경우마다 이동할 경로 수신필요 -->
+        <a class="btn btn-primary" href="login.jsp">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>
