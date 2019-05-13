@@ -75,10 +75,16 @@ public class InvoiceDTO {
 	}
 
 	public void setiState(int iState) {
-		if(iState == 1) {
-			this.iState = "출고 완료";			
-		} else {
+		switch(iState) {
+		case 2:
+			this.iState = "출고 완료";
+			break;
+		case 1:
+			this.iState = "출고 처리중";
+			break;
+		case 0:
 			this.iState = "출고 준비중";
+			break;
 		}
 	}
 
