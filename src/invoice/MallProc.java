@@ -18,10 +18,6 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import admin.AdminDTO;
-import product.ProductDAO;
-import product.ProductDTO;
 import function.CustomerFunction;
 
 @WebServlet("/view/MallProc")
@@ -46,8 +42,6 @@ public class MallProc extends HttpServlet {
 		RequestDispatcher rd;
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
-		String message = new String();
-		String url = new String();
 		CustomerFunction cf = new CustomerFunction();
 		
 		//DTO,DAO 관련 변수
@@ -57,19 +51,15 @@ public class MallProc extends HttpServlet {
 		List<InvoiceDTO> iDtoLists = new ArrayList<InvoiceDTO>();
     	OrderDTO oDto = new OrderDTO();
     	List<OrderDTO> oDtoLists = new ArrayList<OrderDTO>();
-    	ProductDAO pDao = new ProductDAO();
-    	ProductDTO pDto = new ProductDTO();
     	
     	//session 변수
     	String userId = (String)session.getAttribute("userId");
     	LOG.trace("[쇼핑몰 Proc] 사용자 ID : " + userId);
 		
     	//일반 변수
-    	String now = cf.curTime(); //현재 날짜와 시간을 받는 변수
-    	int curTime = 0; //현재 시간을 정수로 받는 변수
     	String iCode = new String(); //송장번호를 받는 변수
-    	int count = 0; //카운트가 필요할 때 사용
     	String date = new String();
+    	String month = new String();
     	int monthTotalSales = 0; //1. 이번달 매출액을 저장
     	int lastYearTotalSales = 0; //2. 작년도 매출액을 저장
     	int thisYearTotalSales = 0; //3. 이번년도 매출액을 저장
@@ -144,7 +134,7 @@ public class MallProc extends HttpServlet {
 		//2. [월별 배송목록] 날짜에서 월에 해당하는 부분을 가져와 해당 월의 리스트를 DTO로 받는다.
 		case "mallInvoiceListMonth":
 			LOG.trace("[쇼핑몰 Proc] 월별 배송 목록");
-			iDtoLists = iDao.mallSearchAllMonth(userId.charAt(0),cf.curDate());
+			iDtoLists = iDao.mallSearchAllMonth(userId.charAt(0),cf.curMonth());
 			request.setAttribute("invoiceLists", iDtoLists);
 			rd = request.getRequestDispatcher("mall/invoiceMonthList.jsp"); //쇼핑몰 월별 리스트 화면으로 송장 리스트를 던져준다.
 			rd.forward(request, response);
@@ -163,12 +153,13 @@ public class MallProc extends HttpServlet {
 			break;
 			
 		case "mallSearchMonthList":
-			date = request.getParameter("Month"); //페이지로부터 선택한 날짜를 가져온다.
-			LOG.trace("[쇼핑몰 Proc] 선택한 달 : "+date);
-			iDtoLists = iDao.mallSearchAllDay(userId.charAt(0), date); //쇼핑몰의 코드와 날짜를 통해 이번 월의 송장목록을 가져온다.
-			request.setAttribute("selectDate", date); //날짜를 표시하기위해 다시 던져준다.
+			LOG.trace("[쇼핑몰 Proc] 월별 배송 목록 검색");
+			month = request.getParameter("month"); //페이지로부터 선택한 날짜를 가져온다.
+			LOG.trace("[쇼핑몰 Proc] 선택한 달 : "+ month);
+			iDtoLists = iDao.mallSearchAllMonth(userId.charAt(0), month); //쇼핑몰의 코드와 날짜를 통해 이번 월의 송장목록을 가져온다.
+			request.setAttribute("selectDate", month); //날짜를 표시하기위해 다시 던져준다.
 			request.setAttribute("invoiceLists", iDtoLists);
-			rd = request.getRequestDispatcher("mall/invoiceDayList.jsp"); //쇼핑몰의 하루 리스트 화면으로 송장 리스트를 던져준다.
+			rd = request.getRequestDispatcher("mall/invoiceMonthList.jsp"); //쇼핑몰의 하루 리스트 화면으로 송장 리스트를 던져준다.
 			rd.forward(request, response);
 			break;
 			
@@ -198,7 +189,7 @@ public class MallProc extends HttpServlet {
 	        	LOG.trace("[쇼핑몰 Proc] 송장 처리 시작");
 	            // csv 데이터 파일
 	        	LOG.trace("파일 이름 : " + request.getParameter("fileName1") );
-	        	String csvFile ="D:\\Gamja file\\fulfillmentBlue\\file\\CSV\\"+ request.getParameter("fileName1") ;
+	        	String csvFile ="C://temp//"+ request.getParameter("fileName1") ;
 	            File csv = new File(csvFile);
 	            BufferedReader br = new BufferedReader(new FileReader(csv));
 	            String line = "";
@@ -228,7 +219,7 @@ public class MallProc extends HttpServlet {
 	                
 	                //제품번호, 송장번호, 제품수량을 DTO에 넣는다.
 	                try {
-						oDto = new OrderDTO(token[3],customer[0],Integer.parseInt(token[5]));
+						oDto = new OrderDTO(token[3],customer[0],Integer.parseInt(token[4]));
 					} catch (NumberFormatException e) {
 						e.printStackTrace();
 					}
@@ -246,6 +237,8 @@ public class MallProc extends HttpServlet {
 	        catch (IOException e) {
 	            e.printStackTrace();
 	        }
+	        rd = request.getRequestDispatcher("MallProc?action=mallInvoiceListDay");
+			rd.forward(request, response);
 			break;		
 		default:
 			break;

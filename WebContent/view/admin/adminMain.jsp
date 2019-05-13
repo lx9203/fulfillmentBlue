@@ -275,7 +275,7 @@
   <script src="../vendor/chart.js/Chart.min.js"></script>
 
   <!-- Page level custom scripts -->
+  <%@ include file="_chart.jspf" %>
   <script src="../js/demo/chart-pie-demo.js"></script>
-  <%@ include file="a_Test.jspf" %>
 </body>
 </html>
