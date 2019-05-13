@@ -198,8 +198,8 @@ public class SupplyDAO {
 		return state;
 	}
 
-	public int searchStateByDay() {
-		String sql = "select sState from supply order by sCode limit 1;";
+	public int searchState(String pCode) {
+		String sql = "select sState from supply where sProductCode like '"+ pCode +"%' order by sCode desc limit 1;";
 		int state = selectOneCondition(sql);
 		return state;
 	}// 날짜로 sState 찾기
