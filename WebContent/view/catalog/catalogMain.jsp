@@ -26,6 +26,14 @@
     background-size: cover;
     border-radius: .35rem
   }
+  
+  .hover-fadeout:hover > .hover-fadeout {
+	opacity:0.5;
+  }
+  
+  .hover-fadeout:hover > .hover-fadein {
+	opacity:1;
+  }
   </style>
 
 </head>
@@ -157,6 +165,22 @@
                 </article>
               </div>
             </div>
+            
+              <div class="col-lg-4 mb-4">
+              <!-- Illustrations -->
+              <div class="card shadow mb-4 fade-item center" id="meet" style="height:16rem; position:unset"> <!-- 형상 틀 -->
+                <article style="height:0">
+                  <div class="hover-fadeout" style="position: relative;"></div>
+                  <div class="hover-fadein" style="position: absolute; left:0px; top:0px;">
+                    <h3>Title</h3>
+                    <p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+                    <ul class="">
+                      <li><input type="button">Details</span></li>
+                    </ul>
+			      </div>
+                </article>
+              </div>
+            </div>
           </div>
         </div>
         <!-- /.container-fluid -->
@@ -182,18 +206,19 @@
   <script src="../../js/sb-admin-2.min.js"></script>
  
   <script>
-  $('.hover-fadein').hide();
-  $('.fade-item').hover(
-	function(){
-		$('.hover-fadeout').stop().fadeOut();
-		$('.hover-fadein').stop().fadeIn();
-	},
-		
-	function(){
-		$('.hover-fadein').stop().fadeOut();
-		$('.hover-fadeout').stop().fadeIn()
-	}
-  );
+  $(document).ready(function(e) {
+	  $('.hover-fadein').hide();
+	  $('.fade-item').hover(
+		function(){
+			$('.hover-fadeout').stop().fadeOut();
+			$('.hover-fadein').stop().fadeIn();
+		},
+			
+		function(){
+			$('.hover-fadein').stop().fadeOut();
+			$('.hover-fadeout').stop().fadeIn()
+		}
+  )});
   </script>
 </body>
 </html>
