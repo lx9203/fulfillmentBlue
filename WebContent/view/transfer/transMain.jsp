@@ -23,7 +23,8 @@
 <body id="page-top">
   <!-- Page Wrapper -->
   <div id="wrapper">
-    <%@ include file="_navigator.jspf" %>
+    <c:set value="trans" var="navRecall"/>
+    <%@ include file="../common/_navigator.jspf" %>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
