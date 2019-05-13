@@ -75,12 +75,10 @@ public class UserProc extends HttpServlet {
 			
 			switch(userType) {
 			case 1:
+				LOG.trace("운송사 입장");
 				ProductDAO pDao = new ProductDAO();
 				List<ProductDTO> productList = pDao.selectAll();
-				
-				request.setAttribute("productList",productList);
-				LOG.trace(productList.toString());
-				rd = request.getRequestDispatcher("transMain.jsp");
+				rd = request.getRequestDispatcher("TransProc?action=intoMain");
 				rd.forward(request, response);
 				break;
 			case 2:
