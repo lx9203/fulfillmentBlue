@@ -26,14 +26,6 @@
     background-size: cover;
     border-radius: .35rem
   }
-  
-  .hover-fadeout:hover > .hover-fadeout {
-	opacity:0.5;
-  }
-  
-  .hover-fadeout:hover > .hover-fadein {
-	opacity:1;
-  }
   </style>
 
 </head>
@@ -219,6 +211,17 @@
 			$('.hover-fadeout').stop().fadeIn()
 		}
   )});
+  
+//   $(document).ready(function() {
+// 		$('.hover-fadein').hide();
+// 	    $('.fade-item').on('mouseover', function(){
+// 	        $(this).find('a').addClass('hover');
+// 	        $(this).find('ul.sub-list').show();
+// 	    }).on('mouseout',function(){
+// 	        $(this).find('a').removeClass('hover');
+// 	        $(this).find('ul.sub-list').hide();
+// 	    });
+// 	});
   </script>
 </body>
 </html>
