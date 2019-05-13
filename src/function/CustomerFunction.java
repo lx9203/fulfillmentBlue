@@ -28,6 +28,7 @@ public class CustomerFunction {
     	case "대전":
     	case "충청":
     	case "강원":
+    	case "세종":
     		area = "2area";
     		break;
     	case "광주":
