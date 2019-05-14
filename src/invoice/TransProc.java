@@ -16,8 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import function.CustomerFunction;
-import product.ProductDAO;
-import product.ProductDTO;
+import product.*;
+import supply.*;
 
 @WebServlet("/view/TransProc")
 public class TransProc extends HttpServlet {
@@ -43,7 +43,6 @@ public class TransProc extends HttpServlet {
 			HttpSession session = request.getSession();
 			String action = request.getParameter("action");
 			String message = new String();
-			String url = new String();
 			CustomerFunction cf = new CustomerFunction();
 			
 			//DTO,DAO 관련 변수
@@ -51,10 +50,10 @@ public class TransProc extends HttpServlet {
 			OrderDAO oDao = new OrderDAO();
 			InvoiceDTO iDto = new InvoiceDTO();
 			List<InvoiceDTO> iDtoLists = new ArrayList<InvoiceDTO>();
-	    	OrderDTO oDto = new OrderDTO();
 	    	List<OrderDTO> oDtoLists = new ArrayList<OrderDTO>();
 	    	ProductDAO pDao = new ProductDAO();
 	    	ProductDTO pDto = new ProductDTO();
+	    	SupplyDAO sDao = new SupplyDAO();
 	    	
 	    	//session 변수
 	    	String userId = (String)session.getAttribute("userId");
@@ -93,7 +92,7 @@ public class TransProc extends HttpServlet {
 				//3.이번년도 월별 지불 액수
 				for(int m=1;m<13;m++) {
 					monthTotalPrice = 0;
-					iDtoLists = iDao.mallSalesCurYearMonth(userId.charAt(0),m);
+					iDtoLists = iDao.transSalesCurYearMonth(userId,m);
 					LOG.trace("[운송사 Proc]"+m+"월 송장 수 : "+iDtoLists.size()+"");
 		    		monthTotalPrice = iDtoLists.size()*10000;
 					monthTotalSalesList.add(monthTotalPrice); //월별 총액을 리스트로 저장
@@ -115,7 +114,7 @@ public class TransProc extends HttpServlet {
 	    		LOG.trace("[운송사 Proc] 일별 배송 목록");
 				iDtoLists = iDao.transSearchAllDay(userId,cf.curDate()); //쇼핑몰의 코드를 통해 오늘 날짜의 송장 목록을 가져온다.
 				request.setAttribute("invoiceLists", iDtoLists);
-				rd = request.getRequestDispatcher("trans/invoiceDayList.jsp"); //쇼핑몰 일별 리스트 화면으로 송장 리스트를 던져준다.
+				rd = request.getRequestDispatcher("transfer/invoiceDayList.jsp"); //쇼핑몰 일별 리스트 화면으로 송장 리스트를 던져준다.
 				rd.forward(request, response);
 				break;
 				
@@ -124,7 +123,7 @@ public class TransProc extends HttpServlet {
 	    		LOG.trace("[운송사 Proc] 월별 배송 목록");
 				iDtoLists = iDao.transSearchAllMonth(userId,cf.curMonth()); //쇼핑몰의 코드를 통해 오늘 날짜의 송장 목록을 가져온다.
 				request.setAttribute("invoiceLists", iDtoLists);
-				rd = request.getRequestDispatcher("trans/invoiceMonthList.jsp"); //쇼핑몰 일별 리스트 화면으로 송장 리스트를 던져준다.
+				rd = request.getRequestDispatcher("transfer/invoiceMonthList.jsp"); //쇼핑몰 일별 리스트 화면으로 송장 리스트를 던져준다.
 				rd.forward(request, response);
 				break;
 				
@@ -135,18 +134,18 @@ public class TransProc extends HttpServlet {
 				iDtoLists = iDao.transSearchAllDay(userId, date); //쇼핑몰의 코드와 날짜를 통해 이번 월의 송장목록을 가져온다.
 				request.setAttribute("selectDate", date); //날짜를 표시하기위해 다시 던져준다.
 				request.setAttribute("invoiceLists", iDtoLists);
-				rd = request.getRequestDispatcher("trans/invoiceDayList.jsp"); //쇼핑몰의 하루 리스트 화면으로 송장 리스트를 던져준다.
+				rd = request.getRequestDispatcher("transfer/invoiceDayList.jsp"); //쇼핑몰의 하루 리스트 화면으로 송장 리스트를 던져준다.
 				rd.forward(request, response);
 				break;
 				
-			case "mallSearchMonthList":
+			case "transSearchMonthList":
 				LOG.trace("[운송사 Proc] 월별 배송 목록 검색");
 				month = request.getParameter("month"); //페이지로부터 선택한 날짜를 가져온다.
 				LOG.trace("[운송사 Proc] 선택한 달 : "+ month);
 				iDtoLists = iDao.transSearchAllMonth(userId, month); //쇼핑몰의 코드와 날짜를 통해 이번 월의 송장목록을 가져온다.
 				request.setAttribute("selectDate", month); //날짜를 표시하기위해 다시 던져준다.
 				request.setAttribute("invoiceLists", iDtoLists);
-				rd = request.getRequestDispatcher("trans/invoiceMonthList.jsp"); //쇼핑몰의 하루 리스트 화면으로 송장 리스트를 던져준다.
+				rd = request.getRequestDispatcher("transfer/invoiceMonthList.jsp"); //쇼핑몰의 하루 리스트 화면으로 송장 리스트를 던져준다.
 				rd.forward(request, response);
 				break;
 				
@@ -166,11 +165,12 @@ public class TransProc extends HttpServlet {
 				request.setAttribute("invoiceTotalPrice", totalProductPrice);
 				request.setAttribute("invoice", iDto);
 				request.setAttribute("orderLists", oDtoLists);
-				rd = request.getRequestDispatcher("mall/invoiceDetailList.jsp");
+				rd = request.getRequestDispatcher("transfer/invoiceDetailList.jsp");
 				rd.forward(request, response);
 				
 				break;
 			case "forwarding": //물건 출고 case
+				LOG.trace("출고 시작");
 				boolean available = true;
 				int count = 0;
 				//1.현재 시간을 확인 한다.
@@ -178,7 +178,6 @@ public class TransProc extends HttpServlet {
 					String curTime = cf.curTime();
 					curHour = Integer.parseInt(curTime.substring(11,13));
 				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -198,7 +197,7 @@ public class TransProc extends HttpServlet {
 					for(OrderDTO order : oDtoLists) { // 1. 출고 가능 여부를 먼저 검사한다.
 						//재고의 개수가 적으면 해당 송장의 모든 물건을 출고 하지 않는다. 동시에 공급처로 물품을 요청한다.
 						if(order.getoQuantity() >order.getpQuantity()) { 
-		//물풀 요청이 들어가야하는 자리!!
+							sDao.insertSupply(order.getoProductCode());
 							available = false;
 							break;
 						}
@@ -209,18 +208,17 @@ public class TransProc extends HttpServlet {
 							pDto = new ProductDTO(order.getoProductCode(), afterRelease);
 							pDao.updateQuantity(pDto); //출고
 							if(afterRelease < 10) { //출고 후, 남은 재고가 10개 이하면 출고 신청을 한다.
-		//물풀 요청이 들어가야하는 자리!!	
+								sDao.insertSupply(order.getoProductCode());
 							}
 						}
 						iDao.requestState(invoice.getiCode());//해당 송장을 출고 처리상태로 변경한다.
 						count ++;
 					}
 				}
-				message = "총 "+count+"건의 출고 처리가 완료되었습니다.";
-				url = "register.html";
+				message = "총"+count+" 건의 출고 처리가 완료되었습니다.";
 				request.setAttribute("message", message);
-				request.setAttribute("url", url);
-				rd = request.getRequestDispatcher("alertMsg.jsp");
+				request.setAttribute("msgState", true);
+				rd = request.getRequestDispatcher("TransProc?action=transInvoiceListDay");
 				rd.forward(request, response);
 				break;
 	    	}

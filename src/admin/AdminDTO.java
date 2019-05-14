@@ -3,6 +3,9 @@ package admin;
 public class AdminDTO {
 	private String iCode;
 	private String pCode;
+	private String iDate;
+	private String uName;
+	private int iTotalPrice;
 	private int oQuantity;
 	private int pPrice;
 	
@@ -45,6 +48,30 @@ public class AdminDTO {
 
 	public void setpPrice(int pPrice) {
 		this.pPrice = pPrice;
+	}
+
+	public String getiDate() {
+		return iDate;
+	}
+
+	public void setiDate(String iDate) {
+		this.iDate = iDate;
+	}
+
+	public String getuName() {
+		return uName;
+	}
+
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
+
+	public int getiTotalPrice() {
+		return iTotalPrice;
+	}
+
+	public void setiTotalPrice(int iTotalPrice) {
+		this.iTotalPrice = iTotalPrice;
 	}
 	
 	

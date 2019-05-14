@@ -5,11 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -159,7 +157,6 @@ public class InvoiceDAO {
 		return invoiceList;
 	}
 	
-	
 	//--------------------------------송장 매출 처리 메소드----------------------
 	
 	// ------------------------------1. 쇼핑몰 지불액 처리---------------------------------
@@ -285,7 +282,7 @@ public class InvoiceDAO {
 				invoice.setiName(rs.getString("iName"));
 				invoice.setiTel(rs.getString("iTel"));
 				invoice.setiAddress(rs.getString("iAddress"));
-				invoice.setiDate(rs.getString("iDate"));
+				invoice.setiDate(rs.getString("iDate").substring(0, 10));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,6 +50,7 @@ public class OrderDAO {
 				se.printStackTrace();
 			}
 		}
+		LOG.trace("제품 출고 신청 완료");
 	}
 	
 	//-------------------------------송장을 통해 주문 물건의 개수와 해당 물건의 재고량을 가져온다.

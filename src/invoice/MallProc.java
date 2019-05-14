@@ -43,6 +43,7 @@ public class MallProc extends HttpServlet {
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
 		CustomerFunction cf = new CustomerFunction();
+		String message = new String();
 		
 		//DTO,DAO 관련 변수
 		InvoiceDAO iDao = new InvoiceDAO();
@@ -185,6 +186,7 @@ public class MallProc extends HttpServlet {
 			break;
 			
 		case "readCSV": //송장CSV파일 받기 case	
+			int count = 0;
 	        try {
 	        	LOG.trace("[쇼핑몰 Proc] 송장 처리 시작");
 	            // csv 데이터 파일
@@ -214,7 +216,7 @@ public class MallProc extends HttpServlet {
 	                	//송장번호 이름 전화번호 주소 지역코드를 DB에 넣는다.
 	                	//날짜와 배송 상태는 DAO에서 처리한다.
 	                	iDao.insertInvoice(iDto);
-	                	
+	                	count++;              	
 	                }   
 	                
 	                //제품번호, 송장번호, 제품수량을 DTO에 넣는다.
@@ -237,6 +239,9 @@ public class MallProc extends HttpServlet {
 	        catch (IOException e) {
 	            e.printStackTrace();
 	        }
+	        message = "총 " +count+"건의 송장 처리를 신청하셨습니다.";
+			request.setAttribute("message", message);
+			request.setAttribute("msgState", true);
 	        rd = request.getRequestDispatcher("MallProc?action=mallInvoiceListDay");
 			rd.forward(request, response);
 			break;		

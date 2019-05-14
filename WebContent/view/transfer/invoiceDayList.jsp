@@ -53,7 +53,7 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
               <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${selectDate}</h6>
-              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+              <a href="TransProc?action=forwarding" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i>출고
               </a>
             </div>
@@ -62,9 +62,10 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <colgroup>
 					<col style="width:10%">
+					<col style="width:10%">
+					<col style="width:35%">
 					<col style="width:15%">
-					<col style="width:40%">
-					<col style="width:15%">
+					<col style="width:10%">
 					<col style="width:10%">
 				  </colgroup>
                   <thead>

@@ -1,13 +1,11 @@
 package user;
 
 
-import java.awt.Button;
 import java.awt.FileDialog;
 import java.awt.Frame;
-import java.awt.Panel;
 import java.util.regex.Pattern;
 
-public class Test extends Frame{
+public class Test{
 	public static void main(String[] args) {
 		/*int a = isValidForm("asdfg","asdfg");
 		int b = isValidForm("asdfg","asdfg453425");
