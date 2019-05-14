@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,10 +40,10 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-2 text-gray-800">월별 판매내역</h1>
-            <form action="" class="form-horizontal d-sm-inline-block" method="post">
+            <form action="AdminProc?action=mallMonthSearchList" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
-			      <input type="text" name="monthCustomer" id="monthpicker" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
+			      <input type="text" name="month" id="monthpicker" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
 			      <input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
 			    </label>
 			  </div>
@@ -51,10 +52,7 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">[검색연월]</h6>
-              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-              </a>
+              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${requestScope.month}</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -76,13 +74,16 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td><a href="requestDetail.jsp" >a1001</a></td>
-                      <td>삼겹살 1kg</td>
-                      <td>10000</td>
-                      <th>20</th>
-                      <td>200000</td>
-                    </tr>
+                    <c:set var="invoiceList" value ="${requestScope.invoiceList}"/>
+					<c:forEach var="invoice" items="${invoiceList}">
+	                 <tr>
+                      <td>${invoice.pCode}</td>
+                      <td>${invoice.pName}</td>
+                      <td><fmt:formatNumber value="${invoice.pPrice}" pattern="#,##0"/>원</td>
+                      <td>${invoice.oQuantity}</td>
+                      <td><fmt:formatNumber value="${invoice.iTotalPrice}" pattern="#,##0"/>원</td>
+                   	</tr>
+                 	</c:forEach>
                   </tbody>
                 </table>
               </div>

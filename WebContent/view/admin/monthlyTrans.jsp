@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,9 +53,6 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
               <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${requestScope.selectMonth}</h6>
-              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-              </a>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -80,7 +78,7 @@
                       <td>${invoice.iCode}</td>
                       <td>${invoice.uName}</td>
                       <td>${invoice.iDate}</td>
-                      <td>${invoice.iTotalPrice}</td>
+                      <td><fmt:formatNumber value="${invoice.iTotalPrice}" pattern="#,##0"/>원</td>
                    	</tr>
                  	</c:forEach>
                   </tbody>

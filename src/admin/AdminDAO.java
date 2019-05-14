@@ -48,6 +48,12 @@ public class AdminDAO {
 		List<String> invoiceCodes = selectiCodeCondition(sql);
 		return invoiceCodes;
 	}
+	
+	public List<String> selectThisMonthReady(){
+		sql = "select iCode from invoice WHERE iState = 1;";
+		List<String> invoiceCodes = selectiCodeCondition(sql);
+		return invoiceCodes;
+	}
 	//------------------------전년도에 처리한 송장의 리스트---------------------------------------------
 	public List<String> selectLastYear(){ // !!! 'and iState = 1'을 조건으로 추가 해야 함 !!!
 		sql = "select iCode from invoice WHERE iDate >='"+cf.lastYear(cf.curYear())+"-01-01' AND iDate <'"+cf.curYear()+"-01-01' and iState = 2;";
@@ -129,20 +135,19 @@ public class AdminDAO {
 	
 	//------------------------------------ 타입별 메소드 --------------------------------------------
 	
-	//2. 운송사 관련 메소드 
+	//[공통] 해당 월의 처리 완료된 송장 리스트 가져오기
+		public List<AdminDTO> adminMonthList(String month){
+			String sql = "select iCode, iDate, iAreaCode from invoice "
+					+ "where iDate >='"+month+"-01' and iDate < '"+cf.nextMonth(month)+"-01' and iState = 2 ;";
+			List<AdminDTO> invoiceList = selectTransCondition(sql);
+			return invoiceList;
+		}
 	
 	//-------------------------------운송사에서 사용하는 리스트---------------------------------------------------------
 	//1. 해당 날짜의 처리 준비중인 송장 리스트 가져오기
-	public List<AdminDTO> adminTransDay(String date){
+	public List<AdminDTO> adminTransList(){
 		String sql = "select iCode, iDate, iAreaCode from invoice "
-				+ "where iDate >'"+date+"' and iDate < '"+cf.tomorrow(date)+"' and iState = 1;";
-		List<AdminDTO> invoiceList = selectTransCondition(sql);
-		return invoiceList;
-	}
-	//2. 해당 월의 처리 완료된 송장 리스트 가져오기
-	public List<AdminDTO> adminTransMonth(String month){
-		String sql = "select iCode, iDate, iAreaCode from invoice "
-				+ "where iDate >'"+month+"-01' and iDate < '"+cf.nextMonth(month)+"-01' and iState = 2;";
+				+ "where iState = 1 order by iDate;";
 		List<AdminDTO> invoiceList = selectTransCondition(sql);
 		return invoiceList;
 	}
@@ -173,6 +178,54 @@ public class AdminDAO {
 			}
 		}
 		return invoiceList;
+	}
+	
+	public void completeState(String iCode) { // 출고 완료 (State = 2)
+		String query = "update invoice set iState=2 where iCode =?;";
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setString(1,iCode);
+			pStmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+	}
+	
+	public List<AdminDTO> selectProductQuantityMonth(String month){
+		String sql = "select o.oProductCode, SUM(o.oQuantity) from `order` as o "
+				+ "inner join invoice as i on i.iCode=o.oInvoiceCode "
+				+ "where i.iDate >='"+month+"-01' and i.iDate < '"+cf.nextMonth(month)+"-01' and iState = 2 "
+				+ "group by o.oProductCode;";
+		PreparedStatement pStmt = null;
+		List<AdminDTO> orderList = new ArrayList<AdminDTO>();
+		try {
+			pStmt = conn.prepareStatement(sql);
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()){
+				AdminDTO order = new AdminDTO();
+				order.setpCode(rs.getString("oProductCode"));
+				order.setoQuantity(rs.getInt("SUM(o.oQuantity)"));
+				orderList.add(order);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return orderList;
 	}
 	
 	public void close() {

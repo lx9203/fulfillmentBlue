@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +23,6 @@ public class InvoiceDAO {
 	
 	PreparedStatement pStmt = null;
 	ResultSet rs = null;
-	String today = curDate();
 	CustomerFunction cf = new CustomerFunction();
 	
 	public InvoiceDAO() {
@@ -48,7 +45,7 @@ public class InvoiceDAO {
 			pStmt.setString(4, invoice.getiAddress());
 			pStmt.setString(5, invoice.getiAreaCode());
 			//날짜와 배송 상태는 현재시간과 배송 준비 상태를 넣는다.
-			pStmt.setString(6, curTime());
+			pStmt.setString(6, cf.curTime());
 			pStmt.setInt(7, 0);
 			
 			pStmt.executeUpdate();
@@ -82,23 +79,6 @@ public class InvoiceDAO {
 		}
 	}
 	
-	public void completeState(String iCode) { // 출고 완료 (State = 2)
-		String query = "update invoice set iState=1 where iCode =?;";
-		try {
-			pStmt = conn.prepareStatement(query);
-			pStmt.setString(1,iCode);
-			pStmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(pStmt != null && !pStmt.isClosed())
-					pStmt.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			}
-		}
-	}
 	
 	//-----------------------출고 처리 하기--------------------------------------------
 	public List<InvoiceDTO> selectAllWorkTime(){ //오늘 날짜의 18시까지의 송장을 처리
@@ -153,6 +133,13 @@ public class InvoiceDAO {
 		LOG.trace("[송장 DAO] 다음달 날짜 : " + nextMonth);
 		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
 				+ "where iAreaCode like '"+AreaCode+"' and iDate >='"+month+"-01' and iDate < '"+nextMonth+"-01';";
+		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
+		return invoiceList;
+	}
+	
+	//3. 송장 처리가 진행중인 송장의 목록 가져오기
+	public List<InvoiceDTO> transState1(){
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice where iState = 1;";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
@@ -305,39 +292,5 @@ public class InvoiceDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	//현재 시간 구하기 
-	public String curTime() {
-		LocalDateTime curTime = LocalDateTime.now();	
-    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    	return curTime.format(dateTimeFormatter);
-	}
-	
-	//현재 날짜를 구하는 함수
-	public String curDate() {
-		LocalDateTime curTime = LocalDateTime.now();
-    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");	
-    	return curTime.format(dateTimeFormatter);
-	}
-	//이번 달을 구하는 함수
-	public String curMonth() {
-		LocalDateTime curTime = LocalDateTime.now();
-    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");	
-    	return curTime.format(dateTimeFormatter);
-	}
-	//다음달 구하는 함수
-	public String nextMonth() {
-		LocalDateTime nextTime = LocalDateTime.now();
-		nextTime = nextTime.plusMonths(1);
-    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");	
-    	return nextTime.format(dateTimeFormatter);
-	}
-	//하루전 날짜 구하는 함수
-	public String yesterDate() {
-		LocalDateTime yesterTime = LocalDateTime.now();
-		yesterTime = yesterTime.minusDays(1);
-    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");	
-    	return yesterTime.format(dateTimeFormatter);
 	}
 }

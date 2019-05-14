@@ -17,7 +17,7 @@
   <!-- 관리자 영역 -->
   <c:if test="${navRecall == 'admin'}">
     <li class="nav-item">
-      <a class="nav-link" href="">
+      <a class="nav-link" href="AdminProc?action=intoMain">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>운영현황</span>
       </a>
@@ -43,7 +43,7 @@
     </div>
 
     <li class="nav-item">
-      <a class="nav-link" href="../admin/aMonthlySell.jsp">
+      <a class="nav-link" href="AdminProc?action=mallMonthList">
         <i class="fas fa-fw fa-table"></i>
         <span>판매내역</span>
       </a>
@@ -56,8 +56,8 @@
       </a>
       <div id="collapseTrans" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="dailyTrans.jsp">일별 운송내역</a>
-          <a class="collapse-item" href="AdminProc?action=transList">월별 운송내역</a>
+          <a class="collapse-item" href="AdminProc?action=transDayList">일별 운송내역</a>
+          <a class="collapse-item" href="AdminProc?action=transMonthList">월별 운송내역</a>
         </div>
       </div>
     </li>
