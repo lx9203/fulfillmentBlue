@@ -39,10 +39,10 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-2 text-gray-800">월별 운송내역</h1>
-            <form action="" class="form-horizontal d-sm-inline-block" method="post">
+            <form action="AdminProc?action=transSearchMonth" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
-			      <input type="text" name="monthCustomer" id="monthpicker" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
+			      <input type="text" name="month" id="monthpicker" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
 			      <input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
 			    </label>
 			  </div>
@@ -51,7 +51,7 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">[검색연월]</h6>
+              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${requestScope.selectMonth}</h6>
               <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
               </a>
@@ -70,7 +70,7 @@
                       <th>송장번호</th>
                       <th>운송사명</th>
                       <th>날짜</th>
-                      <th>총금액</th>
+                      <th>송장 총 금액</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -80,7 +80,7 @@
                       <td>${invoice.iCode}</td>
                       <td>${invoice.uName}</td>
                       <td>${invoice.iDate}</td>
-                      <td>${invoice.iDate}</td>
+                      <td>${invoice.iTotalPrice}</td>
                    	</tr>
                  	</c:forEach>
                   </tbody>

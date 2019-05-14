@@ -54,6 +54,10 @@ public class AdminProc extends HttpServlet {
 		List<AdminDTO> invoiceList = new ArrayList<AdminDTO>();
 		List<ProductDTO> productList = new ArrayList<ProductDTO>();
 		
+		// 일반 변수
+		int invoiceTotalPrice =0;
+		String month = new String();
+		
 		switch(action) {
 		case "intoMain": //메인 페이지 들어갈 때
 			/*
@@ -155,10 +159,10 @@ public class AdminProc extends HttpServlet {
 			rd.forward(request, response);
 			break;
 			
-		case "transList":
+		case "transDayList":
 			LOG.trace("운송 준비 송장 확인");
-			int invoiceTotalPrice =0;
-			invoiceList = aDao.adminTransDay();
+			invoiceTotalPrice =0;
+			invoiceList = aDao.adminTransDay(cf.curDate());
 			for(AdminDTO invoice : invoiceList) {
 				orderList = aDao.selectOrder(invoice.getiCode());
 				for(AdminDTO order : orderList) {
@@ -166,12 +170,44 @@ public class AdminProc extends HttpServlet {
 				}
 				invoice.setiTotalPrice(invoiceTotalPrice);
 			}
-			
-			
 			request.setAttribute("invoiceList", invoiceList);
 			rd = request.getRequestDispatcher("admin/monthlyTrans.jsp");
 			rd.forward(request, response);
 			break;
+		case "transMonthList":
+			LOG.trace("월별 운송 송장 확인");
+			invoiceTotalPrice =0;
+			invoiceList = aDao.adminTransDay(cf.curMonth());
+			for(AdminDTO invoice : invoiceList) {
+				orderList = aDao.selectOrder(invoice.getiCode());
+				for(AdminDTO order : orderList) {
+					invoiceTotalPrice += order.getoQuantity()*order.getpPrice();	
+				}
+				invoice.setiTotalPrice(invoiceTotalPrice);
+			}
+			request.setAttribute("invoiceList", invoiceList);
+			rd = request.getRequestDispatcher("admin/monthlyTrans.jsp");
+			rd.forward(request, response);
+			break;
+			
+		case "transSearchMonth" :
+			LOG.trace("검색 월 운송 송장 확인");
+			month = request.getParameter("month");
+			invoiceTotalPrice =0;
+			invoiceList = aDao.adminTransDay(month);
+			for(AdminDTO invoice : invoiceList) {
+				orderList = aDao.selectOrder(invoice.getiCode());
+				for(AdminDTO order : orderList) {
+					invoiceTotalPrice += order.getoQuantity()*order.getpPrice();	
+				}
+				invoice.setiTotalPrice(invoiceTotalPrice);
+			}
+			request.setAttribute("selectMonth", month);
+			request.setAttribute("invoiceList", invoiceList);
+			rd = request.getRequestDispatcher("admin/monthlyTrans.jsp");
+			rd.forward(request, response);
+			break;
+			
 		default:
 			break;
 		}

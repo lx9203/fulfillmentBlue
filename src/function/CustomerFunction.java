@@ -104,10 +104,6 @@ public class CustomerFunction {
 			LOG.trace("CF.sCodeCreate퇴장");
 			return sCode;
 		}
-
-		String sCode = supplier + date + count;
-		return sCode;
-	}
 		
 //----------------------------------- 시간 관련 함수 ----------------------------------------------------
 //------------------------------- 01. 현재 시간 관련 함수 ------------------------------------------------

@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,9 +132,17 @@ public class AdminDAO {
 	//2. 운송사 관련 메소드 
 	
 	//-------------------------------운송사에서 사용하는 리스트---------------------------------------------------------
-	public List<AdminDTO> adminTransDay(){
+	//1. 해당 날짜의 처리 준비중인 송장 리스트 가져오기
+	public List<AdminDTO> adminTransDay(String date){
 		String sql = "select iCode, iDate, iAreaCode from invoice "
-				+ "where iDate >'"+cf.curDate()+"' and iDate < '"+cf.tomorrow(cf.curDate())+"' and iState = 2;";
+				+ "where iDate >'"+date+"' and iDate < '"+cf.tomorrow(date)+"' and iState = 1;";
+		List<AdminDTO> invoiceList = selectTransCondition(sql);
+		return invoiceList;
+	}
+	//2. 해당 월의 처리 완료된 송장 리스트 가져오기
+	public List<AdminDTO> adminTransMonth(String month){
+		String sql = "select iCode, iDate, iAreaCode from invoice "
+				+ "where iDate >'"+month+"-01' and iDate < '"+cf.nextMonth(month)+"-01' and iState = 2;";
 		List<AdminDTO> invoiceList = selectTransCondition(sql);
 		return invoiceList;
 	}
@@ -152,7 +158,7 @@ public class AdminDAO {
 				AdminDTO invoice = new AdminDTO();
 				uDto = uDao.searchById(rs.getString("iAreaCode"));
 				invoice.setiCode(rs.getString("iCode"));
-				invoice.setiDate(rs.getString("iDate"));
+				invoice.setiDate(rs.getString("iDate").substring(0, 10));
 				invoice.setuName(uDto.getName());
 				invoiceList.add(invoice);
 			}
