@@ -74,19 +74,19 @@
 									<colgroup>
 										<col style="width: 10%">
 										<col style="width: 40%">
-										<col style="width: 10%">
-										<col style="width: 10%">
 										<col style="width: 15%">
+										<col style="width: 10%">
+										<col style="width: 10%">
 										<col style="width: 15%">
 									</colgroup>
 									<thead>
 										<tr>
 											<th>발주코드</th>
 											<th>제품명</th>
+											<th>날짜</th>
 											<th>제품수량</th>
 											<th>제품가격</th>
 											<th>청구금액</th>
-											<th>날짜</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -95,13 +95,24 @@
 											<tr>
 												<td>${supply.sCode}</td>
 												<td>${supply.sProductName}</td>
+												<td>${supply.sDate}</td>
 												<td>${supply.sQuantity}</td>
                         						<td><fmt:formatNumber value="${supply.sProductPrice }" pattern="#,##0"/></td>
 												<td><fmt:formatNumber value="${supply.sTotalPrice }" pattern="#,##0"/></td>
-												<td>${supply.sDate}</td>
 											</tr>
 										</c:forEach>
 									</tbody>
+									<tfoot>
+										<tr>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th>총액</th>
+											<th><fmt:formatNumber value="${requestScope.supplyTotalPrice}" pattern="#,##0"/></th>
+											<th></th>
+										</tr>
+									</tfoot>
 								</table>
 							</div>
 						</div>
