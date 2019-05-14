@@ -1,7 +1,6 @@
 package user;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -15,9 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import product.*;
-import invoice.*;
 
 
 @WebServlet("/view/UserProc")
@@ -60,7 +56,6 @@ public class UserProc extends HttpServlet {
 		//User관련 변수 목록
 		int userType = 0;
 		int result = 0; //match 검사용
-		String area = new String();
 		String errorMessage = null;
 		
 		
@@ -76,25 +71,21 @@ public class UserProc extends HttpServlet {
 			switch(userType) {
 			case 1:
 				LOG.trace("운송사 입장");
-				ProductDAO pDao = new ProductDAO();
-				List<ProductDTO> productList = pDao.selectAll();
 				rd = request.getRequestDispatcher("TransProc?action=intoMain");
 				rd.forward(request, response);
 				break;
 			case 2:
 				LOG.trace("쇼핑몰 입장");
-				name = (String)session.getAttribute("userId");
 				rd = request.getRequestDispatcher("MallProc?action=intoMain");
 				rd.forward(request, response);
 				break;
 			case 3:
 				LOG.trace("공급사 입장");
-				name = (String)session.getAttribute("userId");
-				LOG.trace(name);
 				rd = request.getRequestDispatcher("SupplyProc?action=intoMain");
 				rd.forward(request, response);
 				break;
 			case 0:
+				LOG.trace("관리자 입장");
 				rd = request.getRequestDispatcher("AdminProc?action=intoMain");
 				rd.forward(request, response);
 				break;

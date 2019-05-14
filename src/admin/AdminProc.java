@@ -15,7 +15,10 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebServlet("/view/admin/AdminProc")
+import product.*;
+import function.*;
+
+@WebServlet("/view/AdminProc")
 public class AdminProc extends HttpServlet {
 	private static final Logger LOG = LoggerFactory.getLogger(AdminProc.class);
 	private static final long serialVersionUID = 1L;
@@ -40,10 +43,16 @@ public class AdminProc extends HttpServlet {
 		String action = request.getParameter("action");
 		String message = new String();
 		String url = new String();
+		CustomerFunction cf = new CustomerFunction();
+		
 		
 		AdminDAO aDao = new AdminDAO();
 		AdminDTO aDto = new AdminDTO();
+		ProductDTO pDto = new ProductDTO();
+		ProductDAO pDao = new ProductDAO();
 		List<AdminDTO> orderList = new ArrayList<AdminDTO>();
+		List<AdminDTO> invoiceList = new ArrayList<AdminDTO>();
+		List<ProductDTO> productList = new ArrayList<ProductDTO>();
 		
 		switch(action) {
 		case "intoMain": //메인 페이지 들어갈 때
@@ -59,85 +68,113 @@ public class AdminProc extends HttpServlet {
 			*/
 			
 			
-			int thisTotalPrice = 0;
+			int thisTotalSales = 0;
 			int monthTotalPrice = 0;
-			int thisYearTotalPrice =0;
-			int lastYearTotalPrice =0;
-			int shopTotalPrice = 0;
-			int supplyTotalPrice = 0;
-			int transTotalPrice =0;
+			int thisYearTotalSales =0;
+			int lastYearTotalSales =0;
+			int shopTotalSales = 0;
+			int supplyTotalSales = 0;
+			int transTotalSales =0;
 		
 			int[] itemTotalQuantity = {0,0,0,0,0};
-			List<Integer> monthTotalPriceList = new ArrayList<Integer>();
+			List<Integer> monthTotalSalesList = new ArrayList<Integer>();
 			
 			//1.이번 달 판매수익
 			List<String> thisInvoiceCodes = aDao.selectThisMonth();
-			LOG.trace("이번달 송장 수 : "+thisInvoiceCodes.size()+"");
+			LOG.trace("이번달 처리 송장 수 : "+thisInvoiceCodes.size());
 			for(String invoiceCode : thisInvoiceCodes) {
 				orderList = aDao.selectOrder(invoiceCode);
 				for(AdminDTO order : orderList) {
-					supplyTotalPrice += order.getoQuantity()*order.getpPrice(); //6. 공급사 대금 청구
+					supplyTotalSales += order.getoQuantity()*order.getpPrice(); //6. 공급사 대금 청구
+					thisTotalSales += order.getoQuantity()*order.getpPrice()*0.1; 
+					shopTotalSales += order.getoQuantity()*order.getpPrice()*1.1; //5. 쇼핑몰 대금 청구
 				}
-				thisTotalPrice += supplyTotalPrice*0.1; 
-				shopTotalPrice += supplyTotalPrice*1.1; //5. 쇼핑몰 대금 청구
-				shopTotalPrice += 10000;
-				transTotalPrice += 10000; //7. 운송사 대금 청구
+				shopTotalSales += 10000;
+				transTotalSales += 10000; //7. 운송사 대금 청구
 			}
 			//2.전년도 판매수익
-			for(int m=1;m<13;m++) {
-				List<String> MonthInvoiceCodes = aDao.selectLastYear(m);
-				LOG.trace(m+"월 송장 수 : "+MonthInvoiceCodes.size()+"");
-				for(String invoiceCode : MonthInvoiceCodes) {
-					orderList = aDao.selectOrder(invoiceCode);
-					for(AdminDTO order : orderList) {
-						lastYearTotalPrice += 1000/*order.getoQuantity()*order.getpPrice()*0.1*/;	
-					}
-					lastYearTotalPrice += 10000;
+			List<String> MonthInvoiceCodes = aDao.selectLastYear();
+			LOG.trace("작년 처리 송장 수 : "+MonthInvoiceCodes.size());
+			for(String invoiceCode : MonthInvoiceCodes) {
+				orderList = aDao.selectOrder(invoiceCode);
+				for(AdminDTO order : orderList) {
+					lastYearTotalSales += order.getoQuantity()*order.getpPrice()*0.1;	
 				}
+				lastYearTotalSales += 10000;
 			}
 			
 			//3. 이번년도 판매수익 + 그래프 이번년도 월별 매출 총액
 			for(int m=1;m<13;m++) {
 				monthTotalPrice = 0;
 				List<String> monthTotalInvoiceList = aDao.selectThisYear(m);
-				LOG.trace(m+"월 송장 수 : "+monthTotalPriceList.size()+"");
+				LOG.trace(m+"월 송장 수 : "+monthTotalInvoiceList.size()+"");
 				for(String invoiceCode : monthTotalInvoiceList) {
 					orderList = aDao.selectOrder(invoiceCode);
 					for(AdminDTO order : orderList) {
-						monthTotalPrice += 1000/*order.getoQuantity()*order.getpPrice()*0.1*/;	
+						monthTotalPrice += order.getoQuantity()*order.getpPrice()*0.1;	
 					}
 					monthTotalPrice += 10000;
 				}
-				monthTotalPriceList.add(monthTotalPrice); //월별 총액을 리스트로 저장
-				thisYearTotalPrice += monthTotalPrice; //올해 총액을 int로 저장
+				monthTotalSalesList.add(monthTotalPrice); //월별 총액을 리스트로 저장
+				thisYearTotalSales += monthTotalPrice; //올해 총액을 int로 저장
 			}
 			
-			request.setAttribute("thisTotalPrice",thisTotalPrice); //1.이번 달 판매수익
-			request.setAttribute("lastYearTotalPrice",lastYearTotalPrice); //2.전년도 판매수익
-			request.setAttribute("thisYearTotalPrice", thisYearTotalPrice); //3. 이번년도 판매수익
+			request.setAttribute("thisTotalSales",thisTotalSales); //1.이번 달 판매수익
+			request.setAttribute("lastYearTotalSales",lastYearTotalSales); //2.전년도 판매수익
+			request.setAttribute("thisYearTotalSales", thisYearTotalSales); //3. 이번년도 판매수익
 			request.setAttribute("totalInvoice", thisInvoiceCodes.size()); //4. 이번달 처리 송장 수
-			request.setAttribute("shopTotalPrice", shopTotalPrice); //5. 쇼핑몰 대금 청구
-			request.setAttribute("supplyTotalPrice", supplyTotalPrice); //6. 공급사 대금 청구
-			request.setAttribute("transTotalPrice", transTotalPrice); //7. 운송사 대금 청구
+			request.setAttribute("shopTotalSales", shopTotalSales); //5. 쇼핑몰 대금 청구
+			request.setAttribute("supplyTotalSales", supplyTotalSales); //6. 공급사 대금 청구
+			request.setAttribute("transTotalSales", transTotalSales); //7. 운송사 대금 청구
 			request.setAttribute("totalSupply", ""); //8. 이번달 발주 처리 수
 			
 			
-			request.setAttribute("monthTotalPriceList", monthTotalPriceList); // 그래프 월별 총액 값
+			request.setAttribute("monthTotalSalesList", monthTotalSalesList); // 그래프 월별 총액 값
 			rd = request.getRequestDispatcher("admin/adminMain.jsp");
+			rd.forward(request, response);
+			break;
+			
+		case "productList":
+			LOG.trace("재고 물품 확인");
+			productList = pDao.selectAll();
+			
+			request.setAttribute("productList", productList); 
+			request.setAttribute("curDate", cf.curDate());
+			rd = request.getRequestDispatcher("admin/stockList.jsp");
+			rd.forward(request, response);
+			break;
+			
+		case "categoryProductList": //카테고리로 물품을 구별한다.
+			LOG.trace("재고 물품 확인");
+			String pCode = new String();
+			productList = pDao.selectCategory(pCode);
+			
+			request.setAttribute("productList", productList); 
+			request.setAttribute("curDate", cf.curDate());
+			rd = request.getRequestDispatcher("admin/stockList.jsp");
+			rd.forward(request, response);
+			break;
+			
+		case "transList":
+			LOG.trace("운송 준비 송장 확인");
+			int invoiceTotalPrice =0;
+			invoiceList = aDao.adminTransDay();
+			for(AdminDTO invoice : invoiceList) {
+				orderList = aDao.selectOrder(invoice.getiCode());
+				for(AdminDTO order : orderList) {
+					invoiceTotalPrice += order.getoQuantity()*order.getpPrice();	
+				}
+				invoice.setiTotalPrice(invoiceTotalPrice);
+			}
+			
+			
+			request.setAttribute("invoiceList", invoiceList);
+			rd = request.getRequestDispatcher("admin/monthlyTrans.jsp");
 			rd.forward(request, response);
 			break;
 		default:
 			break;
 		}
 	}
-	
-	/*public static int itemQuantity(AdminDTO order, int[] list) {
-		char shop = order.getpCode().charAt(0);
-		switch(shop) {
-		case 'a':
-			list[0] += 
-			break;
-		}
-	}*/
 
 }

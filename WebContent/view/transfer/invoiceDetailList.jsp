@@ -81,7 +81,7 @@
                       <td>${order.oNum}</td>
                       <td>${order.oProductName}</td>
                       <td>${order.oQuantity}</td>
-                      <td><fmt:formatNumber value="${order.oPrice}" pattern="#,##0"/></td>
+                      <td><fmt:formatNumber value="${order.pPrice}" pattern="#,##0"/></td>
                       <td><fmt:formatNumber value="${order.oTotalPrice}" pattern="#,##0"/></td>
                     </tr>
                     </c:forEach>
