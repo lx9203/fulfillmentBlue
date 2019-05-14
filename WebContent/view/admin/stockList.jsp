@@ -4,13 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>월별 운송내역</title>
+  <title>재고현황</title>
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -22,7 +21,6 @@
   <!-- Custom styles for this page -->
   <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   
-  <link href="../css/jquery-ui.min.css" rel="stylesheet">
 </head>
 <body id="page-top">
   <!-- Page Wrapper -->
@@ -36,55 +34,52 @@
         <%@ include file="../common/_top.jspf" %>
         <!-- Begin Page Content -->
         <div class="container-fluid">
+        
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-2 text-gray-800">월별 운송내역</h1>
-            <form action="" class="form-horizontal d-sm-inline-block" method="post">
-			  <div class="form-group" style="margin-bottom:0">
-			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
-			      <input type="text" name="monthCustomer" id="monthpicker" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
-			      <input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
-			    </label>
-			  </div>
-	        </form>
+            <h1 class="h3 mb-0 text-gray-800">재고현황</h1>
           </div>
+          
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">[검색연월]</h6>
-              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-              </a>
+              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${requestScope.curDate}</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <colgroup>
+					<col style="width:15%">
 					<col style="width:30%">
-					<col style="width:25%">
-					<col style="width:25%">
-					<col style="width:25%">
+					<col style="width:15%">
+					<col style="width:15%">
+					<col style="width:15%">
 				  </colgroup>
                   <thead>
                     <tr>
-                      <th>송장번호</th>
-                      <th>운송사명</th>
-                      <th>날짜</th>
-                      <th>총금액</th>
+                      <th>상품코드</th>
+                      <th>상품이름</th>
+                      <th>재고량</th>
+                      <th>출고대기</th>
+                      <th>입고예정</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th>1645812123</th>
-                      <th>C운송회사</th>
-                      <td>20190509</td>
-                      <td>5000000</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+                  	<c:set var="productList" value ="${requestScope.productList}"/>
+					<c:forEach var="product" items="${productList}">
+	                 <tr>
+                      <td>${product.pCode}</td>
+                      <td>${product.pName}</td>
+                      <td>${product.pQuantity}</td>
+                      <td>${product.pCode}</td>
+                      <td>${product.pCode}</td>
+                   	</tr>
+                 	</c:forEach>
+                 </tbody>
+               </table>
+             </div>
+           </div>
+         </div>
           <!-- 위까지 그래프  -->
         </div>
         <!-- /.container-fluid -->
@@ -112,12 +107,7 @@
 
   <!-- Page level custom scripts -->
   <script src="../js/demo/datatables-demo.js"></script>
- 
-  <!-- 날짜검색기능 -->
-  <script src="../js/jquery-ui.min.js"></script>
-  <script src="../js/monthpicker.js"></script>
-  <script src="../js/jquery.mtz.monthpicker.js"></script>
-  
+	
 </body>
 </html>
 <%@ include file="../common/_messageModal.jspf" %>

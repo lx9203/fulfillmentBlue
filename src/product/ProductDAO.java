@@ -11,10 +11,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import user.UserDAO;
-
 public class ProductDAO {
-	private static final Logger LOG = LoggerFactory.getLogger(UserDAO.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ProductDAO.class);
 
 	public static final int ID_PASSWORD_MATCH = 1;
 	public static final int ID_DOES_NOT_EXIST = 2;
@@ -56,12 +54,20 @@ public class ProductDAO {
 				se.printStackTrace();
 			}
 		}
+		LOG.trace("제품 재고 개수 변경");
 	}
 	
 	//------------------------ 전체 리스트 가져오기 ------------------------
 	
+	public List<ProductDTO> selectCategory(String pCode){
+		String sql = "select * from product where pCode like '"+pCode+"%';";
+		List<ProductDTO> productList = selectAllCondition(sql);
+		return productList;
+	}
+	
+	
 	public List<ProductDTO> selectAll(){
-		String sql = "select pName, pPrice, pQuantity,pImgSource from product;";
+		String sql = "select * from product;";
 		List<ProductDTO> productList = selectAllCondition(sql);
 		return productList;
 	}
@@ -75,6 +81,7 @@ public class ProductDAO {
 			
 			while(rs.next()){
 				ProductDTO product = new ProductDTO();
+				product.setpCode(rs.getString("pCode"));
 				product.setpName(rs.getString("pName"));
 				product.setpPrice(rs.getInt("pPrice"));
 				product.setpQuantity(rs.getInt("pQuantity"));

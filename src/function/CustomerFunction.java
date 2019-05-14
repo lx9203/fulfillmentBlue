@@ -1,6 +1,5 @@
 package function;
 
-import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,7 +17,7 @@ public class CustomerFunction {
 	private static final Logger LOG = LoggerFactory.getLogger(CustomerFunction.class);
 	
 	// (invoice) 지역코드 변환 함수 - 송장 등록 관련
-	public static String iAreaCode(String Address) {
+	public String iAreaCode(String Address) {
     	String area = new String();
     	String strAd = Address.substring(0,2);
     	switch(strAd) {
@@ -52,7 +51,7 @@ public class CustomerFunction {
     }
 
 	//(invoice) 송장번호 생성 함수 - 송장 등록 관련
-	public static String iCodeProc(String shopping, String areaCode) {
+	public String iCodeProc(String shopping, String areaCode) {
     	InvoiceDAO iDao = new InvoiceDAO();
 		char shoppingCode = shopping.charAt(0);
 		char area = areaCode.charAt(0);
@@ -105,8 +104,10 @@ public class CustomerFunction {
 			LOG.trace("CF.sCodeCreate퇴장");
 			return sCode;
 		}
-		
 
+		String sCode = supplier + date + count;
+		return sCode;
+	}
 		
 //----------------------------------- 시간 관련 함수 ----------------------------------------------------
 //------------------------------- 01. 현재 시간 관련 함수 ------------------------------------------------
@@ -147,41 +148,41 @@ public class CustomerFunction {
 	}
 	
 	// 다음날 날짜 구하기
-		public String tomorrow(String date) {
-			LocalDate tomorrow = LocalDate.parse(date);
-			tomorrow = tomorrow.plusDays(1);
-	    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");	
-	    	return tomorrow.format(dateTimeFormatter);
-		}
+	public String tomorrow(String date) {
+		LocalDate tomorrow = LocalDate.parse(date);
+		tomorrow = tomorrow.plusDays(1);
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");	
+    	return tomorrow.format(dateTimeFormatter);
+	}
 	
 	// 전달 날짜 구하기
-		public String lastMonth(String date) {
-			LocalDate lastMonth = LocalDate.parse(date+"-01");
-			lastMonth = lastMonth.minusMonths(1);
-	    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");	
-	    	return lastMonth.format(dateTimeFormatter);
-		}
+	public String lastMonth(String date) {
+		LocalDate lastMonth = LocalDate.parse(date+"-01");
+		lastMonth = lastMonth.minusMonths(1);
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");	
+    	return lastMonth.format(dateTimeFormatter);
+	}
 	// 다음달 날짜 구하기
-		public String nextMonth(String date) {
-			LocalDate nextMonth = LocalDate.parse(date+"-01");
-			nextMonth = nextMonth.plusMonths(1);
-	    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");	
-	    	return nextMonth.format(dateTimeFormatter);
-		}
+	public String nextMonth(String date) {
+		LocalDate nextMonth = LocalDate.parse(date+"-01");
+		nextMonth = nextMonth.plusMonths(1);
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM");	
+    	return nextMonth.format(dateTimeFormatter);
+	}
 		
 	// 전년 날짜 구하기
-		public String lastYear(String date) {
-			LocalDate lastMonth = LocalDate.parse(date+"-01-01");
-			lastMonth = lastMonth.minusYears(1);
-	    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy");	
-	    	return lastMonth.format(dateTimeFormatter);
-		}
+	public String lastYear(String date) {
+		LocalDate lastMonth = LocalDate.parse(date+"-01-01");
+		lastMonth = lastMonth.minusYears(1);
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy");	
+    	return lastMonth.format(dateTimeFormatter);
+	}
 	// 다음년 날짜 구하기
-		public String nextYear(String date) {
-			LocalDate nextMonth = LocalDate.parse(date+"-01-01");
-			nextMonth = nextMonth.plusYears(1);
-	    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy");	
-	    	return nextMonth.format(dateTimeFormatter);
-		}
+	public String nextYear(String date) {
+		LocalDate nextMonth = LocalDate.parse(date+"-01-01");
+		nextMonth = nextMonth.plusYears(1);
+    	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy");	
+    	return nextMonth.format(dateTimeFormatter);
+	}
 
 }
