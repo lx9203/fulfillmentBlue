@@ -1,6 +1,7 @@
 package user;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -14,6 +15,9 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import product.*;
+import invoice.*;
 
 
 @WebServlet("/view/UserProc")
@@ -56,6 +60,7 @@ public class UserProc extends HttpServlet {
 		//User관련 변수 목록
 		int userType = 0;
 		int result = 0; //match 검사용
+		String area = new String();
 		String errorMessage = null;
 		
 		
@@ -71,21 +76,25 @@ public class UserProc extends HttpServlet {
 			switch(userType) {
 			case 1:
 				LOG.trace("운송사 입장");
+				ProductDAO pDao = new ProductDAO();
+				List<ProductDTO> productList = pDao.selectAll();
 				rd = request.getRequestDispatcher("TransProc?action=intoMain");
 				rd.forward(request, response);
 				break;
 			case 2:
 				LOG.trace("쇼핑몰 입장");
+				name = (String)session.getAttribute("userId");
 				rd = request.getRequestDispatcher("MallProc?action=intoMain");
 				rd.forward(request, response);
 				break;
 			case 3:
 				LOG.trace("공급사 입장");
+				name = (String)session.getAttribute("userId");
+				LOG.trace(name);
 				rd = request.getRequestDispatcher("SupplyProc?action=intoMain");
 				rd.forward(request, response);
 				break;
 			case 0:
-				LOG.trace("관리자 입장");
 				rd = request.getRequestDispatcher("AdminProc?action=intoMain");
 				rd.forward(request, response);
 				break;
@@ -177,7 +186,7 @@ public class UserProc extends HttpServlet {
 					id = "aShop";	
 				} else {
 					LOG.trace(op1.get().charAt(0)+"");
-					id = (char)(op1.get().charAt(0)+1)+"Shop";	
+					id = (char)(op1.get().charAt(0)+1)+"Shopping";	
 				}
 							
 				break;
@@ -189,7 +198,7 @@ public class UserProc extends HttpServlet {
 					id = "ASupply";	
 					LOG.trace("처음 만든 아이디");
 				} else {
-					id = (char)(op2.get().charAt(0)+1)+ "Supply";	
+					id = (char)(op2.get().charAt(0)+1)+ "Seller";	
 				}		
 				break;
 			default:
@@ -207,12 +216,13 @@ public class UserProc extends HttpServlet {
 			
 			LOG.trace("회원 가입 완료");
 			//회원 가입 완료 문구 작성
-			message = "축하합니다! 회원 가입이 완료 되었습니다. <br> 회원님의 아이디는 " + id + " 입니다.";
+			message = "축하합니다! 회원 가입이 완료 되었습니다.\\n 회원님의 아이디는 " + id + " 입니다.\\n";
+			url = "login.jsp";
 			LOG.trace(message);
 			LOG.trace(url);
 			request.setAttribute("message", message);
-			request.setAttribute("msgState", true);
-			rd = request.getRequestDispatcher("login.jsp");
+			request.setAttribute("url", url);
+			rd = request.getRequestDispatcher("alertMsg.jsp");
 			rd.forward(request, response);
 			LOG.trace("전달 완료");
 			break;

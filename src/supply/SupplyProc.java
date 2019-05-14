@@ -1,9 +1,6 @@
 package supply;
 
 import java.io.*;
-import java.text.*;
-import java.time.*;
-import java.time.format.*;
 import java.util.*;
 
 import javax.servlet.*;
@@ -13,7 +10,6 @@ import javax.servlet.http.*;
 import org.slf4j.*;
 
 import function.*;
-import invoice.*;
 
 @WebServlet("/view/SupplyProc")
 public class SupplyProc extends HttpServlet {
@@ -40,7 +36,7 @@ public class SupplyProc extends HttpServlet {
 		LOG.trace("액션");
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
-		LOG.trace(action);
+		LOG.trace("SupplyProc.action : "+action);
 		HttpSession session = request.getSession();
 		RequestDispatcher rd;
 		
@@ -48,6 +44,8 @@ public class SupplyProc extends HttpServlet {
 		
 		CustomerFunction cf = new CustomerFunction();
 		String curMonth = cf.curMonth();
+		String supplierCode = new String();
+		String userId = new String();
 
 		SupplyDAO sDao = new SupplyDAO();
 		List<SupplyDTO> sDtoLists = new ArrayList<SupplyDTO>();
@@ -58,15 +56,18 @@ public class SupplyProc extends HttpServlet {
 			LOG.trace("sProc.complete진입");
 			pCode = request.getParameter("pCode");
 			int pQuantity = sDao.selectQuantity(pCode);
-			sDao.SupplyQuantity(pCode, pQuantity);
-			LOG.trace("sProc.complete퇴장");
+			sDao.SupplyQuantity(pCode, pQuantity);	// supply DB에 추가
+			sDao.insertSupply(pCode);	// Product의 갯수를 증가시킴
+			LOG.trace("sProc.complete 완료. sProc.complete퇴장");
 			break;
 			
 		case "supplyBeforeList":
 			LOG.trace("sProc.supplyBeforeList진입");
 			// 상태가 0,1 인 목록
-			String userId = (String)session.getAttribute("userId");
-			LOG.trace("sProc.userId : " + userId);
+			userId = (String)session.getAttribute("userId");
+			LOG.trace("sProc.intoMain userID : " + userId);
+			supplierCode = CustomerFunction.SupplierCode(userId);
+			LOG.trace(supplierCode);
 			sDtoLists = sDao.selectBeforeAll(userId);
 			int supplyTotalPrice =0;
 			for (SupplyDTO supply : sDtoLists) {
@@ -84,8 +85,10 @@ public class SupplyProc extends HttpServlet {
 			// 상태가 2인 목록
 			LOG.trace("sProc.supplyAfterList진입");
 			userId = (String)session.getAttribute("userId");
-			LOG.trace("sProc.userId : " + userId);
-			sDtoLists = sDao.selectAfterAll(userId);
+			LOG.trace("sProc.intoMain userID : " + userId);
+			supplierCode = CustomerFunction.SupplierCode(userId);
+			LOG.trace(supplierCode);
+			sDtoLists = sDao.selectAfterAll(supplierCode);
 			supplyTotalPrice =0;
 			for (SupplyDTO supply : sDtoLists) {
 				supplyTotalPrice += supply.getsTotalPrice();
@@ -101,10 +104,12 @@ public class SupplyProc extends HttpServlet {
 			// 상태가 2인 목록(월검색)
 			LOG.trace("sProc.supplyAfterListSearch진입");
 			userId = (String)session.getAttribute("userId");
-			LOG.trace("sProc.userId : " + userId);
+			LOG.trace("sProc.intoMain userID : " + userId);
+			supplierCode = CustomerFunction.SupplierCode(userId);
+			LOG.trace(supplierCode);
 			String month = request.getParameter("month");
 			LOG.trace("sProc.month : " + month);
-			sDtoLists = sDao.searchByMonth(month, userId);
+			sDtoLists = sDao.searchByMonth(month, supplierCode);
 			supplyTotalPrice =0;
 			for (SupplyDTO supply : sDtoLists) {
 				supplyTotalPrice += supply.getsTotalPrice();
@@ -120,55 +125,59 @@ public class SupplyProc extends HttpServlet {
 		
 		case "intoMain":
 			LOG.trace("sProc.intoMain진입");
-    		//1. 이번달 지불 액수 
+			
+			//	변수
 			userId = (String)session.getAttribute("userId");
 			LOG.trace("sProc.intoMain userID : " + userId);
-			sDtoLists = sDao.searchByMonth(curMonth, userId); //이번달 처리가 완료된 발주리스트를 불러온다.
-			LOG.trace("sProc.intoMain sDtoLists : " + sDtoLists);
-    		int monthListCount = sDtoLists.size();
-    		supplyTotalPrice = 0;
-			for (SupplyDTO supply : sDtoLists) {
-				supplyTotalPrice += supply.getsTotalPrice();
-			}
-			LOG.trace("sProc.intoMain 이번달 매출액 : "+ supplyTotalPrice);
-			request.setAttribute("monthListCount",monthListCount);
-			request.setAttribute("supplyTotalPrice",supplyTotalPrice);
-    		LOG.trace("sProc.intoMain 이번달 매출액 계산 완료");
+			supplierCode = CustomerFunction.SupplierCode(userId);
+			LOG.trace(supplierCode);
+			int curMonthTotalSales = 0;
+			int curYearTotalSales = 0;
+			
+			//----------------------------------------------------
     		
-//    		//2. 전년도 지불 액수 
-//    		LOG.trace(cf.lastYear(cf.curYear()));
-//			sDtoLists = sDao.supplySalesYear(userId.charAt(0),cf.lastYear(cf.curYear()));
-//			for(InvoiceDTO invoice : sDtoLists) {
-//    			sDtoLists = sDao.selectAll(supply.getsCode());
-//    			for(OrderDTO order : sDtoLists) {
-//    				lastYearTotalSales += order.getoQuantity()*order.getpPrice()*1.1;
-//    			}
-//    		}
-//			LOG.trace("[쇼핑몰 Proc] 전년도 매출액 계산 완료");
+			//3. 이번달 매출액 
+			sDtoLists = sDao.searchByMonth(curMonth, supplierCode); //이번달 처리가 완료된 발주리스트를 불러온다.
+			LOG.trace("sProc.intoMain sDtoLists : " + sDtoLists);
+			int monthListCount = sDao.count(supplierCode);
+			for (SupplyDTO supply : sDtoLists) {
+				curMonthTotalSales += supply.getsTotalPrice();
+			}
+			LOG.trace("sProc.intoMain 이번달 매출액 : "+ curMonthTotalSales);
+			LOG.trace("sProc.intoMain 이번달 매출액 계산 완료");
 			
+			//1.이번년도 월별 지불 액수
+			for(SupplyDTO supply : sDtoLists) {
+				sDtoLists = sDao.supplySalesCurYear(supplierCode);
+				curYearTotalSales += supply.getsTotalPrice();
+			}
+			LOG.trace("sProc.intoMain curYearTotalPrice : " + curYearTotalSales);
 			
-//			//3.이번년도 월별 지불 액수
-//			for(int m=1;m<13;m++) {
-//				monthTotalPrice = 0;
-//				iDtoLists = iDao.mallSalesCurYearMonth(userId.charAt(0),m);
-//				LOG.trace("[쇼핑몰 Proc]"+m+"월 송장 수 : "+iDtoLists.size()+"");
-//				for(InvoiceDTO invoice : iDtoLists) {
-//					oDtoLists = oDao.selectAll(invoice.getiCode());
-//	    			for(OrderDTO order : oDtoLists) {
-//	    				monthTotalPrice += order.getoQuantity()*order.getpPrice()*1.1;
-//	    			}
-//	    			monthTotalPrice += 10000;
-//	    		}
-//				monthTotalSalesList.add(monthTotalPrice); //월별 총액을 리스트로 저장
-//				thisYearTotalSales += monthTotalPrice; //올해 총액을 int로 저장
-//			}
-//    		
-//    		request.setAttribute("monthTotalSales", monthTotalSales); //1. 이번달 지불액
-//    		request.setAttribute("lastYearTotalSales", lastYearTotalSales); //2. 작년 총 지불액
-//    		request.setAttribute("thisYearTotalSales", thisYearTotalSales);//3. 이번년 총 지불액 
-//    		request.setAttribute("monthListCount", monthListCount); //4. 이번달 처리 송장 건수
-//    		
-//    		request.setAttribute("monthTotalSalesList", monthTotalSalesList); //5. 월별 총 지불액
+    		//2-1. 작년 매출액 
+    		LOG.trace("SupplyProc.intoMain 작년 매출액 계산시작");
+    		String lastYear = cf.lastYear(cf.curYear());
+    		LOG.trace(cf.lastYear(cf.curYear()));
+			sDtoLists = sDao.supplySalesYear(supplierCode,lastYear);
+			int lastYearTotalSales = 0;
+			for (SupplyDTO supply : sDtoLists) {
+				lastYearTotalSales += supply.getsTotalPrice();
+			}
+			LOG.trace("SupplyProc.intoMain lastYearTotalSales 계산완료");
+			LOG.trace("SupplyProc.intoMain lastYearTotalSales : " + lastYearTotalSales);
+			request.setAttribute("lastYearTotalSales", lastYearTotalSales);
+			
+			//2-2. 작년매출 대비 올해 매출 현황
+			double CurYearSalesRatio = curYearTotalSales-lastYearTotalSales;
+			
+    		request.setAttribute("curYearTotalSales", curYearTotalSales);//1. 이번년 매출액
+    		LOG.trace("SupplyProc.intoMain curYearTotalSales : "+curYearTotalSales);
+    		request.setAttribute("CurYearSalesRatio", CurYearSalesRatio);	//2. 작년대비 매출현황
+    		LOG.trace("SupplyProc.intoMain CurYearSalesRatio : "+CurYearSalesRatio);
+    		request.setAttribute("curMonthTotalPrice", curYearTotalSales); //3. 이번달 매출액
+    		LOG.trace("SupplyProc.intoMain curYearTotalSales : "+curYearTotalSales);
+    		request.setAttribute("monthListCount", monthListCount); //4. 이번달 처리완료 건수
+    		LOG.trace("SupplyProc.intoMain monthListCount : "+monthListCount);
+    		
     		rd = request.getRequestDispatcher("supply/supplierMain.jsp");
 			rd.forward(request, response);
 			LOG.trace("sProc.intoMain끝");

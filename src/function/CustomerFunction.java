@@ -87,17 +87,16 @@ public class CustomerFunction {
 			String date = sdf.format(curDate);
 			
 			// 공급자 구분
-			char supplierCode = pCode.charAt(0);
-			supplier = Character.toString(supplierCode);
+			String supplierCode = SupplierCode(pCode);
 			LOG.trace("CF.supplier : "+supplier);
 			// 자동(3)
-			int OneOrZero = sDao.searchState(supplier); // sState 검색후 state가 0인것이
+			int OneOrZero = sDao.searchState(supplierCode); // sState 검색후 state가 0인것이
 			LOG.trace("CF.OneOrZero : "+OneOrZero);
 			if (OneOrZero != 0) { // 1, 2 이면
 				increment = 101; // 101번부터 시작
 				LOG.trace("CF.OneOrZero가 0이 아닐 경우의 increment : "+increment);
 			} else { // state가 0인것이 있으면
-				increment = Integer.parseInt(sDao.searchsCodeBySupplier(supplier).substring(7))+ 1; 
+				increment = Integer.parseInt(sDao.searchsCodeBySupplier(supplierCode).substring(7))+ 1; 
 				// count = 이미 있는 sCode의 마지막번호 +1로 시작
 				LOG.trace("CF.OneOrZero가 0일 경우의 increment : "+increment);
 			}
@@ -105,6 +104,12 @@ public class CustomerFunction {
 			LOG.trace(sCode);
 			LOG.trace("CF.sCodeCreate퇴장");
 			return sCode;
+		}
+		//(supply)
+		public static String SupplierCode(String pCode) {
+			char codeFirst = pCode.charAt(0);
+			String supplierCode = Character.toString(codeFirst);
+			return supplierCode;
 		}
 		
 // ------------------------- 제품 출고 관련 함수 ------------------------------------------

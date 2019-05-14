@@ -19,11 +19,11 @@ public class test {
 		String sDate = new String();
 		CustomerFunction cf = new CustomerFunction();
 		
-		sProductCode = "A102";
-		LOG.trace("test.sProductCode : "+sProductCode);
 		
-		sDao.insertSupply(sProductCode);
-		
+//		sProductCode = "A102";
+//		LOG.trace("test.sProductCode : "+sProductCode);
+//		
+//		sDao.insertSupply(sProductCode);
 		
 //		SupplyDAO sDao = new SupplyDAO();
 //		int pQuantity = sDao.selectQuantity(pCode);
@@ -60,5 +60,6 @@ public class test {
 //		}
 
 	}
+	
 	
 }

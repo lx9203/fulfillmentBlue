@@ -191,7 +191,7 @@
   <!--  공급사 영역 -->
   <c:if test="${navRecall == 'supply'}">
     <li class="nav-item">
-      <a class="nav-link" href="supplierMain.jsp">
+      <a class="nav-link" href="SupplyProc?action=intoMain">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>공급사 메인페이지</span>
       </a>
