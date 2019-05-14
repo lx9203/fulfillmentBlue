@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import product.*;
 import function.*;
+import invoice.OrderDTO;
 
 @WebServlet("/view/AdminProc")
 public class AdminProc extends HttpServlet {
@@ -97,9 +98,9 @@ public class AdminProc extends HttpServlet {
 				transTotalSales += 10000; //7. 운송사 대금 청구
 			}
 			//2.전년도 판매수익
-			List<String> MonthInvoiceCodes = aDao.selectLastYear();
-			LOG.trace("작년 처리 송장 수 : "+MonthInvoiceCodes.size());
-			for(String invoiceCode : MonthInvoiceCodes) {
+			List<String> lastYearInvoiceCodes = aDao.selectLastYear();
+			LOG.trace("작년 처리 송장 수 : "+lastYearInvoiceCodes.size());
+			for(String invoiceCode : lastYearInvoiceCodes) {
 				orderList = aDao.selectOrder(invoiceCode);
 				for(AdminDTO order : orderList) {
 					lastYearTotalSales += order.getoQuantity()*order.getpPrice()*0.1;	
@@ -126,7 +127,7 @@ public class AdminProc extends HttpServlet {
 			request.setAttribute("thisTotalSales",thisTotalSales); //1.이번 달 판매수익
 			request.setAttribute("lastYearTotalSales",lastYearTotalSales); //2.전년도 판매수익
 			request.setAttribute("thisYearTotalSales", thisYearTotalSales); //3. 이번년도 판매수익
-			request.setAttribute("totalInvoice", thisInvoiceCodes.size()); //4. 이번달 처리 송장 수
+			request.setAttribute("totalInvoice", aDao.selectThisMonthReady().size()); //4. 이번달 처리 송장 수
 			request.setAttribute("shopTotalSales", shopTotalSales); //5. 쇼핑몰 대금 청구
 			request.setAttribute("supplyTotalSales", supplyTotalSales); //6. 공급사 대금 청구
 			request.setAttribute("transTotalSales", transTotalSales); //7. 운송사 대금 청구
@@ -137,6 +138,8 @@ public class AdminProc extends HttpServlet {
 			rd = request.getRequestDispatcher("admin/adminMain.jsp");
 			rd.forward(request, response);
 			break;
+			
+//------------------------------------- 1. 재고 관련 ------------------------------------------ 
 			
 		case "productList":
 			LOG.trace("재고 물품 확인");
@@ -158,11 +161,44 @@ public class AdminProc extends HttpServlet {
 			rd = request.getRequestDispatcher("admin/stockList.jsp");
 			rd.forward(request, response);
 			break;
+//------------------------------------- 2. 판매 목록 관련 ------------------------------------------ 
+		case "mallMonthList" :
+			LOG.trace("[관리자 Proc] 월별 제품 판매 수량 목록");
+			invoiceList = aDao.selectProductQuantityMonth(cf.curMonth());
+			for(AdminDTO invoice : invoiceList) {
+				pDto = pDao.searchAll(invoice.getpCode());
+				invoice.setpName(pDto.getpName());
+				invoice.setpPrice(pDto.getpPrice());
+				invoice.setiTotalPrice(invoice.getpPrice()*invoice.getoQuantity());
+			}
+			request.setAttribute("invoiceList", invoiceList);
+			rd = request.getRequestDispatcher("admin/monthlySell.jsp");
+			rd.forward(request, response);
+			break;
+		case "mallMonthSearchList" :
+			LOG.trace("[관리자 Proc] 월별 제품 판매 수량 목록");
+			month = request.getParameter("month");
+			invoiceList = aDao.selectProductQuantityMonth(month);
+			for(AdminDTO invoice : invoiceList) {
+				pDto = pDao.searchAll(invoice.getpCode());
+				invoice.setpName(pDto.getpName());
+				invoice.setpPrice(pDto.getpPrice());
+				invoice.setiTotalPrice(invoice.getpPrice()*invoice.getoQuantity());
+			}
+			
+			request.setAttribute("month", month);
+			request.setAttribute("invoiceList", invoiceList);
+			rd = request.getRequestDispatcher("admin/monthlySell.jsp");
+			rd.forward(request, response);
+			break;
+			
+			
+//------------------------------------- 3. 운송 처리 관련 ------------------------------------------ 
 			
 		case "transDayList":
 			LOG.trace("운송 준비 송장 확인");
 			invoiceTotalPrice =0;
-			invoiceList = aDao.adminTransDay(cf.curDate());
+			invoiceList = aDao.adminTransList();
 			for(AdminDTO invoice : invoiceList) {
 				orderList = aDao.selectOrder(invoice.getiCode());
 				for(AdminDTO order : orderList) {
@@ -171,14 +207,14 @@ public class AdminProc extends HttpServlet {
 				invoice.setiTotalPrice(invoiceTotalPrice);
 			}
 			request.setAttribute("invoiceList", invoiceList);
-			rd = request.getRequestDispatcher("admin/monthlyTrans.jsp");
+			rd = request.getRequestDispatcher("admin/dailyTrans.jsp");
 			rd.forward(request, response);
 			break;
 		case "transMonthList":
 			LOG.trace("월별 운송 송장 확인");
-			invoiceTotalPrice =0;
-			invoiceList = aDao.adminTransDay(cf.curMonth());
+			invoiceList = aDao.adminMonthList(cf.curMonth());
 			for(AdminDTO invoice : invoiceList) {
+				invoiceTotalPrice =0;
 				orderList = aDao.selectOrder(invoice.getiCode());
 				for(AdminDTO order : orderList) {
 					invoiceTotalPrice += order.getoQuantity()*order.getpPrice();	
@@ -193,9 +229,9 @@ public class AdminProc extends HttpServlet {
 		case "transSearchMonth" :
 			LOG.trace("검색 월 운송 송장 확인");
 			month = request.getParameter("month");
-			invoiceTotalPrice =0;
-			invoiceList = aDao.adminTransDay(month);
+			invoiceList = aDao.adminMonthList(month);
 			for(AdminDTO invoice : invoiceList) {
+				invoiceTotalPrice =0;
 				orderList = aDao.selectOrder(invoice.getiCode());
 				for(AdminDTO order : orderList) {
 					invoiceTotalPrice += order.getoQuantity()*order.getpPrice();	
@@ -205,6 +241,39 @@ public class AdminProc extends HttpServlet {
 			request.setAttribute("selectMonth", month);
 			request.setAttribute("invoiceList", invoiceList);
 			rd = request.getRequestDispatcher("admin/monthlyTrans.jsp");
+			rd.forward(request, response);
+			break;
+		case "permitInvoice":
+			LOG.trace("송장 허가");
+			int count =0;
+			invoiceList = aDao.adminTransList();
+			LOG.trace("송장 개수 = " + invoiceList.size());
+			if(invoiceList.size() == 0) {
+				message = "처리 할 송장이 없습니다.";
+				request.setAttribute("message", message);
+				request.setAttribute("msgState", true);
+				rd = request.getRequestDispatcher("AdminProc?action=transDayList");
+				rd.forward(request, response);
+			}
+			for(AdminDTO invoice : invoiceList) {
+				orderList = aDao.selectOrder(invoice.getiCode());
+				for(AdminDTO order : orderList) {
+					if(order.getoQuantity()>order.getpQuantity()) {
+						message = "아직 제품의 입고가 완료되지 않았습니다. <br> 발주 승인을 먼저 진행해 주세요.";
+						request.setAttribute("message", message);
+						request.setAttribute("msgState", true);
+						rd = request.getRequestDispatcher("AdminProc?action=transDayList");
+						rd.forward(request, response);
+						break;
+					}
+				}
+				aDao.completeState(invoice.getiCode());//해당 송장을 출고 처리상태로 변경한다.
+				count++;
+			}
+			message = "총 "+count+"건의 송장 처리가 완료되었습니다.";
+			request.setAttribute("message", message);
+			request.setAttribute("msgState", true);
+			rd = request.getRequestDispatcher("AdminProc?action=transDayList");
 			rd.forward(request, response);
 			break;
 			

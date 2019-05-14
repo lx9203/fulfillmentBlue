@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>일별 운송내역</title>
+  <title>운송 처리 처리 페이지</title>
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -37,50 +37,45 @@
         <div class="container-fluid">
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-2 text-gray-800">일별 운송내역</h1>
+            <h1 class="h3 mb-2 text-gray-800">운송 처리 대기</h1>
           </div>
           
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${selectDate}</h6>
-              <a href="TransProc?action=forwarding" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-download fa-sm text-white-50"></i>출고
+            <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2"></h6>
+              <a href="AdminProc?action=permitInvoice" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                <i class="fas fa-download fa-sm text-white-50"></i> 출고 처리
               </a>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <colgroup>
-					<col style="width:10%">
-					<col style="width:10%">
-					<col style="width:35%">
-					<col style="width:15%">
-					<col style="width:10%">
-					<col style="width:10%">
+					<col style="width:30%">
+					<col style="width:25%">
+					<col style="width:25%">
+					<col style="width:25%">
 				  </colgroup>
                   <thead>
                     <tr>
                       <th>송장번호</th>
-                      <th>이름</th>
-                      <th>주소</th>
-                      <th>연락처</th>
+                      <th>운송사명</th>
                       <th>날짜</th>
-                      <th>상태</th>                      
+                      <th>송장 총 금액</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <c:set var="invoiceList" value="${requestScope.invoiceLists}"/>
+                    <c:set var="invoiceList" value ="${requestScope.invoiceList}"/>
 					<c:forEach var="invoice" items="${invoiceList}">
 	                 <tr>
-                      <td><a href="TransProc?action=detailList&iCode=${invoice.iCode}">${invoice.iCode}</a></td>
-                      <td>${invoice.iName}</td>
-                      <td>${invoice.iAddress}</td>
-                      <td>${invoice.iTel}</td>
+                      <td>${invoice.iCode}</td>
+                      <td>${invoice.uName}</td>
                       <td>${invoice.iDate}</td>
-                      <td>${invoice.iState}</td>
+                      <td>${invoice.iTotalPrice}</td>
                    	</tr>
                  	</c:forEach>
+                  </tbody>
                   </tbody>
                 </table>
              </div>

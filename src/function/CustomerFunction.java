@@ -4,13 +4,15 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import invoice.InvoiceDAO;
+import invoice.*;
 import supply.*;
 
 public class CustomerFunction {
@@ -110,6 +112,35 @@ public class CustomerFunction {
 			return supplierCode;
 		}
 		
+// ------------------------- 제품 출고 관련 함수 ------------------------------------------
+	public int productQuantityState1(String pCode) {//출고 대기중인 상품의 개수를 출력하는 메소드
+		int totalQuantity = 0;
+		List<InvoiceDTO> iDtoList = new ArrayList<InvoiceDTO>();
+		List<OrderDTO> oDtoList = new ArrayList<OrderDTO>();
+		InvoiceDAO iDao = new InvoiceDAO();
+		OrderDAO oDao = new OrderDAO();
+		
+		
+		iDtoList = iDao.transState1(); //출고 준비중인 모든 송장 리스트를 가져온다.
+		for(InvoiceDTO invoice : iDtoList) { 
+			oDtoList = oDao.selectQuantity(invoice.getiCode());
+			for(OrderDTO order : oDtoList) {
+				if(order.getoProductCode().equals(pCode)) { //해당 제품의 개수를 모두 합한다.
+					totalQuantity += order.getoQuantity();
+				}
+			}
+		}
+		
+		return totalQuantity; //출고 준비중인 송장의 해당 상품 개수 총합을 return 한다. 
+	}
+	
+	public int supplyQuantity(String pCode) {
+		int totalQuantity = 0;
+		SupplyDTO sDto = new SupplyDTO();
+		SupplyDAO sDao = new SupplyDAO();
+		return totalQuantity;
+	}
+		
 //----------------------------------- 시간 관련 함수 ----------------------------------------------------
 //------------------------------- 01. 현재 시간 관련 함수 ------------------------------------------------
 	
@@ -173,17 +204,17 @@ public class CustomerFunction {
 		
 	// 전년 날짜 구하기
 	public String lastYear(String date) {
-		LocalDate lastMonth = LocalDate.parse(date+"-01-01");
-		lastMonth = lastMonth.minusYears(1);
+		LocalDate lastYear = LocalDate.parse(date+"-01-01");
+		lastYear = lastYear.minusYears(1);
     	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy");	
-    	return lastMonth.format(dateTimeFormatter);
+    	return lastYear.format(dateTimeFormatter);
 	}
 	// 다음년 날짜 구하기
 	public String nextYear(String date) {
-		LocalDate nextMonth = LocalDate.parse(date+"-01-01");
-		nextMonth = nextMonth.plusYears(1);
+		LocalDate nextYear = LocalDate.parse(date+"-01-01");
+		nextYear = nextYear.plusYears(1);
     	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy");	
-    	return nextMonth.format(dateTimeFormatter);
+    	return nextYear.format(dateTimeFormatter);
 	}
 
 }

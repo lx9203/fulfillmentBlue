@@ -101,6 +101,39 @@ public class ProductDAO {
 		return productList;
 	}
 	
+	public ProductDTO searchAll(String pCode){
+		String sql = "select * from product where pCode like'"+pCode+"';";
+		ProductDTO product = selectCondition(sql);
+		return product;
+	}
+	
+	public ProductDTO selectCondition(String sql){
+		PreparedStatement pStmt = null;
+		ProductDTO product = new ProductDTO();
+		try {
+			pStmt = conn.prepareStatement(sql);
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()){
+				product.setpCode(rs.getString("pCode"));
+				product.setpName(rs.getString("pName"));
+				product.setpPrice(rs.getInt("pPrice"));
+				product.setpQuantity(rs.getInt("pQuantity"));
+				product.setpImgSource(rs.getString("pImgSource"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return product;
+	}
+	
 	
 	
 	public void close() {
