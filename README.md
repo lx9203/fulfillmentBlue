@@ -13,3 +13,4 @@
 ### 19.05.11 : 제품 CSV파일 새로 만듦
 ### 19.05.12 : MallProc으로 새로 만들어 Mall기능을 따로 분리
 ### 19.05.13 : MallProc 마무리 + TransProc 새로 추가 (Refactor)
+### 19.05.14 : AdminProc 수정(매출 처리 기능) + Admin 기능 Refactoring
