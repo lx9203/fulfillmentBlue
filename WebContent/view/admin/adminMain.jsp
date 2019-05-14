@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">이달 판매수익 (현재까지)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.thisTotalSales}원</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${requestScope.thisTotalSales}" pattern="#,##0"/>원</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -62,7 +63,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">전년도 판매수익</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.lastYearTotalSales}원</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${requestScope.lastYearTotalSales}" pattern="#,##0"/>원</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -79,7 +80,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">올해 판매 수익</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.thisYearTotalSales}원</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${requestScope.thisYearTotalSales}" pattern="#,##0"/>원</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -96,7 +97,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">출고대기 건수(현재)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">20건</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.totalInvoice}건</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -117,7 +118,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">쇼핑몰 청구 대금</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.shopTotalSales}원</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${requestScope.shopTotalSales}" pattern="#,##0"/>원</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -134,7 +135,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">운송사 지불 대금</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.transTotalSales}원</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${requestScope.transTotalSales}" pattern="#,##0"/>원</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -151,7 +152,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">공급사 지불 대금</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.supplyTotalSales}원</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${requestScope.supplyTotalSales}" pattern="#,##0"/>원</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-gray-300"></i>

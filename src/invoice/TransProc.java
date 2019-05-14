@@ -195,23 +195,21 @@ public class TransProc extends HttpServlet {
 				for(InvoiceDTO invoice : iDtoLists) {
 					oDtoLists = oDao.selectQuantity(invoice.getiCode()); //해당 송장의 제품코드, 출고해야할 수량과 창고의 재고량을 가져온다.
 					for(OrderDTO order : oDtoLists) { // 1. 출고 가능 여부를 먼저 검사한다.
-						//재고의 개수가 적으면 해당 송장의 모든 물건을 출고 하지 않는다. 동시에 공급처로 물품을 요청한다.
-						if(order.getoQuantity() >order.getpQuantity()) { 
+						//출고 가능한 수량 = 재고 수량 + 재고 신청 수량 - 출고 준비중인 수량
+						int availQuantity = order.getpQuantity() + cf.supplyQuantity(order.getoProductCode()) - cf.productQuantityState1(order.getoProductCode());
+						//모든 송장 물품에 대해서 출고 가능한 수량이 충분하면 출고 신청을 한다. 
+						if(order.getoQuantity() > availQuantity ) { //한가지라도 충분하지 않을경우, 해당 송장은 출고 신청을 하지 못한다.
 							sDao.insertSupply(order.getoProductCode());
 							available = false;
 							break;
 						}
-					}
-					if(available) { //2. 송장에 해당하는 물건 전부가 출고 가능일 때, 출고 
-						for(OrderDTO order : oDtoLists) {
-							int afterRelease = order.getpQuantity()-order.getoQuantity();
-							pDto = new ProductDTO(order.getoProductCode(), afterRelease);
-							pDao.updateQuantity(pDto); //출고
-							if(afterRelease < 10) { //출고 후, 남은 재고가 10개 이하면 출고 신청을 한다.
-								sDao.insertSupply(order.getoProductCode());
-							}
+						int afterRelease = availQuantity-order.getoQuantity();
+						if(afterRelease < 10) { //출고 후, 남은 재고가 10개 이하면 출고 신청을 한다.
+							sDao.insertSupply(order.getoProductCode());
 						}
-						iDao.requestState(invoice.getiCode());//해당 송장을 출고 처리상태로 변경한다.
+					}
+					if(available) { //2. 송장에 해당하는 물건 전부가 출고 가능일 때, 출고 신청 가능 
+						iDao.requestState(invoice.getiCode());//해당 송장을 출고 처리상태로 변경(0->1)한다.
 						count ++;
 					}
 				}

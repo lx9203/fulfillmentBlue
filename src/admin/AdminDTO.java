@@ -5,7 +5,9 @@ public class AdminDTO {
 	private String pCode;
 	private String iDate;
 	private String uName;
+	private String pName;
 	private int iTotalPrice;
+	private int pQuantity;
 	private int oQuantity;
 	private int pPrice;
 	
@@ -72,6 +74,22 @@ public class AdminDTO {
 
 	public void setiTotalPrice(int iTotalPrice) {
 		this.iTotalPrice = iTotalPrice;
+	}
+
+	public int getpQuantity() {
+		return pQuantity;
+	}
+
+	public void setpQuantity(int pQuantity) {
+		this.pQuantity = pQuantity;
+	}
+
+	public String getpName() {
+		return pName;
+	}
+
+	public void setpName(String pName) {
+		this.pName = pName;
 	}
 	
 	
