@@ -154,3 +154,5 @@
 	<script src="../js/blue_company.js"></script>
 </body>
 </html>
+
+<%@ include file="../common/_messageModal.jspf" %>
