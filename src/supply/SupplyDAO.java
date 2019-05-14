@@ -41,7 +41,7 @@ public class SupplyDAO {
 		LOG.trace("supplierCode: " + supplierCode);
 		String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState from supply as s "
 				+ "inner join product as p on p.pCode = s.sProductCode " + "where sState < 2 and  p.pCode like '"
-				+ supplierCode + "%' order by sState desc";
+				+ supplierCode + "%'";
 		List<SupplyDTO> supplyList = selectCondition(sql);
 		return supplyList;
 	}
@@ -53,7 +53,7 @@ public class SupplyDAO {
 		String curMonth = cf.curMonth();
 		String nextMonth = cf.nextMonth(curMonth);
 		String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState from supply as s "
-				+ "inner join product as p on p.pCode = s.sProductCode " + "where sState = 2 and p.pCode like '"
+				+ "inner join product as p on p.pCode = s.sProductCode " + "where sState = 2 and  p.pCode like '"
 				+ supplierCode + "%' and s.sDate >= '" + curMonth + "-01' and s.sDate < '" + nextMonth
 				+ "-01' order by s.sCode desc;";
 		List<SupplyDTO> supplyList = selectCondition(sql);
@@ -77,6 +77,7 @@ public class SupplyDAO {
 				supply.setsQuantity(rs.getInt("sQuantity"));
 				supply.setsState(rs.getInt("sState"));
 				supply.setsTotalPrice(supply.getsQuantity(), supply.getsProductPrice());
+				LOG.trace(supply.getsTotalPrice() + "");
 				supplyList.add(supply);
 			}
 		} catch (Exception e) {
@@ -104,14 +105,11 @@ public class SupplyDAO {
 			while (rs.next()) {
 				SupplyDTO supply = new SupplyDTO();
 				supply.setsCode(rs.getString("sCode"));
-				supply.setsProductCode(rs.getString("pCode"));
 				supply.setsProductName(rs.getString("pName"));
 				supply.setsProductPrice(rs.getInt("pPrice"));
 				supply.setsQuantity(rs.getInt("sQuantity"));
 				supply.setsDate(rs.getString("sDate").substring(0, 10));
 				supply.setsState(rs.getInt("sState"));
-				supply.setsTotalPrice(supply.getsQuantity(), supply.getsProductPrice());
-				LOG.trace("sDao.supply.getTotalPrice : "+supply.getsTotalPrice());
 				searchList.add(supply);
 			}
 		} catch (Exception e) {
@@ -130,7 +128,7 @@ public class SupplyDAO {
 
 	// 어제 리스트
 	public List<SupplyDTO> searchByDay() {
-		String sql = "select s.sCode, p.pName, p.pCode, p.pPrice, s.sQuantity, s.sDate, s.sState from supply as s "
+		String sql = "select s.sCode, p.pName, p.pPrice, s.sQuantity, s.sDate, s.sState from supply as s "
 				+ "inner join product as p on p.pCode=s.sProductCode where s.sDate >= '" + yesterday
 				+ "' and s.sDate < '" + today + "';";
 		List<SupplyDTO> searchList = searchCondition(sql);
@@ -142,7 +140,7 @@ public class SupplyDAO {
 		supplierCode = userId.substring(0, 1);
 		LocalDate LocalAfterMonth = LocalDate.parse(Month + "-01");
 		LocalAfterMonth = LocalAfterMonth.plusMonths(1);
-		String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState from supply as s "
+		String sql = "select s.sCode, p.pName, p.pPrice, s.sQuantity, s.sDate, s.sState from supply as s "
 				+ "inner join product as p on p.pCode=s.sProductCode where sState = 2 and p.pCode like '" + supplierCode
 				+ "%' and s.sDate >= '" + Month + "' and s.sDate < '" + LocalAfterMonth + "';";
 		List<SupplyDTO> searchList = searchCondition(sql);
@@ -161,7 +159,6 @@ public class SupplyDAO {
 			ResultSet rs = pStmt.executeQuery();
 			while (rs.next()) {
 				sCode = rs.getString("sCode");
-				LOG.trace(sCode);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -191,13 +188,9 @@ public class SupplyDAO {
 	// 날짜로 sState 찾기
 	public int selectOneCondition(String sql) {
 		PreparedStatement pStmt = null;
-		int sState = 0;
+		int state = 0;
 		try {
 			pStmt = conn.prepareStatement(sql);
-			ResultSet rs = pStmt.executeQuery();
-			while (rs.next()) {
-				sState = rs.getInt("sState");
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -208,7 +201,7 @@ public class SupplyDAO {
 				se.printStackTrace();
 			}
 		}
-		return sState;
+		return state;
 	}
 
 	public int searchState(String pCode) {
@@ -248,6 +241,31 @@ public class SupplyDAO {
 			}
 		}
 		return sCode;
+	}
+
+	// supply DB 에 넣기
+	public void insertSupply(SupplyDTO sDto) {
+		PreparedStatement pStmt = null;
+		String query = "insert into supply (sCode, sProductCode, sDate, sQuantity, sState) " + "values(?,?,?,?,?);";
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setString(1, sDto.getsCode());
+			pStmt.setString(2, sDto.getsProductCode());
+			pStmt.setString(3, sDto.getsDate());
+			pStmt.setInt(4, sDto.getsQuantity());
+			pStmt.setString(5, sDto.getsState());
+
+			pStmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
 	}
 
 	// product에서 pCode에 해당하는 주문량 확인

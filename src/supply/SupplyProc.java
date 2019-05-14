@@ -56,18 +56,16 @@ public class SupplyProc extends HttpServlet {
 		switch(action){
 		case "complete":
 			// complete를 하면 어제에 해당하는 모든 발주를 배송하고(pQuantity+100) 처리완료상태(sState=1)로 만듬
-			LOG.trace("sProc.complete진입");
 			pCode = request.getParameter("pCode");
 			int pQuantity = sDao.selectQuantity(pCode);
 			sDao.SupplyQuantity(pCode, pQuantity);
-			LOG.trace("sProc.complete퇴장");
 			break;
 			
 		case "supplyBeforeList":
-			LOG.trace("sProc.supplyBeforeList진입");
+			LOG.trace("supplyBeforeList진입");
 			// 상태가 0 인 목록
 			String userId = (String)session.getAttribute("userId");
-			LOG.trace("sProc.userId : " + userId);
+			LOG.trace("userId : " + userId);
 			sDtoLists = sDao.selectBeforeAll(userId);
 			int supplyTotalPrice =0;
 			for (SupplyDTO supply : sDtoLists) {
@@ -75,54 +73,40 @@ public class SupplyProc extends HttpServlet {
 			}
 			request.setAttribute("supplyTotalPrice",supplyTotalPrice);
 			request.setAttribute("supplyList",sDtoLists);
-			LOG.trace("sProc.sDtoLists : " + sDtoLists);
 			rd = request.getRequestDispatcher("supply/sBeforeSupply.jsp");
 			rd.forward(request, response);
-			LOG.trace("sProc.supplyBeforeList끝");
-			break;
-			
-		case "supplyAfterList":
-			LOG.trace("sProc.supplyAfterList진입");
-			userId = (String)session.getAttribute("userId");
-			LOG.trace("sProc.userId : " + userId);
-			sDtoLists = sDao.selectAfterAll(userId);
-			supplyTotalPrice =0;
-			for (SupplyDTO supply : sDtoLists) {
-				supplyTotalPrice += supply.getsTotalPrice();
-			}
-			request.setAttribute("supplyTotalPrice",supplyTotalPrice);
-			request.setAttribute("supplyList",sDtoLists);
-			rd = request.getRequestDispatcher("supply/sAfterSupply.jsp");
-			rd.forward(request, response);
-			LOG.trace("sProc.supplyAfterList끝");
+			LOG.trace("supplyBeforeList끝");
 			break;
 		
 		case "supplyAfterListSearch":
 			// 상태가 1인 목록
-			LOG.trace("sProc.supplyAfterListSearch진입");
+			LOG.trace("supplyAfterListSearch진입");
 			userId = (String)session.getAttribute("userId");
-			LOG.trace("sProc.userId : " + userId);
 			String month = request.getParameter("month");
-			LOG.trace("sProc.month : " + month);
 			sDtoLists = sDao.searchByMonth(month, userId);
-			supplyTotalPrice =0;
-			for (SupplyDTO supply : sDtoLists) {
-				supplyTotalPrice += supply.getsTotalPrice();
-			}
-			request.setAttribute("supplyTotalPrice",supplyTotalPrice);
 			request.setAttribute("selectMonth", month);
 			request.setAttribute("supplyList",sDtoLists);
-			LOG.trace("sProc.sDtoLists : "+ sDtoLists);
 			rd = request.getRequestDispatcher("supply/sAfterSupply.jsp");
 			rd.forward(request, response);
-			LOG.trace("sProc.supplyAfterListSearch끝");
+			LOG.trace("supplyAfterListSearch끝");
+			break;
+			
+		case "supplyAfterList":
+			LOG.trace("supplyAfterList진입");
+			userId = (String)session.getAttribute("userId");
+			LOG.trace("userId : " + userId);
+			sDtoLists = sDao.selectAfterAll(userId);
+			request.setAttribute("supplyList",sDtoLists);
+			rd = request.getRequestDispatcher("supply/sAfterSupply.jsp");
+			rd.forward(request, response);
+			LOG.trace("supplyAfterList끝");
 			break;
 		
 		case "intoMain":
-			LOG.trace("sProc.intoMain진입");
+			LOG.trace("intoMain진입");
 			rd = request.getRequestDispatcher("supply/supplierMain.jsp");
 			rd.forward(request, response);
-			LOG.trace("sProc.intoMain끝");
+			LOG.trace("intoMain끝");
 			break;
 
 		default:

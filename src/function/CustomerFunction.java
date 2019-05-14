@@ -76,9 +76,8 @@ public class CustomerFunction {
 	// (supply) 발주코드(sCode) 생성 함수 { 공급사구분+날짜+자동(3) }
 		public static String sCodeCreate(String pCode) {
 			// 변수
-			LOG.trace("CF.sCodeCreate진입");
 			SupplyDAO sDao = new SupplyDAO();
-			int increment = 0;
+			int count = 0;
 			String supplier = "";
 			// 날짜
 			Date curDate = new Date();
@@ -88,21 +87,16 @@ public class CustomerFunction {
 			// 공급자 구분
 			char supplierCode = pCode.charAt(0);
 			supplier = Character.toString(supplierCode);
-			LOG.trace("CF.supplier : "+supplier);
 			// 자동(3)
 			int OneOrZero = sDao.searchState(supplier); // sState 검색후 state가 0인것이
-			LOG.trace("CF.OneOrZero : "+OneOrZero);
-			if (OneOrZero != 0) { // 1, 2 이면
-				increment = 101; // 101번부터 시작
-				LOG.trace("CF.OneOrZero가 0이 아닐 경우의 increment : "+increment);
+			if (OneOrZero != 0) { // 없으면
+				count = 101; // 101번부터 시작
 			} else { // state가 0인것이 있으면
-				increment = Integer.parseInt(sDao.searchsCodeBySupplier(supplier).substring(7))+ 1; 
-				// count = 이미 있는 sCode의 마지막번호 +1로 시작
-				LOG.trace("CF.OneOrZero가 0일 경우의 increment : "+increment);
+				count = Integer.parseInt(sDao.searchsCodeBySupplier(supplier).substring(7)) + 1; // count = 이미 있는 sCode의
+																									// 마지막번호 +1로 시작
 			}
-			String sCode = supplier + date + increment;
-			LOG.trace(sCode);
-			LOG.trace("CF.sCodeCreate퇴장");
+
+			String sCode = supplier + date + count;
 			return sCode;
 		}
 		
