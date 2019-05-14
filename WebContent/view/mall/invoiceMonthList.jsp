@@ -26,7 +26,8 @@
 <body id="page-top">
   <!-- Page Wrapper -->
   <div id="wrapper">
-    <%@ include file="_navigator.jspf" %>
+    <c:set value="mall" var="navRecall"/>
+    <%@ include file="../common/_navigator.jspf" %>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
@@ -37,7 +38,7 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-2 text-gray-800">월별 송장내역</h1>
-            <form action="InvoiceProc?action=searchList" class="form-horizontal d-sm-inline-block" method="post">
+            <form action="MallProc?action=mallSearchMonthList" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
 			      <input type="text" name="month" id="monthpicker" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
@@ -126,3 +127,5 @@
 
 </body>
 </html>
+
+<%@ include file="../common/_messageModal.jspf" %>

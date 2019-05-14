@@ -115,7 +115,7 @@
          </div>
           <!-- 위까지 그래프  -->
           <!-- 운송업체 버튼제어 예시 -->               
-               <input type='hidden' class="on-off-control" value="on">
+               <input type='hidden' class="on-off-control" value="off">
          
           <form action="" class="user " method="POST" id="checkPass">
                 
@@ -167,7 +167,9 @@
         <!-- /.container-fluid -->
       </div>
       <!-- End of Main Content -->
-      <%@ include file="common/_bottom.jspf" %>
+      
+      <c:set value="true" var="msgState"/>
+      <%@ include file="common/_messageModal.jspf" %>
     </div>
     <!-- End of Content Wrapper -->
   </div>
@@ -199,3 +201,4 @@
   
 </body>
 </html>
+

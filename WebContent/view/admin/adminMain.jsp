@@ -21,7 +21,8 @@
 <body id="page-top">
   <!-- Page Wrapper -->
   <div id="wrapper">
-    <%@ include file="a_navigator.jspf" %>
+    <c:set value="admin" var="navRecall"/>
+    <%@ include file="../common/_navigator.jspf" %>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
@@ -275,7 +276,8 @@
   <script src="../vendor/chart.js/Chart.min.js"></script>
 
   <!-- Page level custom scripts -->
+  <%@ include file="_chart.jspf" %>
   <script src="../js/demo/chart-pie-demo.js"></script>
-  <%@ include file="a_Test.jspf" %>
 </body>
 </html>
+<%@ include file="../common/_messageModal.jspf" %>

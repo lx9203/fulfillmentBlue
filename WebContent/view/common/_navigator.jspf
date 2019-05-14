@@ -1,0 +1,206 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+  <!-- 상단 창고회사 로고 -->
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+    <div class="sidebar-brand-icon rotate-n-15">
+      <i class="fas fa-laugh-wink"></i>
+    </div>
+    <div class="sidebar-brand-text mx-3">BlueCompany</div>
+  </a>
+
+  <hr class="sidebar-divider my-0">
+
+  <!-- 관리자 영역 -->
+  <c:if test="${navRecall == 'admin'}">
+    <li class="nav-item">
+      <a class="nav-link" href="">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>운영현황</span>
+      </a>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">
+      재고조사
+    </div>
+
+    <li class="nav-item">
+      <a class="nav-link" href="admin/aStockList.jsp">
+        <i class="fas fa-fw fa-table"></i>
+        <span>재고현황</span>
+      </a>
+    </li>
+
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <div class="sidebar-heading">
+      월별 내역조회
+    </div>
+
+    <li class="nav-item">
+      <a class="nav-link" href="../admin/aMonthlySell.jsp">
+        <i class="fas fa-fw fa-table"></i>
+        <span>판매내역</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="aMonthlyTrans.jsp">
+        <i class="fas fa-fw fa-table"></i>
+        <span>운송내역</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="aMonthlySupply.jsp">
+        <i class="fas fa-fw fa-table"></i>
+        <span>발주내역</span>
+      </a>
+    </li>
+  </c:if>
+  <!--  ./관리자 영역 -->
+  
+  <!--  카탈로그 영역 -->
+  <c:if test="${navRecall == 'catalog'}">
+    <li class="nav-item">
+      <a class="nav-link" href="catalogMain.jsp">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>제품소개 메인페이지</span>
+      </a>
+    </li>
+  
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">
+      카테고리
+    </div>
+
+    <li class="nav-item">
+      <a class="nav-link" href="cCatalogList.jsp">
+        <i class="fas fa-fw fa-table"></i>
+        <span>상품종류1</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="tables.jsp">
+        <i class="fas fa-fw fa-table"></i>
+        <span>상품종류2</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="tables.jsp">
+        <i class="fas fa-fw fa-table"></i>
+        <span>상품종류3</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="tables.jsp">
+        <i class="fas fa-fw fa-table"></i>
+        <span>상품종류4</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="tables.jsp">
+        <i class="fas fa-fw fa-table"></i>
+        <span>상품종류5</span>
+      </a>
+    </li>
+  </c:if>
+  <!--  ./카탈로그 영역 -->
+
+  <!-- 쇼핑몰 영역 -->
+  <c:if test="${navRecall == 'mall'}">
+    <li class="nav-item">
+      <a class="nav-link" href="MallProc?action=intoMain">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>쇼핑몰 메인페이지</span>
+      </a>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">
+      내역조회
+    </div>
+
+    <li class="nav-item">
+      <a class="nav-link" href="MallProc?action=mallInvoiceListDay">
+        <i class="fas fa-fw fa-table"></i>
+        <span>일별 송장내역</span>
+      </a>
+    </li>
+  
+    <li class="nav-item">
+      <a class="nav-link" href="MallProc?action=mallInvoiceListMonth">
+        <i class="fas fa-fw fa-table"></i>
+        <span>월별 송장내역</span>
+      </a>
+    </li>
+  </c:if>
+  <!--  ./쇼핑몰 영역 -->
+
+  <!--  운송사 영역 -->
+  <c:if test="${navRecall == 'trans'}">
+    <div class="sidebar-heading">
+      내역조회
+    </div>
+
+    <li class="nav-item">
+      <a class="nav-link" href="TransProc?action=transInvoiceListDay">
+        <i class="fas fa-fw fa-table"></i>
+        <span>일별 운송내역</span>
+      </a>
+    </li>
+  
+    <li class="nav-item">
+      <a class="nav-link" href="TransProc?action=transInvoiceListMonth">
+        <i class="fas fa-fw fa-table"></i>
+        <span>월별 운송내역</span>
+      </a>
+    </li>
+  </c:if>
+  <!--  ./운송사 영역 -->
+
+  <!--  공급사 영역 -->
+  <c:if test="${navRecall == 'supply'}">
+    <li class="nav-item">
+      <a class="nav-link" href="supplierMain.jsp">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>공급사 메인페이지</span>
+      </a>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">
+      내역조회
+    </div>
+
+    <li class="nav-item">
+      <a class="nav-link" href="SupplyProc?action=supplyBeforeList">
+        <i class="fas fa-fw fa-table"></i>
+        <span>수주내역</span></a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="SupplyProc?action=supplyAfterList">
+        <i class="fas fa-fw fa-table"></i>
+        <span>납품내역</span></a>
+    </li>
+  </c:if>
+  <!-- ./공급사 영역 -->
+
+  <hr class="sidebar-divider d-none d-md-block">
+
+  <!-- Sidebar Toggler (Sidebar) -->
+  <div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+  </div>
+
+</ul>
+<!-- End of Sidebar -->

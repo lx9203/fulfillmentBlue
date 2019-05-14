@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +23,8 @@
 <body id="page-top">
   <!-- Page Wrapper -->
   <div id="wrapper">
-    <%@ include file="_navigator.jspf" %>
+    <c:set value="mall" var="navRecall"/>
+    <%@ include file="../common/_navigator.jspf" %>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
@@ -44,8 +46,9 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">월간 총 매출액</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.monthTotalSales}원</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">월간 총 지불액</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${requestScope.monthTotalSales}" pattern="#,##0"/>원</div>
+                      
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -61,8 +64,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">전년도 총 매출액</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.lastYearTotalSales}원</div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">전년도 총 지불액</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${requestScope.lastYearTotalSales}" pattern="#,##0"/>원</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -78,17 +81,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">이번년도 총 매출액</div>
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${requestScope.thisYearTotalSales}원</div>
-                        </div>
-                        <div class="col">
-                          <div class="progress progress-sm mr-2">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                      </div>
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">이번년도 총 지불액</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${requestScope.thisYearTotalSales}" pattern="#,##0"/>원</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -125,7 +119,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">이번 년도 월간 지불액</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -142,7 +136,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                   <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
+                    <canvas id="monthTotalPrice"></canvas>
                   </div>
                 </div>
               </div>
@@ -213,7 +207,9 @@
   <script src="../vendor/chart.js/Chart.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="../js/demo/chart-area-demo.js"></script>
+  <%@ include file="_chart.jspf" %>
   <script src="../js/demo/chart-pie-demo.js"></script>
 </body>
 </html>
+
+<%@ include file="../common/_messageModal.jspf" %>

@@ -103,64 +103,32 @@ public class InvoiceDAO {
 	}
 	
 	//-----------------------출고 처리 하기--------------------------------------------
-	public List<InvoiceDTO> selectAllWorkTime(){ //오늘 날짜의 9시부터 18시까지의 송장을 처리
-		String today = curDate();
-		String sql = "select iCode from invoice WHERE iDate >='"+today+" 09:00:00' AND iDate <= '"+today+" 18:00:00' ;";
-		List<InvoiceDTO> invoiceList = selectiCodeCondition(sql);
+	public List<InvoiceDTO> selectAllWorkTime(){ //오늘 날짜의 18시까지의 송장을 처리
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice WHERE iDate < '"+cf.curDate()+" 18:00:00' and iState = 0 order by iDate ;";
+		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
-	public List<InvoiceDTO> selectAllBeforeWork(){ //어제 날짜 18일 부터 오늘날짜 09시 까지 송장 처리 
-		String today = curDate();
-		String yesterday = yesterDate();
-		String sql = "select iCode from invoice WHERE iDate >='"+yesterday+" 18:00:00' AND iDate < '"+today+" 09:00:00' ;";
-		List<InvoiceDTO> invoiceList = selectiCodeCondition(sql);
-		return invoiceList;
-	}
-	public List<InvoiceDTO> selectAllAfterWork(){
-		String today = curDate(); //오늘 날짜 18시부터 24시까지 송장 처리
-		String sql = "select iCode from invoice WHERE iDate >'"+today+" 18:00:00' AND iDate <= '"+today+" 24:00:00' ;";
-		List<InvoiceDTO> invoiceList = selectiCodeCondition(sql);
-		return invoiceList;
-	}
-	// iCode 가져오는 메소드
-	public List<InvoiceDTO> selectiCodeCondition(String sql){
-		PreparedStatement pStmt = null;
-		List<InvoiceDTO> invoiceList = new ArrayList<InvoiceDTO>();
-		try {
-			pStmt = conn.prepareStatement(sql);
-			ResultSet rs = pStmt.executeQuery();
-			
-			while(rs.next()){
-				InvoiceDTO invoice = new InvoiceDTO();
-				invoice.setiCode(rs.getString("iCode"));
-				invoiceList.add(invoice);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(pStmt != null && !pStmt.isClosed())
-					pStmt.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			}
-		}
-		return invoiceList;
-	}
-	
-	//------------------------여러개의 송장번호를 리스트로 가져오기-------------------------------------------
-	//------------------- 쇼핑몰에서 사용하는 리스트--------------------------------
-	
-	//1. 해당 쇼핑몰의 지정한 날짜의 송장 목록 가져오기
-	public List<InvoiceDTO> mallSearchAllDay(char iCode,String Date){
-		String tomorrow = cf.tomorrow(Date);
-		LOG.trace("[송장 DAO] 다음날 날짜 : " + tomorrow);
-		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
-				+ "where iCode like '"+Character.toString(iCode)+"%' and iDate >'"+Date+"' and iDate < '"+tomorrow+"';";
+	public List<InvoiceDTO> selectAllBeforeWork(){ //오늘날짜 09시 까지 송장 처리 
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice WHERE iDate < '"+cf.curDate()+" 09:00:00' and iState = 0 order by iDate ;";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
 	
+	//------------------------여러개의 송장번호를 리스트로 가져오기-------------------------------------------
+	
+	
+	//------------------- 쇼핑몰에서 사용하는 리스트--------------------------------
+	
+	//1. 해당 쇼핑몰의 지정한 날짜의 송장 목록 가져오기
+	public List<InvoiceDTO> mallSearchAllDay(char iCode,String date){
+		String tomorrow = cf.tomorrow(date);
+		LOG.trace("[송장 DAO] 다음날 날짜 : " + tomorrow);
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
+				+ "where iCode like '"+Character.toString(iCode)+"%' and iDate >'"+date+"' and iDate < '"+tomorrow+"';";
+		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
+		return invoiceList;
+	}
+	//2. 해당 쇼핑몰에서 지정한 달의 송장 목록 가져오기
 	public List<InvoiceDTO> mallSearchAllMonth(char iCode,String month){
 		String nextMonth = cf.nextMonth(month);
 		LOG.trace("[송장 DAO] 다음달 날짜 : " + nextMonth);
@@ -169,34 +137,32 @@ public class InvoiceDAO {
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
-	//-------------------------------운송사에서 사용하는 리스트 -------------------------
 	
-	public List<InvoiceDTO> transSelectAllDay(String userId){
-		LOG.trace(today);
+	//----------------------운송사에서 사용하는 리스트 -------------------------
+	
+	//1. 해당 운송사의 지정한 날짜의 송장 목록 가져오기
+	public List<InvoiceDTO> transSearchAllDay(String AreaCode,String date){
+		String tomorrow = cf.tomorrow(date);
+		LOG.trace("[송장 DAO] 다음날 날짜 : " + tomorrow);
 		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
-				+ "where iDate like '"+today+"%' and iAreaCode like '"+userId+"';";
+				+ "where iAreaCode like '"+AreaCode+"' and iDate >'"+date+"' and iDate < '"+tomorrow+"';";
+		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
+		return invoiceList;
+	}
+	//2. 해당 운송사의 지정한 달의 송장 목록 가져오기
+	public List<InvoiceDTO> transSearchAllMonth(String AreaCode,String month){
+		String nextMonth = cf.nextMonth(month);
+		LOG.trace("[송장 DAO] 다음달 날짜 : " + nextMonth);
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
+				+ "where iAreaCode like '"+AreaCode+"' and iDate >='"+month+"-01' and iDate < '"+nextMonth+"-01';";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
 	
-	public List<InvoiceDTO> transSelectAllMonth(String userId){
-		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
-				+ "where iDate >'"+today+" ' and iDate < '"+today+" 23:59:59' and iAreaCode like '"+userId+"';";
-		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
-		return invoiceList;
-	}
-	
-	//----------------------------날짜 검색 리스트-------------------------------
-	
-	public List<InvoiceDTO> transSearchAllDay(String userId,String Date){
-		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
-				+ "where iDate like '"+Date+"%' and iAreaCode like '"+userId+"';";
-		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
-		return invoiceList;
-	}
 	
 	//--------------------------------송장 매출 처리 메소드----------------------
 	
+	// ------------------------------1. 쇼핑몰 지불액 처리---------------------------------
 	public List<InvoiceDTO> mallSalesMonth(char iCode,String month){
 		String nextMonth = cf.nextMonth(month);
 		LOG.trace("[송장 DAO] 다음달 날짜 : " + nextMonth);
@@ -215,7 +181,7 @@ public class InvoiceDAO {
 		return invoiceList;
 	}
 	
-	public List<InvoiceDTO> mallSalesCurYearMonth(char iCode,int month){ // !!! 'and iState = 1'을 조건으로 추가 해야 함 !!!
+	public List<InvoiceDTO> mallSalesCurYearMonth(char iCode,int month){
 		String thisMonth = String.format("%02d", month);
 		String nextMonth = String.format("%02d", month+1);
 		String sql = new String();
@@ -225,6 +191,39 @@ public class InvoiceDAO {
 		}else {
 			sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
 					+ "where iCode like '"+Character.toString(iCode)+"%' and iDate >='"+cf.curYear()+"-"+thisMonth+"-01' and iDate < '"+cf.nextYear(cf.curYear())+"-01-01' and iState = 2;";
+		}
+		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
+		return invoiceList;
+	}
+	//---------------------------------2.운송사 매출 처리----------------------------------------
+	public List<InvoiceDTO> transSalesMonth(String AreaCode,String month){
+		String nextMonth = cf.nextMonth(month);
+		LOG.trace("[송장 DAO] 다음달 날짜 : " + nextMonth);
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
+				+ "where iAreaCode like '"+AreaCode+"' and iDate >='"+month+"-01' and iDate < '"+nextMonth+"-01' and iState = 2;";
+		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
+		return invoiceList;
+	}
+	
+	public List<InvoiceDTO> transSalesYear(String AreaCode,String year){
+		String nextYear = cf.nextYear(year);
+		LOG.trace("[송장 DAO] 다음 년도 날짜 : " + nextYear);
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
+				+ "where iAreaCode like '"+AreaCode+"' and iDate >='"+year+"-01' and iDate < '"+nextYear+"-01' and iState = 2;";
+		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
+		return invoiceList;
+	}
+	
+	public List<InvoiceDTO> transSalesCurYearMonth(String AreaCode,int month){
+		String thisMonth = String.format("%02d", month);
+		String nextMonth = String.format("%02d", month+1);
+		String sql = new String();
+		if(month != 12) {
+			sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
+					+ "where iAreaCode like '"+AreaCode+"' and iDate >='"+cf.curYear()+"-"+thisMonth+"-01' and iDate < '"+cf.curYear()+"-"+nextMonth+"-01' and iState = 2;";
+		}else {
+			sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
+					+ "where iAreaCode like '"+AreaCode+"' and iDate >='"+cf.curYear()+"-"+thisMonth+"-01' and iDate < '"+cf.nextYear(cf.curYear())+"-01-01' and iState = 2;";
 		}
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
@@ -259,37 +258,11 @@ public class InvoiceDAO {
 		}
 		return invoiceList;
 	}
-	
 
-	
-	
 	//----------------------------한개의 송장번호 가져오기--------------------------------------------
 	public InvoiceDTO selectOneDayLast(String date){
-		String sql = "select iCode from invoice where iCode like '%"+date+"%' order by iCode desc limit 1;";
-		InvoiceDTO invoice = selectOneIncrement(sql);
-		return invoice;
-	}
-	
-	public InvoiceDTO selectOneIncrement(String sql){
-		PreparedStatement pStmt = null;
-		InvoiceDTO invoice = new InvoiceDTO();
-		try {
-			pStmt = conn.prepareStatement(sql);
-			ResultSet rs = pStmt.executeQuery();
-			
-			while(rs.next()){
-				invoice.setiCode(rs.getString("iCode"));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(pStmt != null && !pStmt.isClosed())
-					pStmt.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			}
-		}
+		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice where iCode like '%"+date+"%' order by iCode desc limit 1;";
+		InvoiceDTO invoice = selectOneCondition(sql);
 		return invoice;
 	}
 	

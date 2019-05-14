@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,8 @@
 <body id="page-top">
   <!-- Page Wrapper -->
   <div id="wrapper">
-    <%@ include file="_navigator.jspf" %>
+    <c:set value="mall" var="navRecall"/>
+    <%@ include file="../common/_navigator.jspf" %>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
@@ -70,8 +72,8 @@
                       <td>${order.oNum}</td>
                       <td>${order.oProductName}</td>
                       <td>${order.oQuantity}</td>
-                      <td>${order.oPrice}</td>
-                      <td>${order.oTotalPrice}</td>
+                      <td><fmt:formatNumber value="${order.pPrice}" pattern="#,##0"/></td>
+                      <td><fmt:formatNumber value="${order.oTotalPrice}" pattern="#,##0"/></td>
                     </tr>
                     </c:forEach>
                   </tbody>
@@ -81,7 +83,7 @@
                       <th></th>
                       <th></th>
                       <th>총액</th>
-                      <th>${requestScope.invoiceTotalPrice}</th>
+                      <th><fmt:formatNumber value="${requestScope.invoiceTotalPrice}" pattern="#,##0"/></th>
                     </tr>
                   </tfoot>
                 </table>
@@ -117,3 +119,5 @@
   <script src="../js/demo/datatables-demo.js"></script>
 </body>
 </html>
+
+<%@ include file="../common/_messageModal.jspf" %>
