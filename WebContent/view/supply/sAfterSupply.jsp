@@ -143,3 +143,5 @@
 
 </body>
 </html>
+
+<%@ include file="../common/_messageModal.jspf" %>

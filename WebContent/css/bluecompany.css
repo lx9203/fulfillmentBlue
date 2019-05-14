@@ -3,7 +3,7 @@
     background-size: cover;
 }
 
-/*-- 'input type=file' custom style-- */
+/* 'input type=file' custom style */
 .filebox label {
 	display: inline-block;
 	padding: .25rem .5rem;
@@ -49,9 +49,9 @@
 	font-weight: 500;
 	line-height: 1.5;
 }
-/*-- end of 'input type=file' custom style-- */
+/* end of 'input type=file' custom style */
 
-
+/* datepicker button style */
 .ui-datepicker-prev span {
     background-image: url(img/arrow-alt-circle-left-solid.svg) !important;
         background-position: 0px 0px !important;
@@ -61,3 +61,75 @@
     background-image: url(img/arrow-alt-circle-right-solid.svg) !important;
         background-position: 0px 0px !important;
 }
+/* ./end of datepicker button style */
+
+/* category ".hover-item > .hover-fadeout, .hover-fadein" setting */
+.fade-item {
+  height: 16rem;
+}
+
+.hover-fadeout {
+  height: 16rem;
+  background-position: center center;
+  background-size: cover;
+  border-radius: .35rem
+}
+
+.fade-item .hover-fadeout {
+  position: relative;
+  transition-property: opacity;
+  transition-duration: 0.75s;
+  opacity: 1;
+}
+
+.fade-item:hover .hover-fadeout {
+  transition-property: opacity;
+  transition-duration: 0.75s;
+  opacity: 0.25;
+}
+
+.fade-item .hover-fadein {
+  transition-property: opacity;
+  transition-duration: 0.75s;
+  opacity: 0;
+  color: white;
+  
+  align-items: center;
+  background-color: rgba(90,92,105,.5);
+  height: 16rem;
+  border-radius: .35rem;
+  z-index:-1;
+  position: relative; left:0px; top:-16rem; flex:1; border:none;
+  
+  justify-content: center;
+  text-align: center;
+  font-weight: 200;
+}
+
+.fade-item:hover .hover-fadein {
+  transition-property: opacity;
+  transition-duration: 0.75s;
+  opacity: 1;
+  color: white;
+  
+  align-items: center;
+  background-color: rgba(90,92,105,.5);
+  height: 16rem;
+  border-radius: .35rem;
+  z-index:1;
+  position: relative; left:0px; top:-16rem; flex:1; border:none;
+  
+  justify-content: center;
+  text-align: center;
+  font-weight: 200;
+}
+
+.hover-fadein button {
+  background-color: transparent;
+  color: #ffffff !important;
+   
+  border:1px solid;
+  border-radius: 0.5em;
+  padding:0.5rem 1rem;
+}
+/* ./end of category ".hover-item > .hover-fadeout, .hover-fadein" setting */
