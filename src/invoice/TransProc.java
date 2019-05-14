@@ -196,7 +196,7 @@ public class TransProc extends HttpServlet {
 					oDtoLists = oDao.selectQuantity(invoice.getiCode()); //해당 송장의 제품코드, 출고해야할 수량과 창고의 재고량을 가져온다.
 					for(OrderDTO order : oDtoLists) { // 1. 출고 가능 여부를 먼저 검사한다.
 						//출고 가능한 수량 = 재고 수량 + 재고 신청 수량 - 출고 준비중인 수량
-						int availQuantity = order.getpQuantity() + cf.supplyQuantity(order.getoProductCode()) - cf.productQuantityState1(order.getoProductCode());
+						int availQuantity = order.getpQuantity() + /*cf.supplyQuantity(order.getoProductCode())*/ - cf.productQuantityState1(order.getoProductCode());
 						//모든 송장 물품에 대해서 출고 가능한 수량이 충분하면 출고 신청을 한다. 
 						if(order.getoQuantity() > availQuantity ) { //한가지라도 충분하지 않을경우, 해당 송장은 출고 신청을 하지 못한다.
 							sDao.insertSupply(order.getoProductCode());

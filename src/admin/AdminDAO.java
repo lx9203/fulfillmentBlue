@@ -20,6 +20,7 @@ public class AdminDAO {
 	private Connection conn;
 	private static final String USERNAME = "javauser";
 	private static final String PASSWORD = "javapass";
+
 	private static final String URL = "jdbc:mysql://localhost:3306/fulfillmentsystem?verifyServerCertificate=false&useSSL=false";
 	
 	PreparedStatement pStmt = null;
@@ -48,12 +49,16 @@ public class AdminDAO {
 		List<String> invoiceCodes = selectiCodeCondition(sql);
 		return invoiceCodes;
 	}
-	
+	//2. 처리신청을 한 송장의 목록을 가져온다.
 	public List<String> selectThisMonthReady(){
 		sql = "select iCode from invoice WHERE iState = 1;";
 		List<String> invoiceCodes = selectiCodeCondition(sql);
 		return invoiceCodes;
 	}
+	
+	
+	
+	
 	//------------------------전년도에 처리한 송장의 리스트---------------------------------------------
 	public List<String> selectLastYear(){ // !!! 'and iState = 1'을 조건으로 추가 해야 함 !!!
 		sql = "select iCode from invoice WHERE iDate >='"+cf.lastYear(cf.curYear())+"-01-01' AND iDate <'"+cf.curYear()+"-01-01' and iState = 2;";
@@ -198,11 +203,25 @@ public class AdminDAO {
 		}
 	}
 	
-	public List<AdminDTO> selectProductQuantityMonth(String month){
+	public List<AdminDTO> selectQMonthState2(String month){ //정해진 달에 제품이 팔린 수량
 		String sql = "select o.oProductCode, SUM(o.oQuantity) from `order` as o "
 				+ "inner join invoice as i on i.iCode=o.oInvoiceCode "
 				+ "where i.iDate >='"+month+"-01' and i.iDate < '"+cf.nextMonth(month)+"-01' and iState = 2 "
 				+ "group by o.oProductCode;";
+		List<AdminDTO> orderList = selectProductQuantityCondition(sql);
+		return orderList;
+	}
+	
+	public AdminDTO selectQState1(String pCode){//제품이 출고 대기중이 수량
+		String sql = "select o.oProductCode, SUM(o.oQuantity) from `order` as o "
+				+ "inner join invoice as i on i.iCode=o.oInvoiceCode "
+				+ "where o.oProductCode like '"+pCode+"' and iState < 2 "
+				+ "group by o.oProductCode;";
+		AdminDTO order = selectProductQuantityOneCondition(sql);
+		return order;
+	}
+	
+	public List<AdminDTO> selectProductQuantityCondition(String sql){
 		PreparedStatement pStmt = null;
 		List<AdminDTO> orderList = new ArrayList<AdminDTO>();
 		try {
@@ -226,6 +245,30 @@ public class AdminDAO {
 			}
 		}
 		return orderList;
+	}
+	
+	public AdminDTO selectProductQuantityOneCondition(String sql){
+		PreparedStatement pStmt = null;
+		AdminDTO order = new AdminDTO();
+		try {
+			pStmt = conn.prepareStatement(sql);
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()){
+				order.setpCode(rs.getString("oProductCode"));
+				order.setoQuantity(rs.getInt("SUM(o.oQuantity)"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return order;
 	}
 	
 	public void close() {

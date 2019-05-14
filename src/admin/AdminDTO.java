@@ -9,6 +9,7 @@ public class AdminDTO {
 	private int iTotalPrice;
 	private int pQuantity;
 	private int oQuantity;
+	private int sQuantity;
 	private int pPrice;
 	
 	public AdminDTO() {}
@@ -90,6 +91,14 @@ public class AdminDTO {
 
 	public void setpName(String pName) {
 		this.pName = pName;
+	}
+
+	public int getsQuantity() {
+		return sQuantity;
+	}
+
+	public void setsQuantity(int sQuantity) {
+		this.sQuantity = sQuantity;
 	}
 	
 	

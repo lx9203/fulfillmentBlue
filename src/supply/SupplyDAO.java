@@ -105,6 +105,35 @@ public class SupplyDAO {
 		}
 		return sState;
 	}
+	
+	public SupplyDTO productQuantity(String pCode) {
+		String sql = "select SUM(sQuantity) from supply where sProductCode like '"+pCode+"' and sState <2 group by sProductCode;";
+		SupplyDTO sDto = selectOneQuantityCondition(sql);
+		return sDto;
+	}
+	
+	public SupplyDTO selectOneQuantityCondition(String sql) {
+		PreparedStatement pStmt = null;
+		SupplyDTO aDto = new SupplyDTO();
+		try {
+			pStmt = conn.prepareStatement(sql);
+			ResultSet rs = pStmt.executeQuery();
+			while (rs.next()) {
+				aDto.setsQuantity(rs.getInt("SUM(sQuantity)")); 
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return aDto;
+	}
+	
 
 	// --------------------------Condition---------------------------------------------------
 

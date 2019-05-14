@@ -53,7 +53,7 @@ public class CustomerFunction {
     }
 
 	//(invoice) 송장번호 생성 함수 - 송장 등록 관련
-	public String iCodeProc(String shopping, String areaCode) {
+	public static String iCodeProc(String shopping, String areaCode) {
     	InvoiceDAO iDao = new InvoiceDAO();
 		char shoppingCode = shopping.charAt(0);
 		char area = areaCode.charAt(0);
@@ -132,13 +132,6 @@ public class CustomerFunction {
 		}
 		
 		return totalQuantity; //출고 준비중인 송장의 해당 상품 개수 총합을 return 한다. 
-	}
-	
-	public int supplyQuantity(String pCode) {
-		int totalQuantity = 0;
-		SupplyDTO sDto = new SupplyDTO();
-		SupplyDAO sDao = new SupplyDAO();
-		return totalQuantity;
 	}
 		
 //----------------------------------- 시간 관련 함수 ----------------------------------------------------
