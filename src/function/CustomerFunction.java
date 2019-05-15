@@ -113,7 +113,7 @@ public class CustomerFunction {
 		}
 		
 // ------------------------- 제품 출고 관련 함수 ------------------------------------------
-	public int productQuantityState1(String pCode) {//출고 대기중인 상품의 개수를 출력하는 메소드
+	public int productQuantity(String pCode) {//출고 대기중인 상품의 개수를 출력하는 메소드
 		int totalQuantity = 0;
 		List<InvoiceDTO> iDtoList = new ArrayList<InvoiceDTO>();
 		List<OrderDTO> oDtoList = new ArrayList<OrderDTO>();
@@ -121,7 +121,7 @@ public class CustomerFunction {
 		OrderDAO oDao = new OrderDAO();
 		
 		
-		iDtoList = iDao.transState1(); //출고 준비중인 모든 송장 리스트를 가져온다.
+		iDtoList = iDao.transRequestList(); //출고 준비중인 모든 송장 리스트를 가져온다.
 		for(InvoiceDTO invoice : iDtoList) { 
 			oDtoList = oDao.selectQuantity(invoice.getiCode());
 			for(OrderDTO order : oDtoList) {
