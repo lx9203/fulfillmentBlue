@@ -18,13 +18,6 @@
   <!-- Custom styles for this template-->
   <link href="../css/sb-admin-2.min.css" rel="stylesheet">
   
-  
-  <style>
-  	.bb-line {
-  		stroke-width: 2px; 
-  	}
-  
-  </style>
 </head>
 <body id="page-top">
   <!-- Page Wrapper -->
@@ -244,10 +237,9 @@
 
   <!-- Page level plugins -->
   <script src="../vendor/chart.js/Chart.min.js"></script>
-  <script src="../js/util.js"></script>
 
   <!-- Page level custom scripts -->
-  <%@ include file="_sampleDATA.jspf" %>
+  <%@ include file="_doubleChart.jspf" %>
 </body>
 </html>
 <%@ include file="common/_messageModal.jspf" %>
