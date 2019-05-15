@@ -6,6 +6,7 @@ import java.util.*;
 import org.slf4j.*;
 
 import function.*;
+import invoice.*;
 
 public class SupplyDAO {
 	private static final Logger LOG = LoggerFactory.getLogger(SupplyDAO.class);
@@ -149,6 +150,17 @@ public class SupplyDAO {
 	}
 
 	// 처리 완료인 전체검색 (sState = 2) -> SupplyProc.supplyAfterList
+		public List<SupplyDTO> selectAll(String supplierCode) {
+			LOG.trace("sDao.selectAll() 진입");
+			String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState from supply as s "
+					+ "inner join product as p on p.pCode = s.sProductCode where sState = 2 and p.pCode like '"
+					+ supplierCode + "%' order by s.sCode desc;";
+			List<SupplyDTO> supplyList = selectCondition(sql);
+			LOG.trace("sDao.selectAll() 종료");
+			return supplyList;
+		}
+
+	// 처리 완료인 이번달검색 (sState = 2) -> SupplyProc.supplyAfterList
 	public List<SupplyDTO> selectAfterAll(String supplierCode) {
 		LOG.trace("sDao.selectAfterAll() 진입");
 		String curMonth = cf.curMonth();
@@ -299,6 +311,25 @@ public class SupplyDAO {
 				+ "and sState = 2 and sDate >= '" + curYear + "-01-01' and sDate < '" + nextYear + "-01-01';";
 		List<SupplyDTO> supplyList = selectCondition(sql);
 		LOG.trace("supplySalesCurYear 퇴장");
+		return supplyList;
+	}
+	
+	public List<SupplyDTO> SalesYearMonth(String year,String supplierCode,int month){
+		String thisMonth = String.format("%02d", month);
+		String nextMonth = String.format("%02d", month+1);
+		String sql = new String();
+		if(month != 12) {
+			sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState "
+					+ "from supply as s " 
+					+ "inner join product as p on p.pCode = s.sProductCode "
+					+ "where s.sCode like '"+supplierCode+"%' and s.sDate >='"+year+"-"+thisMonth+"-01' and s.sDate < '"+year+"-"+nextMonth+"-01' and s.sState = 2;";
+		}else {
+			sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState "
+					+ "from supply as s " 
+					+ "inner join product as p on p.pCode = s.sProductCode "
+					+ "where s.sCode like '"+supplierCode+"%' and s.sDate >='"+year+"-"+thisMonth+"-01' and s.sDate < '"+cf.nextYear(year)+"-01-01' and s.sState = 2;";
+		}
+		List<SupplyDTO> supplyList = selectCondition(sql);
 		return supplyList;
 	}
 

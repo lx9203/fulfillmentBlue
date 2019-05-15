@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 import org.slf4j.*;
 
 import function.*;
+import invoice.*;
 
 @WebServlet("/view/SupplyProc")
 public class SupplyProc extends HttpServlet {
@@ -44,9 +45,13 @@ public class SupplyProc extends HttpServlet {
 		String curMonth = cf.curMonth();
 		String supplierCode = new String();
 		String userId = new String();
+		int thisYearTotalSales = 0;
+		int monthTotalPrice = 0;
 
 		SupplyDAO sDao = new SupplyDAO();
 		List<SupplyDTO> sDtoLists = new ArrayList<SupplyDTO>();
+	   	List<Integer> lastTotalSalesList = new ArrayList<Integer>();
+    	List<Integer> thisTotalSalesList = new ArrayList<Integer>();
 
 		switch(action){
 		case "complete":
@@ -175,16 +180,46 @@ public class SupplyProc extends HttpServlet {
 			LOG.trace("sProc.intoMain3 monthListCount : "+monthListCount);
 			LOG.trace("SupplyProc.intoMain2-4 이번달 처리완료 건수 계산완료");
 			
+			//5.올해 월별 지불 액수
+			for(int m=1;m<13;m++) {
+				monthTotalPrice = 0;
+				sDtoLists = sDao.SalesYearMonth(cf.curYear(),supplierCode,m);
+				LOG.trace("sProc.intoMain 올해 월별 총액 : "+m+"월 송장 수 : "+sDtoLists.size()+"");
+				for(SupplyDTO supply : sDtoLists) {
+					sDtoLists = sDao.selectAll(supplierCode);
+	    				monthTotalPrice += supply.getsTotalPrice();
+	    		}
+				thisTotalSalesList.add(monthTotalPrice); //월별 총액을 리스트로 저장
+				thisYearTotalSales += monthTotalPrice; //올해 총액을 int로 저장
+			}
+			
+			//3.작년 월별 지불 액수
+			for(int m=1;m<13;m++) {
+				monthTotalPrice = 0;
+				sDtoLists = sDao.SalesYearMonth(cf.lastYear(cf.curYear()),supplierCode,m);
+				LOG.trace("sProc.intoMain 작년 월별 총액 : "+m+"월 송장 수 : "+sDtoLists.size()+"");
+				for(SupplyDTO supply : sDtoLists) {
+					sDtoLists = sDao.selectAll(supplierCode);
+	    				monthTotalPrice += supply.getsTotalPrice();
+	    		}
+				lastTotalSalesList.add(monthTotalPrice); //월별 총액을 리스트로 저장
+				lastYearTotalSales += monthTotalPrice; //올해 총액을 int로 저장
+			}
+			
 			// 종합
     		request.setAttribute("curYearTotalSales", curYearTotalSales);//1. 이번년 매출액
     		request.setAttribute("CurYearSalesRatio", CurYearSalesRatio);	//2. 작년대비 매출현황
     		request.setAttribute("curMonthTotalSales", curMonthTotalSales); //3. 이번달 매출액
     		request.setAttribute("monthListCount", monthListCount); //4. 이번달 처리완료 건수
+       		request.setAttribute("thisTotalSalesList", thisTotalSalesList); //5. 올해 월별 총 지불액
+    		request.setAttribute("lastTotalSalesList", lastTotalSalesList); //5. 작년 월별 총 지불액
     		
     		LOG.trace("SupplyProc.intoMain종합 curYearTotalSales : "+curYearTotalSales);
     		LOG.trace("SupplyProc.intoMain종합 CurYearSalesRatio : "+CurYearSalesRatio);
     		LOG.trace("SupplyProc.intoMain종합 curMonthTotalSales : "+curMonthTotalSales);
     		LOG.trace("SupplyProc.intoMain종합 monthListCount : "+monthListCount);
+    		LOG.trace("SupplyProc.intoMain종합 thisTotalSalesList : "+thisTotalSalesList);
+    		LOG.trace("SupplyProc.intoMain종합 lastTotalSalesList : "+lastTotalSalesList);
     		
     		rd = request.getRequestDispatcher("supply/supplierMain.jsp");
 			rd.forward(request, response);
