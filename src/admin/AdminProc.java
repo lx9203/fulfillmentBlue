@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import product.*;
 import function.*;
-import invoice.OrderDTO;
+import supply.*;
 
 @WebServlet("/view/AdminProc")
 public class AdminProc extends HttpServlet {
@@ -43,7 +43,6 @@ public class AdminProc extends HttpServlet {
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
 		String message = new String();
-		String url = new String();
 		CustomerFunction cf = new CustomerFunction();
 		
 		
@@ -51,9 +50,12 @@ public class AdminProc extends HttpServlet {
 		AdminDTO aDto = new AdminDTO();
 		ProductDTO pDto = new ProductDTO();
 		ProductDAO pDao = new ProductDAO();
+		SupplyDTO sDto = new SupplyDTO();
+		SupplyDAO sDao = new SupplyDAO();
 		List<AdminDTO> orderList = new ArrayList<AdminDTO>();
 		List<AdminDTO> invoiceList = new ArrayList<AdminDTO>();
-		List<ProductDTO> productList = new ArrayList<ProductDTO>();
+		List<AdminDTO> productList = new ArrayList<AdminDTO>();
+		List<ProductDTO> pDtoList = new ArrayList<ProductDTO>();
 		
 		// 일반 변수
 		int invoiceTotalPrice =0;
@@ -81,7 +83,6 @@ public class AdminProc extends HttpServlet {
 			int supplyTotalSales = 0;
 			int transTotalSales =0;
 		
-			int[] itemTotalQuantity = {0,0,0,0,0};
 			List<Integer> monthTotalSalesList = new ArrayList<Integer>();
 			
 			//1.이번 달 판매수익
@@ -140,31 +141,60 @@ public class AdminProc extends HttpServlet {
 			break;
 			
 //------------------------------------- 1. 재고 관련 ------------------------------------------ 
-			
+
+//(1). 페이지를 들어가면서 모든 물품의 재고를 확인한다. 
 		case "productList":
 			LOG.trace("재고 물품 확인");
-			productList = pDao.selectAll();
-			
+			productList = new ArrayList<AdminDTO>();
+			pDtoList = pDao.selectAll();
+			for(ProductDTO product : pDtoList) {
+				aDto = new AdminDTO();
+				aDto.setoQuantity(0); //출고수량이 없을 경우, 0으로 지정
+				aDto.setsQuantity(0); //발주수량이 없을 경우, 0으로 지정
+				aDto = aDao.selectQState1(product.getpCode());//제품 출고 수량
+				sDto = sDao.productQuantity(product.getpCode());
+				aDto.setpCode(product.getpCode());//제품코드
+				aDto.setpName(product.getpName()); //제품이름
+				aDto.setpQuantity(product.getpQuantity()); //제품 재고량
+				aDto.setsQuantity(sDto.getsQuantity());//제품 발주 수량
+				LOG.trace("제품 코드 :" + aDto.getpCode() + ", 제품 발주 수량 : "+ aDto.getsQuantity());
+				productList.add(aDto);
+			}
 			request.setAttribute("productList", productList); 
 			request.setAttribute("curDate", cf.curDate());
-			rd = request.getRequestDispatcher("admin/stockList.jsp");
+			rd = request.getRequestDispatcher("admin/stockList.jsp"); 
 			rd.forward(request, response);
 			break;
 			
+//(2). 카테고리를 선택하여 물품을 구별한다.
 		case "categoryProductList": //카테고리로 물품을 구별한다.
 			LOG.trace("재고 물품 확인");
 			String pCode = new String();
-			productList = pDao.selectCategory(pCode);
-			
+			pDtoList = pDao.selectCategory(pCode);
+			for(ProductDTO product : pDtoList) {
+				aDto = new AdminDTO();
+				aDto.setoQuantity(0); //출고수량이 없을 경우, 0으로 지정
+				aDto.setsQuantity(0); //발주수량이 없을 경우, 0으로 지정
+				aDto = aDao.selectQState1(product.getpCode());//제품 출고 수량
+				sDto = sDao.productQuantity(product.getpCode());
+				aDto.setpCode(product.getpCode());//제품코드
+				aDto.setpName(product.getpName()); //제품이름
+				aDto.setpQuantity(product.getpQuantity()); //제품 재고량
+				aDto.setsQuantity(sDto.getsQuantity());//제품 발주 수량
+				LOG.trace("제품 코드 :" + aDto.getpCode() + ", 제품 발주 수량 : "+ aDto.getsQuantity());
+				productList.add(aDto);
+			}
 			request.setAttribute("productList", productList); 
 			request.setAttribute("curDate", cf.curDate());
 			rd = request.getRequestDispatcher("admin/stockList.jsp");
 			rd.forward(request, response);
 			break;
 //------------------------------------- 2. 판매 목록 관련 ------------------------------------------ 
+			
+//(1). 월별 제품이 얼마나 팔렸는지 그 수량을 확인 한다.
 		case "mallMonthList" :
 			LOG.trace("[관리자 Proc] 월별 제품 판매 수량 목록");
-			invoiceList = aDao.selectProductQuantityMonth(cf.curMonth());
+			invoiceList = aDao.selectQMonthState2(cf.curMonth());
 			for(AdminDTO invoice : invoiceList) {
 				pDto = pDao.searchAll(invoice.getpCode());
 				invoice.setpName(pDto.getpName());
@@ -178,7 +208,7 @@ public class AdminProc extends HttpServlet {
 		case "mallMonthSearchList" :
 			LOG.trace("[관리자 Proc] 월별 제품 판매 수량 목록");
 			month = request.getParameter("month");
-			invoiceList = aDao.selectProductQuantityMonth(month);
+			invoiceList = aDao.selectQMonthState2(month);
 			for(AdminDTO invoice : invoiceList) {
 				pDto = pDao.searchAll(invoice.getpCode());
 				invoice.setpName(pDto.getpName());
@@ -195,7 +225,7 @@ public class AdminProc extends HttpServlet {
 			
 //------------------------------------- 3. 운송 처리 관련 ------------------------------------------ 
 			
-		case "transDayList":
+		case "transPermissionList":
 			LOG.trace("운송 준비 송장 확인");
 			invoiceTotalPrice =0;
 			invoiceList = aDao.adminTransList();
@@ -207,7 +237,7 @@ public class AdminProc extends HttpServlet {
 				invoice.setiTotalPrice(invoiceTotalPrice);
 			}
 			request.setAttribute("invoiceList", invoiceList);
-			rd = request.getRequestDispatcher("admin/dailyTrans.jsp");
+			rd = request.getRequestDispatcher("admin/permissionTrans.jsp");
 			rd.forward(request, response);
 			break;
 		case "transMonthList":
@@ -276,6 +306,20 @@ public class AdminProc extends HttpServlet {
 			rd = request.getRequestDispatcher("AdminProc?action=transDayList");
 			rd.forward(request, response);
 			break;
+//------------------------------------- 4. 발주 목록 관련 ------------------------------------------
+		case "supplyPermissionList":
+			request.setAttribute("selectMonth", month);
+			request.setAttribute("invoiceList", invoiceList);
+			rd = request.getRequestDispatcher("admin/permissionSupply.jsp");
+			rd.forward(request, response);
+			break;
+		case "supplyMonthList":
+			request.setAttribute("selectMonth", month);
+			request.setAttribute("invoiceList", invoiceList);
+			rd = request.getRequestDispatcher("admin/monthlySupply.jsp");
+			rd.forward(request, response);
+			break;
+		
 			
 		default:
 			break;

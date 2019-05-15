@@ -71,8 +71,8 @@
                       <td>${product.pCode}</td>
                       <td>${product.pName}</td>
                       <td>${product.pQuantity}</td>
-                      <td>${product.pCode}</td>
-                      <td>${product.pCode}</td>
+                      <td>${product.oQuantity}</td>
+                      <td>${product.sQuantity}</td>
                    	</tr>
                  	</c:forEach>
                  </tbody>
