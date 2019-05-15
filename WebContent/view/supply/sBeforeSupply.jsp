@@ -59,7 +59,7 @@
 						<div
 							class="card-header py-3 d-sm-flex align-items-center justify-content-between">
 							<h6 class="m-0 font-weight-bold text-primary d-sm-inline-block"
-								style="line-height: 2">[검색한 날짜]</h6>
+								style="line-height: 2"></h6>
 							<a href="SupplyProc?action=complete" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
 								<i class="fas fa-download fa-sm text-white-50"></i> 납품
 							</a>
