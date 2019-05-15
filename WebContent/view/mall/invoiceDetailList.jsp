@@ -56,6 +56,13 @@
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <colgroup>
+					<col style="width:15%">
+					<col style="width:40%">
+					<col style="width:15%">
+					<col style="width:15%">
+					<col style="width:15%">
+				  </colgroup>
                   <thead>
                     <tr>
                       <th>주문번호</th>
@@ -72,8 +79,8 @@
                       <td>${order.oNum}</td>
                       <td>${order.oProductName}</td>
                       <td>${order.oQuantity}</td>
-                      <td><fmt:formatNumber value="${order.pPrice}" pattern="#,##0"/></td>
-                      <td><fmt:formatNumber value="${order.oTotalPrice}" pattern="#,##0"/></td>
+                      <td><fmt:formatNumber value="${order.pPrice}" pattern="#,##0"/>원</td>
+                      <td><fmt:formatNumber value="${order.oTotalPrice}" pattern="#,##0"/>원</td>
                     </tr>
                     </c:forEach>
                   </tbody>
@@ -83,7 +90,7 @@
                       <th></th>
                       <th></th>
                       <th>총액</th>
-                      <th><fmt:formatNumber value="${requestScope.invoiceTotalPrice}" pattern="#,##0"/></th>
+                      <th><fmt:formatNumber value="${requestScope.invoiceTotalPrice}" pattern="#,##0"/>원</th>
                     </tr>
                   </tfoot>
                 </table>

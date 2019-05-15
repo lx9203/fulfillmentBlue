@@ -31,16 +31,30 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 	return s.join(dec);
 }
 
-var data1 = ${requestScope.thisTotalSalesList};
-var data2 = ${requestScope.lastTotalSalesList};
+var data1 = ${requestScope.lastTotalSalesList};
+var data2 = ${requestScope.thisTotalSalesList};
 
 
 var ctx = document.getElementById("monthTotalSalesChart");
 var mixedChart = new Chart(ctx, {
-	type: 'line',
+	type: 'bar',
 	data: {
 	    datasets: [{
 	        label: '올해 월별 실적',
+	        lineTension: 0.3,
+	        backgroundColor: "rgba(255, 159, 64, 0.2)",
+	        borderColor: "rgba(255, 159, 64, 1)",
+	        pointRadius: 3,
+	        pointBackgroundColor: "rgba(255, 159, 64, 1)",
+	        pointBorderColor: "rgba(255, 159, 64, 1)",
+	        pointHoverRadius: 3,
+	        pointHoverBackgroundColor: "rgba(255, 159, 64, 1)",
+	        pointHoverBorderColor: "rgba(255, 159, 64, 1)",
+	        pointHitRadius: 10,
+	        pointBorderWidth: 2,
+	        data: [data1[0],data1[1],data1[2],data1[3],data1[4],data1[5],data1[6],data1[7],data1[8],data1[9],data1[10],data1[11]],
+	    }, {
+	        label: '작년 월별 실적',
 	        lineTension: 0.3,
 	        backgroundColor: "rgba(78, 115, 223, 0.05)",
 	        borderColor: "rgba(78, 115, 223, 1)",
@@ -52,21 +66,8 @@ var mixedChart = new Chart(ctx, {
 	        pointHoverBorderColor: "rgba(78, 115, 223, 1)",
 	        pointHitRadius: 10,
 	        pointBorderWidth: 2,
-	        data: [data1[0],data1[1],data1[2],data1[3],data1[4],data1[5],data1[6],data1[7],data1[8],data1[9],data1[10],data1[11]],
-	    }, {
-	        label: '작년 월별 실적',
-	        lineTension: 0.3,
-	        backgroundColor: "rgba(255, 159, 64, 0.05)",
-	        borderColor: "rgba(255, 159, 64, 1)",
-	        pointRadius: 3,
-	        pointBackgroundColor: "rgba(255, 159, 64, 1)",
-	        pointBorderColor: "rgba(255, 159, 64, 1)",
-	        pointHoverRadius: 3,
-	        pointHoverBackgroundColor: "rgba(255, 159, 64, 1)",
-	        pointHoverBorderColor: "rgba(255, 159, 64, 1)",
-	        pointHitRadius: 10,
-	        pointBorderWidth: 2,
 	        data: [data2[0],data2[1],data2[2],data2[3],data2[4],data2[5],data2[6],data2[7],data2[8],data2[9],data2[10],data2[11]],
+	        type: 'line'
 	    }],
 	    labels: ["1월", "2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"]
 	},

@@ -12,13 +12,13 @@
   <title>제품소개</title>
 
   <!-- Custom fonts for this template-->
-  <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="../css/sb-admin-2.min.css" rel="stylesheet">
   
-  <link href="../../css/bluecompany.css" rel="stylesheet">
+  <link href="../css/bluecompany.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -53,9 +53,9 @@
               <!-- 형상 틀 -->
               <div class="card shadow mb-4 fade-item center">
                 <!-- 링크 -->
-                <a class="card-link" href="cCatalogList.jsp">
+                <a class="card-link" href="ProductProc?action=meat">
                   <article style="height:0">
-                    <div class="hover-fadeout" style="background-image: url('../../img/meat/meat_main.jpg')"></div>
+                    <div class="hover-fadeout" style="background-image: url('../img/meat/meat_main.jpg')"></div>
                     <div class="hover-fadein card shadow mb-4">
                       <h3>육류(Meat)</h3>
                       <p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
@@ -71,9 +71,9 @@
               <!-- 형상 틀 -->
               <div class="card shadow mb-4 fade-item center">
                 <!-- 링크 -->
-                <a class="card-link" href="cCatalogList.jsp">
+                <a class="card-link" href="ProductProc?action=seafood">
                   <article style="height:0">
-                    <div class="hover-fadeout" style="background-image: url('../../img/seafood/seafood_main.jpg')"></div>
+                    <div class="hover-fadeout" style="background-image: url('../img/seafood/seafood_main.jpg')"></div>
                     <div class="hover-fadein card shadow mb-4">
                       <h3>해산물(Seafood)</h3>
                       <p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
@@ -96,9 +96,9 @@
               <!-- 형상 틀 -->
               <div class="card shadow mb-4 fade-item center">
                 <!-- 링크 -->
-                <a class="card-link" href="cCatalogList.jsp">
+                <a class="card-link" href="ProductProc?action=BBQ">
                   <article style="height:0">
-                    <div class="hover-fadeout" style="background-image: url('../../img/BBQ/BBQ_main.jpg')"></div>
+                    <div class="hover-fadeout" style="background-image: url('../img/BBQ/BBQ_main.jpg')"></div>
                     <div class="hover-fadein card shadow mb-4">
                       <h3>바베큐(BBQ)</h3>
                       <p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
@@ -114,9 +114,9 @@
               <!-- 형상 틀 -->
               <div class="card shadow mb-4 fade-item center">
                 <!-- 링크 -->
-                <a class="card-link" href="cCatalogList.jsp">
+                <a class="card-link" href="ProductProc?action=vegetable">
                   <article style="height:0">
-                    <div class="hover-fadeout" style="background-image: url('../../img/vegetable/vegetable_main.jpg')"></div>
+                    <div class="hover-fadeout" style="background-image: url('../img/vegetable/vegetable_main.jpg')"></div>
                     <div class="hover-fadein card shadow mb-4">
                       <h3>야채/과일(Vegetable/Fruit)</h3>
                       <p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
@@ -132,9 +132,9 @@
               <!-- 형상 틀 -->
               <div class="card shadow mb-4 fade-item center">
                 <!-- 링크 -->
-                <a class="card-link" href="cCatalogList.jsp">
+                <a class="card-link" href="ProductProc?action=spicy">
                   <article style="height:0">
-                    <div class="hover-fadeout" style="background-image: url('../../img/spicy/spicy_main.jpg')"></div>
+                    <div class="hover-fadeout" style="background-image: url('../img/spicy/spicy_main.jpg')"></div>
                     <div class="hover-fadein card shadow mb-4">
                       <h3>향신료(Spicy)</h3>
                       <p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
@@ -161,14 +161,14 @@
   <!-- End of Page Wrapper -->
 
   <!-- Bootstrap core JavaScript-->
-  <script src="../../vendor/jquery/jquery.min.js"></script>
-  <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="../../js/sb-admin-2.min.js"></script>
+  <script src="../js/sb-admin-2.min.js"></script>
 
 </body>
 </html>

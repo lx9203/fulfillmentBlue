@@ -51,15 +51,17 @@
               <!-- Illustrations -->
               <div class="card shadow mb-4 small">
                 <table>
+                <%-- <c:set var="pDtoList" value="pDtoList"/>
+                <c:forEach var="product" items="pDtoList">
                   <tr>
                     <td rowspan="2">
                       <div class="container" style="height:6rem">
-                        <img class="img-fluid"  style="max-height:100%; max-width:unset; padding:1rem 0 1rem 0" src="../img/undraw_posting_photo.svg" alt="">
+                        <img class="img-fluid"  style="max-height:100%; max-width:unset; padding:1rem 0 1rem 0" src="${product.pImgSource}" alt="">
                       </div>
                     </td>
                     <td>
                       <div class="card-header" style="padding:5px 20px 5px 20px; background-color:white">
-                        <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">${product.pName}</h6>
                       </div>
                     </td>
                   </tr>
@@ -67,13 +69,12 @@
                     <td>
                       <div class="card-body" style="padding:5px 20px 5px 20px">
                         <p style="margin-block-end:0">
-                          Add some quality, svg illustrations to your project courtesy of unDraw,
-                          a constantly updated collection of beautiful svg images that you can use
-                          completely free and without attribution!
+                          이곳에는 내용이 저장 됩니다.
                         </p>
                       </div>
                     </td>
                   </tr>
+                </c:forEach> --%>
                 </table>
               </div>
             </div>

@@ -179,7 +179,7 @@ public class AdminProc extends HttpServlet {
 		case "categoryProductList": //카테고리로 물품을 구별한다.
 			LOG.trace("재고 물품 확인");
 			String pCode = new String();
-			pDtoList = pDao.selectCategory(pCode);
+			pDtoList = pDao.selectCategory(Character.toString(pCode.charAt(0)));
 			for(ProductDTO product : pDtoList) {
 				aDto = new AdminDTO();
 				aDto.setoQuantity(0); //출고수량이 없을 경우, 0으로 지정
