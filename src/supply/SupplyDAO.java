@@ -395,7 +395,7 @@ public class SupplyDAO {
 	}
 
 	// supply DB에 추가 -> SupplyProc.complete
-	public void insertSupply(String pCode) {
+	public void insertSupply(String pCode, int Quantity) {
 		// 발주신청(pCode를 받아 발주코드와 현재시간, 처리상태를 붙임)
 		String query = "insert into supply (sCode, sProductCode, sDate, sQuantity, sState) values(?,?,?,?,?);";
 		try {
@@ -403,7 +403,7 @@ public class SupplyDAO {
 			pStmt.setString(1, CustomerFunction.sCodeCreate(pCode));
 			pStmt.setString(2, pCode);
 			pStmt.setString(3, cf.curTime());
-			pStmt.setInt(4, 20);
+			pStmt.setInt(4, Quantity);
 			pStmt.setInt(5, 0);
 
 			pStmt.executeUpdate();

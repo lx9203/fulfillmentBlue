@@ -73,7 +73,7 @@ public class SupplyProc extends HttpServlet {
 			LOG.trace("sProc.intoMain userID : " + userId);
 			supplierCode = CustomerFunction.SupplierCode(userId);
 			LOG.trace(supplierCode);
-			sDtoLists = sDao.selectBeforeAll(userId);
+			sDtoLists = sDao.selectBeforeAll(supplierCode);
 			int supplyTotalPrice =0;
 			for (SupplyDTO supply : sDtoLists) {
 				supplyTotalPrice += supply.getsTotalPrice();

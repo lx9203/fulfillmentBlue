@@ -55,7 +55,7 @@ public class OrderDAO {
 	
 	//-------------------------------송장을 통해 주문 물건의 개수와 해당 물건의 재고량을 가져온다.
 	public List<OrderDTO> selectQuantity(String iCode){
-		String sql = "select p.pCode o.oQuantity, p.pQuantity from `order` as o\r\n" + 
+		String sql = "select p.pCode, o.oQuantity, p.pQuantity from `order` as o\r\n" + 
 				"inner join product as p on p.pCode = o.oProductCode where o.oInvoiceCode like '"+iCode+"';";
 		List<OrderDTO> orderList = selectQuantitiyCondition(sql);
 		return orderList;

@@ -88,7 +88,7 @@ public class CustomerFunction {
 			
 			// 공급자 구분
 			String supplierCode = SupplierCode(pCode);
-			LOG.trace("CF.supplier : "+supplier);
+			LOG.trace("CF.supplier : "+supplierCode);
 			// 자동(3)
 			int OneOrZero = sDao.searchState(supplierCode); // sState 검색후 state가 0인것이
 			LOG.trace("CF.OneOrZero : "+OneOrZero);
@@ -100,7 +100,7 @@ public class CustomerFunction {
 				// count = 이미 있는 sCode의 마지막번호 +1로 시작
 				LOG.trace("CF.OneOrZero가 0일 경우의 increment : "+increment);
 			}
-			String sCode = supplier + date + increment;
+			String sCode = supplierCode + date + increment;
 			LOG.trace(sCode);
 			LOG.trace("CF.sCodeCreate퇴장");
 			return sCode;
