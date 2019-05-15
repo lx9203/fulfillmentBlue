@@ -85,19 +85,6 @@ public class MallProc extends HttpServlet {
     		}
     		LOG.trace("[쇼핑몰 Proc] 이번달 매출액 계산 완료");
     		
-    		//2. 전년도 지불 액수 
-    		LOG.trace(cf.lastYear(cf.curYear()));
-			iDtoLists = iDao.mallSalesYear(userId.charAt(0),cf.lastYear(cf.curYear()));
-			for(InvoiceDTO invoice : iDtoLists) {
-    			oDtoLists = oDao.selectAll(invoice.getiCode());
-    			for(OrderDTO order : oDtoLists) {
-    				lastYearTotalSales += order.getoQuantity()*order.getpPrice()*1.1;
-    			}
-    			lastYearTotalSales += 10000;
-    		}
-			LOG.trace("[쇼핑몰 Proc] 전년도 매출액 계산 완료");
-			
-			
 			//3.올해 월별 지불 액수
 			for(int m=1;m<13;m++) {
 				monthTotalPrice = 0;

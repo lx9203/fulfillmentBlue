@@ -216,13 +216,13 @@ public class UserProc extends HttpServlet {
 			
 			LOG.trace("회원 가입 완료");
 			//회원 가입 완료 문구 작성
-			message = "축하합니다! 회원 가입이 완료 되었습니다.\\n 회원님의 아이디는 " + id + " 입니다.\\n";
+			message = "축하합니다! 회원 가입이 완료 되었습니다.<br> 회원님의 아이디는 " + id + " 입니다.";
 			url = "login.jsp";
 			LOG.trace(message);
 			LOG.trace(url);
 			request.setAttribute("message", message);
-			request.setAttribute("url", url);
-			rd = request.getRequestDispatcher("alertMsg.jsp");
+			request.setAttribute("msgState", true);
+	        rd = request.getRequestDispatcher("login.jsp");
 			rd.forward(request, response);
 			LOG.trace("전달 완료");
 			break;

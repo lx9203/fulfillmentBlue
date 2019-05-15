@@ -52,7 +52,7 @@
                       </div>
                     </div>
                     <input class="btn btn-primary btn-user btn-block" type="submit" value="로그인">
-                 	<a href="catalog/catalogMain.jsp" class="btn btn-google btn-user btn-block">창고 둘러보기</a>
+                 	<a href="ProductProc?action=intoMain" class="btn btn-google btn-user btn-block">창고 둘러보기</a>
                   </form>
                   <hr>
                   <div class="text-center">
