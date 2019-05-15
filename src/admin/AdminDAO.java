@@ -254,10 +254,9 @@ public class AdminDAO {
 		}
 	
 	public void invoiceCompleteState(String iCode) { // 출고 완료 (State = 2)
-		String query = "update invoice set iState=2, iDate=? where iCode =?;";
+		String query = "update invoice set iState=2 where iCode =?;";
 		try {
 			pStmt = conn.prepareStatement(query);
-			pStmt.setString(1,cf.curTime());
 			pStmt.setString(2,iCode);
 			pStmt.executeUpdate();
 		} catch (Exception e) {

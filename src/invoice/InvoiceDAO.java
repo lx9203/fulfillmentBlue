@@ -102,7 +102,7 @@ public class InvoiceDAO {
 		String tomorrow = cf.tomorrow(date);
 		LOG.trace("[송장 DAO] 다음날 날짜 : " + tomorrow);
 		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
-				+ "where iCode like '"+Character.toString(iCode)+"%' and iDate >'"+date+"' and iDate < '"+tomorrow+"';";
+				+ "where iCode like '"+Character.toString(iCode)+"%' and iDate >='"+date+"' and iDate < '"+tomorrow+"';";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
@@ -123,7 +123,7 @@ public class InvoiceDAO {
 		String tomorrow = cf.tomorrow(date);
 		LOG.trace("[송장 DAO] 다음날 날짜 : " + tomorrow);
 		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
-				+ "where iAreaCode like '"+AreaCode+"' and iDate >'"+date+"' and iDate < '"+tomorrow+"';";
+				+ "where iAreaCode like '"+AreaCode+"' and iDate >='"+date+"' and iDate < '"+tomorrow+"';";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
@@ -245,7 +245,7 @@ public class InvoiceDAO {
 
 	//----------------------------한개의 송장번호 가져오기--------------------------------------------
 	public InvoiceDTO selectOneDayLast(String date){
-		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice where iCode like '%"+date+"%' order by iCode desc limit 1;";
+		String sql = "select iCode, iName, iTel, iAddress, iDate from invoice where iDate >='"+cf.curDate()+"' and iDate < '"+cf.tomorrow(cf.curDate())+"'  order by iCode desc limit 1;";
 		InvoiceDTO invoice = selectOneCondition(sql);
 		return invoice;
 	}

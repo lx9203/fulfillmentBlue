@@ -246,9 +246,9 @@ public class AdminProc extends HttpServlet {
 		case "transPermissionList":
 			LOG.trace("운송 준비 송장 확인");
 			invoiceTotalSales = 0;
-			invoiceTotalPrice = 0;
 			invoiceList = aDao.selectTransList();
 			for(AdminDTO invoice : invoiceList) {
+				invoiceTotalPrice = 0;
 				orderList = aDao.selectOrderList(invoice.getiCode());
 				for(AdminDTO order : orderList) {
 					invoiceTotalPrice += order.getoQuantity()*order.getpPrice();	

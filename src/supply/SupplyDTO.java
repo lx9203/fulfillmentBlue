@@ -70,7 +70,7 @@ public class SupplyDTO {
 			this.sState = "납품 처리대기";
 			break;
 		case 1 :
-			this.sState = "납품 승인대기";
+			this.sState = "납품 승인요청";
 			break;
 		}
 	}

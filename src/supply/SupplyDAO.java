@@ -143,7 +143,18 @@ public class SupplyDAO {
 		LOG.trace("sDao.selectBeforeAll() 진입");
 		String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState "
 				+ "from supply as s inner join product as p on p.pCode = s.sProductCode "
-				+ "where sState < 2 and  p.pCode like '" + supplierCode + "%' order by sState desc;";
+				+ "where sState < 2 and p.pCode like '" + supplierCode + "%' and s.sDate < '"+cf.curDate()+"'order by sState desc;";
+		List<SupplyDTO> supplyList = selectCondition(sql);
+		LOG.trace("sDao.selectBeforeAll() 종료");
+		return supplyList;
+	}
+	
+	// 납품 
+	public List<SupplyDTO> selectBeforeState(String supplierCode) {
+		LOG.trace("sDao.selectBeforeAll() 진입");
+		String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState "
+				+ "from supply as s inner join product as p on p.pCode = s.sProductCode "
+				+ "where sState = 0 and p.pCode like '" + supplierCode + "%'";
 		List<SupplyDTO> supplyList = selectCondition(sql);
 		LOG.trace("sDao.selectBeforeAll() 종료");
 		return supplyList;
@@ -213,7 +224,7 @@ public class SupplyDAO {
 	public String searchsCode(String supplierCode) {
 		String sCode = new String();
 		try {
-			String sql = "select sCode from supply where sState = 0 and sCode like '"+supplierCode+"%' order by sCode limit 1;;";
+			String sql = "select sCode from supply where sState = 0 and sCode like '"+supplierCode+"%' order by sCode limit 1;";
 			PreparedStatement pStmt = null;
 			pStmt = conn.prepareStatement(sql);
 			ResultSet rs = pStmt.executeQuery();
