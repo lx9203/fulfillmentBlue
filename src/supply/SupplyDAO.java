@@ -141,9 +141,9 @@ public class SupplyDAO {
 	// 미완료 전체검색 (sState < 2) -> SupplyProc.supplyBeforeList
 	public List<SupplyDTO> selectBeforeAll(String supplierCode) {
 		LOG.trace("sDao.selectBeforeAll() 진입");
-		String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState from supply as s "
-				+ "inner join product as p on p.pCode = s.sProductCode " + "where sState < 2 and  p.pCode like '"
-				+ supplierCode + "%' order by sState desc";
+		String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState "
+				+ "from supply as s inner join product as p on p.pCode = s.sProductCode "
+				+ "where sState < 2 and  p.pCode like '" + supplierCode + "%' order by sState desc;";
 		List<SupplyDTO> supplyList = selectCondition(sql);
 		LOG.trace("sDao.selectBeforeAll() 종료");
 		return supplyList;

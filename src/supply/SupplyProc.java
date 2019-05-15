@@ -64,6 +64,9 @@ public class SupplyProc extends HttpServlet {
 			String sCode = sDao.searchsCode(supplierCode);
 			sDao.updateState(sCode);
 			LOG.trace("sProc.complete 완료. sProc.complete퇴장");
+
+			rd = request.getRequestDispatcher("supply/sBeforeSupply.jsp");
+			rd.forward(request, response);
 			break;
 			
 		case "supplyBeforeList":
