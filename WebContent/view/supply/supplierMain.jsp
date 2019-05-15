@@ -44,7 +44,7 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">연간 매출액</div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">올해 매출액</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.curYearTotalSales} 원</div>
                     </div>
                     <div class="col-auto">
@@ -61,8 +61,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">전년대비 매출 상황</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.supplyTotalPrice}원</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">전년도 금월금일 매출 비교</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.CurYearSalesRatio}원</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -79,7 +79,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">월간 매출</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.supplyTotalPrice}원</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.curMonthTotalSales}원</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>

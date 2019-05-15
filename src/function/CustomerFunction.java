@@ -105,7 +105,7 @@ public class CustomerFunction {
 			LOG.trace("CF.sCodeCreate퇴장");
 			return sCode;
 		}
-		//(supply)
+		//(supply)	userId or sCode or pCode의 첫글자 가져오기 (supplierCode 만들기)
 		public static String SupplierCode(String pCode) {
 			char codeFirst = pCode.charAt(0);
 			String supplierCode = Character.toString(codeFirst);
