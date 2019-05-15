@@ -17,13 +17,9 @@
 
   <!-- Custom styles for this template-->
   <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+  
+  <link href="../css/bluecompany.css" rel="stylesheet">
 
-  <style>
-  .flex-container-setting {
-  	display:flex;
-  	flex-wrap:wrap;
-  }
-  </style>
 </head>
 
 <body id="page-top">
@@ -50,174 +46,103 @@
             <h1 class="h3 mb-0 text-gray-800">[카테고리명]</h1>
           </div>
 
-          <div class="row align-items-center">
+          <div class="row">
 			
 			<!-- item 1 -->
-			<div class="col-xs-4 col-md-3" style="min-width:150px; max-width:253px; min-height:13rem; margin-bottom:1.5rem;">
-				<div class="card shadow" style="width:100%; padding: unset;">
-					<div class="" style="width:100%; height:10rem; background-image: url(../img/BBQ/sausage.jpg); background-position: center center; background-size: cover; border-radius: 0.25rem 0.25rem 0 0;"></div>
-					<div style="margin:0.2rem">
-						<div class="card-header" style="padding: .25rem 0.75rem; background-color: white; min-height: max-content;">
-							<h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+			<div class="col-6 col-sm-3 p-box">
+				<div class="p-box-layout">
+					<div class="p-box-layout-img" style="background-image: url(../img/BBQ/sausage.jpg);"></div>
+					<div class="p-box-layout-caption">
+						<div class="p-box-layout-caption-head">
+							<h6>Illustrations</h6>
 						</div>
-						<div class="small card-body" style="padding:.25rem 0.75rem;">
-							<p style="margin:unset">제품가:</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<!-- item 1 -->
-			<div class="col-xs-4 col-md-3" style="min-width:150px; max-width:253px; min-height:13rem; margin-bottom:1.5rem;">
-				<div class="card shadow" style="width:100%; padding: unset;">
-					<div class="" style="width:100%; height:10rem; background-image: url(../img/BBQ/sausage.jpg); background-position: center center; background-size: cover; border-radius: 0.25rem 0.25rem 0 0;"></div>
-					<div style="margin:0.2rem">
-						<div class="card-header" style="padding: .25rem 0.75rem; background-color: white; min-height: max-content;">
-							<h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-						</div>
-						<div class="small card-body" style="padding:.25rem 0.75rem;">
-							<p style="margin:unset">제품가:</p>
+						<div class="p-box-layout-caption-script">
+							<p>제품단가:</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- item 1 -->
-			<div class="col-xs-4 col-md-3" style="min-width:150px; max-width:253px; min-height:13rem; margin-bottom:1.5rem;">
+			<div class="col-6 col-sm-3" style="min-height:13rem; margin-bottom:1.5rem;">
 				<div class="card shadow" style="width:100%; padding: unset;">
 					<div class="" style="width:100%; height:10rem; background-image: url(../img/BBQ/sausage.jpg); background-position: center center; background-size: cover; border-radius: 0.25rem 0.25rem 0 0;"></div>
-					<div style="margin:0.2rem">
+					<div style="margin:0.2rem 0.5rem">
 						<div class="card-header" style="padding: .25rem 0.75rem; background-color: white; min-height: max-content;">
 							<h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
 						</div>
 						<div class="small card-body" style="padding:.25rem 0.75rem;">
-							<p style="margin:unset">제품가:</p>
+							<p style="margin:unset">제품단가:</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- item 1 -->
-			<div class="col-xs-4 col-md-3" style="min-width:150px; max-width:253px; min-height:13rem; margin-bottom:1.5rem;">
+			<div class="col-6 col-sm-3" style="min-height:13rem; margin-bottom:1.5rem;">
 				<div class="card shadow" style="width:100%; padding: unset;">
 					<div class="" style="width:100%; height:10rem; background-image: url(../img/BBQ/sausage.jpg); background-position: center center; background-size: cover; border-radius: 0.25rem 0.25rem 0 0;"></div>
-					<div style="margin:0.2rem">
+					<div style="margin:0.2rem 0.5rem">
 						<div class="card-header" style="padding: .25rem 0.75rem; background-color: white; min-height: max-content;">
 							<h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
 						</div>
 						<div class="small card-body" style="padding:.25rem 0.75rem;">
-							<p style="margin:unset">제품가:</p>
+							<p style="margin:unset">제품단가:</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- item 1 -->
-			<div class="col-xs-4 col-md-3" style="min-width:150px; max-width:253px; min-height:13rem; margin-bottom:1.5rem;">
+			<div class="col-6 col-sm-3" style="min-height:13rem; margin-bottom:1.5rem;">
 				<div class="card shadow" style="width:100%; padding: unset;">
 					<div class="" style="width:100%; height:10rem; background-image: url(../img/BBQ/sausage.jpg); background-position: center center; background-size: cover; border-radius: 0.25rem 0.25rem 0 0;"></div>
-					<div style="margin:0.2rem">
+					<div style="margin:0.2rem 0.5rem">
 						<div class="card-header" style="padding: .25rem 0.75rem; background-color: white; min-height: max-content;">
 							<h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
 						</div>
 						<div class="small card-body" style="padding:.25rem 0.75rem;">
-							<p style="margin:unset">제품가:</p>
+							<p style="margin:unset">제품단가:</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- item 1 -->
-			<div class="col-xs-4 col-md-3" style="min-width:150px; max-width:253px; min-height:13rem; margin-bottom:1.5rem;">
+			<div class="col-6 col-sm-3" style="min-height:13rem; margin-bottom:1.5rem;">
 				<div class="card shadow" style="width:100%; padding: unset;">
 					<div class="" style="width:100%; height:10rem; background-image: url(../img/BBQ/sausage.jpg); background-position: center center; background-size: cover; border-radius: 0.25rem 0.25rem 0 0;"></div>
-					<div style="margin:0.2rem">
+					<div style="margin:0.2rem 0.5rem">
 						<div class="card-header" style="padding: .25rem 0.75rem; background-color: white; min-height: max-content;">
 							<h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
 						</div>
 						<div class="small card-body" style="padding:.25rem 0.75rem;">
-							<p style="margin:unset">제품가:</p>
+							<p style="margin:unset">제품단가:</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- item 1 -->
-			<div class="col-xs-4 col-md-3" style="min-width:150px; max-width:253px; min-height:13rem; margin-bottom:1.5rem;">
+			<div class="col-6 col-sm-3" style="min-height:13rem; margin-bottom:1.5rem;">
 				<div class="card shadow" style="width:100%; padding: unset;">
 					<div class="" style="width:100%; height:10rem; background-image: url(../img/BBQ/sausage.jpg); background-position: center center; background-size: cover; border-radius: 0.25rem 0.25rem 0 0;"></div>
-					<div style="margin:0.2rem">
+					<div style="margin:0.2rem 0.5rem">
 						<div class="card-header" style="padding: .25rem 0.75rem; background-color: white; min-height: max-content;">
 							<h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
 						</div>
 						<div class="small card-body" style="padding:.25rem 0.75rem;">
-							<p style="margin:unset">제품가:</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- item 1 -->
-			<div class="col-xs-4 col-md-3" style="min-width:150px; max-width:253px; min-height:13rem; margin-bottom:1.5rem;">
-				<div class="card shadow" style="width:100%; padding: unset;">
-					<div class="" style="width:100%; height:10rem; background-image: url(../img/BBQ/sausage.jpg); background-position: center center; background-size: cover; border-radius: 0.25rem 0.25rem 0 0;"></div>
-					<div style="margin:0.2rem">
-						<div class="card-header" style="padding: .25rem 0.75rem; background-color: white; min-height: max-content;">
-							<h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-						</div>
-						<div class="small card-body" style="padding:.25rem 0.75rem;">
-							<p style="margin:unset">제품가:</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- item 1 -->
-			<div class="col-xs-4 col-md-3" style="min-width:150px; max-width:253px; min-height:13rem; margin-bottom:1.5rem;">
-				<div class="card shadow" style="width:100%; padding: unset;">
-					<div class="" style="width:100%; height:10rem; background-image: url(../img/BBQ/sausage.jpg); background-position: center center; background-size: cover; border-radius: 0.25rem 0.25rem 0 0;"></div>
-					<div style="margin:0.2rem">
-						<div class="card-header" style="padding: .25rem 0.75rem; background-color: white; min-height: max-content;">
-							<h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-						</div>
-						<div class="small card-body" style="padding:.25rem 0.75rem;">
-							<p style="margin:unset">제품가:</p>
+							<p style="margin:unset">제품단가:</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			
 			<!-- item 1 -->
-			<div class="col-xs-4 col-md-3" style="min-width:150px; max-width:253px; min-height:13rem; margin-bottom:1.5rem;">
+			<div class="col-6 col-sm-3" style="min-height:13rem; margin-bottom:1.5rem;">
 				<div class="card shadow" style="width:100%; padding: unset;">
 					<div class="" style="width:100%; height:10rem; background-image: url(../img/BBQ/sausage.jpg); background-position: center center; background-size: cover; border-radius: 0.25rem 0.25rem 0 0;"></div>
-					<div style="margin:0.2rem">
+					<div style="margin:0.2rem 0.5rem">
 						<div class="card-header" style="padding: .25rem 0.75rem; background-color: white; min-height: max-content;">
 							<h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
 						</div>
 						<div class="small card-body" style="padding:.25rem 0.75rem;">
-							<p style="margin:unset">제품가:</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- item 1 -->
-			<div class="col-xs-4 col-md-3" style="min-width:150px; max-width:253px; min-height:13rem; margin-bottom:1.5rem;">
-				<div class="card shadow" style="width:100%; padding: unset;">
-					<div class="" style="width:100%; height:10rem; background-image: url(../img/BBQ/sausage.jpg); background-position: center center; background-size: cover; border-radius: 0.25rem 0.25rem 0 0;"></div>
-					<div style="margin:0.2rem">
-						<div class="card-header" style="padding: .25rem 0.75rem; background-color: white; min-height: max-content;">
-							<h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-						</div>
-						<div class="small card-body" style="padding:.25rem 0.75rem;">
-							<p style="margin:unset">제품가:</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- item 1 -->
-			<div class="col-xs-4 col-md-3" style="min-width:150px; max-width:253px; min-height:13rem; margin-bottom:1.5rem;">
-				<div class="card shadow" style="width:100%; padding: unset;">
-					<div class="" style="width:100%; height:10rem; background-image: url(../img/BBQ/sausage.jpg); background-position: center center; background-size: cover; border-radius: 0.25rem 0.25rem 0 0;"></div>
-					<div style="margin:0.2rem">
-						<div class="card-header" style="padding: .25rem 0.75rem; background-color: white; min-height: max-content;">
-							<h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-						</div>
-						<div class="small card-body" style="padding:.25rem 0.75rem;">
-							<p style="margin:unset">제품가:</p>
+							<p style="margin:unset">제품단가:</p>
 						</div>
 					</div>
 				</div>
