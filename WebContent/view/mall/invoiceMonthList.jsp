@@ -57,10 +57,10 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <colgroup>
 					<col style="width:10%">
-					<col style="width:15%">
-					<col style="width:40%">
-					<col style="width:15%">
 					<col style="width:10%">
+					<col style="width:35%">
+					<col style="width:20%">
+					<col style="width:15%">
 					<col style="width:10%">
 				  </colgroup>
                   <thead>

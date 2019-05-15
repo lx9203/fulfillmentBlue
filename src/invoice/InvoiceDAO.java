@@ -138,8 +138,8 @@ public class InvoiceDAO {
 	}
 	
 	//3. 송장 처리가 진행중인 송장의 목록 가져오기
-	public List<InvoiceDTO> transState1(){
-		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice where iState = 1;";
+	public List<InvoiceDTO> transRequestList(){
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice where iState < 2;";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
