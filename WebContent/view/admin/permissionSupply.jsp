@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +45,7 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
               <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${selectDate}</h6>
-              <a href="AdminProc?action=" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+              <a href="AdminProc?action=permitSupply" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i>발주
               </a>
             </div>
@@ -67,20 +68,34 @@
                       <th>상품이름</th>
                       <th>단가</th>
                       <th>발주량</th>
-                      <th>총액</th>
+                      <th>발주금액</th>
                       <th>날짜</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tfoot>
                     <tr>
-                      <td>A156481135</td>
-                      <td><a href="requestDetail.jsp" >a1001</a></td>
-                      <td>삼겹살 1kg</td>
-                      <td>50</td>
-                      <th>10000</th>
-                      <th>500000</th>
-                      <th>20190509</th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th>총액</th>
+                      <th><fmt:formatNumber value="${requestScope.supplyTotalSales}" pattern="#,##0"/>원</th>
+                      <th></th>
                     </tr>
+                  </tfoot>
+                  <tbody>
+                    <c:set var="supplyList" value ="${requestScope.supplyList}"/>
+					<c:forEach var="supply" items="${supplyList}">
+	                 <tr>
+                      <td>${supply.sCode}</td>
+                      <td>${supply.pCode}</td>
+                      <td>${supply.pName}</td>
+                      <td><fmt:formatNumber value="${supply.pPrice}" pattern="#,##0"/>원</td>
+                      <td>${supply.sQuantity}</td>
+                      <td><fmt:formatNumber value="${supply.sTotalPrice}" pattern="#,##0"/>원</td>
+                      <td>${supply.sDate}</td>
+                   	</tr>
+                 	</c:forEach>
                   </tbody>
                 </table>
              </div>

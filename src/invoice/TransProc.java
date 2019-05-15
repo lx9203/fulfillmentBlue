@@ -16,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import function.CustomerFunction;
-import product.*;
 import supply.*;
 
 @WebServlet("/view/TransProc")
@@ -51,8 +50,6 @@ public class TransProc extends HttpServlet {
 			InvoiceDTO iDto = new InvoiceDTO();
 			List<InvoiceDTO> iDtoLists = new ArrayList<InvoiceDTO>();
 	    	List<OrderDTO> oDtoLists = new ArrayList<OrderDTO>();
-	    	ProductDAO pDao = new ProductDAO();
-	    	ProductDTO pDto = new ProductDTO();
 	    	SupplyDAO sDao = new SupplyDAO();
 	    	
 	    	//session 변수
@@ -70,7 +67,8 @@ public class TransProc extends HttpServlet {
 	    	int monthListCount = 0; //4. 이번달 처리 송장 건수를 저장
 	    	int monthTotalPrice = 0; //월별 매출액을 저장
 	    	
-	    	List<Integer> monthTotalSalesList = new ArrayList<Integer>();
+	    	List<Integer> lastTotalSalesList = new ArrayList<Integer>();
+	    	List<Integer> thisTotalSalesList = new ArrayList<Integer>();
 	    	
 	    	switch(action) {
 	    	case "intoMain":
@@ -81,22 +79,25 @@ public class TransProc extends HttpServlet {
 	    		monthTotalSales = monthListCount * 10000;
 	    	
 	    		LOG.trace("[운송사 Proc] 이번달 매출액 계산 완료");
-	    		
-	    		//2. 전년도 지불 액수 
-	    		LOG.trace(cf.lastYear(cf.curYear()));
-				iDtoLists = iDao.transSalesYear(userId,cf.lastYear(cf.curYear()));
-	    		lastYearTotalSales = iDtoLists.size()*10000;
-				LOG.trace("[운송사 Proc] 전년도 매출액 계산 완료");
 				
 				
 				//3.이번년도 월별 지불 액수
 				for(int m=1;m<13;m++) {
 					monthTotalPrice = 0;
-					iDtoLists = iDao.transSalesCurYearMonth(userId,m);
+					iDtoLists = iDao.transSalesYearMonth(cf.curYear(),userId,m);
 					LOG.trace("[운송사 Proc]"+m+"월 송장 수 : "+iDtoLists.size()+"");
 		    		monthTotalPrice = iDtoLists.size()*10000;
-					monthTotalSalesList.add(monthTotalPrice); //월별 총액을 리스트로 저장
+		    		thisTotalSalesList.add(monthTotalPrice); //월별 총액을 리스트로 저장
 					thisYearTotalSales += monthTotalPrice; //올해 총액을 int로 저장
+				}
+				//4. 작년도 월별 지불 액수
+				for(int m=1;m<13;m++) {
+					monthTotalPrice = 0;
+					iDtoLists = iDao.transSalesYearMonth(cf.lastYear(cf.curYear()),userId,m);
+					LOG.trace("[운송사 Proc]"+m+"월 송장 수 : "+iDtoLists.size()+"");
+		    		monthTotalPrice = iDtoLists.size()*10000;
+		    		lastTotalSalesList.add(monthTotalPrice); //월별 총액을 리스트로 저장
+		    		lastYearTotalSales += monthTotalPrice; //올해 총액을 int로 저장
 				}
 	    		
 	    		request.setAttribute("monthTotalSales", monthTotalSales); //1. 이번달 지불액
@@ -104,7 +105,8 @@ public class TransProc extends HttpServlet {
 	    		request.setAttribute("thisYearTotalSales", thisYearTotalSales);//3. 이번년 총 지불액 
 	    		request.setAttribute("monthListCount", monthListCount); //4. 이번달 처리 송장 건수
 	    		
-	    		request.setAttribute("monthTotalSalesList", monthTotalSalesList); //5. 월별 총 지불액
+	    		request.setAttribute("thisTotalSalesList", thisTotalSalesList); //5. 월별 총 지불액
+	    		request.setAttribute("lastTotalSalesList", lastTotalSalesList); //5. 월별 총 지불액
 	    		rd = request.getRequestDispatcher("transfer/transMain.jsp");
 				rd.forward(request, response);
 	    		break;

@@ -67,7 +67,8 @@ public class MallProc extends HttpServlet {
     	int monthListCount = 0; //4. 이번달 처리 송장 건수를 저장
     	int monthTotalPrice = 0; //월별 매출액을 저장
     	
-    	List<Integer> monthTotalSalesList = new ArrayList<Integer>();
+    	List<Integer> lastTotalSalesList = new ArrayList<Integer>();
+    	List<Integer> thisTotalSalesList = new ArrayList<Integer>();
     	
     	switch(action) {
     	case "intoMain" :
@@ -97,10 +98,10 @@ public class MallProc extends HttpServlet {
 			LOG.trace("[쇼핑몰 Proc] 전년도 매출액 계산 완료");
 			
 			
-			//3.이번년도 월별 지불 액수
+			//3.올해 월별 지불 액수
 			for(int m=1;m<13;m++) {
 				monthTotalPrice = 0;
-				iDtoLists = iDao.mallSalesCurYearMonth(userId.charAt(0),m);
+				iDtoLists = iDao.mallSalesYearMonth(cf.curYear(),userId.charAt(0),m);
 				LOG.trace("[쇼핑몰 Proc]"+m+"월 송장 수 : "+iDtoLists.size()+"");
 				for(InvoiceDTO invoice : iDtoLists) {
 					oDtoLists = oDao.selectAll(invoice.getiCode());
@@ -109,8 +110,23 @@ public class MallProc extends HttpServlet {
 	    			}
 	    			monthTotalPrice += 10000;
 	    		}
-				monthTotalSalesList.add(monthTotalPrice); //월별 총액을 리스트로 저장
+				thisTotalSalesList.add(monthTotalPrice); //월별 총액을 리스트로 저장
 				thisYearTotalSales += monthTotalPrice; //올해 총액을 int로 저장
+			}
+			//3.작년 월별 지불 액수
+			for(int m=1;m<13;m++) {
+				monthTotalPrice = 0;
+				iDtoLists = iDao.mallSalesYearMonth(cf.lastYear(cf.curYear()),userId.charAt(0),m);
+				LOG.trace("[쇼핑몰 Proc]"+m+"월 송장 수 : "+iDtoLists.size()+"");
+				for(InvoiceDTO invoice : iDtoLists) {
+					oDtoLists = oDao.selectAll(invoice.getiCode());
+	    			for(OrderDTO order : oDtoLists) {
+	    				monthTotalPrice += order.getoQuantity()*order.getpPrice()*1.1;
+	    			}
+	    			monthTotalPrice += 10000;
+	    		}
+				lastTotalSalesList.add(monthTotalPrice); //월별 총액을 리스트로 저장
+				lastYearTotalSales += monthTotalPrice; //올해 총액을 int로 저장
 			}
     		
     		request.setAttribute("monthTotalSales", monthTotalSales); //1. 이번달 지불액
@@ -118,7 +134,8 @@ public class MallProc extends HttpServlet {
     		request.setAttribute("thisYearTotalSales", thisYearTotalSales);//3. 이번년 총 지불액 
     		request.setAttribute("monthListCount", monthListCount); //4. 이번달 처리 송장 건수
     		
-    		request.setAttribute("monthTotalSalesList", monthTotalSalesList); //5. 월별 총 지불액
+    		request.setAttribute("thisTotalSalesList", thisTotalSalesList); //5. 올해 월별 총 지불액
+    		request.setAttribute("lastTotalSalesList", lastTotalSalesList); //5. 작년 월별 총 지불액
     		rd = request.getRequestDispatcher("mall/mallMain.jsp");
 			rd.forward(request, response);
 			break;

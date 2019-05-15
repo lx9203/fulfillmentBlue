@@ -1,16 +1,19 @@
 package admin;
 
 public class AdminDTO {
-	private String iCode;
-	private String pCode;
-	private String iDate;
-	private String uName;
-	private String pName;
-	private int iTotalPrice;
-	private int pQuantity;
-	private int oQuantity;
-	private int sQuantity;
-	private int pPrice;
+	private String iCode; //송장 번호(쇼핑몰, 운송사)
+	private String pCode; //제품 번호
+	private String sCode; //발주 코드(공급사)
+	private String iDate; //송장 날짜
+	private String sDate; //발주 날짜
+	private String uName; //유저 이름(운송사이름)
+	private String pName; //제품 이름
+	private int iTotalPrice; //송장내 총 금액
+	private int sTotalPrice; //발주물품 총 금액
+	private int pQuantity; //재고 수량
+	private int oQuantity; //송장 주문 수량
+	private int sQuantity; //발주 수량
+	private int pPrice; //제품가격
 	
 	public AdminDTO() {}
 	
@@ -58,7 +61,7 @@ public class AdminDTO {
 	}
 
 	public void setiDate(String iDate) {
-		this.iDate = iDate;
+		this.iDate = iDate.substring(0, 10);
 	}
 
 	public String getuName() {
@@ -99,6 +102,30 @@ public class AdminDTO {
 
 	public void setsQuantity(int sQuantity) {
 		this.sQuantity = sQuantity;
+	}
+
+	public String getsCode() {
+		return sCode;
+	}
+
+	public void setsCode(String sCode) {
+		this.sCode = sCode;
+	}
+
+	public String getsDate() {
+		return sDate;
+	}
+
+	public void setsDate(String sDate) {
+		this.sDate = sDate.substring(0, 10);
+	}
+
+	public int getsTotalPrice() {
+		return sTotalPrice;
+	}
+
+	public void setsTotalPrice(int sTotalPrice) {
+		this.sTotalPrice = sTotalPrice;
 	}
 	
 	

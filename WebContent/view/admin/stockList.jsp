@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,6 +65,15 @@
                       <th>입고예정</th>
                     </tr>
                   </thead>
+                  <tfoot>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th>총액</th>
+                      <th><fmt:formatNumber value="${requestScope.invoiceTotalSales}" pattern="#,##0"/>원</th>
+                    </tr>
+                  </tfoot>
                   <tbody>
                   	<c:set var="productList" value ="${requestScope.productList}"/>
 					<c:forEach var="product" items="${productList}">
