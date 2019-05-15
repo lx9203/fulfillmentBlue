@@ -53,7 +53,7 @@ public class CustomerFunction {
     }
 
 	//(invoice) 송장번호 생성 함수 - 송장 등록 관련
-	public static String iCodeProc(String shopping, String areaCode) {
+	public String iCodeProc(String shopping, String areaCode) {
     	InvoiceDAO iDao = new InvoiceDAO();
 		char shoppingCode = shopping.charAt(0);
 		char area = areaCode.charAt(0);

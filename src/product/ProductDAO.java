@@ -37,12 +37,12 @@ public class ProductDAO {
 	
 	//출하 및 입고 후 개수 업데이트 메소드
 	
-	public void updateQuantity(ProductDTO product) {
+	public void updateQuantity(String pCode, int Quantity) {
 		String query = "update product set pQuantity=? where pCode =?;";
 		try {
 			pStmt = conn.prepareStatement(query);
-			pStmt.setInt(1, product.getpQuantity());			
-			pStmt.setString(2, product.getpCode());			
+			pStmt.setInt(1, Quantity);			
+			pStmt.setString(2, pCode);			
 			pStmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -101,7 +101,7 @@ public class ProductDAO {
 		return productList;
 	}
 	
-	public ProductDTO searchAll(String pCode){
+	public ProductDTO searchOne(String pCode){
 		String sql = "select * from product where pCode like'"+pCode+"';";
 		ProductDTO product = selectCondition(sql);
 		return product;

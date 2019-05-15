@@ -111,7 +111,7 @@ public class InvoiceDAO {
 		String nextMonth = cf.nextMonth(month);
 		LOG.trace("[송장 DAO] 다음달 날짜 : " + nextMonth);
 		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
-				+ "where iCode like '"+Character.toString(iCode)+"%' and iDate >='"+month+"-01' and iDate < '"+nextMonth+"-01';";
+				+ "where iCode like '"+Character.toString(iCode)+"%' and iDate >='"+month+"-01' and iDate < '"+nextMonth+"-01' and iState = 2;";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
@@ -132,7 +132,7 @@ public class InvoiceDAO {
 		String nextMonth = cf.nextMonth(month);
 		LOG.trace("[송장 DAO] 다음달 날짜 : " + nextMonth);
 		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
-				+ "where iAreaCode like '"+AreaCode+"' and iDate >='"+month+"-01' and iDate < '"+nextMonth+"-01';";
+				+ "where iAreaCode like '"+AreaCode+"' and iDate >='"+month+"-01' and iDate < '"+nextMonth+"-01' and iState = 2;";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
@@ -165,16 +165,16 @@ public class InvoiceDAO {
 		return invoiceList;
 	}
 	
-	public List<InvoiceDTO> mallSalesCurYearMonth(char iCode,int month){
+	public List<InvoiceDTO> mallSalesYearMonth(String year,char iCode,int month){
 		String thisMonth = String.format("%02d", month);
 		String nextMonth = String.format("%02d", month+1);
 		String sql = new String();
 		if(month != 12) {
 			sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
-					+ "where iCode like '"+Character.toString(iCode)+"%' and iDate >='"+cf.curYear()+"-"+thisMonth+"-01' and iDate < '"+cf.curYear()+"-"+nextMonth+"-01' and iState = 2;";
+					+ "where iCode like '"+Character.toString(iCode)+"%' and iDate >='"+year+"-"+thisMonth+"-01' and iDate < '"+year+"-"+nextMonth+"-01' and iState = 2;";
 		}else {
 			sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
-					+ "where iCode like '"+Character.toString(iCode)+"%' and iDate >='"+cf.curYear()+"-"+thisMonth+"-01' and iDate < '"+cf.nextYear(cf.curYear())+"-01-01' and iState = 2;";
+					+ "where iCode like '"+Character.toString(iCode)+"%' and iDate >='"+year+"-"+thisMonth+"-01' and iDate < '"+cf.nextYear(year)+"-01-01' and iState = 2;";
 		}
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
@@ -198,16 +198,16 @@ public class InvoiceDAO {
 		return invoiceList;
 	}
 	
-	public List<InvoiceDTO> transSalesCurYearMonth(String AreaCode,int month){
+	public List<InvoiceDTO> transSalesYearMonth(String year, String AreaCode,int month){
 		String thisMonth = String.format("%02d", month);
 		String nextMonth = String.format("%02d", month+1);
 		String sql = new String();
 		if(month != 12) {
 			sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
-					+ "where iAreaCode like '"+AreaCode+"' and iDate >='"+cf.curYear()+"-"+thisMonth+"-01' and iDate < '"+cf.curYear()+"-"+nextMonth+"-01' and iState = 2;";
+					+ "where iAreaCode like '"+AreaCode+"' and iDate >='"+year+"-"+thisMonth+"-01' and iDate < '"+year+"-"+nextMonth+"-01' and iState = 2;";
 		}else {
 			sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice "
-					+ "where iAreaCode like '"+AreaCode+"' and iDate >='"+cf.curYear()+"-"+thisMonth+"-01' and iDate < '"+cf.nextYear(cf.curYear())+"-01-01' and iState = 2;";
+					+ "where iAreaCode like '"+AreaCode+"' and iDate >='"+year+"-"+thisMonth+"-01' and iDate < '"+cf.nextYear(year)+"-01-01' and iState = 2;";
 		}
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;

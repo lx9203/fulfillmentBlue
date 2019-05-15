@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,10 +40,10 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-2 text-gray-800">월별 발주내역</h1>
-            <form action="" class="form-horizontal d-sm-inline-block" method="post">
+            <form action="AdminProc?action=supplySearchMonthList" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
-			      <input type="text" name="monthCustomer" id="monthpicker" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
+			      <input type="text" name="month" id="monthpicker" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
 			      <input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
 			    </label>
 			  </div>
@@ -51,44 +52,55 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">[검색연월]</h6>
-              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-              </a>
+              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${requestScope.selectMonth}</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <colgroup>
 					<col style="width:10%">
-					<col style="width:25%">
+					<col style="width:10%">
+					<col style="width:30%">
 					<col style="width:10%">
 					<col style="width:10%">
-					<col style="width:10%">
-					<col style="width:20%">
+					<col style="width:15%">
 					<col style="width:15%">
 				  </colgroup>
                   <thead>
                     <tr>
+                      <th>발주코드</th>
                       <th>상품코드</th>
                       <th>상품이름</th>
                       <th>단가</th>
                       <th>발주량</th>
                       <th>총액</th>
-                      <th>발주코드</th>
                       <th>날짜</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tfoot>
                     <tr>
-                      <td><a href="requestDetail.jsp" >a1001</a></td>
-                      <td>삼겹살 1kg</td>
-                      <td>50</td>
-                      <th>10000</th>
-                      <th>500000</th>
-                      <td>A156481135</td>
-                      <th>20190509</th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th>총액</th>
+                      <th><fmt:formatNumber value="${requestScope.supplyTotalSales}" pattern="#,##0"/>원</th>
+                      <th></th>
                     </tr>
+                  </tfoot>
+                  <tbody>
+                    <c:set var="supplyList" value ="${requestScope.supplyList}"/>
+					<c:forEach var="supply" items="${supplyList}">
+	                 <tr>
+                      <td>${supply.sCode}</td>
+                      <td>${supply.pCode}</td>
+                      <td>${supply.pName}</td>
+                      <td><fmt:formatNumber value="${supply.pPrice}" pattern="#,##0"/>원</td>
+                      <td>${supply.sQuantity}</td>
+                      <td><fmt:formatNumber value="${supply.sTotalPrice}" pattern="#,##0"/>원</td>
+                      <td>${supply.sDate}</td>
+                   	</tr>
+                 	</c:forEach>
                   </tbody>
                 </table>
               </div>

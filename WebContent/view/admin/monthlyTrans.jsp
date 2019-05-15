@@ -40,7 +40,7 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-2 text-gray-800">월별 운송내역</h1>
-            <form action="AdminProc?action=transSearchMonth" class="form-horizontal d-sm-inline-block" method="post">
+            <form action="AdminProc?action=transSearchMonthList" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
 			      <input type="text" name="month" id="monthpicker" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
@@ -68,9 +68,17 @@
                       <th>송장번호</th>
                       <th>운송사명</th>
                       <th>날짜</th>
-                      <th>송장 총 금액</th>
+                      <th>송장금액</th>
                     </tr>
                   </thead>
+                  <tfoot>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th>총액</th>
+                      <th><fmt:formatNumber value="${requestScope.invoiceTotalSales}" pattern="#,##0"/>원</th>
+                    </tr>
+                  </tfoot>
                   <tbody>
                     <c:set var="invoiceList" value ="${requestScope.invoiceList}"/>
 					<c:forEach var="invoice" items="${invoiceList}">

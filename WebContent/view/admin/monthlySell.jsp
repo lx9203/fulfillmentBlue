@@ -40,7 +40,7 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-2 text-gray-800">월별 판매내역</h1>
-            <form action="AdminProc?action=mallMonthSearchList" class="form-horizontal d-sm-inline-block" method="post">
+            <form action="AdminProc?action=salesMonthSearchList" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
 			      <input type="text" name="month" id="monthpicker" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
@@ -52,7 +52,7 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${requestScope.month}</h6>
+              <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${requestScope.selectMonth}</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -73,6 +73,15 @@
                       <th>금액</th>
                     </tr>
                   </thead>
+                  <tfoot>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th>총액</th>
+                      <th><fmt:formatNumber value="${requestScope.productTotalSales}" pattern="#,##0"/>원</th>
+                    </tr>
+                  </tfoot>
                   <tbody>
                     <c:set var="invoiceList" value ="${requestScope.invoiceList}"/>
 					<c:forEach var="invoice" items="${invoiceList}">

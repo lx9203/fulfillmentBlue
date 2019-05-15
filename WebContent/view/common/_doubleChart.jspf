@@ -32,7 +32,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 var data1 = ${requestScope.thisTotalSalesList};
-var date2 = ${requestScope.lastTotalSalesList};
+var data2 = ${requestScope.lastTotalSalesList};
 
 
 var ctx = document.getElementById("monthTotalSalesChart");
