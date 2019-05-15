@@ -96,9 +96,9 @@
 												<td>${supply.sCode}</td>
 												<td>${supply.sProductName}</td>
 												<td>${supply.sDate}</td>
-												<td>${supply.sQuantity}</td>
-                        						<td><fmt:formatNumber value="${supply.sProductPrice }" pattern="#,##0"/></td>
-												<td><fmt:formatNumber value="${supply.sTotalPrice }" pattern="#,##0"/></td>
+												<td>${supply.sQuantity} 개</td>
+                        						<td><fmt:formatNumber value="${supply.sProductPrice }" pattern="#,##0"/> 원</td>
+												<td><fmt:formatNumber value="${supply.sTotalPrice }" pattern="#,##0"/> 원</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -109,7 +109,7 @@
 											<th></th>
 											<th></th>
 											<th>총액</th>
-											<th><fmt:formatNumber value="${requestScope.supplyTotalPrice}" pattern="#,##0"/></th>
+											<th><fmt:formatNumber value="${requestScope.supplyTotalPrice}" pattern="#,##0"/> 원</th>
 											<th></th>
 										</tr>
 									</tfoot>

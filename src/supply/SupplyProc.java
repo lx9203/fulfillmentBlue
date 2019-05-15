@@ -64,6 +64,9 @@ public class SupplyProc extends HttpServlet {
 			String sCode = sDao.searchsCode(supplierCode);
 			sDao.updateState(sCode);
 			LOG.trace("sProc.complete 완료. sProc.complete퇴장");
+
+			rd = request.getRequestDispatcher("supply/sBeforeSupply.jsp");
+			rd.forward(request, response);
 			break;
 			
 		case "supplyBeforeList":
@@ -73,7 +76,7 @@ public class SupplyProc extends HttpServlet {
 			LOG.trace("sProc.intoMain userID : " + userId);
 			supplierCode = CustomerFunction.SupplierCode(userId);
 			LOG.trace(supplierCode);
-			sDtoLists = sDao.selectBeforeAll(userId);
+			sDtoLists = sDao.selectBeforeAll(supplierCode);
 			int supplyTotalPrice =0;
 			for (SupplyDTO supply : sDtoLists) {
 				supplyTotalPrice += supply.getsTotalPrice();

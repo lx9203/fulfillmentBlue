@@ -32,8 +32,8 @@
 <body id="page-top">
 	<!-- Page Wrapper -->
 	<div id="wrapper">
-		<c:set value="supply" var="navRecall"/>
-        <%@ include file="../common/_navigator.jspf" %>
+		<c:set value="supply" var="navRecall" />
+		<%@ include file="../common/_navigator.jspf"%>
 		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column">
 			<!-- Main Content -->
@@ -45,14 +45,11 @@
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
 						<h1 class="h3 mb-2 text-gray-800">수주내역</h1>
-						<form action="" class="form-horizontal d-sm-inline-block"
-							method="post">
+						<form action="SupplyProc?action=supplyBeforeList" class="form-horizontal d-sm-inline-block" method="post">
 							<div class="form-group" style="margin-bottom: 0">
 								<label class="control-label" style="margin-bottom: 0">날짜:&nbsp;
-									<input type="text" name="dateCustomer" id="datepicker1"
-									style="border: 1px sloid; border-radius: .2rem;">&nbsp;&nbsp;
-									<input class="btn btn-primary btn-sm shadow-sm" type="submit"
-									value="검색">
+									<input type="text" name="date" id="datepicker1"	style="border: 1px sloid; border-radius: .2rem;">&nbsp;&nbsp;
+									<input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
 								</label>
 							</div>
 						</form>
@@ -63,8 +60,7 @@
 							class="card-header py-3 d-sm-flex align-items-center justify-content-between">
 							<h6 class="m-0 font-weight-bold text-primary d-sm-inline-block"
 								style="line-height: 2">[검색한 날짜]</h6>
-							<a href="#"
-								class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+							<a href="SupplyProc?action=complete" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
 								<i class="fas fa-download fa-sm text-white-50"></i> 납품
 							</a>
 						</div>
@@ -99,9 +95,9 @@
 												<td>${supply.sCode}</td>
 												<td>${supply.sProductName}</td>
 												<td>${supply.sDate}</td>
-												<td>${supply.sQuantity}</td>
-												<td>${supply.sProductPrice }</td>
-												<td>${supply.sTotalPrice }</td>
+												<td>${supply.sQuantity}개</td>
+												<td>${supply.sProductPrice }원</td>
+												<td>${supply.sTotalPrice }원</td>
 												<td>${supply.sState}</td>
 											</tr>
 										</c:forEach>
@@ -113,7 +109,7 @@
 											<th></th>
 											<th></th>
 											<th>총액</th>
-											<th>${requestScope.supplyTotalPrice}</th>
+											<th>${requestScope.supplyTotalPrice}원</th>
 											<th></th>
 										</tr>
 									</tfoot>
@@ -152,7 +148,8 @@
 	<!-- 날짜검색기능 -->
 	<script src="../js/jquery-ui.min.js"></script>
 	<script src="../js/blue_company.js"></script>
+	<script src="../js/datepicker.js"></script>
 </body>
 </html>
 
-<%@ include file="../common/_messageModal.jspf" %>
+<%@ include file="../common/_messageModal.jspf"%>
