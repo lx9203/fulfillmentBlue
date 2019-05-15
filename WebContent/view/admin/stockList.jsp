@@ -44,6 +44,18 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
               <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${requestScope.curDate}</h6>
+              <div class="dropdown no-arrow">
+                <button class="dropdown-toggle btn btn-primary btn-sm shadow-sm" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-fw fa-folder"></i> 제품종류
+                </button>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="#">육류</a>
+                  <a class="dropdown-item" href="#">해산물</a>
+                  <a class="dropdown-item" href="#">바베큐</a>
+                  <a class="dropdown-item" href="#">야채/과일</a>
+                  <a class="dropdown-item" href="#">향신료</a>
+                </div>
+              </div>
             </div>
             <div class="card-body">
               <div class="table-responsive">
