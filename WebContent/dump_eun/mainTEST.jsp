@@ -185,7 +185,7 @@
           <!-- Content Row 2-->
           <div class="row">
             <!-- Area Chart -->
-            <div class="col-xl-12 col-lg-7">
+            <div class="col-xl-12">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -214,6 +214,55 @@
 
           </div>
           <!-- end of contant row 2 -->
+          
+          <form>
+          	<div class="form-group">
+          		<div class='d-inline-block'>
+				<select class="custom-select custom-select-sm no-arrow" name='category'>
+					<option value='' selected>-- 선택 --</option>
+					<option value='1'>육류</option>
+					<option value='2'>해산물</option>
+					<option value='3'>바베큐</option>
+					<option value='4'>야채/과일</option>
+					<option value='5'>향신료</option>
+				</select>
+				</div>
+				<input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
+			</div>
+          </form>
+          
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100">
+            <div class="input-group d-inline-block">
+              
+              <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              			<input type="text" class="form-control bg-light border-0 small" placeholder="#" aria-label="Search" aria-describedby="basic-addon2">
+                    </a>
+               
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                      <span class="dropdown-item">육류</span>
+                      <span class="dropdown-item">해산물</span>
+                      <span class="dropdown-item">바베큐</span>
+                      <span class="dropdown-item">야채/과일</span>
+                      <span class="dropdown-item">향신료</span>
+                    </div>
+                  </div>
+                </div>
+              
+                <input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
+          </form>
+          
+          <!-- Single button -->
+<div class="btn-group">
+  <input type="text" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    
+  <ul class="dropdown-menu" role="menu">
+    <li>Action</li>
+    <li>Another action</li>
+    <li>Something else here</li>
+    <li>Separated link</li>
+  </ul>
+</div>
           <!-- 위까지 그래프  -->
         </div>
         <!-- /.container-fluid -->
@@ -239,7 +288,7 @@
   <script src="../vendor/chart.js/Chart.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <%@ include file="_doubleChart.jspf" %>
+  <%@ include file="_comboChartBarLine.jspf" %>
 </body>
 </html>
 <%@ include file="common/_messageModal.jspf" %>
