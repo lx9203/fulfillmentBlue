@@ -39,6 +39,7 @@ public class SupplyProc extends HttpServlet {
 		String action = request.getParameter("action");
 		LOG.trace("SupplyProc.action : "+action);
 		HttpSession session = request.getSession();
+		String message = new String();
 		RequestDispatcher rd;
 		
 		CustomerFunction cf = new CustomerFunction();
@@ -47,6 +48,7 @@ public class SupplyProc extends HttpServlet {
 		String userId = new String();
 		int thisYearTotalSales = 0;
 		int monthTotalPrice = 0;
+		int count=0;
 
 		SupplyDAO sDao = new SupplyDAO();
 		List<SupplyDTO> sDtoLists = new ArrayList<SupplyDTO>();
@@ -61,11 +63,17 @@ public class SupplyProc extends HttpServlet {
 			LOG.trace("sProc.intoMain userID : " + userId);
 			supplierCode = CustomerFunction.SupplierCode(userId);
 			LOG.trace(supplierCode);
-			String sCode = sDao.searchsCode(supplierCode);
-			sDao.updateState(sCode);
+			sDtoLists = sDao.selectBeforeState(supplierCode);
+			for(SupplyDTO supply : sDtoLists) {
+				sDao.updateState(supply.getsCode());
+				count++;
+			}
 			LOG.trace("sProc.complete 완료. sProc.complete퇴장");
-
-			rd = request.getRequestDispatcher("supply/sBeforeSupply.jsp");
+			
+			message = "총 "+count+" 건의 납품 승인 요청이 완료되었습니다.";
+			request.setAttribute("message", message);
+			request.setAttribute("msgState", true);
+			rd = request.getRequestDispatcher("SupplyProc?action=supplyBeforeList");
 			rd.forward(request, response);
 			break;
 			
