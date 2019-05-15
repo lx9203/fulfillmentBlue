@@ -81,13 +81,13 @@ public class InvoiceDAO {
 	
 	
 	//-----------------------출고 처리 하기--------------------------------------------
-	public List<InvoiceDTO> selectAllWorkTime(){ //오늘 날짜의 18시까지의 송장을 처리
-		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice WHERE iDate < '"+cf.curDate()+" 18:00:00' and iState = 0 order by iDate ;";
+	public List<InvoiceDTO> selectAllWorkTime(String Area){ //오늘 날짜의 18시까지의 송장을 처리
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice WHERE iAreaCode like '"+Area+"' and iDate < '"+cf.curDate()+" 18:00:00' and iState = 0 order by iDate ;";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
-	public List<InvoiceDTO> selectAllBeforeWork(){ //오늘날짜 09시 까지 송장 처리 
-		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice WHERE iDate < '"+cf.curDate()+" 09:00:00' and iState = 0 order by iDate ;";
+	public List<InvoiceDTO> selectAllBeforeWork(String Area){ //오늘날짜 09시 까지 송장 처리 
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice WHERE iAreaCode like '"+Area+"' and iDate < '"+cf.curDate()+" 09:00:00' and iState = 0 order by iDate ;";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}
@@ -139,7 +139,7 @@ public class InvoiceDAO {
 	
 	//3. 송장 처리가 진행중인 송장의 목록 가져오기
 	public List<InvoiceDTO> transRequestList(){
-		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice where iState < 2;";
+		String sql = "select iCode, iName, iTel, iAddress, iDate, iState from invoice where iState = 1;";
 		List<InvoiceDTO> invoiceList = selectAllCondition(sql);
 		return invoiceList;
 	}

@@ -67,10 +67,10 @@ public class SupplyDTO {
 	public void setsState(int sState) {
 		switch(sState) {
 		case 0 :
-			this.sState = "대기중";
+			this.sState = "납품 처리대기";
 			break;
 		case 1 :
-			this.sState = "발송중";
+			this.sState = "납품 승인대기";
 			break;
 		}
 	}
