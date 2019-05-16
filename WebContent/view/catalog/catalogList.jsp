@@ -18,6 +18,7 @@
   <!-- Custom styles for this template-->
   <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
+  <link href="../css/bluecompany.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -44,80 +45,28 @@
             <h1 class="h3 mb-0 text-gray-800">[카테고리명]</h1>
           </div>
 
-          <!-- row 1번-->
           <div class="row">
           
-            <div class="col-lg-6 mb-4">
-              <!-- Illustrations -->
-              <div class="card shadow mb-4 small">
-                <table>
-                <%-- <c:set var="pDtoList" value="pDtoList"/>
-                <c:forEach var="product" items="pDtoList">
-                  <tr>
-                    <td rowspan="2">
-                      <div class="container" style="height:6rem">
-                        <img class="img-fluid"  style="max-height:100%; max-width:unset; padding:1rem 0 1rem 0" src="${product.pImgSource}" alt="">
-                      </div>
-                    </td>
-                    <td>
-                      <div class="card-header" style="padding:5px 20px 5px 20px; background-color:white">
-                        <h6 class="m-0 font-weight-bold text-primary">${product.pName}</h6>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="card-body" style="padding:5px 20px 5px 20px">
-                        <p style="margin-block-end:0">
-                          이곳에는 내용이 저장 됩니다.
-                        </p>
-                      </div>
-                    </td>
-                  </tr>
-                </c:forEach> --%>
-                </table>
-              </div>
-            </div>
-            
-			<div class="col-lg-6 mb-4">
-              <!-- Illustrations -->
-              <div class="card shadow mb-4 small">
-                <table>
-                  <tr>
-                    <td rowspan="2">
-                      <div class="container" style="height:6rem">
-                        <img class="img-fluid"  style="max-height:100%; max-width:unset; padding:1rem 0 1rem 0" src="../img/undraw_posting_photo.svg" alt="">
-                      </div>
-                    </td>
-                    <td>
-                      <div class="card-header" style="padding:5px 20px 5px 20px; background-color:white">
-                        <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="card-body" style="padding:5px 20px 5px 20px">
-                        <p style="margin-block-end:0">
-                          Add some quality, svg illustrations to your project courtesy of unDraw,
-                          a constantly updated collection of beautiful svg images that you can use
-                          completely free and without attribution!
-                        </p>
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-            
+          <!-- item 1 -->
+			<div class="col-6 col-sm-3 p-box">
+				<div class="p-box-layout">
+					<div class="p-box-layout-img" style="background-image: url(../img/BBQ/sausage.jpg);"></div>
+					<div class="p-box-layout-caption">
+						<div class="p-box-layout-caption-head">
+							<h6>Illustrations</h6>
+						</div>
+						<div class="p-box-layout-caption-script">
+							<p>제품단가:</p>
+						</div>
+					</div>
+				</div>
+			</div>
+          
           </div>
           <!-- row 1번 끝-->
-          
-          
 
         </div>
         <!-- /.container-fluid -->
-
       </div>
       <!-- End of Main Content -->
 

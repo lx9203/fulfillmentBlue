@@ -37,16 +37,16 @@
     <li class="nav-item dropdown no-arrow">
       <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <c:if test="${userType==0}">
-        	<i class="fas fa-warehouse"></i>&nbsp;
+        	<i class="fab fa-docker"></i>&nbsp;&nbsp;
         </c:if>
         <c:if test="${userType==1}">
-        	<i class="fas fa-shipping-fast"></i>&nbsp;
+        	<i class="fas fa-truck"></i>&nbsp;&nbsp;
         </c:if>
         <c:if test="${userType==2}">
-        	<i class="fas fa-gifts"></i>&nbsp;
+        	<i class="fas fa-gift"></i>&nbsp;&nbsp;
         </c:if>
         <c:if test="${userType==3}">
-        	<i class="fas fa-boxes"></i>&nbsp;
+        	<i class="fas fa-dolly-flatbed"></i>&nbsp;&nbsp;
         </c:if>
         
         <span class="mr-2 d-none d-lg-inline text-gray-600 small">${userName}님 환영합니다.</span>
