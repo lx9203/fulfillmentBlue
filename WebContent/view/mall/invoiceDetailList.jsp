@@ -45,11 +45,11 @@
               <table>
                 <tr>
                   <c:set var="invoice" value="${requestScope.invoice}"/>
-                  <td><h6 class="m-0 font-weight-bold text-primary">송장번호: ${invoice.iCode} &nbsp;&nbsp;</h6></td>
-                  <td>&nbsp;&nbsp;성명 : ${invoice.iName}&nbsp;&nbsp;</td>
-                  <td>&nbsp;&nbsp;주소 : ${invoice.iAddress}&nbsp;&nbsp;</td>
-                  <td>&nbsp;&nbsp;연락처 : ${invoice.iTel}&nbsp;&nbsp;</td>
-                  <td>&nbsp;&nbsp;날짜 : ${invoice.iDate}&nbsp;&nbsp;</td>
+                  <td style="text-align: center;"><h6 class="m-0 font-weight-bold text-primary">송장번호: ${invoice.iCode} &nbsp;&nbsp;</h6></td>
+                  <td style="text-align: center;">&nbsp;&nbsp;성명 : ${invoice.iName}&nbsp;&nbsp;</td>
+                  <td style="text-align: center;">&nbsp;&nbsp;주소 : ${invoice.iAddress}&nbsp;&nbsp;</td>
+                  <td style="text-align: center;">&nbsp;&nbsp;연락처 : ${invoice.iTel}&nbsp;&nbsp;</td>
+                  <td style="text-align: center;">&nbsp;&nbsp;날짜 : ${invoice.iDate}&nbsp;&nbsp;</td>
                 </tr>
               </table>
             </div>
@@ -65,22 +65,22 @@
 				  </colgroup>
                   <thead>
                     <tr>
-                      <th>주문번호</th>
-                      <th>상품명</th>
-                      <th>개수</th>
-                      <th>단가</th>
-                      <th>합계</th>
+                      <th style="text-align: center;">주문번호</th>
+                      <th style="text-align: center;">상품명</th>
+                      <th style="text-align: center;">개수</th>
+                      <th style="text-align: center;">단가</th>
+                      <th style="text-align: center;">합계</th>
                     </tr>
                   </thead>
                   <tbody>
                     <c:set var="orderLists" value="${requestScope.orderLists}"/>
 					<c:forEach var="order" items="${orderLists}">
                     <tr>
-                      <td>${order.oNum}</td>
-                      <td>${order.oProductName}</td>
-                      <td>${order.oQuantity}</td>
-                      <td><fmt:formatNumber value="${order.pPrice}" pattern="#,##0"/>원</td>
-                      <td><fmt:formatNumber value="${order.oTotalPrice}" pattern="#,##0"/>원</td>
+                      <td style="text-align: center;">${order.oNum}</td>
+                      <td style="text-align: left;">${order.oProductName}</td>
+                      <td style="text-align: center;">${order.oQuantity}</td>
+                      <td style="text-align: right;"><fmt:formatNumber value="${order.pPrice}" pattern="#,##0"/>원</td>
+                      <td style="text-align: right;"><fmt:formatNumber value="${order.oTotalPrice}" pattern="#,##0"/>원</td>
                     </tr>
                     </c:forEach>
                   </tbody>
@@ -89,8 +89,8 @@
                       <th></th>
                       <th></th>
                       <th></th>
-                      <th>총액</th>
-                      <th><fmt:formatNumber value="${requestScope.invoiceTotalPrice}" pattern="#,##0"/>원</th>
+                      <th style="text-align: center;">총액</th>
+                      <th style="text-align: right;"><fmt:formatNumber value="${requestScope.invoiceTotalPrice}" pattern="#,##0"/>원</th>
                     </tr>
                   </tfoot>
                 </table>
