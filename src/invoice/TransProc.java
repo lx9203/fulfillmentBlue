@@ -173,7 +173,6 @@ public class TransProc extends HttpServlet {
 				break;
 			case "forwarding": //물건 출고 case
 				LOG.trace("출고 시작");
-				boolean available = true;
 				int count = 0;
 				String Area = (String)session.getAttribute("userId");
 				//1.현재 시간을 확인 한다.
@@ -185,10 +184,10 @@ public class TransProc extends HttpServlet {
 				}
 				
 				//2. 9시 이전, 9시에서 18시 사이, 18시 이후 3가지 경우로 나눈다.
-				if(curHour>=12 && curHour<=18) { //(1) 12시에서 18시 사이에 출고를 할 경우, 당일 송장을 출고한다.
+				if(curHour>=10 && curHour<=18) { //(1) 12시에서 18시 사이에 출고를 할 경우, 당일 송장을 출고한다.
 					LOG.trace("12시 이후 출고");
 					iDtoLists = iDao.selectAllWorkTime(Area);
-				} else if(curHour<12) { //(2) 9시 이전에 출고를 할 경우 전날부터 오늘 오전 9시 까지의 송장을 출고한다.
+				} else if(curHour<12) { //(2) 12시 이전에 출고를 할 경우 전날부터 오늘 오전 9시 까지의 송장을 출고한다.
 					LOG.trace("12시 이전 출고");
 					iDtoLists = iDao.selectAllBeforeWork(Area);
 				} else if(curHour>18) { //(3)18시 이후에 출고 불가 처리 
@@ -199,7 +198,6 @@ public class TransProc extends HttpServlet {
 				//3. 각 시간에 맞는 송장만 가져와 출고 작업을 시작한다. 
 				for(InvoiceDTO invoice : iDtoLists) {
 					LOG.trace("출고 시작");
-					available = true;
 					oDtoLists = oDao.selectQuantity(invoice.getiCode()); //해당 송장의 제품코드, 출고해야할 수량과 창고의 재고량을 가져온다.
 					for(OrderDTO order : oDtoLists) { // 1. 출고 가능 여부를 먼저 검사한다.
 						//출고 가능한 수량 = 재고 수량 + 재고 신청 수량 - 출고 준비중인 수량
@@ -207,12 +205,12 @@ public class TransProc extends HttpServlet {
 						SupplyDTO sDto = sDao.productQuantity(order.getoProductCode());
 						int availQuantity = order.getpQuantity() + sDto.getsQuantity() - cf.productQuantity(order.getoProductCode());
 						LOG.trace("출고 가능 수량 : " +  availQuantity);
+						LOG.trace("출고 신청 수량 : " +  order.getoQuantity());
 						//모든 송장 물품에 대해서 출고 가능한 수량이 충분하면 출고 신청을 한다. 
 						//재고가 모자르거나 10개 이하인 경우 해당 제품 발주 신청
 						if(order.getoQuantity() > availQuantity || availQuantity < 10 ) {
 							LOG.trace("해당 물품 발주 신청 : " + order.getoProductCode());
-							sDao.insertSupply(order.getoProductCode(),order.getoQuantity()+20); //해당 제품 20수량 발주
-							available = false;
+							sDao.insertSupply(order.getoProductCode(),order.getoQuantity()+100); //해당 제품 수량 100개 발주
 						}
 					}
 					LOG.trace("송장 처리 1건 추가");

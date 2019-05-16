@@ -316,32 +316,29 @@ public class AdminProc extends HttpServlet {
 				break;
 			}
 			for(AdminDTO invoice : invoiceList) {
+				LOG.trace("[출고중] 현재 처리 송장 번호 : " + invoice.getiCode());			
 				boolean pm = true;
 				orderList = aDao.selectOrderList(invoice.getiCode());
 				for(AdminDTO order : orderList) {
 					if(order.getoQuantity()>order.getpQuantity()) {
 						LOG.trace("[출고중] 제품 재고수 : " + order.getpQuantity());
 						LOG.trace("[출고중] 제품 출고수 : " + order.getoQuantity());
-						message = "아직 제품의 입고가 완료되지 않았습니다. <br> 발주 승인을 먼저 진행해 주세요.";
-						request.setAttribute("message", message);
-						request.setAttribute("msgState", true);
-						rd = request.getRequestDispatcher("AdminProc?action=transPermissionList");
-						rd.forward(request, response);
+						aDao.invoiceOutofStockState(invoice.getiCode());
 						pm = false;	
 						break;
 					}
 				}
-				LOG.trace("[출고중] 제품 출고 가능 여부 : " + pm);
 				if(pm) {
 					for(AdminDTO order : orderList) {
 						pDao.updateQuantity(order.getpCode(),order.getpQuantity()-order.getoQuantity()); //창고에서 물품 출고
+						LOG.trace("[출고중] 제품 명 : " + order.getpCode());
 						LOG.trace("[출고중] 제품 출고 후 : " + (order.getpQuantity()-order.getoQuantity()));
 					}
 					aDao.invoiceCompleteState(invoice.getiCode());//재고에 이상이 없으면 해당 송장을 출고 완료 상태로 변경한다.
 					count++;
 				}
 			}
-			message = "총 "+count+"건의 송장 처리가 완료되었습니다.";
+			message = "총 "+count+"건의 송장 처리가 완료되었습니다. <br> (재고 부족으로 인해 발송 못한 송장이 있을 수도 있습니다.)";
 			request.setAttribute("message", message);
 			request.setAttribute("msgState", true);
 			rd = request.getRequestDispatcher("AdminProc?action=transPermissionList");
@@ -402,7 +399,8 @@ public class AdminProc extends HttpServlet {
 			for(AdminDTO supply : supplyList) {
 				pDto = pDao.searchOne(supply.getpCode());
 				pDao.updateQuantity(supply.getpCode(),pDto.getpQuantity()+supply.getsQuantity());
-				LOG.trace("[출고중] 제품 출고 후 : " + (pDto.getpQuantity()+supply.getsQuantity()));
+				LOG.trace("[발주중] 제품 발주 제품 : " + supply.getpCode());
+				LOG.trace("[발주중] 제품 발주 후 : " + (pDto.getpQuantity()+supply.getsQuantity()));
 				aDao.supplyCompleteState(supply.getsCode());//해당 발주 리스트를 출고 처리상태로 변경한다.
 				count++;
 			}

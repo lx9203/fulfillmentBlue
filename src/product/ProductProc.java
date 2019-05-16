@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import function.CustomerFunction;
-
 @WebServlet("/view/ProductProc")
 public class ProductProc extends HttpServlet {
 	private static final Logger LOG = LoggerFactory.getLogger(ProductProc.class);
@@ -38,8 +36,6 @@ public class ProductProc extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher rd;
 		String action = request.getParameter("action");
-		String message = new String();
-		CustomerFunction cf = new CustomerFunction();
 		
 		List<ProductDTO> pDtoList = new ArrayList<ProductDTO>();
 		ProductDAO pDao = new ProductDAO();

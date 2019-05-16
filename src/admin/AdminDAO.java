@@ -45,25 +45,29 @@ public class AdminDAO {
 	//------------------------이번달에 처리한 송장의 리스트---------------------------------------------
 	//1. 해당 월에 해당하는 송장이 처리된 송장 번호를 받는다.
 	public List<String> selectThisMonth(){
+		LOG.trace("[AdminDAO] 월별 출고 완료 송장 리스트");
 		sql = "select iCode from invoice WHERE iDate >='"+cf.curMonth()+"-01' AND iDate <'"+cf.nextMonth(cf.curMonth())+"-01' and iState = 2;";
 		List<String> invoiceCodes = selectiCodeCondition(sql);
 		return invoiceCodes;
 	}
-	//2. 처리신청을 한 송장의 목록을 가져온다.
+	//2. 처리신청을 한 송장의 건수를 가져온다.
 	public List<String> selectThisMonthReady(){
+		LOG.trace("[AdminDAO] 출고 신청 송장 리스트");
 		sql = "select iCode from invoice WHERE iState = 1;";
 		List<String> invoiceCodes = selectiCodeCondition(sql);
 		return invoiceCodes;
 	}
 	
 	//------------------------전년도에 처리한 송장의 리스트---------------------------------------------
-	public List<String> selectLastYear(){ // !!! 'and iState = 1'을 조건으로 추가 해야 함 !!!
+	public List<String> selectLastYear(){
+		LOG.trace("[AdminDAO] 전년도 출고 완료 송장 리스트");
 		sql = "select iCode from invoice WHERE iDate >='"+cf.lastYear(cf.curYear())+"-01-01' AND iDate <'"+cf.curYear()+"-01-01' and iState = 2;";
 		List<String> invoiceCodes = selectiCodeCondition(sql);
 		return invoiceCodes;
 	}
 	//------------------------올해에 처리한 송장의 리스트---------------------------------------------
-	public List<String> selectYear(String year,int month){ // !!! 'and iState = 1'을 조건으로 추가 해야 함 !!!
+	public List<String> selectYear(String year,int month){
+		LOG.trace("[AdminDAO] 이번 년도 출고 완료 송장 리스트");
 		String thisMonth = String.format("%02d", month);
 		String nextMonth = String.format("%02d", month+1);
 		if(month != 12) {
@@ -105,6 +109,7 @@ public class AdminDAO {
 	
 	//[공통] 해당 월의 처리 완료된 송장 리스트 가져오기
 		public List<AdminDTO> adminMonthList(String month){
+			LOG.trace("[AdminDAO] 선택 월에 출고 완료 송장 리스트");
 			String sql = "select iCode, iDate, iAreaCode from invoice "
 					+ "where iDate >='"+month+"-01' and iDate < '"+cf.nextMonth(month)+"-01' and iState = 2 ;";
 			List<AdminDTO> invoiceList = selectTransCondition(sql);
@@ -112,6 +117,7 @@ public class AdminDAO {
 		}
 	//-----------------------------1. 재고 관련 ----------------------------------------------------------------
 		public AdminDTO selectProductOne(String pCode){//제품이 출고 대기중이 수량
+			LOG.trace("[AdminDAO] 물품 재고 총 수량");
 			String sql = "select o.oProductCode, SUM(o.oQuantity) from `order` as o "
 					+ "inner join invoice as i on i.iCode=o.oInvoiceCode "
 					+ "where o.oProductCode like '"+pCode+"' and iState < 2 "
@@ -146,6 +152,7 @@ public class AdminDAO {
 			
 	//-----------------------------2. 월별 제품 판매 수량 관련 -------------------------------------------------
 		public List<AdminDTO> selectProductMonth(String month){ //정해진 달에 제품이 팔린 수량
+			LOG.trace("[AdminDAO] 선택 월에 물품 판매 수량 리스트");
 			String sql = "select o.oProductCode, SUM(o.oQuantity) from `order` as o "
 					+ "inner join invoice as i on i.iCode=o.oInvoiceCode "
 					+ "where i.iDate >='"+month+"-01' and i.iDate < '"+cf.nextMonth(month)+"-01' and iState = 2 "
@@ -181,10 +188,11 @@ public class AdminDAO {
 		}
 	
 	//-------------------------------3. 운송사에서 사용하는 리스트---------------------------------------------------------
-	//1. 해당 날짜의 처리 준비중인 송장 리스트 가져오기
+	//1.처리 준비중인 송장 리스트 가져오기
 	public List<AdminDTO> selectTransList(){
+		LOG.trace("[AdminDAO] 출고 신청 송장 리스트");
 		String sql = "select iCode, iDate, iAreaCode from invoice "
-				+ "where iState = 1 order by iDate;";
+				+ "where iState = 1 or iState = 3 order by iState desc;";
 		List<AdminDTO> invoiceList = selectTransCondition(sql);
 		return invoiceList;
 	}
@@ -252,12 +260,32 @@ public class AdminDAO {
 			}
 			return orderList;
 		}
-	
+//----------------------------- 출고 승인 완료 (1 -> 2) 관련 메소드 -------------------------
 	public void invoiceCompleteState(String iCode) { // 출고 완료 (State = 2)
+		LOG.trace("[AdminDAO] 출고 승인 완료");
 		String query = "update invoice set iState=2 where iCode =?;";
 		try {
 			pStmt = conn.prepareStatement(query);
-			pStmt.setString(2,iCode);
+			pStmt.setString(1,iCode);
+			pStmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pStmt != null && !pStmt.isClosed())
+					pStmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+	}
+	
+	public void invoiceOutofStockState(String iCode) { // 재고 부족 (State = 3)
+		LOG.trace("[AdminDAO] 출고 승인 완료");
+		String query = "update invoice set iState=3 where iCode =?;";
+		try {
+			pStmt = conn.prepareStatement(query);
+			pStmt.setString(1,iCode);
 			pStmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -273,6 +301,7 @@ public class AdminDAO {
 	
 //--------------------------------------- 발주 내역에서 사용하는 메소드 ----------------------------------
 	public List<AdminDTO> selectSupplyList(){ //발주신청이 들어와 있는 발주리스트
+		LOG.trace("[AdminDAO] 발주 승인 신청 리스트");
 		String sql = "select p.pCode, p.pName, p.pPrice, s.sQuantity, s.sCode, s.sDate from supply as s " 
 					+"inner join product as p on p.pCode = s.sProductCode where s.sState = 1 "
 					+"order by s.sDate;";
@@ -281,6 +310,7 @@ public class AdminDAO {
 	}
 	
 	public List<AdminDTO> selectSupplyListMonth(String month){ //월별 발주가 완료된 발주 리스트
+		LOG.trace("[AdminDAO] 월별 발주 완료 리스트");
 		String sql = "select p.pCode, p.pName, p.pPrice, s.sQuantity, s.sCode, s.sDate from supply as s " 
 					+"inner join product as p on p.pCode = s.sProductCode "
 					+"where s.sDate >='"+month+"-01' and s.sDate < '"+cf.nextMonth(month)+"-01' and s.sState = 2 "
@@ -319,13 +349,13 @@ public class AdminDAO {
 		}
 		return supplyList;
 	}
-
-	public void supplyCompleteState(String sCode) { // 출고 완료 (State = 2)
-		String query = "update supply set sState=2, sDate=? where sCode =?;";
+//------------------------------- 발주 승인(1 ->2) 처리 메소드 ---------------------------
+	public void supplyCompleteState(String sCode) { // 발주 승인 (State = 2)
+		LOG.trace("[AdminDAO] 발주 승인 처리");
+		String query = "update supply set sState=2 where sCode =?;";
 		try {
 			pStmt = conn.prepareStatement(query);
-			pStmt.setString(1,cf.curTime());
-			pStmt.setString(2,sCode);
+			pStmt.setString(1,sCode);
 			pStmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
