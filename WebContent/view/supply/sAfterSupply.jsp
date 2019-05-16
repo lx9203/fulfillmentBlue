@@ -81,24 +81,24 @@
 									</colgroup>
 									<thead>
 										<tr>
-											<th>발주코드</th>
-											<th>제품명</th>
-											<th>날짜</th>
-											<th>제품수량</th>
-											<th>제품가격</th>
-											<th>청구금액</th>
+											<th style="text-align: center;">발주코드</th>
+											<th style="text-align: center;">제품명</th>
+											<th style="text-align: center;">날짜</th>
+											<th style="text-align: center;">제품수량</th>
+											<th style="text-align: center;">제품가격</th>
+											<th style="text-align: center;">청구금액</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:set var="supplyList" value="${requestScope.supplyList}" />
 										<c:forEach var="supply" items="${supplyList}">
 											<tr>
-												<td>${supply.sCode}</td>
-												<td>${supply.sProductName}</td>
-												<td>${supply.sDate}</td>
-												<td>${supply.sQuantity} 개</td>
-                        						<td><fmt:formatNumber value="${supply.sProductPrice }" pattern="#,##0"/> 원</td>
-												<td><fmt:formatNumber value="${supply.sTotalPrice }" pattern="#,##0"/> 원</td>
+												<td style="text-align: center;">${supply.sCode}</td>
+												<td style="text-align: left;">${supply.sProductName}</td>
+												<td style="text-align: center;">${supply.sDate}</td>
+												<td style="text-align: center;">${supply.sQuantity} 개</td>
+                        						<td style="text-align: right;"><fmt:formatNumber value="${supply.sProductPrice }" pattern="#,##0"/> 원</td>
+												<td style="text-align: right;"><fmt:formatNumber value="${supply.sTotalPrice }" pattern="#,##0"/> 원</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -108,9 +108,8 @@
 											<th></th>
 											<th></th>
 											<th></th>
-											<th>총액</th>
-											<th><fmt:formatNumber value="${requestScope.supplyTotalPrice}" pattern="#,##0"/> 원</th>
-											<th></th>
+											<th style="text-align: center;">총액</th>
+											<th style="text-align: right;"><fmt:formatNumber value="${requestScope.supplyTotalPrice}" pattern="#,##0"/> 원</th>
 										</tr>
 									</tfoot>
 								</table>

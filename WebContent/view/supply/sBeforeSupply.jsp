@@ -59,7 +59,7 @@
 						<div
 							class="card-header py-3 d-sm-flex align-items-center justify-content-between">
 							<h6 class="m-0 font-weight-bold text-primary d-sm-inline-block"
-								style="line-height: 2"></h6>
+								style="line-height: 2">${requestScope.curDate}</h6>
 							<a href="SupplyProc?action=complete" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
 								<i class="fas fa-download fa-sm text-white-50"></i> 납품
 							</a>
@@ -79,26 +79,26 @@
 									</colgroup>
 									<thead>
 										<tr>
-											<th>발주코드</th>
-											<th>제품명</th>
-											<th>날짜</th>
-											<th>제품수량</th>
-											<th>제품가격</th>
-											<th>청구금액</th>
-											<th>상태</th>
+											<th style="text-align: center;">발주코드</th>
+											<th style="text-align: center;">제품명</th>
+											<th style="text-align: center;">날짜</th>
+											<th style="text-align: center;">제품수량</th>
+											<th style="text-align: center;">제품가격</th>
+											<th style="text-align: center;">청구금액</th>
+											<th style="text-align: center;">상태</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:set var="supplyList" value="${requestScope.supplyList}" />
 										<c:forEach var="supply" items="${supplyList}">
 											<tr>
-												<td>${supply.sCode}</td>
-												<td>${supply.sProductName}</td>
-												<td>${supply.sDate}</td>
-												<td>${supply.sQuantity}개</td>
-												<td>${supply.sProductPrice }원</td>
-												<td>${supply.sTotalPrice }원</td>
-												<td>${supply.sState}</td>
+												<td style="text-align: center;">${supply.sCode}</td>
+												<td style="text-align: left;">${supply.sProductName}</td>
+												<td style="text-align: center;">${supply.sDate}</td>
+												<td style="text-align: center;">${supply.sQuantity}개</td>
+												<td style="text-align: right;">${supply.sProductPrice }원</td>
+												<td style="text-align: right;">${supply.sTotalPrice }원</td>
+												<td style="text-align: center;">${supply.sState}</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -108,8 +108,8 @@
 											<th></th>
 											<th></th>
 											<th></th>
-											<th>총액</th>
-											<th>${requestScope.supplyTotalPrice}원</th>
+											<th style="text-align: center;">총액</th>
+											<th style="text-align: right;">${requestScope.supplyTotalPrice}원</th>
 											<th></th>
 										</tr>
 									</tfoot>

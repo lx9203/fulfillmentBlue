@@ -64,22 +64,22 @@
 				  </colgroup>
                   <thead>
                     <tr>
-                      <th>송장번호</th>
-                      <th>이름</th>
-                      <th>주소</th>
-                      <th>연락처</th>
-                      <th>날짜</th>
+                      <th style="text-align: center;">송장번호</th>
+                      <th style="text-align: center;">이름</th>
+                      <th style="text-align: left;">주소</th>
+                      <th style="text-align: center;">연락처</th>
+                      <th style="text-align: center;">날짜</th>
                     </tr>
                   </thead>
                   <tbody>
                     <c:set var="invoiceList" value="${requestScope.invoiceLists}"/>
 					<c:forEach var="invoice" items="${invoiceList}">
 	                 <tr>
-                      <td><a href="InvoiceProc?action=detailList&iCode=${invoice.iCode}">${invoice.iCode}</a></td>
-                      <td>${invoice.iName}</td>
-                      <td>${invoice.iAddress}</td>
-                      <td>${invoice.iTel}</td>
-                      <td>${invoice.iDate}</td>
+                      <td style="text-align: center;"><a href="InvoiceProc?action=detailList&iCode=${invoice.iCode}">${invoice.iCode}</a></td>
+                      <td style="text-align: center;">${invoice.iName}</td>
+                      <td style="text-align: left;">${invoice.iAddress}</td>
+                      <td style="text-align: center;">${invoice.iTel}</td>
+                      <td style="text-align: center;">${invoice.iDate}</td>
                    	</tr>
                  	</c:forEach>
                   </tbody>
