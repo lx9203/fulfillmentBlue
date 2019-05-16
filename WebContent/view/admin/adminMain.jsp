@@ -18,6 +18,8 @@
 
   <!-- Custom styles for this template-->
   <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+  
+  <link href="../css/bluecompany.css" rel="stylesheet">
 </head>
 <body id="page-top">
   <!-- Page Wrapper -->
@@ -41,15 +43,15 @@
           <div class="row">
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">이달 판매수익 (현재까지)</div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">이달 판매수익 (현재까지)</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${requestScope.thisTotalSales}" pattern="#,##0"/>원</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                      <i class="fas fa-won-sign fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
@@ -58,15 +60,15 @@
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
+              <div class="card shadow h-100 py-2 border-left-past">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">전년도 판매수익</div>
+                      <div class="text-xs font-weight-bold text-past text-uppercase mb-1">전년도 판매수익</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${requestScope.lastYearTotalSales}" pattern="#,##0"/>원</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                      <i class="fas fa-won-sign fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
@@ -75,15 +77,15 @@
 
             <!-- Pending Requests Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-warning shadow h-100 py-2">
+              <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">올해 판매 수익</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">올해 판매 수익</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${requestScope.thisYearTotalSales}" pattern="#,##0"/>원</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-gray-300"></i>
+                      <i class="fas fa-won-sign fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
@@ -100,7 +102,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800">${requestScope.totalInvoice}건</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                      <i class="fas fa-truck-loading fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
@@ -110,6 +112,7 @@
           </div>
           <!-- end of Content Row 1-->
           
+          <!-- Content Row 2-->
           <div class="row">
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
@@ -121,7 +124,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${requestScope.shopTotalSales}" pattern="#,##0"/>원</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                      <i class="fas fa-gift fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
@@ -130,15 +133,15 @@
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
+              <div class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">운송사 지불 대금</div>
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">운송사 지불 대금</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${requestScope.transTotalSales}" pattern="#,##0"/>원</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                      <i class="fas fa-truck fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
@@ -147,15 +150,15 @@
 
             <!-- Pending Requests Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-warning shadow h-100 py-2">
+              <div class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">공급사 지불 대금</div>
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">공급사 지불 대금</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${requestScope.supplyTotalSales}" pattern="#,##0"/>원</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-gray-300"></i>
+                      <i class="fas fa-dolly-flatbed fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
@@ -180,28 +183,16 @@
             </div>
 
           </div>
-          <!-- end of Content Row 1-->
+          <!-- end of Content Row 2-->
 
-          <!-- Content Row 2-->
+          <!-- Content Row 3-->
           <div class="row">
             <!-- Area Chart -->
             <div class="col-xl-12">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">월별 수익 비교</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
+                  <h6 class="m-0 font-weight-bold text-primary">연도별 수익 비교</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -212,7 +203,7 @@
               </div>
             </div>
           </div>
-          <!-- end of contant row 2 -->
+          <!-- end of contant row 3 -->
           <!-- 위까지 그래프  -->
         </div>
         <!-- /.container-fluid -->
@@ -239,7 +230,6 @@
 
   <!-- Page level custom scripts -->
   <%@ include file="../common/_doubleChart.jspf" %>
-  <script src="../js/demo/chart-pie-demo.js"></script>
 </body>
 </html>
 <%@ include file="../common/_messageModal.jspf" %>

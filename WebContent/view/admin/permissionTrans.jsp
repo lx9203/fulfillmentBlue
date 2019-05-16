@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>운송 처리 처리 페이지</title>
+  <title>운송 처리 페이지</title>
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -46,7 +46,7 @@
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2"></h6>
               <a href="AdminProc?action=permitInvoice" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-download fa-sm text-white-50"></i> 출고 처리
+                <i class="fas fa-truck-loading"></i>&nbsp;&nbsp;출고 처리
               </a>
             </div>
             <div class="card-body">

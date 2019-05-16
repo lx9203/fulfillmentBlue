@@ -47,7 +47,7 @@
               <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${requestScope.curDate}</h6>
               <div class="dropdown no-arrow">
                 <button class="dropdown-toggle btn btn-primary btn-sm shadow-sm" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-list-ul"></i>&nbsp;제품종류
+                  <i class="fas fa-list-ul"></i>&nbsp;&nbsp;제품종류
                 </button>
                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                   <a class="dropdown-item" href="#">육류</a>
