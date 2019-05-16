@@ -1,23 +1,19 @@
 package supply;
 
-import java.text.*;
-import java.time.*;
-import java.time.format.*;
-import java.util.*;
 
-import org.slf4j.*;
+/*import org.slf4j.*;
 
-import function.*;
+import function.*;*/
 
 public class test {
 	public static void main(String[] args) {
-		final Logger LOG = LoggerFactory.getLogger(test.class);
+		/*final Logger LOG = LoggerFactory.getLogger(test.class);
 		SupplyDTO sDto = new SupplyDTO();
 		SupplyDAO sDao = new SupplyDAO();
 		String sCode = new String();
 		String sProductCode = new String();
 		String sDate = new String();
-		CustomerFunction cf = new CustomerFunction();
+		CustomerFunction cf = new CustomerFunction();*/
 		
 		
 //		sProductCode = "A102";

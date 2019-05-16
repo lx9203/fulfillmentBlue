@@ -122,12 +122,12 @@ public class Test {
 		Date curDate = new Date();
     	SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
     	int increment =0;
-    	Optional<String> op = Optional.ofNullable(iDao.selectOneDayLast(sdf.format(curDate)).getiCode());
+    	Optional<String> op = Optional.ofNullable(iDao.selectOneDayLast().getiCode());
     	System.out.println(op);
 		if(!op.isPresent()) {
 			increment =10001;	
 		} else {
-			String iCode = iDao.selectOneDayLast(sdf.format(curDate)).getiCode();
+			String iCode = iDao.selectOneDayLast().getiCode();
 			increment = Integer.parseInt(iCode.substring(8))+1;
 			System.out.println(increment);
 		}	

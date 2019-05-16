@@ -60,18 +60,18 @@ public class CustomerFunction {
 		Date curDate = new Date();
     	SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
     	int increment =0;
-    	Optional<String> op = Optional.ofNullable(iDao.selectOneDayLast(sdf.format(curDate)).getiCode());
+    	Optional<String> op = Optional.ofNullable(iDao.selectOneDayLast().getiCode());
     	LOG.trace(op.isPresent()+ "");
 		if(!op.isPresent()) {
 			increment =10001; //송장번호를 생성시 당일 첫 송장번호는 10001부터 시작
 			LOG.trace("처음 생성한 송장번호");
 		} else {
-			String iCode = iDao.selectOneDayLast(sdf.format(curDate)).getiCode();
-			increment = Integer.parseInt(iCode.substring(8))+1;
+			String iCode = iDao.selectOneDayLast().getiCode();
+			increment = Integer.parseInt(iCode.substring(0,5))+1;
 			System.out.println(increment);
 		}	
     	
-		return Character.toString(shoppingCode)+Character.toString(area)+sdf.format(curDate)+increment;
+		return increment + Character.toString(shoppingCode)+Character.toString(area)+sdf.format(curDate);
 	}
 	
 	// (supply) 발주코드(sCode) 생성 함수 { 공급사구분+날짜+자동(3) }
@@ -80,8 +80,6 @@ public class CustomerFunction {
 			LOG.trace("CF.sCodeCreate진입");
 			SupplyDAO sDao = new SupplyDAO();
 			int increment = 0;
-			String supplier = "";
-			// 날짜
 			Date curDate = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
 			String date = sdf.format(curDate);

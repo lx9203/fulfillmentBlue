@@ -6,7 +6,6 @@ import java.util.*;
 import org.slf4j.*;
 
 import function.*;
-import invoice.*;
 
 public class SupplyDAO {
 	private static final Logger LOG = LoggerFactory.getLogger(SupplyDAO.class);
@@ -42,7 +41,6 @@ public class SupplyDAO {
 	// --------------------------Condition---------------------------------------------------
 
 	public List<SupplyDTO> selectCondition(String sql) {
-		LOG.trace("sDao.selectCondition() 진입");
 		PreparedStatement pStmt = null;
 		List<SupplyDTO> supplyList = new ArrayList<SupplyDTO>();
 		try {
@@ -61,7 +59,6 @@ public class SupplyDAO {
 				supply.setsTotalPrice(supply.getsQuantity(), supply.getsProductPrice());
 				supplyList.add(supply);
 			}
-			LOG.trace("sDao.selectCondition supplyList : " + supplyList.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -70,10 +67,8 @@ public class SupplyDAO {
 					pStmt.close();
 			} catch (SQLException se) {
 				se.printStackTrace();
-				LOG.info("selectCondition Error Code : {}", se.getErrorCode());
 			}
 		}
-		LOG.trace("sDao.selectCondition() 종료");
 		return supplyList;
 	}
 
@@ -145,35 +140,30 @@ public class SupplyDAO {
 				+ "from supply as s inner join product as p on p.pCode = s.sProductCode "
 				+ "where sState < 2 and p.pCode like '" + supplierCode + "%' and s.sDate < '"+cf.curDate()+"'order by sState desc;";
 		List<SupplyDTO> supplyList = selectCondition(sql);
-		LOG.trace("sDao.selectBeforeAll() 종료");
 		return supplyList;
 	}
 	
 	// 납품 
 	public List<SupplyDTO> selectBeforeState(String supplierCode) {
-		LOG.trace("sDao.selectBeforeAll() 진입");
+		LOG.trace("sDao.selectBeforeState() 진입");
 		String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState "
 				+ "from supply as s inner join product as p on p.pCode = s.sProductCode "
-				+ "where sState = 0 and p.pCode like '" + supplierCode + "%'";
+				+ "where sState = 0 and p.pCode like '" + supplierCode + "%' and s.sDate < '"+cf.curDate()+"';";
 		List<SupplyDTO> supplyList = selectCondition(sql);
-		LOG.trace("sDao.selectBeforeAll() 종료");
 		return supplyList;
 	}
 
 	// 처리 완료인 전체검색 (sState = 2) -> SupplyProc.supplyAfterList
 		public List<SupplyDTO> selectAll(String supplierCode) {
-			LOG.trace("sDao.selectAll() 진입");
 			String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState from supply as s "
 					+ "inner join product as p on p.pCode = s.sProductCode where sState = 2 and p.pCode like '"
 					+ supplierCode + "%' order by s.sCode desc;";
 			List<SupplyDTO> supplyList = selectCondition(sql);
-			LOG.trace("sDao.selectAll() 종료");
 			return supplyList;
 		}
 
 	// 처리 완료인 이번달검색 (sState = 2) -> SupplyProc.supplyAfterList
 	public List<SupplyDTO> selectAfterAll(String supplierCode) {
-		LOG.trace("sDao.selectAfterAll() 진입");
 		String curMonth = cf.curMonth();
 		String nextMonth = cf.nextMonth(curMonth);
 		String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState from supply as s "
@@ -181,7 +171,6 @@ public class SupplyDAO {
 				+ supplierCode + "%' and s.sDate >= '" + curMonth + "-01' and s.sDate < '" + nextMonth
 				+ "-01' order by s.sCode desc;";
 		List<SupplyDTO> supplyList = selectCondition(sql);
-		LOG.trace("sDao.selectAfterAll() 종료");
 		return supplyList;
 	}
 
@@ -197,7 +186,6 @@ public class SupplyDAO {
 				+ "and s.sDate >= '" + month + "' and s.sDate < '" + nextMonth + "';";
 		List<SupplyDTO> searchList = selectCondition(sql);
 		LOG.trace("sDao.searchByMonth searchList : " + searchList);
-		LOG.trace("sDao.searchByMonth 종료");
 		return searchList;
 	}// 월별 리스트
 
@@ -240,7 +228,7 @@ public class SupplyDAO {
 
 	// sState 찾기 -> CustomerFunction.sCodeCreate
 	public int searchState(String pCode) {
-		String sql = "select sState from supply where sProductCode like '" + pCode + "%' order by sCode desc limit 1;";
+		String sql = "select sState from supply where sCode like '" + pCode + "%' order by sCode desc limit 1;";
 		int state = selectOneCondition(sql);
 		return state;
 	}// sState 찾기
@@ -308,7 +296,6 @@ public class SupplyDAO {
 				+ "where sCode like '" + supplierCode + "%' and sState = 2 " 
 				+ "and sDate >= '" + lastNewDay + "' and sDate <= '" + lastYearToday + "';";
 		List<SupplyDTO> supplyList = selectCondition(sql);
-		LOG.trace("supplySalesLastYear 퇴장");
 		return supplyList;
 	}
 	
@@ -321,7 +308,6 @@ public class SupplyDAO {
 				+ "where sCode like '" + supplierCode + "%' "
 				+ "and sState = 2 and sDate >= '" + curYear + "-01-01' and sDate < '" + nextYear + "-01-01';";
 		List<SupplyDTO> supplyList = selectCondition(sql);
-		LOG.trace("supplySalesCurYear 퇴장");
 		return supplyList;
 	}
 	
@@ -386,25 +372,6 @@ public class SupplyDAO {
 		}
 	}
 
-	// 발주 상태를 2(완료)로 만듬
-	public void updateStateTwo(String sCode) {
-		String query = "update supply set sState=0 where sCode =?;";
-		try {
-			pStmt = conn.prepareStatement(query);
-			pStmt.setString(1, sCode);
-			pStmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (pStmt != null && !pStmt.isClosed())
-					pStmt.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			}
-		}
-	}
-
 	// supply DB에 추가 -> SupplyProc.complete
 	public void insertSupply(String pCode, int Quantity) {
 		// 발주신청(pCode를 받아 발주코드와 현재시간, 처리상태를 붙임)
@@ -417,27 +384,6 @@ public class SupplyDAO {
 			pStmt.setInt(4, Quantity);
 			pStmt.setInt(5, 0);
 
-			pStmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (pStmt != null && !pStmt.isClosed())
-					pStmt.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			}
-		}
-	}
-
-	// Product의 갯수를 증가시킴 -> SupplyProc.complete
-	public void SupplyQuantity(String pCode, int pQuantity) {
-		String query = "UPDATE product p INNER JOIN supply s ON p.pCode = s.sProductCode "
-				+ "SET pQuantity = ? where pCode = ? and sDate < '" + today + "' and sDate >= '" + yesterday + "';";
-		try {
-			pStmt = conn.prepareStatement(query);
-			pStmt.setInt(1, pQuantity + 20);
-			pStmt.setString(2, pCode);
 			pStmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
