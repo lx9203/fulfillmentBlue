@@ -110,7 +110,7 @@ public class AdminDAO {
 	//[공통] 해당 월의 처리 완료된 송장 리스트 가져오기
 		public List<AdminDTO> adminMonthList(String month){
 			LOG.trace("[AdminDAO] 선택 월에 출고 완료 송장 리스트");
-			String sql = "select iCode, iDate, iAreaCode from invoice "
+			String sql = "select iCode, iDate, iAreaCode, iState from invoice "
 					+ "where iDate >='"+month+"-01' and iDate < '"+cf.nextMonth(month)+"-01' and iState = 2 ;";
 			List<AdminDTO> invoiceList = selectTransCondition(sql);
 			return invoiceList;
@@ -191,7 +191,7 @@ public class AdminDAO {
 	//1.처리 준비중인 송장 리스트 가져오기
 	public List<AdminDTO> selectTransList(){
 		LOG.trace("[AdminDAO] 출고 신청 송장 리스트");
-		String sql = "select iCode, iDate, iAreaCode from invoice "
+		String sql = "select iCode, iDate, iAreaCode, iState from invoice "
 				+ "where iState = 1 or iState = 3 order by iState desc;";
 		List<AdminDTO> invoiceList = selectTransCondition(sql);
 		return invoiceList;
@@ -208,6 +208,7 @@ public class AdminDAO {
 				uDto = uDao.searchById(rs.getString("iAreaCode"));
 				invoice.setiCode(rs.getString("iCode"));
 				invoice.setiDate(rs.getString("iDate"));
+				invoice.setiState(rs.getInt("iState"));
 				invoice.setuName(uDto.getName());
 				invoiceList.add(invoice);
 			}

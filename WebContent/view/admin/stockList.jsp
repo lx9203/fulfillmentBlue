@@ -70,31 +70,22 @@
 				  </colgroup>
                   <thead>
                     <tr>
-                      <th>상품코드</th>
-                      <th>상품이름</th>
-                      <th>재고량</th>
-                      <th>출고대기</th>
-                      <th>입고예정</th>
+                      <th style="text-align: center;">상품코드</th>
+                      <th style="text-align: center;">상품이름</th>
+                      <th style="text-align: center;">재고수량</th>
+                      <th style="text-align: center;">출고대기수량</th>
+                      <th style="text-align: center;">입고예정수량</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th>총액</th>
-                      <th><fmt:formatNumber value="${requestScope.invoiceTotalSales}" pattern="#,##0"/>원</th>
-                    </tr>
-                  </tfoot>
                   <tbody>
                   	<c:set var="productList" value ="${requestScope.productList}"/>
 					<c:forEach var="product" items="${productList}">
 	                 <tr>
-                      <td>${product.pCode}</td>
-                      <td>${product.pName}</td>
-                      <td>${product.pQuantity}</td>
-                      <td>${product.oQuantity}</td>
-                      <td>${product.sQuantity}</td>
+                      <td style="text-align: center;">${product.pCode}</td>
+                      <td style="text-align: left;">${product.pName}</td>
+                      <td style="text-align: right;">${product.pQuantity}개</td>
+                      <td style="text-align: right;">${product.oQuantity}개</td>
+                      <td style="text-align: right;">${product.sQuantity}개</td>
                    	</tr>
                  	</c:forEach>
                  </tbody>

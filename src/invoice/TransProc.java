@@ -84,6 +84,10 @@ public class TransProc extends HttpServlet {
 				//3.이번년도 월별 지불 액수
 				for(int m=1;m<13;m++) {
 					monthTotalPrice = 0;
+					if(m>Integer.parseInt(cf.curMonth().substring(5))) {
+						LOG.trace("현재 달 보다 숫자가 큼");
+						break;
+					}
 					iDtoLists = iDao.transSalesYearMonth(cf.curYear(),userId,m);
 					LOG.trace("[운송사 Proc]"+m+"월 송장 수 : "+iDtoLists.size()+"");
 		    		monthTotalPrice = iDtoLists.size()*10000;

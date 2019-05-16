@@ -60,21 +60,21 @@
                   <colgroup>
 					<col style="width:10%">
 					<col style="width:10%">
-					<col style="width:30%">
+					<col style="width:37%">
 					<col style="width:10%">
-					<col style="width:10%">
-					<col style="width:15%">
-					<col style="width:15%">
+					<col style="width:8%">
+					<col style="width:12%">
+					<col style="width:13%">
 				  </colgroup>
                   <thead>
                     <tr>
-                      <th>발주코드</th>
-                      <th>상품코드</th>
-                      <th>상품이름</th>
-                      <th>단가</th>
-                      <th>발주량</th>
-                      <th>총액</th>
-                      <th>날짜</th>
+                      <th style="text-align: center;">발주코드</th>
+                      <th style="text-align: center;">상품코드</th>
+                      <th style="text-align: center;">상품이름</th>
+                      <th style="text-align: center;">단가</th>
+                      <th style="text-align: center;">발주량</th>
+                      <th style="text-align: center;">총액</th>
+                      <th style="text-align: center;">날짜</th>
                     </tr>
                   </thead>
                   <tfoot>
@@ -83,8 +83,8 @@
                       <th></th>
                       <th></th>
                       <th></th>
-                      <th>총액</th>
-                      <th><fmt:formatNumber value="${requestScope.supplyTotalSales}" pattern="#,##0"/>원</th>
+                      <th style="text-align: center;">총액</th>
+                      <th style="text-align: right;"><fmt:formatNumber value="${requestScope.supplyTotalSales}" pattern="#,##0"/>원</th>
                       <th></th>
                     </tr>
                   </tfoot>
@@ -92,13 +92,13 @@
                     <c:set var="supplyList" value ="${requestScope.supplyList}"/>
 					<c:forEach var="supply" items="${supplyList}">
 	                 <tr>
-                      <td>${supply.sCode}</td>
-                      <td>${supply.pCode}</td>
-                      <td>${supply.pName}</td>
-                      <td><fmt:formatNumber value="${supply.pPrice}" pattern="#,##0"/>원</td>
-                      <td>${supply.sQuantity}</td>
-                      <td><fmt:formatNumber value="${supply.sTotalPrice}" pattern="#,##0"/>원</td>
-                      <td>${supply.sDate}</td>
+                      <td style="text-align: center;">${supply.sCode}</td>
+                      <td style="text-align: center;">${supply.pCode}</td>
+                      <td style="text-align: left;">${supply.pName}</td>
+                      <td style="text-align: right;"><fmt:formatNumber value="${supply.pPrice}" pattern="#,##0"/>원</td>
+                      <td style="text-align: right;">${supply.sQuantity}개</td>
+                      <td style="text-align: right;"><fmt:formatNumber value="${supply.sTotalPrice}" pattern="#,##0"/>원</td>
+                      <td style="text-align: center;">${supply.sDate}</td>
                    	</tr>
                  	</c:forEach>
                   </tbody>
