@@ -88,6 +88,10 @@ public class MallProc extends HttpServlet {
 			//3.올해 월별 지불 액수
 			for(int m=1;m<13;m++) {
 				monthTotalPrice = 0;
+				if(m>Integer.parseInt(cf.curMonth().substring(5))) {
+					LOG.trace("현재 달 보다 숫자가 큼");
+					break;
+				}
 				iDtoLists = iDao.mallSalesYearMonth(cf.curYear(),userId.charAt(0),m);
 				LOG.trace("[쇼핑몰 Proc]"+m+"월 송장 수 : "+iDtoLists.size()+"");
 				for(InvoiceDTO invoice : iDtoLists) {

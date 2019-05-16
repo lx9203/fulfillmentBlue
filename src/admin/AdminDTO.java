@@ -14,6 +14,7 @@ public class AdminDTO {
 	private int oQuantity; //송장 주문 수량
 	private int sQuantity; //발주 수량
 	private int pPrice; //제품가격
+	private String iState;
 	
 	public AdminDTO() {}
 	
@@ -126,6 +127,24 @@ public class AdminDTO {
 
 	public void setsTotalPrice(int sTotalPrice) {
 		this.sTotalPrice = sTotalPrice;
+	}
+
+	public String getiState() {
+		return iState;
+	}
+
+	public void setiState(int iState) {
+		switch(iState) {
+		case 1:
+			this.iState = "승인 대기";
+			break;
+		case 3:
+			this.iState = "재고 부족";
+			break;
+		default:
+			this.iState = "오류";
+			break;
+		}
 	}
 	
 	

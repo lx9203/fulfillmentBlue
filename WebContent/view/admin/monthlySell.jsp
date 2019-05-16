@@ -66,31 +66,31 @@
 				  </colgroup>
                   <thead>
                     <tr>
-                      <th>상품코드</th>
-                      <th>상품이름</th>
-                      <th>단가</th>
-                      <th>출고량</th>
-                      <th>금액</th>
+                      <th style="text-align: center;">상품코드</th>
+                      <th style="text-align: center;">상품이름</th>
+                      <th style="text-align: center;">단가</th>
+                      <th style="text-align: center;">출고량</th>
+                      <th style="text-align: center;">금액</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th>총액</th>
-                      <th><fmt:formatNumber value="${requestScope.productTotalSales}" pattern="#,##0"/>원</th>
+                      <th style="text-align: center;"></th>
+                      <th style="text-align: center;"></th>
+                      <th style="text-align: center;"></th>
+                      <th style="text-align: center;">총액</th>
+                      <th style="text-align: right;"><fmt:formatNumber value="${requestScope.productTotalSales}" pattern="#,##0"/>원</th>
                     </tr>
                   </tfoot>
                   <tbody>
                     <c:set var="invoiceList" value ="${requestScope.invoiceList}"/>
 					<c:forEach var="invoice" items="${invoiceList}">
 	                 <tr>
-                      <td>${invoice.pCode}</td>
-                      <td>${invoice.pName}</td>
-                      <td><fmt:formatNumber value="${invoice.pPrice}" pattern="#,##0"/>원</td>
-                      <td>${invoice.oQuantity}</td>
-                      <td><fmt:formatNumber value="${invoice.iTotalPrice}" pattern="#,##0"/>원</td>
+                      <td style="text-align: center;">${invoice.pCode}</td>
+                      <td style="text-align: left;">${invoice.pName}</td>
+                      <td style="text-align: right;"><fmt:formatNumber value="${invoice.pPrice}" pattern="#,##0"/>원</td>
+                      <td style="text-align: right;">${invoice.oQuantity}개</td>
+                      <td style="text-align: right;"><fmt:formatNumber value="${invoice.iTotalPrice}" pattern="#,##0"/>원</td>
                    	</tr>
                  	</c:forEach>
                   </tbody>

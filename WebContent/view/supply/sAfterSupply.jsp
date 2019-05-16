@@ -96,7 +96,7 @@
 												<td style="text-align: center;">${supply.sCode}</td>
 												<td style="text-align: left;">${supply.sProductName}</td>
 												<td style="text-align: center;">${supply.sDate}</td>
-												<td style="text-align: center;">${supply.sQuantity} 개</td>
+												<td style="text-align: right;">${supply.sQuantity} 개</td>
                         						<td style="text-align: right;"><fmt:formatNumber value="${supply.sProductPrice }" pattern="#,##0"/> 원</td>
 												<td style="text-align: right;"><fmt:formatNumber value="${supply.sTotalPrice }" pattern="#,##0"/> 원</td>
 											</tr>

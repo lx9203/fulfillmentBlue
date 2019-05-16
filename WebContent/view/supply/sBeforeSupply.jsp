@@ -95,7 +95,7 @@
 												<td style="text-align: center;">${supply.sCode}</td>
 												<td style="text-align: left;">${supply.sProductName}</td>
 												<td style="text-align: center;">${supply.sDate}</td>
-												<td style="text-align: center;">${supply.sQuantity}개</td>
+												<td style="text-align: right;">${supply.sQuantity}개</td>
 												<td style="text-align: right;">${supply.sProductPrice }원</td>
 												<td style="text-align: right;">${supply.sTotalPrice }원</td>
 												<td style="text-align: center;">${supply.sState}</td>

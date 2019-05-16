@@ -158,6 +158,10 @@ public class SupplyProc extends HttpServlet {
 			//5.올해 월별 지불 액수
 			for(int m=1;m<13;m++) {
 				monthTotalPrice = 0;
+				if(m>Integer.parseInt(cf.curMonth().substring(5))) {
+					LOG.trace("현재 달 보다 숫자가 큼");
+					break;
+				}
 				sDtoLists = sDao.SalesYearMonth(cf.curYear(),supplierCode,m);
 				LOG.trace("sProc.intoMain 올해 월별 총액 : "+m+"월 송장 수 : "+sDtoLists.size()+"");
 				for(SupplyDTO supply : sDtoLists) {
@@ -183,7 +187,7 @@ public class SupplyProc extends HttpServlet {
 			
 			// 종합
     		request.setAttribute("curYearTotalSales", curYearTotalSales);//1. 이번년 매출액
-    		request.setAttribute("CurYearSalesRatio", CurYearSalesRatio);	//2. 작년 매출액
+    		request.setAttribute("lastYearTotalSales", lastYearTotalSales);	//2. 작년 매출액
     		request.setAttribute("curMonthTotalSales", curMonthTotalSales); //3. 이번달 매출액
     		request.setAttribute("monthListCount", monthListCount); //4. 이번달 처리완료 건수
        		request.setAttribute("thisTotalSalesList", thisTotalSalesList); //5. 올해 월별 총 지불액

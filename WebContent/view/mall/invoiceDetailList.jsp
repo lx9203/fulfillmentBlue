@@ -78,7 +78,7 @@
                     <tr>
                       <td style="text-align: center;">${order.oNum}</td>
                       <td style="text-align: left;">${order.oProductName}</td>
-                      <td style="text-align: center;">${order.oQuantity}</td>
+                      <td style="text-align: right;">${order.oQuantity}</td>
                       <td style="text-align: right;"><fmt:formatNumber value="${order.pPrice}" pattern="#,##0"/>원</td>
                       <td style="text-align: right;"><fmt:formatNumber value="${order.oTotalPrice}" pattern="#,##0"/>원</td>
                     </tr>
