@@ -7,7 +7,7 @@
   <!-- 상단 창고회사 로고 -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
     <div class="sidebar-brand-icon rotate-n-15">
-      <i class="fas fa-laugh-wink"></i>
+      <i class="fab fa-docker" style="font-weight:100"></i>
     </div>
     <div class="sidebar-brand-text mx-3">BlueCompany</div>
   </a>
@@ -18,8 +18,8 @@
   <c:if test="${navRecall == 'admin'}">
     <li class="nav-item">
       <a class="nav-link" href="AdminProc?action=intoMain">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>운영현황</span>
+        <i class="fas fa-chart-bar"></i>
+        <span>창고 운영현황</span>
       </a>
     </li>
 
@@ -31,7 +31,7 @@
 
     <li class="nav-item">
       <a class="nav-link" href="AdminProc?action=productList">
-        <i class="fas fa-fw fa-table"></i>
+        <i class="fas fa-boxes"></i>
         <span>재고현황</span>
       </a>
     </li>
@@ -44,33 +44,41 @@
 
     <li class="nav-item">
       <a class="nav-link" href="AdminProc?action=salesMonthList">
-        <i class="fas fa-fw fa-table"></i>
+        <i class="fas fa-coins"></i>&nbsp;
         <span>판매내역</span>
       </a>
     </li>
     
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTrans" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-folder"></i>
+        <i class="fas fa-truck"></i>&nbsp;
         <span>운송내역</span>
       </a>
       <div id="collapseTrans" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="AdminProc?action=transPermissionList">운송 신청내역</a>
-          <a class="collapse-item" href="AdminProc?action=transMonthList">월별 운송내역</a>
+          <a class="collapse-item" href="AdminProc?action=transPermissionList">
+            <i class="fas fa-file-export"></i>&nbsp;운송 신청내역
+          </a>
+          <a class="collapse-item" href="AdminProc?action=transMonthList">
+            <i class="fas fa-file-alt"></i>&nbsp;월별 운송내역
+          </a>
         </div>
       </div>
     </li>
     
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSupply" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-folder"></i>
+        <i class="fas fa-dolly-flatbed"></i>&nbsp;
         <span>발주내역</span>
       </a>
       <div id="collapseSupply" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="AdminProc?action=supplyPermissionList">발주 신청내역</a>
-          <a class="collapse-item" href="AdminProc?action=supplyMonthList">월별 발주내역</a>
+          <a class="collapse-item" href="AdminProc?action=supplyPermissionList">
+            <i class="fas fa-file-export"></i>&nbsp;발주 신청내역
+          </a>
+          <a class="collapse-item" href="AdminProc?action=supplyMonthList">
+            <i class="fas fa-file-alt"></i>&nbsp;월별 발주내역
+          </a>
         </div>
       </div>
     </li>
@@ -82,7 +90,7 @@
   <c:if test="${navRecall == 'catalog'}">
     <li class="nav-item">
       <a class="nav-link" href="catalogMain.jsp">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <i class="fas fa-th-large"></i>
         <span>제품소개 메인페이지</span>
       </a>
     </li>
@@ -95,32 +103,32 @@
 
     <li class="nav-item">
       <a class="nav-link" href="cCatalogList.jsp">
-        <i class="fas fa-fw fa-table"></i>
-        <span>상품종류1</span>
+        <i class="fas fa-th"></i>
+        <span>육류(Meat)</span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="tables.jsp">
-        <i class="fas fa-fw fa-table"></i>
-        <span>상품종류2</span>
+        <i class="fas fa-th"></i>
+        <span>해산물(Seafood)</span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="tables.jsp">
-        <i class="fas fa-fw fa-table"></i>
-        <span>상품종류3</span>
+        <i class="fas fa-th"></i>
+        <span>바베큐(BBQ)</span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="tables.jsp">
-        <i class="fas fa-fw fa-table"></i>
-        <span>상품종류4</span>
+        <i class="fas fa-th"></i>
+        <span>야채/과일(Vegetable/Fruit)</span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="tables.jsp">
-        <i class="fas fa-fw fa-table"></i>
-        <span>상품종류5</span>
+        <i class="fas fa-th"></i>
+        <span>향신료(Spicy)</span>
       </a>
     </li>
   </c:if>
@@ -130,7 +138,7 @@
   <c:if test="${navRecall == 'mall'}">
     <li class="nav-item">
       <a class="nav-link" href="MallProc?action=intoMain">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <i class="fas fa-chart-bar"></i>
         <span>쇼핑몰 메인페이지</span>
       </a>
     </li>
@@ -143,14 +151,14 @@
 
     <li class="nav-item">
       <a class="nav-link" href="MallProc?action=mallInvoiceListDay">
-        <i class="fas fa-fw fa-table"></i>
+        <i class="fas fa-tasks"></i>
         <span>일별 송장내역</span>
       </a>
     </li>
   
     <li class="nav-item">
       <a class="nav-link" href="MallProc?action=mallInvoiceListMonth">
-        <i class="fas fa-fw fa-table"></i>
+        <i class="fas fa-list"></i>
         <span>월별 송장내역</span>
       </a>
     </li>
@@ -161,7 +169,7 @@
   <c:if test="${navRecall == 'trans'}">
   	 <li class="nav-item">
       <a class="nav-link" href="TransProc?action=intoMain">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <i class="fas fa-chart-bar"></i>
         <span>운송사 메인페이지</span>
       </a>
     </li>
@@ -174,14 +182,14 @@
 
     <li class="nav-item">
       <a class="nav-link" href="TransProc?action=transInvoiceListDay">
-        <i class="fas fa-fw fa-table"></i>
+        <i class="fas fa-tasks"></i>
         <span>일별 운송내역</span>
       </a>
     </li>
   
     <li class="nav-item">
       <a class="nav-link" href="TransProc?action=transInvoiceListMonth">
-        <i class="fas fa-fw fa-table"></i>
+        <i class="fas fa-list"></i>
         <span>월별 운송내역</span>
       </a>
     </li>
@@ -192,7 +200,7 @@
   <c:if test="${navRecall == 'supply'}">
     <li class="nav-item">
       <a class="nav-link" href="SupplyProc?action=intoMain">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <i class="fas fa-chart-bar"></i>
         <span>공급사 메인페이지</span>
       </a>
     </li>
@@ -205,13 +213,13 @@
 
     <li class="nav-item">
       <a class="nav-link" href="SupplyProc?action=supplyBeforeList">
-        <i class="fas fa-fw fa-table"></i>
+        <i class="fas fa-tasks"></i>
         <span>수주내역</span></a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" href="SupplyProc?action=supplyAfterList">
-        <i class="fas fa-fw fa-table"></i>
+        <i class="fas fa-list"></i>
         <span>납품내역</span></a>
     </li>
   </c:if>

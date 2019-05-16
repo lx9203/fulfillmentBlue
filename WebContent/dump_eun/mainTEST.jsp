@@ -253,7 +253,57 @@
               
                 <input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
           </form>
-          
+          <br>
+          <hr>
+        	<i class="fas fa-warehouse"></i><br>
+        	<i class="fab fa-docker">  <b>창고</b></i><br>
+        	<i class="fas fa-truck">  운송사</i><br>
+        	<i class="fas fa-shipping-fast"></i><br>
+        	
+        	<i class="fas fa-gift">  쇼핑몰</i><br>
+        	<i class="fas fa-gifts"></i><br>
+        	<i class="fas fa-dolly-flatbed">  공급업체</i><br>
+        	
+        	<i class="fas fa-truck-loading"></i><br>
+        	<i class="fas fa-dolly"></i><br>
+        	<br>
+        	
+        	<i class="fas fa-door-open">  로그아웃</i><br>
+        	
+        	<hr>
+        	네비게이션<br>
+        	<i class="fas fa-chart-bar">  메인화면</i><br>
+        	<i class="fas fa-poll"></i><br>
+        	
+        	<i class="fas fa-boxes"></i><br>
+        	
+          	<i class="fas fa-coins">  판매내역</i><br>
+          	<br>
+          	<i class="fas fa-truck">  운송내역</i><br>
+          	<i class="fas fa-shipping-fast"></i><br>
+          	&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-file-export">  운송신청내역</i><br>
+          	&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-file-invoice"></i><br>
+          	&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-file-alt">  월별운송내역</i><br>
+          	&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-list-alt"></i><br>
+          	<br>
+          	<i class="fas fa-dolly-flatbed">  발주내역</i><br>
+          	<i class="fas fa-dolly"></i><br>
+          	&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-file-export">  발주신청내역</i><br>
+          	&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-file-invoice"></i><br>
+          	&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-file-alt">  월별발주내역</i><br>
+          	&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-list-alt"></i><br>
+          	
+          	<hr>
+          	메인페이지<br>
+          	<i class="fas fa-won-sign"></i><br>
+          	
+          	<hr>
+          	<i class="fas fa-th-large">  카탈로그메인</i><br>
+          	<i class="fas fa-th">  카탈로그 항목</i><br>
+          	
+          	<hr>
+          	<i class="fas fa-tasks"></i>일별<br>
+          	<i class="fas fa-list"></i>월별<br>
           <!-- Single button -->
 <div class="btn-group">
   <input type="text" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
