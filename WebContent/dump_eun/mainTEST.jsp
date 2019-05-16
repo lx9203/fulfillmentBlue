@@ -19,6 +19,8 @@
   <link href="../css/sb-admin-2.min.css" rel="stylesheet">
   
 </head>
+<c:set value="0" var="userType"/>
+
 <body id="page-top">
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -289,6 +291,9 @@
 
   <!-- Page level custom scripts -->
   <%@ include file="_comboChartBarLine.jspf" %>
+  
+  <c:set value="true" var="msgState"/>
+  <c:set value="경고창 모달 팝업 작동확인" var="message"/>
 </body>
 </html>
 <%@ include file="common/_messageModal.jspf" %>

@@ -31,7 +31,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 	return s.join(dec);
 }
 
-var data1 = [102500,945256,515489,745644,478941,555790,413887,545617,878451,1045612,784112,212345];
+var data1 = [102500,945256,515489,745644,478941,null,null,null,null];
 var data2 = [845671,515735,677777,325333,978355,585733,287383,1145555,205535,383535,865433,952255];
 
 var ctx = document.getElementById("monthTotalPrice");
@@ -83,7 +83,7 @@ var mixedChart = new Chart(ctx, {
 					drawBorder: false
 				},
 				ticks: {
-					maxTicksLimit: 7
+					maxTicksLimit: 12
 				}
 			}],
 			yAxes: [{
