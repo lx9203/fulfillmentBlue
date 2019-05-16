@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,7 @@ public class ProductProc extends HttpServlet {
 		//공통 설정 
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher rd;
+		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
 		
 		List<ProductDTO> pDtoList = new ArrayList<ProductDTO>();
@@ -43,6 +45,7 @@ public class ProductProc extends HttpServlet {
 		switch(action) {
 		case "intoMain":
 			LOG.trace("카탈로그 입장");
+			session.setAttribute("userName", "고객");
 			rd = request.getRequestDispatcher("catalog/catalogMain.jsp");
 			rd.forward(request, response);
 			break;
