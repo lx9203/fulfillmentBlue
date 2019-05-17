@@ -3,6 +3,16 @@
     background-size: cover;
 }
 
+/* border card style */
+.border-left-past {
+	border-left:.25rem solid #ff9f40!important
+}
+.text-past {
+	color:#ff9f40
+}
+/* ./end of border color style */
+
+
 /* 'input type=file' custom style */
 .filebox label {
 	display: inline-block;
@@ -51,6 +61,16 @@
 }
 /* end of 'input type=file' custom style */
 
+/* datepicker, monthpicker input style*/ 
+.picker-input {
+    height: calc(1.5em + .5rem + 2px);
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+    border: 1px solid #d1d3e2;
+  }
+
 /* datepicker button style */
 .ui-datepicker-prev span {
     background-image: url(img/arrow-alt-circle-left-solid.svg) !important;
@@ -62,6 +82,7 @@
         background-position: 0px 0px !important;
 }
 /* ./end of datepicker button style */
+
 
 /* category ".hover-item > .hover-fadeout, .hover-fadein" setting */
 .fade-item {
@@ -195,5 +216,4 @@
 .p-box-layout-caption-script p{
   margin: unset;
 }
-
 /* ./end of categoryList item cell */

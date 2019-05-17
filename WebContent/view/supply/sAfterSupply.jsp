@@ -1,36 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<title>월별 납품내역</title>
-
-<!-- Custom fonts for this template-->
-<link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
-	type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet">
-
-<!-- Custom styles for this template-->
-<link href="../css/sb-admin-2.min.css" rel="stylesheet">
-
-<!-- Custom styles for this page -->
-<link href="../vendor/datatables/dataTables.bootstrap4.min.css"
-	rel="stylesheet">
-
-<link href="../css/jquery-ui.min.css" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<title>월별 납품내역</title>
+	
+	<!-- Custom fonts for this template-->
+	<link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+	
+	<!-- Custom styles for this template-->
+	<link href="../css/sb-admin-2.min.css" rel="stylesheet">
+	
+	<!-- Custom styles for this page -->
+	<link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+	
+	<link href="../css/jquery-ui.min.css" rel="stylesheet">
+	
+	<link href="../css/bluecompany.css" rel="stylesheet">
 </head>
 <body id="page-top">
 	<!-- Page Wrapper -->
@@ -48,29 +42,25 @@
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
 						<h1 class="h3 mb-2 text-gray-800">월별 납품내역</h1>
-						<form action="SupplyProc?action=supplyAfterListSearch" class="form-horizontal d-sm-inline-block"
-							method="post">
+						<form action="SupplyProc?action=supplyAfterListSearch" class="form-horizontal d-sm-inline-block" method="post">
 							<div class="form-group" style="margin-bottom: 0">
 								<label class="control-label" style="margin-bottom: 0">날짜:&nbsp;
-									<input type="text" name="month" id="monthpicker"
-									style="border: 1px sloid; border-radius: .2rem;">&nbsp;&nbsp;
-									<input class="btn btn-primary btn-sm shadow-sm" type="submit"
-									value="검색">
+									<input type="text" name="month" id="monthpicker" class="picker-input">&nbsp;&nbsp;
+									<button class="btn btn-primary btn-sm shadow-sm" type="submit"value="검색">
+										<i class="fas fa-search"></i>&nbsp;&nbsp;검색
+									</button>
 								</label>
 							</div>
 						</form>
 					</div>
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
-						<div
-							class="card-header py-3 d-sm-flex align-items-center justify-content-between">
-							<h6 class="m-0 font-weight-bold text-primary d-sm-inline-block"
-								style="line-height: 2">${RequestScope.selectMonth}</h6>
+						<div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+							<h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height: 2">${RequestScope.selectMonth}</h6>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="100%"
-									cellspacing="0">
+								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 									<colgroup>
 										<col style="width: 10%">
 										<col style="width: 40%">
@@ -90,7 +80,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:set var="supplyList" value="${requestScope.supplyList}" />
+										<c:set var="supplyList" value="${requestScope.supplyList}"/>
 										<c:forEach var="supply" items="${supplyList}">
 											<tr>
 												<td style="text-align: center;">${supply.sCode}</td>
@@ -146,10 +136,8 @@
 
 	<!-- 날짜검색기능 -->
 	<script src="../js/jquery-ui.min.js"></script>
-
-	<!-- 월 검색기능 -->
-	<script src="../js/jquery.mtz.monthpicker.js"></script>
 	<script src="../js/monthpicker.js"></script>
+	<script src="../js/jquery.mtz.monthpicker.js"></script>
 
 </body>
 </html>

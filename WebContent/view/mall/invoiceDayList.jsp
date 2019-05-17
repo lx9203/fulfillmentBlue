@@ -43,8 +43,10 @@
             <form action="MallProc?action=mallSearchDayList" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
-			      <input type="text" name="date" id="datepicker1" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
-			      <input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
+			      <input type="text" name="date" id="datepicker1" class="picker-input">&nbsp;&nbsp;
+			      <button class="btn btn-primary btn-sm shadow-sm" type="submit"value="검색">
+					<i class="fas fa-search"></i>&nbsp;&nbsp;검색
+				  </button>
 			    </label>
 			  </div>
 	        </form>

@@ -23,6 +23,7 @@
   <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   
   <link href="../css/jquery-ui.min.css" rel="stylesheet">
+  
   <link href="../css/bluecompany.css" rel="stylesheet">
 </head>
 <body id="page-top">
@@ -43,8 +44,10 @@
             <form action="TransProc?action=transSearchDayList" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;
-			      <input type="text" name="date" id="datepicker1" style="border:1px sloid; border-radius:.2rem;">&nbsp;&nbsp;
-			      <input class="btn btn-primary btn-sm shadow-sm" type="submit" value="검색">
+			      <input type="text" name="date" id="datepicker1" class="picker-input">&nbsp;&nbsp;
+			      <button class="btn btn-primary btn-sm shadow-sm" type="submit"value="검색">
+					<i class="fas fa-search"></i>&nbsp;&nbsp;검색
+				  </button>
 			    </label>
 			  </div>
 	        </form>
@@ -55,7 +58,7 @@
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
               <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block" style="line-height:2">${selectDate}</h6>
               <a href="TransProc?action=forwarding" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-download fa-sm text-white-50"></i>출고
+                <i class="fas fa-truck-loading"></i>&nbsp;&nbsp;출고
               </a>
             </div>
             <div class="card-body">
