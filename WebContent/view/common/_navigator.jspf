@@ -89,7 +89,7 @@
   <!--  카탈로그 영역 -->
   <c:if test="${navRecall == 'catalog'}">
     <li class="nav-item">
-      <a class="nav-link" href="catalogMain.jsp">
+      <a class="nav-link" href="ProductProc?action=intoMain">
         <i class="fas fa-th-large"></i>
         <span>제품소개 메인페이지</span>
       </a>
@@ -102,31 +102,31 @@
     </div>
 
     <li class="nav-item">
-      <a class="nav-link" href="cCatalogList.jsp">
+      <a class="nav-link" href="ProductProc?action=meat">
         <i class="fas fa-th"></i>
         <span>육류(Meat)</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="tables.jsp">
+      <a class="nav-link" href="ProductProc?action=seafood">
         <i class="fas fa-th"></i>
         <span>해산물(Seafood)</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="tables.jsp">
+      <a class="nav-link" href="ProductProc?action=BBQ">
         <i class="fas fa-th"></i>
         <span>바베큐(BBQ)</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="tables.jsp">
+      <a class="nav-link" href="ProductProc?action=vegetable">
         <i class="fas fa-th"></i>
         <span>야채/과일(Vegetable/Fruit)</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="tables.jsp">
+      <a class="nav-link" href="ProductProc?action=spicy">
         <i class="fas fa-th"></i>
         <span>향신료(Spicy)</span>
       </a>
