@@ -35,70 +35,70 @@
           <div class="col-lg-6">
             <div class="p-5">
               <div class="text-center">
-                <h2 class="h5 text-gray-900 mb-4">BlueCampany의 고객이 되신것을 환영합니다.</h2>
-                <div class="small">아래의 정보를 채워주세요</div><br>      
+                <h2 class="h5 text-gray-900 mb-4 boldfont">BlueCampany의 고객이 되신것을 환영합니다.</h2>
+                <div class="text-gray-600 boldfont">아래의 정보를 채워주세요</div><br>      
               </div>
 
               <!-- form의 class명 'view-radio-group' 변경 시, blue_company.js도 수정필요 : 라디오 버튼 보이기/숨기기 기능이 class명으로 연동되어 있음. -->
               <form action="UserProc?action=register" class="user view-radio-group" method="POST" id="checkPass">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-user" name="name" placeholder="이름을 입력해주세요.">
+                  <input type="text" class="form-control form-control-user boldfont" name="name" placeholder="이름을 입력해주세요.">
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" name="InputPassword" placeholder="비밀번호를 입력해주세요.">
+                    <input type="password" class="form-control form-control-user boldfont" name="InputPassword" placeholder="비밀번호를 입력해주세요.">
                   </div>
                   <div class="col-sm-6">
-                    <input type="password" class="form-control form-control-user" name="RepeatPassword" placeholder="다시 한 번 입력해 주세요.">
+                    <input type="password" class="form-control form-control-user boldfont" name="RepeatPassword" placeholder="다시 한 번 입력해 주세요.">
                   </div>
                 </div>
 
                 <div class="form-group row " style="line-height: 2">
-                  <div class="col-sm-3 mb-3 mb-sm-0 small " style="display : inline-block; max-width: max-content">
+                  <div class="col-sm-3 mb-3 mb-sm-0 boldfont" style="display : inline-block; max-width: max-content">
                     <span style="padding:0 0 0 17px">회원유형&nbsp;:</span>
                   </div>
 
                 <!-- id 변경 시, blue_company.js변경 필요 : 숨기기 보이기 기능이 id값으로 연동되어 있음 -->
-                  <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
+                  <div class="col-sm-3 custom-control custom-radio small d-inline-block boldfont" style="max-width: max-content">
                     <input type="radio" class="custom-control-input" name="userType" id="transport" value=1>
                     <label class="custom-control-label" for="transport">운송업체&nbsp;</label>
                   </div>
-                  <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
+                  <div class="col-sm-3 custom-control custom-radio small d-inline-block boldfont" style="max-width: max-content">
                     <input type="radio" class="custom-control-input" name="userType" id="shopping" value=2>
                     <label class="custom-control-label" for="shopping">쇼핑몰&nbsp;</label>
                   </div>
-                  <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
+                  <div class="col-sm-3 custom-control custom-radio small d-inline-block boldfont" style="max-width: max-content">
                     <input type="radio" class="custom-control-input" name="userType" id="seller" value=3>
                     <label class="custom-control-label" for="seller">공급사&nbsp;</label>
                   </div>
                 </div>
 
                 <div class="form-group row view-radio-group-object" style="line-height: 2">
-                  <div class="col-sm-3 mb-3 mb-sm-0 small" style="display : inline-block; max-width: max-content">
+                  <div class="col-sm-3 mb-3 mb-sm-0 small boldfont" style="display : inline-block; max-width: max-content">
                     <span style="padding:0 0 0 17px">지역&nbsp;:</span>
                   </div>
-                  <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
+                  <div class="col-sm-3 custom-control custom-radio small d-inline-block boldfont" style="max-width: max-content">
                     <input type="radio" class="custom-control-input" name="areaId" id="kyeonggi" value=1>
                     <label class="custom-control-label" for="kyeonggi">경기&nbsp;</label>
                   </div>
-                  <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
+                  <div class="col-sm-3 custom-control custom-radio small d-inline-block boldfont" style="max-width: max-content">
                     <input type="radio" class="custom-control-input" name="areaId" id="jungbu" value=2>
                     <label class="custom-control-label" for="jungbu">중부&nbsp;</label>
                   </div>
-                  <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
+                  <div class="col-sm-3 custom-control custom-radio small d-inline-block boldfont" style="max-width: max-content">
                     <input type="radio" class="custom-control-input" name="areaId" id="yeongnam" value=3>
                     <label class="custom-control-label" for="yeongnam">영남&nbsp;</label>
                   </div>
-                  <div class="col-sm-3 custom-control custom-radio small d-inline-block" style="max-width: max-content">
+                  <div class="col-sm-3 custom-control custom-radio small d-inline-block boldfont" style="max-width: max-content">
                     <input type="radio" class="custom-control-input" name="areaId" id="seobu" value=4>
                     <label class="custom-control-label" for="seobu">서부&nbsp;</label>
                   </div>
                 </div>
-				<input class="btn btn-primary btn-user btn-block" type="submit" value="회원가입">
+				<input class="btn btn-primary btn-user btn-block boldfont" type="submit" value="회원가입">
               </form>
               <hr>
               <div class="text-center">
-                <a class="small" href="login.jsp">Already have an account? Login!</a>
+                <a class="boldfont" href="login.jsp">이미 BlueCampany의 회원이신가요?</a>
               </div>
             </div>
           </div>

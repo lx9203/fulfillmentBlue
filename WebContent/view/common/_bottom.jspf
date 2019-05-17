@@ -4,7 +4,7 @@
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
   <div class="container my-auto">
-    <div class="copyright text-center my-auto">
+    <div class="copyright text-center my-auto text-gray-600 boldfont"">
       <span>Copyright &copy; Blue Company 2019</span>
     </div>
   </div>
