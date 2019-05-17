@@ -39,7 +39,7 @@
         <div class="container-fluid">
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-2 text-gray-800">일별 송장내역</h1>
+            <h1 class="h3 mb-2 text-gray-600 boldfont">일별 송장내역</h1>
             <form action="MallProc?action=mallSearchDayList" class="form-horizontal d-sm-inline-block" method="post">
 			  <div class="form-group" style="margin-bottom:0">
 			    <label class="control-label" style="margin-bottom:0">날짜:&nbsp;

@@ -35,7 +35,7 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">BlueCompany 운영현황</h1>
+            <h1 class="h3 mb-0 text-gray-600 boldfont">BlueCompany 운영현황</h1>
           </div>
 
           <!-- Content Row 1-->

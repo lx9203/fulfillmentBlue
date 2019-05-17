@@ -35,22 +35,22 @@
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                    <h1 class="h4 text-gray-900 mb-4 boldfont">Welcome Back!</h1>
                   </div>
                   <form action="UserProc?action=login" class="user" method="POST">
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="id" name="id" placeholder="아이디를 입력해 주세요">
+                      <input type="text" class="form-control form-control-user boldfont" id="id" name="id" placeholder="아이디를 입력해 주세요">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="비밀번호를 입력해 주세요">
+                      <input type="password" class="form-control form-control-user boldfont" id="password" name="password" placeholder="비밀번호를 입력해 주세요">
                     </div>
                     <br>
-                    <input class="btn btn-primary btn-user btn-block" type="submit" value="로그인">
-                 	<a href="ProductProc?action=intoMain" class="btn btn-google btn-user btn-block">창고 둘러보기</a>
+                    <input class="btn btn-primary btn-user btn-block boldfont" type="submit" value="로그인">
+                 	<a href="ProductProc?action=intoMain" class="btn btn-google btn-user btn-block boldfont">창고 둘러보기</a>
                   </form>
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="register.jsp">Create an Account!</a>
+                    <a class="text-gray-800 boldfont" href="register.jsp">회원가입</a>
                   </div>
                 </div>
               </div>
