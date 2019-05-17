@@ -58,6 +58,7 @@
                     <div class="hover-fadeout" style="background-image: url('../img/meat/meat_main.jpg')"></div>
                     <div class="hover-fadein card shadow mb-4">
                       <h3>육류(Meat)</h3>
+                          <br>
                       <button>Details</button>
 			        </div>
                   </article>
@@ -75,7 +76,7 @@
                     <div class="hover-fadeout" style="background-image: url('../img/seafood/seafood_main.jpg')"></div>
                     <div class="hover-fadein card shadow mb-4">
                       <h3>해산물(Seafood)</h3>
-                      <p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+                          <br>
                       <button>Details</button>
 			        </div>
                   </article>
@@ -98,7 +99,7 @@
                     <div class="hover-fadeout" style="background-image: url('../img/BBQ/BBQ_main.jpg')"></div>
                     <div class="hover-fadein card shadow mb-4">
                       <h3>바베큐(BBQ)</h3>
-                      <p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+                          <br>
                       <button>Details</button>
 			        </div>
                   </article>
@@ -116,7 +117,7 @@
                     <div class="hover-fadeout" style="background-image: url('../img/vegetable/vegetable_main.jpg')"></div>
                     <div class="hover-fadein card shadow mb-4">
                       <h3>야채/과일(Vegetable/Fruit)</h3>
-                      <p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+                          <br>
                       <button>Details</button>
 			        </div>
                   </article>
@@ -134,7 +135,7 @@
                     <div class="hover-fadeout" style="background-image: url('../img/spicy/spicy_main.jpg')"></div>
                     <div class="hover-fadein card shadow mb-4">
                       <h3>향신료(Spicy)</h3>
-                      <p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+                      <br>
                       <button>Details</button>
 			        </div>
                   </article>

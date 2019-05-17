@@ -152,6 +152,14 @@ public class MallProc extends HttpServlet {
 		
 		//3. [기능 : 날짜 검색] 날짜를 선택해서 해당항는 부분의 하루 리스트를 DTO로 받는다.
 		case "mallSearchDayList":
+			if (request.getParameter("date").equals("")) {
+				message = "날짜를 선택해 주세요.";
+				request.setAttribute("message", message);
+				request.setAttribute("msgState", true);
+				rd = request.getRequestDispatcher("MallProc?action=mallInvoiceListDay");
+				rd.forward(request, response);
+				break;
+			}
 			date = request.getParameter("date"); //페이지로부터 선택한 날짜를 가져온다.
 			LOG.trace("[쇼핑몰 Proc] 선택한 날짜 : "+date);
 			iDtoLists = iDao.mallSearchAllDay(userId.charAt(0), date); //쇼핑몰의 코드와 날짜를 통해 이번 월의 송장목록을 가져온다.
@@ -163,6 +171,14 @@ public class MallProc extends HttpServlet {
 			
 		case "mallSearchMonthList":
 			LOG.trace("[쇼핑몰 Proc] 월별 배송 목록 검색");
+			if (request.getParameter("month").equals("")) {
+				message = "날짜를 선택해 주세요.";
+				request.setAttribute("message", message);
+				request.setAttribute("msgState", true);
+				rd = request.getRequestDispatcher("MallProc?action=mallInvoiceListMonth");
+				rd.forward(request, response);
+				break;
+			}
 			month = request.getParameter("month"); //페이지로부터 선택한 날짜를 가져온다.
 			LOG.trace("[쇼핑몰 Proc] 선택한 달 : "+ month);
 			iDtoLists = iDao.mallSearchAllMonth(userId.charAt(0), month); //쇼핑몰의 코드와 날짜를 통해 이번 월의 송장목록을 가져온다.
@@ -198,6 +214,14 @@ public class MallProc extends HttpServlet {
 	        try {
 	        	LOG.trace("[쇼핑몰 Proc] 송장 처리 시작");
 	            // csv 데이터 파일
+	        	if (request.getParameter("fileName1").equals("")) {
+					message = "파일을 선택해 주세요.";
+					request.setAttribute("message", message);
+					request.setAttribute("msgState", true);
+					rd = request.getRequestDispatcher("MallProc?action=mallInvoiceListDay");
+					rd.forward(request, response);
+					break;
+				}
 	        	LOG.trace("파일 이름 : " + request.getParameter("fileName1") );
 	        	String csvFile ="C://temp//"+ request.getParameter("fileName1") ;
 	            File csv = new File(csvFile);

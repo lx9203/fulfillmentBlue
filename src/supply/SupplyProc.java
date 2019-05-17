@@ -62,6 +62,15 @@ public class SupplyProc extends HttpServlet {
 				sDao.updateState(supply.getsCode());
 				count++;
 			}
+			if(count == 0) {
+				message = "당일 납품할 제품이 없습니다.";
+				request.setAttribute("message", message);
+				request.setAttribute("msgState", true);
+				rd = request.getRequestDispatcher("SupplyProc?action=supplyBeforeList");
+				rd.forward(request, response);
+				break;
+				
+			}
 			
 			message = "총 "+count+" 건의 납품 승인 요청이 완료되었습니다.";
 			request.setAttribute("message", message);
@@ -109,6 +118,14 @@ public class SupplyProc extends HttpServlet {
 		case "supplyAfterListSearch":
 			// 상태가 2인 목록(월검색)
 			LOG.trace("sProc.supplyAfterListSearch진입");
+			if (request.getParameter("month").equals("")) {
+				message = "날짜를 선택해 주세요.";
+				request.setAttribute("message", message);
+				request.setAttribute("msgState", true);
+				rd = request.getRequestDispatcher("SupplyProc?action=supplyAfterList");
+				rd.forward(request, response);
+				break;
+			}
 			userId = (String)session.getAttribute("userId");
 			LOG.trace("sProc.intoMain userID : " + userId);
 			supplierCode = CustomerFunction.SupplierCode(userId);

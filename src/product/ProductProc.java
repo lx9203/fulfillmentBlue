@@ -52,6 +52,7 @@ public class ProductProc extends HttpServlet {
 		case "meat":
 			pDtoList = pDao.selectCategory("A");
 			request.setAttribute("pDtoList", pDtoList);
+			request.setAttribute("cName", "육류(Meat)");
 			LOG.trace(pDtoList.toString());
 			rd = request.getRequestDispatcher("catalog/catalogList.jsp");
 			rd.forward(request, response);
@@ -59,24 +60,28 @@ public class ProductProc extends HttpServlet {
 		case "seafood":
 			pDtoList = pDao.selectCategory("B");
 			request.setAttribute("pDtoList", pDtoList);
+			request.setAttribute("cName", "해산물(Seafood)");
 			rd = request.getRequestDispatcher("catalog/catalogList.jsp");
 			rd.forward(request, response);
 			break;
 		case "BBQ":
 			pDtoList = pDao.selectCategory("C");
 			request.setAttribute("pDtoList", pDtoList);
+			request.setAttribute("cName", "바베큐(BBQ)");
 			rd = request.getRequestDispatcher("catalog/catalogList.jsp");
 			rd.forward(request, response);
 			break;
 		case "vegetable":
 			pDtoList = pDao.selectCategory("D");
 			request.setAttribute("pDtoList", pDtoList);
+			request.setAttribute("cName", "야채(Vegetable)");
 			rd = request.getRequestDispatcher("catalog/catalogList.jsp");
 			rd.forward(request, response);
 			break;
 		case "spicy":
 			pDtoList = pDao.selectCategory("E");
 			request.setAttribute("pDtoList", pDtoList);
+			request.setAttribute("cName", "향신료(Spicy)");
 			rd = request.getRequestDispatcher("catalog/catalogList.jsp");
 			rd.forward(request, response);
 			break;

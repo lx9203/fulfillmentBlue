@@ -135,6 +135,14 @@ public class TransProc extends HttpServlet {
 				
 			//3. [기능 : 날짜 검색] 날짜를 선택해서 해당항는 부분의 하루 리스트를 DTO로 받는다.
 			case "transSearchDayList":
+				if (request.getParameter("date").equals("")) {
+					message = "날짜를 선택해 주세요.";
+					request.setAttribute("message", message);
+					request.setAttribute("msgState", true);
+					rd = request.getRequestDispatcher("TransProc?action=transInvoiceListDay");
+					rd.forward(request, response);
+					break;
+				}
 				date = request.getParameter("date"); //페이지로부터 선택한 날짜를 가져온다.
 				LOG.trace("[운송사 Proc] 선택한 날짜 : "+date);
 				iDtoLists = iDao.transSearchAllDay(userId, date); //쇼핑몰의 코드와 날짜를 통해 이번 월의 송장목록을 가져온다.
@@ -146,6 +154,14 @@ public class TransProc extends HttpServlet {
 				
 			case "transSearchMonthList":
 				LOG.trace("[운송사 Proc] 월별 배송 목록 검색");
+				if (request.getParameter("month").equals("")) {
+					message = "날짜를 선택해 주세요.";
+					request.setAttribute("message", message);
+					request.setAttribute("msgState", true);
+					rd = request.getRequestDispatcher("TransProc?action=transInvoiceListMonth");
+					rd.forward(request, response);
+					break;
+				}
 				month = request.getParameter("month"); //페이지로부터 선택한 날짜를 가져온다.
 				LOG.trace("[운송사 Proc] 선택한 달 : "+ month);
 				iDtoLists = iDao.transSearchAllMonth(userId, month); //쇼핑몰의 코드와 날짜를 통해 이번 월의 송장목록을 가져온다.
@@ -220,6 +236,14 @@ public class TransProc extends HttpServlet {
 					LOG.trace("송장 처리 1건 추가");
 					iDao.requestState(invoice.getiCode());//해당 송장을 출고 처리상태로 변경(0->1)한다.
 					count ++;
+				}
+				if(count == 0) {
+					message = "당일 출고 처리할 송장이 없습니다.";
+					request.setAttribute("message", message);
+					request.setAttribute("msgState", true);
+					rd = request.getRequestDispatcher("TransProc?action=transInvoiceListDay");
+					rd.forward(request, response);
+					break;
 				}
 				message = "총"+count+" 건의 출고 처리가 완료되었습니다.";
 				request.setAttribute("message", message);
