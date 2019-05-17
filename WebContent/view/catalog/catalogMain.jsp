@@ -58,7 +58,6 @@
                     <div class="hover-fadeout" style="background-image: url('../img/meat/meat_main.jpg')"></div>
                     <div class="hover-fadein card shadow mb-4">
                       <h3>육류(Meat)</h3>
-                      <p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
                       <button>Details</button>
 			        </div>
                   </article>
