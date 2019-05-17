@@ -182,8 +182,8 @@ public class AdminProc extends HttpServlet {
 //(2). 카테고리를 선택하여 물품을 구별한다.
 		case "categoryProductList": //카테고리로 물품을 구별한다.
 			LOG.trace("재고 물품 확인");
-			String pCode = new String();
-			pDtoList = pDao.selectCategory(Character.toString(pCode.charAt(0)));
+			String pCode = request.getParameter("cName");
+			pDtoList = pDao.selectCategory(pCode);
 			for(ProductDTO product : pDtoList) {
 				aDto = new AdminDTO();
 				aDto.setoQuantity(0); //출고수량이 없을 경우, 0으로 지정
@@ -227,6 +227,14 @@ public class AdminProc extends HttpServlet {
 		case "salesMonthSearchList" :
 			LOG.trace("[관리자 Proc] 지정한 월별 제품 판매 수량 목록");
 			productTotalSales = 0;
+			if (request.getParameter("month").equals("")) {
+				message = "날짜를 선택해 주세요.";
+				request.setAttribute("message", message);
+				request.setAttribute("msgState", true);
+				rd = request.getRequestDispatcher("AdminProc?action=salesMonthList");
+				rd.forward(request, response);
+				break;
+			}
 			month = request.getParameter("month");
 			invoiceList = aDao.selectProductMonth(month);
 			for(AdminDTO invoice : invoiceList) {
@@ -289,6 +297,14 @@ public class AdminProc extends HttpServlet {
 		case "transSearchMonthList" :
 			invoiceTotalSales = 0;
 			LOG.trace("검색 월 운송 송장 확인");
+			if (request.getParameter("month").equals("")) {
+				message = "날짜를 선택해 주세요.";
+				request.setAttribute("message", message);
+				request.setAttribute("msgState", true);
+				rd = request.getRequestDispatcher("AdminProc?action=transMonthList");
+				rd.forward(request, response);
+				break;
+			}
 			month = request.getParameter("month");
 			invoiceList = aDao.adminMonthList(month);
 			for(AdminDTO invoice : invoiceList) {
@@ -376,6 +392,14 @@ public class AdminProc extends HttpServlet {
 			break;
 		case "supplySearchMonthList": // 지정한 달 발주 완료가 된 발주 리스트 불러오기
 			supplyTotalSales = 0;
+			if (request.getParameter("month").equals("")) {
+				message = "날짜를 선택해 주세요.";
+				request.setAttribute("message", message);
+				request.setAttribute("msgState", true);
+				rd = request.getRequestDispatcher("AdminProc?action=supplyMonthList");
+				rd.forward(request, response);
+				break;
+			}
 			month = request.getParameter("month");
 			supplyList = aDao.selectSupplyListMonth(month);
 			for(AdminDTO supply: supplyList) {

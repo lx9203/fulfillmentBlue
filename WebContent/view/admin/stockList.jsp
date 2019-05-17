@@ -50,11 +50,11 @@
                   <i class="fas fa-list-ul"></i>&nbsp;&nbsp;제품종류
                 </button>
                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                  <a class="dropdown-item" href="#">육류</a>
-                  <a class="dropdown-item" href="#">해산물</a>
-                  <a class="dropdown-item" href="#">바베큐</a>
-                  <a class="dropdown-item" href="#">야채/과일</a>
-                  <a class="dropdown-item" href="#">향신료</a>
+                  <a class="dropdown-item" href="AdminProc?action=categoryProductList&cName=A">육류</a>
+                  <a class="dropdown-item" href="AdminProc?action=categoryProductList&cName=B">해산물</a>
+                  <a class="dropdown-item" href="AdminProc?action=categoryProductList&cName=C">바베큐</a>
+                  <a class="dropdown-item" href="AdminProc?action=categoryProductList&cName=D">야채/과일</a>
+                  <a class="dropdown-item" href="AdminProc?action=categoryProductList&cName=E">향신료</a>
                 </div>
               </div>
             </div>

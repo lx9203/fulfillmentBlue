@@ -44,13 +44,7 @@
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="비밀번호를 입력해 주세요">
                     </div>
-
-                    <div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember Me</label>
-                      </div>
-                    </div>
+                    <br>
                     <input class="btn btn-primary btn-user btn-block" type="submit" value="로그인">
                  	<a href="ProductProc?action=intoMain" class="btn btn-google btn-user btn-block">창고 둘러보기</a>
                   </form>
