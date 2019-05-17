@@ -88,7 +88,7 @@ public class MallProc extends HttpServlet {
 			//3.올해 월별 지불 액수
 			for(int m=1;m<13;m++) {
 				monthTotalPrice = 0;
-				if(m>Integer.parseInt(cf.curMonth().substring(5))) {
+				if(m>Integer.parseInt(cf.curMonth().substring(5))-1) {
 					LOG.trace("현재 달 보다 숫자가 큼");
 					break;
 				}

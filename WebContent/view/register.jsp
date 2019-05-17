@@ -4,7 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+  <link rel="shortcut icon" href="../img/favicon1.ico" type="image/x-icon" >
+  <link rel="icon" href="../img/favicon1.ico" type="image/x-icon" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -59,6 +60,10 @@
                   </div>
 
                 <!-- id 변경 시, blue_company.js변경 필요 : 숨기기 보이기 기능이 id값으로 연동되어 있음 -->
+                <div class="col-sm-3 custom-control custom-radio small d-none boldfont" style="max-width: max-content">
+                    <input type="radio" class="custom-control-input" name="userType" id="d_hidden" value=4 checked>
+                    <label class="custom-control-label" for="d_hidden">hidden&nbsp;</label>
+                  </div>
                   <div class="col-sm-3 custom-control custom-radio small d-inline-block boldfont" style="max-width: max-content">
                     <input type="radio" class="custom-control-input" name="userType" id="transport" value=1>
                     <label class="custom-control-label" for="transport">운송업체&nbsp;</label>
