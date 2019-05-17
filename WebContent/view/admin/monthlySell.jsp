@@ -80,9 +80,7 @@
                   </thead>
                   <tfoot>
                     <tr>
-                      <th style="text-align: center;"></th>
-                      <th style="text-align: center;"></th>
-                      <th style="text-align: center;"></th>
+                      <th colspan="3"></th>
                       <th style="text-align: center;">총액</th>
                       <th style="text-align: right;"><fmt:formatNumber value="${requestScope.productTotalSales}" pattern="#,##0"/>원</th>
                     </tr>

@@ -77,8 +77,7 @@
                   </thead>
                   <tfoot>
                     <tr>
-                      <th></th>
-                      <th></th>
+                      <th colspan="2"></th>
                       <th style="text-align: center;">총액</th>
                       <th style="text-align: right;"><fmt:formatNumber value="${requestScope.invoiceTotalSales}" pattern="#,##0"/>원</th>
                     </tr>
