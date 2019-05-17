@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>일별 수주내역</title>
+<title>공급처 수주내역</title>
 
 <!-- Custom fonts for this template-->
 <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -35,7 +35,7 @@
 				<div class="container-fluid">
 					<!-- Page Heading -->
 					<div class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-2 text-gray-800">수주내역</h1>
+						<h1 class="h3 mb-2 text-gray-600 boldfont">수주내역</h1>
 					</div>
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">

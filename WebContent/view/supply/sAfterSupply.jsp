@@ -10,7 +10,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	
-	<title>월별 납품내역</title>
+	<title>공급처 월별 납품내역</title>
 	
 	<!-- Custom fonts for this template-->
 	<link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -41,7 +41,7 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-2 text-gray-800">월별 납품내역</h1>
+						<h1 class="h3 mb-2 text-gray-600 boldfont">월별 납품내역</h1>
 						<form action="SupplyProc?action=supplyAfterListSearch" class="form-horizontal d-sm-inline-block" method="post">
 							<div class="form-group" style="margin-bottom: 0">
 								<label class="control-label" style="margin-bottom: 0">날짜:&nbsp;

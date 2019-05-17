@@ -38,7 +38,7 @@
         <div class="container-fluid">
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-2 text-gray-800">운송 처리 대기</h1>
+            <h1 class="h3 mb-2 text-gray-600 boldfont">운송 처리 대기</h1>
           </div>
           
           <!-- DataTales Example -->
