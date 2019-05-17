@@ -86,10 +86,7 @@
 									</tbody>
 									<tfoot>
 										<tr>
-											<th></th>
-											<th></th>
-											<th></th>
-											<th></th>
+											<th colspan="4"></th>
 											<th style="text-align: center;">총액</th>
 											<th style="text-align: right;">${requestScope.supplyTotalPrice}원</th>
 											<th></th>

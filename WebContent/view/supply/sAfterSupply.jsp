@@ -94,10 +94,7 @@
 									</tbody>
 									<tfoot>
 										<tr>
-											<th></th>
-											<th></th>
-											<th></th>
-											<th></th>
+											<th colspan="4"></th>
 											<th style="text-align: center;">총액</th>
 											<th style="text-align: right;"><fmt:formatNumber value="${requestScope.supplyTotalPrice}" pattern="#,##0"/> 원</th>
 										</tr>
