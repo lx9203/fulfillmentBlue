@@ -138,10 +138,31 @@ public class UserProc extends HttpServlet {
 		case"register":
 			//필요한 변수 목록 : userType, name, 
 			
-			if(!request.getParameter("userType").equals("")) {
-				userType = Integer.parseInt(request.getParameter("userType"));
+			if(request.getParameter("name").equals("")) {
+				message = "아이디를 입력해 주세요.";
+				request.setAttribute("message", message);
+				request.setAttribute("msgState", true);
+				rd = request.getRequestDispatcher("register.jsp");
+				rd.forward(request, response);
+				break;
 			}
-			LOG.trace("userType : " + userType);
+			if(request.getParameter("InputPassword").equals("") || request.getParameter("RepeatPassword").equals("")) {
+				message = "비밀번호를 모두 입력해 주세요.";
+				request.setAttribute("message", message);
+				request.setAttribute("msgState", true);
+				rd = request.getRequestDispatcher("register.jsp");
+				rd.forward(request, response);
+				break;
+			}
+			
+			if(request.getParameter("userType").equals("4") || request.getParameter("RepeatPassword").equals("")) {
+				message = "사용자 유형을 입력해주세요.";
+				request.setAttribute("message", message);
+				request.setAttribute("msgState", true);
+				rd = request.getRequestDispatcher("register.jsp");
+				rd.forward(request, response);
+				break;	
+			}
 			
 			name = request.getParameter("name");
 			password1 = request.getParameter("InputPassword");
@@ -165,6 +186,12 @@ public class UserProc extends HttpServlet {
 				rd.forward(request, response);
 				break;
 			}
+			
+			
+			if(!request.getParameter("userType").equals("")) {
+				userType = Integer.parseInt(request.getParameter("userType"));
+			}
+			LOG.trace("userType : " + userType);
 			
 			switch (userType) {
 			case 1:
@@ -194,13 +221,6 @@ public class UserProc extends HttpServlet {
 					id = (char)(op2.get().charAt(0)+1)+ "Supply";	
 				}		
 				break;
-			default:
-				message = "사용자 유형 입력을 잘못 받았습니다.\\n";
-				request.setAttribute("message", message);
-				request.setAttribute("msgState", true);
-				rd = request.getRequestDispatcher("register.jsp");
-				rd.forward(request, response);
-				break;	
 			}
 			
 			uDto = new UserDTO(userType, id, name, password1);

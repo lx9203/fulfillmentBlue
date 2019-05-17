@@ -105,7 +105,7 @@ public class AdminProc extends HttpServlet {
 			//3. 이번년도 판매수익 + 그래프 이번년도 월별 매출 총액
 			for(int m=1;m<13;m++) {
 				monthTotalPrice = 0;
-				if(m>Integer.parseInt(cf.curMonth().substring(5))) {
+				if(m>Integer.parseInt(cf.curMonth().substring(5))-1) {
 					LOG.trace("현재 달 보다 숫자가 큼");
 					break;
 				}
@@ -116,7 +116,6 @@ public class AdminProc extends HttpServlet {
 					for(AdminDTO order : orderList) {
 						monthTotalPrice += order.getoQuantity()*order.getpPrice()*0.1;	
 					}
-					monthTotalPrice += 10000;
 				}
 				thisTotalSalesList.add(monthTotalPrice); //월별 총액을 리스트로 저장
 				thisYearTotalSales += monthTotalPrice; //올해 총액을 int로 저장
@@ -131,7 +130,6 @@ public class AdminProc extends HttpServlet {
 					for(AdminDTO order : orderList) {
 						monthTotalPrice += order.getoQuantity()*order.getpPrice()*0.1;	
 					}
-					monthTotalPrice += 10000;
 				}
 				lastTotalSalesList.add(monthTotalPrice); //월별 총액을 리스트로 저장
 				lastYearTotalSales += monthTotalPrice; //올해 총액을 int로 저장
