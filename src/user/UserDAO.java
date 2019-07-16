@@ -19,16 +19,17 @@ public class UserDAO {
 	public static final int PASSWORD_IS_WRONG = 3;
 	public static final int DATABASE_ERROR = -1;
 	private Connection conn;
-	private static final String USERNAME = "javauser";
+	private static final String USERNAME = "root";
 	private static final String PASSWORD = "javapass";
-	private static final String URL = "jdbc:mysql://localhost:3306/fulfillmentsystem?verifyServerCertificate=false&useSSL=false";
+	private static final String URL = "jdbc:mysql://localhost:3306/fulfillmentsystem?serverTimezone=UTC&useSSL=false";
+	
 	
 	PreparedStatement pStmt = null;
 	ResultSet rs = null;
 	
 	public UserDAO() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 		} catch (Exception e) {
 			e.printStackTrace();

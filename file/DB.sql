@@ -1,4 +1,6 @@
+CREATE SCHEMA `fulfillmentsystem`;
 use fulfillmentsystem;
+
 CREATE TABLE IF NOT EXISTS user (
 	id VARCHAR(10) NOT NULL,
 	user_type INT(1),
@@ -8,7 +10,6 @@ CREATE TABLE IF NOT EXISTS user (
 	PRIMARY KEY (id)
 )CHARSET=utf8;
 
-#관리자 생성, 비밀번호 :java
 insert into user values('admin',0,'관리자','****','$2a$10$IzyTY.1tk053V3dDJJPYY.Rt5PaoZzOWxjsW.Y78.P6HKaPNW2hXe');
 
 CREATE TABLE IF NOT EXISTS product (

@@ -1,5 +1,7 @@
 package admin;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,30 +9,34 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import function.*;
-import user.*;
+import function.CustomerFunction;
+import user.UserDAO;
+import user.UserDTO;
 
 
 public class AdminDAO {
 	private static final Logger LOG = LoggerFactory.getLogger(AdminDAO.class);
+	
+	CustomerFunction cf = new CustomerFunction();
+	
 	private Connection conn;
-	private static final String USERNAME = "javauser";
+	private static final String USERNAME = "root";
 	private static final String PASSWORD = "javapass";
-
-	private static final String URL = "jdbc:mysql://localhost:3306/fulfillmentsystem?verifyServerCertificate=false&useSSL=false";
+	private static final String URL = "jdbc:mysql://localhost:3306/fulfillmentsystem?serverTimezone=UTC&useSSL=false";
 	
 	PreparedStatement pStmt = null;
 	ResultSet rs = null;
-	CustomerFunction cf = new CustomerFunction();
 	
 	UserDTO uDto = new UserDTO();
 	UserDAO uDao = new UserDAO();
 	
 	String sql =new String();
+	
 	public AdminDAO() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
