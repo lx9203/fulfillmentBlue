@@ -1,5 +1,6 @@
 package function;
 
+import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,12 +9,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import invoice.*;
-import supply.*;
+import invoice.InvoiceDAO;
+import invoice.InvoiceDTO;
+import invoice.OrderDAO;
+import invoice.OrderDTO;
+import supply.SupplyDAO;
 
 public class CustomerFunction {
 	private static final Logger LOG = LoggerFactory.getLogger(CustomerFunction.class);

@@ -16,10 +16,10 @@ import function.*;
 public class InvoiceDAO {
 	private static final Logger LOG = LoggerFactory.getLogger(InvoiceDAO.class);
 	private Connection conn;
-	private static final String USERNAME = "javauser";
+	private static final String USERNAME = "root";
 	private static final String PASSWORD = "javapass";
 	
-	private static final String URL = "jdbc:mysql://localhost:3306/fulfillmentsystem?verifyServerCertificate=false&useSSL=false";
+	private static final String URL = "jdbc:mysql://localhost:3306/fulfillmentsystem?serverTimezone=UTC&useSSL=false";
 	
 	PreparedStatement pStmt = null;
 	ResultSet rs = null;
